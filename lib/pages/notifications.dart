@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/post.dart';
-import 'package:newnew/models/user.dart';
-import 'package:newnew/models/comment.dart';
-import 'package:newnew/models/global.dart';
+import 'package:newnewmarket/models/post.dart';
+import 'package:newnewmarket/models/user.dart';
+import 'package:newnewmarket/models/comment.dart';
+import 'package:newnewmarket/models/global.dart';
 
 class NotificationsPage extends StatefulWidget {
   @override

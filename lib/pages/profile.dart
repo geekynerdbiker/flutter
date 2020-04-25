@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/global.dart';
-import 'package:newnew/models/post.dart';
+import 'package:newnewmarket/models/global.dart';
+import 'package:newnewmarket/models/post.dart';
 //import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 
@@ -119,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Text("I am a profile on instagram"),
                               InkWell(
                                 child: new Text('my instagram'),
-//                                onTap: () => launch('https://www.instagram.com/kallehallden/')
+                                //onTap: () => launch('https://www.instagram.com/kallehallden/')
                                 ),
                             ],
                           ),
