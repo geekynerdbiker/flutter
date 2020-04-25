@@ -4,7 +4,7 @@ import 'pages/notifications.dart';
 import 'pages/profile.dart';
 import 'pages/search.dart';
 import 'pages/create_post.dart';
-import 'models/global.dart';
+
 import 'models/appbar.dart';
 
 void main() => runApp(MyApp());
@@ -14,10 +14,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Instagram',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(),
     );
   }
@@ -37,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ProfilePage()
   ];
   @override
+
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
@@ -53,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
           //     )
           //   ]
           // ),
-          margin: EdgeInsets.only(bottom: 20),
           child: new TabBar(
             tabs: [
               Tab(
@@ -72,8 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.perm_identity),
               ),
             ],
-            unselectedLabelColor: Colors.black,
-            labelColor: Colors.blue,
+            unselectedLabelColor: Colors.grey,
+            labelColor: Colors.black,
             indicatorColor: Colors.transparent,
           ),
         ),
