@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
-import 'package:newnewmarket/components/home/popularDesigners.dart';
-import 'package:newnewmarket/components/home/shopByCategory.dart';
-import 'package:newnewmarket/components/home/shopByStyle.dart';
-import 'package:newnewmarket/components/home/shopLatestTrends.dart';
-import 'package:newnewmarket/components/home/trendingSearch.dart';
+import 'package:newnewmarket/widgets/home/popularDesigners.dart';
+import 'package:newnewmarket/widgets/home/shopByCategory.dart';
+import 'package:newnewmarket/widgets/home/shopByStyle.dart';
+import 'package:newnewmarket/widgets/home/shopLatestTrends.dart';
+import 'package:newnewmarket/widgets/home/trendingSearch.dart';
 
 import 'package:newnewmarket/widgets/imageWidget.dart';
 
@@ -36,28 +36,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.grey,
-        title: Text('NEWNEW MARKET'),
-        actions: <Widget>[
-          new IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-            onPressed: (){},
-          ),
-          new IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
-            ),
-            onPressed: (){},
-          )
-        ],
-      ),
-
-      drawer: new Drawer(
+      /*drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
             new UserAccountsDrawerHeader(
@@ -79,6 +58,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+       */
       body: new ListView(
         children: <Widget>[
           imageCarousel,

@@ -14,6 +14,7 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   static int page = 1;
   static Post the_post = post1;
+
   @override
   Widget build(BuildContext context) {
     Map<int, Widget> pageview = {
