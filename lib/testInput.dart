@@ -1,12 +1,8 @@
-import 'package:newnewmarket/components/collections/exclusiveCollections.dart';
-import 'package:newnewmarket/components/collections/featuredCollections.dart';
-
-import 'components/home/popularDesigners.dart';
-import 'components/home/shopLatestTrends.dart';
-import 'components/home/shopByCategory.dart';
-import 'components/home/shopByStyle.dart';
-import 'components/home/trendingSearch.dart';
-import 'components/collections/communityCollections.dart';
+import 'models/trend.dart';
+import 'models/style.dart';
+import 'models/designer.dart';
+import 'models/category.dart';
+import 'models/collection.dart';
 
 List<Trend> trendItems = [
   new Trend('Nike'),
@@ -36,10 +32,10 @@ List<Style> styleItems = [
   new Style('Minimalist'),
 ];
 
-List<LatestTrend> latestTrendItems = [
-  new LatestTrend('Cardigans'),
-  new LatestTrend('Cargo Pants'),
-  new LatestTrend('Chore Jackets'),
+List<Trend> latestTrendItems = [
+  new Trend('Cardigans'),
+  new Trend('Cargo Pants'),
+  new Trend('Chore Jackets'),
 ];
 
 List<Designer> designerItems = [
@@ -51,23 +47,9 @@ List<Designer> designerItems = [
   new Designer('Off-White'),
 ];
 
-List<CommunityCollection> cCollectionItems = [
-  new CommunityCollection('C Collection1'),
-  new CommunityCollection('C Collection2'),
-  new CommunityCollection('C Collection3'),
-  new CommunityCollection('C Collection4'),
-];
-
-List<ExclusiveCollection> eCollectionItems = [
-  new ExclusiveCollection('C Collection1'),
-  new ExclusiveCollection('C Collection2'),
-  new ExclusiveCollection('C Collection3'),
-  new ExclusiveCollection('C Collection4'),
-];
-
-List<FeaturedCollection> fCollectionItems = [
-  new FeaturedCollection('C Collection1'),
-  new FeaturedCollection('C Collection2'),
-  new FeaturedCollection('C Collection3'),
-  new FeaturedCollection('C Collection4'),
+List<Collection> collectionItems = [
+  new Collection('C Collection1'),
+  new Collection('C Collection2'),
+  new Collection('C Collection3'),
+  new Collection('C Collection4'),
 ];
