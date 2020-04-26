@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newnewmarket/pages/collection.dart';
+import 'pages/feed.dart';
 import 'pages/home.dart';
 import 'pages/notifications.dart';
 import 'pages/profile.dart';
@@ -27,8 +29,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
-    SearchPage(),
-    CreatePostPage(),
+    CollectionPage(),
     NotificationsPage(),
     ProfilePage()
   ];
@@ -36,9 +37,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       initialIndex: 0,
       child: Scaffold(
+        appBar: new AppBar(
+          backgroundColor: Colors.white,
+          title: Text('NEWNEW MARKET',
+            style: TextStyle(
+              color: Colors.black,
+            ),),
+          actions: <Widget>[
+            new IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.grey,
+              ),
+              onPressed: (){},
+            ),
+            new IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.grey,
+              ),
+              onPressed: (){},
+            )
+          ],
+        ),
+
         body: TabBarView(
           children: pages,
         ),
@@ -56,10 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.home),
               ),
               Tab(
-                icon: Icon(Icons.search),
-              ),
-              Tab(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.view_headline),
               ),
               Tab(
                 icon: Icon(Icons.favorite),
