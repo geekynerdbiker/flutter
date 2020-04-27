@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnewmarket/pages/collection.dart';
+import 'pages/collection.dart';
 import 'pages/feed.dart';
 import 'pages/home.dart';
 import 'pages/notifications.dart';
