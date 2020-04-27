@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:newnewmarket/models/style.dart';
-import 'package:newnewmarket/testInput.dart';
+import 'package:newnew/models/component.dart';
+import 'package:newnew/testInput.dart';
 
 class ShopByStyle extends StatelessWidget {
 

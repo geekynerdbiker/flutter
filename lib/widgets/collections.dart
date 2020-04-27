@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:newnewmarket/testInput.dart';
-import 'package:newnewmarket/models/collection.dart';
+import 'package:newnew/testInput.dart';
+import 'package:newnew/models/component.dart';
 
 class Collections extends StatelessWidget {
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnewmarket/models/category.dart';
-import 'package:newnewmarket/testInput.dart';
+import 'package:newnew/models/component.dart';
+import 'package:newnew/testInput.dart';
 
 class ShopByCategory extends StatelessWidget {
 
