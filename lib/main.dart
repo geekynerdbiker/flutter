@@ -10,7 +10,7 @@ import 'pages/create_post.dart';
 import 'models/appbar.dart';
 
 void main() => runApp(MyApp());
-
+s
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
