@@ -1,4 +1,3 @@
-import 'post.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -11,4 +10,25 @@ class User {
   bool hasStory;
 
   User(this.username, this.profilePicture, this.followers, this.following, this.posts, this.savedPosts, this.hasStory);
+}
+
+class Post {
+  AssetImage image;
+  String description;
+  User user;
+  List<User> likes;
+  List<Comment> comments;
+  DateTime date;
+  bool isLiked;
+  bool isSaved;
+
+  Post(this.image, this.user, this.description, this.date, this.likes, this.comments, this.isLiked, this.isSaved);
+}
+
+class Comment {
+  String comment;
+  User user;
+  DateTime dateOfComment;
+  bool isLiked;
+  Comment(this.user, this.comment, this.dateOfComment, this.isLiked);
 }
