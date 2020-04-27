@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
-import 'package:newnewmarket/widgets/home/popularDesigners.dart';
-import 'package:newnewmarket/widgets/home/shopByCategory.dart';
-import 'package:newnewmarket/widgets/home/shopByStyle.dart';
-import 'package:newnewmarket/widgets/home/shopLatestTrends.dart';
-import 'package:newnewmarket/widgets/home/trendingSearch.dart';
+import 'package:newnew/widgets/home/popularDesigners.dart';
+import 'package:newnew/widgets/home/shopByCategory.dart';
+import 'package:newnew/widgets/home/shopByStyle.dart';
+import 'package:newnew/widgets/home/shopLatestTrends.dart';
+import 'package:newnew/widgets/home/trendingSearch.dart';
 
-import 'package:newnewmarket/widgets/imageWidget.dart';
+import 'package:newnew/widgets/imageWidget.dart';
 
 // components -> widgets
 

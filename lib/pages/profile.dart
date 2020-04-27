@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:newnewmarket/models/global.dart';
-import 'package:newnewmarket/models/post.dart';
 //import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart';
+
+import 'package:newnew/testInput.dart';
+import 'package:newnew/models/user.dart';
+
 
 class ProfilePage extends StatefulWidget {
   @override
