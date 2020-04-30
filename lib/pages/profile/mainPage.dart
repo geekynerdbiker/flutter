@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:newnew/testInput.dart';
 import 'package:newnew/models/user.dart';
 
-
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
