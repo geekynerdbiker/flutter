@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pages/collection.dart';
-import 'pages/feed.dart';
-import 'pages/home.dart';
-import 'pages/notifications.dart';
-import 'pages/profile.dart';
-import 'pages/search.dart';
-import 'pages/create_post.dart';
+import 'package:newnew/pages/cart/mainPage.dart';
+import 'pages/collection/mainPage.dart';
+import 'pages/home/mainPage.dart';
+import 'pages/cart/mainPage.dart';
+import 'pages/profile/mainPage.dart';
 
 import 'models/appbar.dart';
 
@@ -30,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    NotificationsPage(),
+    CartPage(),
     ProfilePage()
   ];
   @override
@@ -40,30 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 4,
       initialIndex: 0,
       child: Scaffold(
-        appBar: new AppBar(
-          backgroundColor: Colors.white,
-          title: Text('NEWNEW MARKET',
-            style: TextStyle(
-              color: Colors.black,
-            ),),
-          actions: <Widget>[
-            new IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-              onPressed: (){},
-            ),
-            new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.grey,
-              ),
-              onPressed: (){},
-            )
-          ],
-        ),
-
+        backgroundColor: Colors.white,
         body: TabBarView(
           children: pages,
         ),
@@ -92,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             unselectedLabelColor: Colors.grey,
             labelColor: Colors.black,
-            indicatorColor: Colors.transparent,
+            indicatorColor: Colors.black,
           ),
         ),
       ),
