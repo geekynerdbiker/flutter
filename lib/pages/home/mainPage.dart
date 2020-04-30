@@ -18,16 +18,42 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
+    Widget searchBar = new Container(
+      child: new AppBar(
+        backgroundColor: Colors.white,
+        title: Text('NEWNEW MARKET',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        actions: <Widget>[
+          new IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
+            onPressed: (){},
+          ),
+          new IconButton(
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Colors.grey,
+            ),
+            onPressed: (){},
+          )
+        ],
+      ),
+    );
 
     Widget imageCarousel = new Container(
-      height: 200,
+      height: MediaQuery.of(context).size.width / 2,
       child: new CarouselSlider(
         items: <Widget>[
           ImageWidget('test1', 'lib/assets/photo4.jpg'),
           ImageWidget('test2', 'lib/assets/photo5.jpg'),
         ],
         options: CarouselOptions(
-          height: 400,
+          height: MediaQuery.of(context).size.width / 2,
           autoPlay: true,
           autoPlayAnimationDuration: Duration(milliseconds: 2000),
           autoPlayCurve: Curves.fastOutSlowIn,
@@ -36,6 +62,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       /*drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
@@ -61,6 +88,7 @@ class _HomePageState extends State<HomePage> {
        */
       body: new ListView(
         children: <Widget>[
+          searchBar,
           imageCarousel,
           new Padding(
             padding: const EdgeInsets.all(12.0),
@@ -85,7 +113,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: 250,
+            height: MediaQuery.of(context).size.width / 3 * 2,
             child: ShopByCategory(),
           ),
 
@@ -99,8 +127,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
           Container(
-            height: 300,
+            height: MediaQuery.of(context).size.width / 5 * 4,
             child: ShopByStyle(),
           ),
 
@@ -127,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: 250,
+            height: MediaQuery.of(context).size.width / 3 * 2,
             child: PopularDesigner(),
           ),
         ],

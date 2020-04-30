@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:newnew/pages/collection/feed.dart';
+import 'package:newnew/widgets/collection/mainPage/collections.dart';
+import 'package:newnew/widgets/collection/mainPage/userCollection.dart';
+
 class CollectionPage extends StatefulWidget {
   @override
   _CollectionPageState createState() => _CollectionPageState();
@@ -12,19 +16,11 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
   AnimationController _animationControllerOff;
   Animation _colorTweenBackgroundOn;
   Animation _colorTweenBackgroundOff;
-  Animation _colorTweenForegroundOn;
-  Animation _colorTweenForegroundOff;
 
   int _currentIndex = 0;
   int _prevControllerIndex = 0;
   double _aniValue = 0.0;
   double _prevAniValue = 0.0;
-
-  List _icons = [
-    Icons.star,
-    Icons.whatshot,
-    Icons.call,
-  ];
 
   List _texts = [
     '기획전',
@@ -32,11 +28,8 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
     '피드'
   ];
 
-  Color _foregroundOn = Colors.white;
-  Color _foregroundOff = Colors.black;
-
-  Color _backgroundOn = Colors.blue;
-  Color _backgroundOff = Colors.grey[300];
+  Color _backgroundOn = Colors.grey[300];
+  Color _backgroundOff = Colors.grey[100];
 
   ScrollController _scrollController = new ScrollController();
 
@@ -48,12 +41,12 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
   void initState() {
     super.initState();
 
-    for (int index = 0; index < _icons.length; index++) {
+    for (int index = 0; index < _texts.length; index++) {
       _keys.add(new GlobalKey());
     }
 
 
-    _controller = TabController(vsync: this, length: _icons.length);
+    _controller = TabController(vsync: this, length: _texts.length);
     _controller.animation.addListener(_handleTabAnimation);
     _controller.addListener(_handleTabChange);
 
@@ -65,9 +58,6 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
     _colorTweenBackgroundOff =
         ColorTween(begin: _backgroundOn, end: _backgroundOff)
             .animate(_animationControllerOff);
-    _colorTweenForegroundOff =
-        ColorTween(begin: _foregroundOn, end: _foregroundOff)
-            .animate(_animationControllerOff);
 
     _animationControllerOn =
         AnimationController(
@@ -77,10 +67,7 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
     _colorTweenBackgroundOn =
         ColorTween(begin: _backgroundOff, end: _backgroundOn)
             .animate(_animationControllerOn);
-    _colorTweenForegroundOn =
-        ColorTween(begin: _foregroundOff, end: _foregroundOn)
-            .animate(_animationControllerOn);
-  }
+    }
 
   @override
   void dispose() {
@@ -94,12 +81,38 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
         backgroundColor: Colors.white,
         body: Column(children: <Widget>[
           Container(
+            child: AppBar(
+              title: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.black,),
+                          onPressed: () {
+                            setState(() {
+                              //page = 1;
+                              build(context);
+                            });
+                          },
+                        ),
+                        //Text('댓글', style: textStyleBold,)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              backgroundColor: Colors.white,
+            ),
+          ),
+          Container(
+              width: 320,
               height: 60.0,
               child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
                   controller: _scrollController,
                   scrollDirection: Axis.horizontal,
-                  itemCount: _icons.length,
+                  itemCount: _texts.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                         key: _keys[index],
@@ -130,9 +143,9 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
               child: TabBarView(
                 controller: _controller,
                 children: <Widget>[
-                  Icon(_icons[0]),
-                  Icon(_icons[1]),
-                  Icon(_icons[2])
+                  Collections(),
+                  UserCollections(),
+                  FeedPage(),
                 ],
               )),
         ]));
@@ -199,7 +212,7 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
       if (position > offset) offset = position;
     } else {
 
-      renderBox = _keys[_icons.length - 1].currentContext.findRenderObject();
+      renderBox = _keys[_texts.length - 1].currentContext.findRenderObject();
       position = renderBox
           .localToGlobal(Offset.zero)
           .dx;
@@ -223,16 +236,6 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
       return _colorTweenBackgroundOff.value;
     } else {
       return _backgroundOff;
-    }
-  }
-
-  _getForegroundColor(int index) {
-    if (index == _currentIndex) {
-      return _colorTweenForegroundOn.value;
-    } else if (index == _prevControllerIndex) {
-      return _colorTweenForegroundOff.value;
-    } else {
-      return _foregroundOff;
     }
   }
 }

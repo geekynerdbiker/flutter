@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:newnew/models/user.dart';
 import 'package:newnew/testInput.dart';
-import 'package:newnew/main.dart';
-import 'package:newnew/models/appbar.dart';
 
 class FeedPage extends StatefulWidget {
   @override
@@ -26,6 +24,7 @@ class _FeedPageState extends State<FeedPage> {
 
   Widget getMain() {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -39,7 +38,6 @@ class _FeedPageState extends State<FeedPage> {
                 ),
 
                 Feature: Story <END> */
-                Divider(),
                 Column(
                   children: getPosts(context),
                 )
@@ -143,7 +141,7 @@ Feature: Story <END> */
                       margin: EdgeInsets.only(right: 10),
                       child: CircleAvatar(backgroundImage: post.user.profilePicture,),
                     ),
-                    Text(post.user.username,)
+                    Text(post.user.username, style: textStyleBold)
                   ],
                 ),
                 IconButton(
@@ -233,7 +231,7 @@ Feature: Story <END> */
             ],
           ),
           FlatButton(
-            child: Text(post.likes.length.toString() + " likes", style: textStyleBold,),
+            child: Text("좋아요 " + post.likes.length.toString() + "개", style: textStyleBold,),
             onPressed: () {
                 setState(() {
                   the_post = post;
@@ -258,7 +256,7 @@ Feature: Story <END> */
             ],
           ),
           FlatButton(
-            child: Text("View all " + post.comments.length.toString() + " comments", style: textStyleLigthGrey,),
+            child: Text(post.comments.length.toString() + "개의 댓글 보기", style: textStyleLigthGrey,),
             onPressed: () {
               setState(() {
                   the_post = post;
@@ -290,7 +288,7 @@ Feature: Story <END> */
               ),
               child: FlatButton(
                 color: user.following.contains(follower) ? Colors.white : Colors.blue,
-                child: Text(user.following.contains(follower) ? "Following" : "Follow", style: TextStyle(fontWeight: FontWeight.bold, color: user.following.contains(follower) ? Colors.grey : Colors.white)),
+                child: Text(user.following.contains(follower) ? "팔로잉" : "팔로워", style: TextStyle(fontWeight: FontWeight.bold, color: user.following.contains(follower) ? Colors.grey : Colors.white)),
                 onPressed: () {
                   setState(() {
                     if (user.following.contains(follower)) {
@@ -312,15 +310,16 @@ Feature: Story <END> */
     }
     
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Likes", style: textStyleBold),
+        title: Text("좋아요", style: textStyleBold),
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black,),
           onPressed: () {
             setState(() {
-                page = 1; 
-                build(context);                 
+                page = 1;
+                build(context);
             });
           },
         ),
@@ -350,9 +349,9 @@ Feature: Story <END> */
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(right: 10),
-                  width: 30,
-                  height: 30,
+                  margin: EdgeInsets.only(top: 15,right: 10),
+                  width: 40,
+                  height: 40,
                   child: CircleAvatar(
                     backgroundImage: comment.user.profilePicture,
                   ),
@@ -360,10 +359,11 @@ Feature: Story <END> */
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Container(margin: EdgeInsets.only(top: 10),),
                     RichText(
                       text: new TextSpan(
                         style: new TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 15.0,
                           color: Colors.black,
                         ),
                         children: <TextSpan>[
@@ -377,16 +377,16 @@ Feature: Story <END> */
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: 10, top: 20),
-                          child: Text(hoursAgo.toString() + "h", style: textStyleLigthGrey,),
+                          margin: EdgeInsets.only(right: 10, top: 5),
+                          child: Text(hoursAgo.toString() + "시간 전", style: textStyleLigthGrey,),
                         ),
                         Container(
-                          child: Text("like", style: textStyleLigthGrey,),
-                          margin: EdgeInsets.only(right: 10, top: 20),
+                          child: Text("좋아요", style: textStyleLigthGrey,),
+                          margin: EdgeInsets.only(right: 10, top: 5),
                         ),
                         Container(
-                          child: Text("Reply", style: textStyleLigthGrey,),
-                          margin: EdgeInsets.only(right: 10, top: 20),
+                          child: Text("답글", style: textStyleLigthGrey,),
+                          margin: EdgeInsets.only(right: 10, top: 5),
                         )
                       ],
                     )
@@ -421,6 +421,7 @@ Feature: Story <END> */
     }
     
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Container(
           child: Row(
@@ -432,12 +433,12 @@ Feature: Story <END> */
                     icon: Icon(Icons.arrow_back, color: Colors.black,),
                     onPressed: () {
                       setState(() {
-                        page = 1; 
-                        build(context);                 
+                        page = 1;
+                        build(context);
                       });
                     },
                   ),
-                  Text('Comments', style: textStyleBold,)
+                  Text('댓글', style: textStyleBold,)
                 ],
               ),
               IconButton(

@@ -13,14 +13,33 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(children: <Widget>[
           Container(
-            height: 100,
-            color: Colors.red,
-
+            child: AppBar(
+              backgroundColor: Colors.white,
+              title: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.black,),
+                          onPressed: () {
+                            setState(() {
+                            //page = 1;
+                              build(context);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Container(
             constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height- 168),
@@ -29,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.all(20),
-                  height: 250,
+                  height: 200,
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -44,11 +63,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               Row(
                                 children: <Widget>[
                                   Container(
-                                    margin: EdgeInsets.only(left: 68, right: 20),
+                                    margin: EdgeInsets.only(right: 20),
                                     child: Column(
                                       children: <Widget>[
                                         Text('129', style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text('posts')
+                                        Text('상품')
                                       ],
                                     ),
                                   ),
@@ -57,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Column(
                                       children: <Widget>[
                                         Text('129K', style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text('followers')
+                                        Text('팔로워')
                                       ],
                                     ),
                                   ),
@@ -66,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Column(
                                       children: <Widget>[
                                         Text('129', style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text('following')
+                                        Text('팔로잉')
                                       ],
                                     ),
                                   ),
@@ -77,13 +96,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                                      color: Colors.blue,
+                                      color: Colors.grey[200],
                                     ),
                                     margin: EdgeInsets.all(10),
                                     width: 120,
                                     height: 30,
                                     child: FlatButton(
-                                      child: Text('Contact',style: TextStyle(color: Colors.white),),
+                                      child: Text('연락하기',style: TextStyle(color: Colors.black),),
                                       onPressed: () {
 
                                       },
@@ -98,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       border: Border.all(width: 1, color: Color(0xFFE7E7E7))
                                     ),
                                     child: FlatButton(
-                                      child: Text('Edit Profile'),
+                                      child: Text('프로필 수정'),
                                       onPressed: () {
                                         
                                       },
@@ -117,9 +136,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(user.username, style: textStyleBold,),
-                              Text("I am a profile on instagram"),
+                              Text("안녕하세요. 버즈 라이트이어입니다."),
                               InkWell(
-                                child: new Text('my instagram'),
+                                child: new Text('좋은 물건 보고가세요!'),
                                 //onTap: () => launch('https://www.instagram.com/kallehallden/')
                                 ),
                             ],
@@ -133,9 +152,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   color: Colors.white,
                 ),
-                Container(
-                  height: 50,
-                  color: Colors.blue,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 2,
+                      color: Colors.white,
+                      child: Icon(Icons.home),
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 2,
+                      color: Colors.white,
+                      child: Icon(Icons.view_headline, color: Colors.grey,),
+                    ),
+                  ],
                 ),
                 Column(
                   children: getPosts(),
