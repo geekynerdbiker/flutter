@@ -9,7 +9,24 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin{
+  TabController _controller;
+
+  List<Widget> pages = [
+
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(vsync: this, length: 2);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: FlatButton(
                                       child: Text('프로필 수정'),
                                       onPressed: () {
-                                        
+
                                       },
                                     ),
                                   ),
@@ -151,22 +168,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   color: Colors.white,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width / 2,
-                      color: Colors.white,
-                      child: Icon(Icons.home),
-                    ),
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width / 2,
-                      color: Colors.white,
-                      child: Icon(Icons.view_headline, color: Colors.grey,),
-                    ),
-                  ],
+                  TabBar(
+                    controller: _controller,
+                    tabs: [
+                      Tab(
+                        icon: Text('상품', style: TextStyle(color: Colors.black),),
+                      ),
+                      Tab(
+                        icon: Text('컬렉션', style: TextStyle(color: Colors.black),),
+                      ),
+                    ],
+                  ),
+                TabBarView(
+                  children: pages,
                 ),
                 Column(
                   children: getPosts(),
@@ -180,8 +194,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
 
-List<Widget> getPosts() {
-  List<Widget> postRows = [];
+  List<Widget> getPosts() {
+    List<Widget> postRows = [];
   List<Widget> posts = [];
   int counter = 0;
   for (Post post in userPosts) {

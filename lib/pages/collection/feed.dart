@@ -30,14 +30,6 @@ class _FeedPageState extends State<FeedPage> {
           children: <Widget>[
             Column(
               children: <Widget> [
-                /*Feature: Story
-
-                Container(
-                  height: 85,
-                  child: getStories(),
-                ),
-
-                Feature: Story <END> */
                 Column(
                   children: getPosts(context),
                 )
@@ -49,72 +41,6 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  /* Feature: Story
-
-  Widget getStories() {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: getUserStories()
-    );
-  }
-
-  List<Widget> getUserStories() {
-    List<Widget> stories = [];
-    for (User follower in user.following) {
-      stories.add(getStory(follower));
-    }
-    return stories;
-  }
-
-  Widget getStory(User follower) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 50,
-            width: 50,
-            child: Stack(
-              alignment: Alignment(0, 0),
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: CircleAvatar(
-                    backgroundColor: follower.hasStory ? Colors.red : Colors.grey,
-                  ),
-                ),
-                Container(
-                  height: 47,
-                  width: 47,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-                Container(
-                  height: 45,
-                  width: 45,
-                  child: CircleAvatar(
-                    backgroundImage: follower.profilePicture,
-                  ),
-                ),
-                FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  onPressed: () {
-
-                  },
-                )
-              ],
-            )
-          ),
-          Text(follower.username, style: textStyle)
-        ],
-      ),
-    );
-  }
-
-Feature: Story <END> */
   List<Widget> getPosts(BuildContext context) {
     List<Widget> posts = [];
     int index = 0;

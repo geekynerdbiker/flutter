@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget searchBar = new Container(
       child: new AppBar(
+        elevation: 0.75,
         backgroundColor: Colors.white,
         title: Text('NEWNEW MARKET',
           style: TextStyle(
@@ -27,13 +28,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: <Widget>[
-          new IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            onPressed: (){},
-          ),
           new IconButton(
             icon: Icon(
               Icons.shopping_cart,
