@@ -43,13 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: pages,
         ),
         bottomNavigationBar: Container(
-          // decoration: BoxDecoration(
-          //   boxShadow: [
-          //     BoxShadow(
-          //       offset: Offset(10, 10)
-          //     )
-          //   ]
-          // ),
           child: new TabBar(
             tabs: [
               Tab(
