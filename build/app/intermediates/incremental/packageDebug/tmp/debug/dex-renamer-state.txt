@@ -1,4 +1,4 @@
-#Thu Apr 30 13:34:26 KST 2020
+#Fri May 01 16:29:51 KST 2020
 base.0=/Users/spaceranger.lightyear/Documents/GitHub/newnew-market/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
