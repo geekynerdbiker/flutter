@@ -7,12 +7,12 @@ TextStyle textStyle = new TextStyle(fontFamily: 'Gotham');
 TextStyle textStyleBold = new TextStyle(fontFamily: 'Gotham', fontWeight: FontWeight.bold, color: Colors.black);
 TextStyle textStyleLigthGrey = new TextStyle(fontFamily: 'Gotham', color: Colors.grey);
 
-User follower1 = new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], [], true);
-User follower2 = new User('우디', AssetImage('lib/assets/profile02.jpg'), [], [], [], [], false);
-User follower3 = new User('제시', AssetImage('lib/assets/profile03.jpg'), [], [], [], [], true);
-User follower4 = new User('저그', AssetImage('lib/assets/profile04.jpg'), [], [], [], [], true);
-User follower5 = new User('렉스', AssetImage('lib/assets/profile05.jpg'), [], [], [], [], true);
-User follower6 = new User('미스터 포테이토', AssetImage('lib/assets/profile06.jpg'), [], [], [], [], false);
+User follower1 = new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []);
+User follower2 = new User('우디', AssetImage('lib/assets/profile02.jpg'), [], [], [], []);
+User follower3 = new User('제시', AssetImage('lib/assets/profile03.jpg'), [], [], [], []);
+User follower4 = new User('저그', AssetImage('lib/assets/profile04.jpg'), [], [], [], []);
+User follower5 = new User('렉스', AssetImage('lib/assets/profile05.jpg'), [], [], [], []);
+User follower6 = new User('미스터 포테이토', AssetImage('lib/assets/profile06.jpg'), [], [], [], []);
 
 List<Post> userPosts = [
   new Post(new AssetImage('lib/assets/post01.jpg'), user, "첫 게시글임 ㅎ", DateTime.now(), [follower1, follower2, follower3, follower4, follower5, follower6], [
@@ -59,7 +59,7 @@ final User user = new User('우주용사 버즈', AssetImage('lib/assets/profile
   follower4,
   follower5,
   follower6
-], [], [], false);
+], [], []);
 
 List<Trend> trendItems = [
   new Trend('Nike'),
@@ -135,5 +135,20 @@ List<Collection> UserCollectionItems = [
   new Collection('User Collection 18'),
   new Collection('User Collection 19'),
   new Collection('User Collection 20'),
+];
 
+List<Product> Products = [
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
+  new Product('Product'),
 ];
