@@ -367,12 +367,6 @@ class _FeedPageState extends State<FeedPage> {
                   Text('댓글', style: textStyleBold,)
                 ],
               ),
-              IconButton(
-                icon: Icon(Icons.send, color: Colors.black,),
-                onPressed: () {
-
-                },
-              )
             ],
           ),
         ),

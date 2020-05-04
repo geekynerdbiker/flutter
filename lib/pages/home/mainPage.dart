@@ -57,29 +57,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      /*drawer: new Drawer(
-        child: new ListView(
-          children: <Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: Text('NEWNEW'),
-              accountEmail: Text('test@test.te'),
-            currentAccountPicture: GestureDetector(
-              child: new CircleAvatar(
-                backgroundColor: Colors.grey,
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-              decoration: new BoxDecoration(
-                color: Colors.grey
-              ),
-            ),
-          ],
-        ),
-      ),
-       */
       body: new ListView(
         children: <Widget>[
           searchBar,

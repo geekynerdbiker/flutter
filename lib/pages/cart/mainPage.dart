@@ -12,27 +12,26 @@ class _CartPageState extends State<CartPage> {
       body: Column(children: <Widget>[
         Container(
           child: AppBar(
+            elevation: 0.75,
             title: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.black,),
-                      onPressed: () {
-                      setState(() {
-                        //page = 1;
-                        build(context);
-                      });
-                      },
-                    ),
-                  ],
-                ),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.black,),
+                        onPressed: () {
+                          setState(() {
+                          });
+                        },
+                      ),
+                      Text('장바구니', style: TextStyle(color: Colors.black),)
+                    ],
+                  ),
                 ],
               ),
-            ),
-            backgroundColor: Colors.white,
+            ),backgroundColor: Colors.white,
           ),
         ),
       ],

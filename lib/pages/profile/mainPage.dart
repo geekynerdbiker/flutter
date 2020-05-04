@@ -34,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
         body: Column(children: <Widget>[
           Container(
             child: AppBar(
+              elevation: 0.75,
               backgroundColor: Colors.white,
               title: Container(
                 child: Row(
@@ -45,11 +46,10 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                           icon: Icon(Icons.arrow_back, color: Colors.black,),
                           onPressed: () {
                             setState(() {
-                            //page = 1;
-                              build(context);
                             });
                           },
                         ),
+                        Text('프로필', style: TextStyle(color: Colors.black),)
                       ],
                     ),
                   ],
@@ -170,18 +170,21 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                 ),
                   TabBar(
                     controller: _controller,
+                    labelColor: Colors.black,
+                    indicatorColor: Colors.black,
+                    unselectedLabelColor: Colors.grey,
                     tabs: [
                       Tab(
-                        icon: Text('상품', style: TextStyle(color: Colors.black),),
+                        icon: Text('상품'),
                       ),
                       Tab(
-                        icon: Text('컬렉션', style: TextStyle(color: Colors.black),),
+                        icon: Text('컬렉션'),
                       ),
                     ],
                   ),
-                TabBarView(
-                  children: pages,
-                ),
+//                TabBarView(
+//                  children: pages,
+//                ),
                 Column(
                   children: getPosts(),
                 )

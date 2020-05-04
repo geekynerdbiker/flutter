@@ -40,23 +40,46 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            elevation: 0.75,
             backgroundColor: Colors.white,
-            title: Text('Page', style: TextStyle(color: Colors.black),),
+            title: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.black,),
+                        onPressed: () {},
+                      ),
+                      Text('컬렉션', style: TextStyle(color: Colors.black),)
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
             bottom: TabBar(
+              controller: _controller,
+              labelColor: Colors.black,
+              indicatorColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
               tabs: [
                 Tab(
-                  icon: Text('기획전', style: TextStyle(color: Colors.black),),
+                  icon: Text('기획전'),
                 ),
                 Tab(
-                  icon: Text('컬렉션', style: TextStyle(color: Colors.black),),
+                  icon: Text('컬렉션'),
                 ),
                 Tab(
-                  icon: Text('피드', style: TextStyle(color: Colors.black),),
+                  icon: Text('피드'),
                 ),
-              ]
+              ],
+
             ),
           ),
           body: TabBarView(
+            controller: _controller,
             children: pages,
           ),
         ),
