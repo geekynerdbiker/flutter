@@ -4,8 +4,9 @@ import 'pages/collection/mainPage.dart';
 import 'pages/home/mainPage.dart';
 import 'pages/cart/mainPage.dart';
 import 'pages/profile/mainPage.dart';
+import 'pages/product/productList.dart';
 
-import 'models/appbar.dart';
+//import 'models/appbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    CartPage(),
+    ProductList(),
     ProfilePage()
   ];
   @override
@@ -44,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         bottomNavigationBar: Container(
           child: new TabBar(
+            labelColor: Colors.black,
+            indicatorColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(
                 icon: Icon(Icons.home),
@@ -58,9 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.perm_identity),
               ),
             ],
-            unselectedLabelColor: Colors.grey,
-            labelColor: Colors.black,
-            indicatorColor: Colors.black,
+
           ),
         ),
       ),
