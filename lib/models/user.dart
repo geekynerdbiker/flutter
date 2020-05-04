@@ -7,9 +7,8 @@ class User {
   List<User> followers;
   List<User> following;
   List<Post> savedPosts;
-  bool hasStory;
 
-  User(this.username, this.profilePicture, this.followers, this.following, this.posts, this.savedPosts, this.hasStory);
+  User(this.username, this.profilePicture, this.followers, this.following, this.posts, this.savedPosts);
 }
 
 class Post {
