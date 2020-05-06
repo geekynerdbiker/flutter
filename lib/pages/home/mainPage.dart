@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       child: new CarouselSlider(
         items: <Widget>[
           ImageWidget('test1', 'lib/assets/photo4.jpg'),
-          ImageWidget('test2', 'lib/assets/photo5.jpg'),
+          ImageWidget('test2', 'lib/ass ets/photo5.jpg'),
         ],
         options: CarouselOptions(
           height: MediaQuery.of(context).size.width / 2,
@@ -134,6 +134,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/widgets/product/twoInLine.dart';
+import 'package:newnew/widgets/product/products.dart';
 
 class ProductList extends StatefulWidget {
   @override
@@ -8,50 +8,56 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  @override
   Widget build(BuildContext context) {
-    Widget appBar = new Container(
-      child: AppBar(
-        elevation: 0.75,
-        title: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            title: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black,),
-                    onPressed: () {
-                      setState(() {
-                      });
-                    },
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {},
+                      ),
+                      //Text('컬렉션', style: TextStyle(color: Colors.black),)
+                    ],
                   ),
-                  Text('', style: TextStyle(color: Colors.black),)
                 ],
-              ),
-            ],
-          ),
-        ),backgroundColor: Colors.white,
-      ),
-    );
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: new ListView(
-        children: <Widget>[
-          appBar,
-          new Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12.0),
-            child: new Text('N'+
-                '개의 상품',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
               ),
             ),
           ),
-          Container(),
-        ],
+          body: Scaffold(
+            backgroundColor: Colors.white,
+            body: new ListView(
+              children: <Widget>[
+                new Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: new Text(
+                    'N' + '개의 상품',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Products(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
