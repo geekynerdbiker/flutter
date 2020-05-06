@@ -114,7 +114,7 @@ List<Collection> collectionItems = [
   new Collection('Collection 7'),
 ];
 
-List<Collection> UserCollectionItems = [
+List<Collection> userCollectionItems = [
   new Collection('User Collection 1'),
   new Collection('User Collection 2'),
   new Collection('User Collection 3'),
@@ -137,18 +137,6 @@ List<Collection> UserCollectionItems = [
   new Collection('User Collection 20'),
 ];
 
-List<Product> Products = [
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
-  new Product('Product'),
+List<Product> productItems = [
+  new Product('Product1', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
 ];
