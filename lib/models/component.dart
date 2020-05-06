@@ -51,6 +51,6 @@ class Product {
   bool isLiked;
   bool isSaved;
 
-  Product(this.title);
+  Product(this.title, this.category1, this.category2, this.category3, this.price);
   //Product(this.image, this.user, this.description, this.date, this.likes, this.comments, this.isLiked, this.isSaved);
 }
