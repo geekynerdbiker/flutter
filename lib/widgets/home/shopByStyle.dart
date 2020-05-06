@@ -20,7 +20,6 @@ class ShopByStyle extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Container(
-        height: 10,width: 10,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: Colors.black)
@@ -42,6 +41,7 @@ class ShopByStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: 10, right: 10),
       crossAxisCount: 2,
       childAspectRatio: 2,

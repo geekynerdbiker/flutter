@@ -41,6 +41,7 @@ class PopularDesigner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: 10, right: 10),
       crossAxisCount: 3,
       children: getDesigners(context),

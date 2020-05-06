@@ -39,7 +39,8 @@ class ShopByCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      padding: EdgeInsets.only(left: 10, right: 10),
+      physics: NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       crossAxisCount: 3,
       children: getCategories(context),
     );
