@@ -139,4 +139,9 @@ List<Collection> userCollectionItems = [
 
 List<Product> productItems = [
   new Product('Product1', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product2', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product3', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product4', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product5', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product6', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
 ];
