@@ -57,6 +57,16 @@ class _FeedPageState extends State<FeedPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
+            constraints: BoxConstraints(
+              maxHeight: 282
+            ),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: post.image
+              )
+            ),
+          ),
+          Container(
             margin: EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,18 +90,8 @@ class _FeedPageState extends State<FeedPage> {
             ),
           ),
           Container(
-            constraints: BoxConstraints.expand(height: 1),
+            constraints: BoxConstraints.expand(height: 0.75),
             color: Colors.grey,
-          ),
-          Container(
-            constraints: BoxConstraints(
-              maxHeight: 282
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: post.image
-              )
-            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

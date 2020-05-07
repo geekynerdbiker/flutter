@@ -17,7 +17,7 @@ class _ProductListState extends State<ProductList> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            elevation: 0,
+            elevation: 0.75,
             backgroundColor: Colors.white,
             title: Container(
               child: Row(

@@ -75,7 +75,6 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
                   icon: Text('피드'),
                 ),
               ],
-
             ),
           ),
           body: TabBarView(
