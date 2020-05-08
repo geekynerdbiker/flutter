@@ -41,7 +41,7 @@ class Collections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      //height: 200,
       child: ListView(
         scrollDirection: Axis.vertical,
         children:
