@@ -4,12 +4,12 @@ import 'package:newnew/models/user.dart';
 import 'package:newnew/widgets/product/products.dart';
 import 'package:newnew/widgets/product/products2.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductList extends StatefulWidget {
   @override
-  _ProductPageState createState() => _ProductPageState();
+  _ProductListState createState() => _ProductListState();
 }
 
-class _ProductPageState extends State<ProductPage> with TickerProviderStateMixin {
+class _ProductListState extends State<ProductList> with TickerProviderStateMixin {
   TabController _controller;
 
   List<Widget> pages = [
