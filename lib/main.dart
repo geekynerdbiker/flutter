@@ -8,6 +8,8 @@ import 'pages/cart/mainPage.dart';
 import 'pages/profile/mainPage.dart';
 import 'pages/collection/mainPage.dart';
 import 'pages/product/addProduct.dart';
+import 'pages/product/productList.dart';
+import 'pages/product/productDetail.dart';
 
 //import 'models/appbar.dart';
 
@@ -32,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    AddProduct(),
+    ProductList(),
     ProfilePage()
   ];
   @override
