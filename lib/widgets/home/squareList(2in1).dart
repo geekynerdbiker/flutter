@@ -1,30 +1,32 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
 import 'package:newnew/testInput.dart';
 
-class ShopByCategory extends StatelessWidget {
+class ShopByStyle2in1 extends StatelessWidget {
 
-  List<Widget> getCategories(BuildContext context) {
-    List<Widget> categories = [];
+  List<Widget> getStyles(BuildContext context) {
+    List<Widget> styles = [];
     int index = 0;
-    for (Category category in categoryItems) {
-      categories.add(getCategory(context, category, index));
+    for (Style style in styleItems) {
+      styles.add(getStyle(context, style, index));
       index ++;
     }
-    return categories;
+    return styles;
   }
 
-  Widget getCategory(BuildContext context, Category category, int index) {
+  Widget getStyle(BuildContext context, Style style, int index) {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Container(
         decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
             border: Border.all(color: Colors.black)
         ),
         child: Center(
           child: Text(
-            category.title,
+            style.title,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,
@@ -40,9 +42,10 @@ class ShopByCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       physics: NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      crossAxisCount: 3,
-      children: getCategories(context),
+      padding: EdgeInsets.only(left: 10, right: 10),
+      crossAxisCount: 2,
+      childAspectRatio: 2,
+      children: getStyles(context),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
@@ -7,16 +6,16 @@ import 'package:newnew/testInput.dart';
 class TrendingSearch extends StatelessWidget {
 
   List<Widget> getTrends(BuildContext context) {
-    List<Widget> trends = [];
+    List<Widget> categories = [];
     int index = 0;
-    for (Trend trend in trendItems) {
-      trends.add(getTrend(context, trend, index));
+    for (Category category in trendItems) {
+      categories.add(getTrend(context, category, index));
       index ++;
     }
-    return trends;
+    return categories;
   }
 
-  Widget getTrend(BuildContext context, Trend trend, int index) {
+  Widget getTrend(BuildContext context, Category category, int index) {
     return Padding(
       padding: EdgeInsets.only(left: 10),
       child: Container(
@@ -27,7 +26,7 @@ class TrendingSearch extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            trend.title,
+            category.title,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,
