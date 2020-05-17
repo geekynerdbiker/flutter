@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
+    AddProduct(),
     ProductList(),
     ProfilePage()
   ];
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       initialIndex: 0,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -58,10 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.home),
               ),
               Tab(
-                icon: Icon(Icons.view_headline),
+                icon: Icon(Icons.favorite),
               ),
               Tab(
-                icon: Icon(Icons.favorite),
+                icon: Icon(Icons.add),
+              ),
+              Tab(
+                icon: Icon(Icons.view_headline),
               ),
               Tab(
                 icon: Icon(Icons.perm_identity),
