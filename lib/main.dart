@@ -4,7 +4,7 @@ import 'package:newnew/pages/product/productList.dart';
 
 
 import 'pages/home/mainPage.dart';
-import 'pages/cart/mainPage.dart';
+import 'pages/category/mainPage.dart';
 import 'pages/profile/mainPage.dart';
 import 'pages/collection/mainPage.dart';
 import 'pages/product/addProduct.dart';
@@ -34,8 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    AddProduct(),
-    ProductList(),
+    ProductDetail(),
+    CategoryPage(),
     ProfilePage()
   ];
   @override
