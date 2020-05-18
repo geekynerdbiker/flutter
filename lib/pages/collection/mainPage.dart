@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/user.dart';
 
 import 'package:newnew/pages/collection/feed.dart';
-import 'package:newnew/widgets/collection/mainPage/collections.dart';
-import 'package:newnew/widgets/collection/mainPage/userCollection.dart';
+import 'package:newnew/widgets/collection/collections.dart';
+import 'package:newnew/widgets/collection/userCollection.dart';
 
 class CollectionPage extends StatefulWidget {
   @override
