@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
 import 'package:newnew/testInput.dart';
 
-class SquareList3in1 extends StatelessWidget {
+class SquareList extends StatelessWidget {
   List<Widget> getProductLists(BuildContext context) {
     List<Widget> productLists = [];
     int index = 0;
@@ -16,7 +16,7 @@ class SquareList3in1 extends StatelessWidget {
     return productLists;
   }
 
-  Widget getMyItems(BuildContext context, ProductList productList, int index) {
+  Widget getMyItems(BuildContext context, ProductLists productList, int index) {
     return Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -35,7 +35,7 @@ class SquareList3in1 extends StatelessWidget {
     );
   }
 
-  Widget getRecentView(BuildContext context, ProductList productList,
+  Widget getRecentView(BuildContext context, ProductLists productList,
       int index) {
     return Padding(
       padding: EdgeInsets.all(5),
@@ -53,7 +53,7 @@ class SquareList3in1 extends StatelessWidget {
     );
   }
 
-  Widget getWishList(BuildContext context, ProductList productList, int index) {
+  Widget getWishList(BuildContext context, ProductLists productList, int index) {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Column(
