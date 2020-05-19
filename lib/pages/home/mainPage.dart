@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            height: 100,
+            height: 130,
             child: PopularSellers(),
           ),
           Row(
