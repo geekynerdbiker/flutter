@@ -1,64 +1,65 @@
 import 'package:flutter/material.dart';
 
 import 'models/component.dart';
-import 'models/user.dart';
 
 TextStyle textStyle = new TextStyle(fontFamily: 'Gotham');
 TextStyle textStyleBold = new TextStyle(fontFamily: 'Gotham', fontWeight: FontWeight.bold, color: Colors.black);
 TextStyle textStyleLigthGrey = new TextStyle(fontFamily: 'Gotham', color: Colors.grey);
 
-User follower1 = new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []);
-User follower2 = new User('우디', AssetImage('lib/assets/profile02.jpg'), [], [], [], []);
-User follower3 = new User('제시', AssetImage('lib/assets/profile03.jpg'), [], [], [], []);
-User follower4 = new User('저그', AssetImage('lib/assets/profile04.jpg'), [], [], [], []);
-User follower5 = new User('렉스', AssetImage('lib/assets/profile05.jpg'), [], [], [], []);
-User follower6 = new User('미스터 포테이토', AssetImage('lib/assets/profile06.jpg'), [], [], [], []);
+List<User> userList = [
+new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []),
+new User('우디', AssetImage('lib/assets/profile02.jpg'), [], [], [], []),
+new User('제시', AssetImage('lib/assets/profile03.jpg'), [], [], [], []),
+new User('저그', AssetImage('lib/assets/profile04.jpg'), [], [], [], []),
+new User('렉스', AssetImage('lib/assets/profile05.jpg'), [], [], [], []),
+new User('미스터 포테이토', AssetImage('lib/assets/profile06.jpg'), [], [], [], []),
+];
 
 List<Post> userPosts = [
-  new Post(new AssetImage('lib/assets/post01.jpg'), user, "첫 게시글임 ㅎ", DateTime.now(), [follower1, follower2, follower3, follower4, follower5, follower6], [
-    new Comment(follower1, "개쩐다!", DateTime.now(), false),
-    new Comment(follower2, "멋있어요", DateTime.now(), false),
-    new Comment(follower4, "이런거 올리지 마셈ㅋ", DateTime.now(), false)
+  new Post(new AssetImage('lib/assets/post01.jpg'), user, "첫 게시글임 ㅎ", DateTime.now(), [userList[0], userList[1], userList[2], userList[3], userList[4], userList[5]], [
+    new Comment(userList[0], "개쩐다!", DateTime.now(), false),
+    new Comment(userList[1], "멋있어요", DateTime.now(), false),
+    new Comment(userList[3], "이런거 올리지 마셈ㅋ", DateTime.now(), false)
   ], false, false),
-  new Post(new AssetImage('lib/assets/post02.jpg'), follower1, "이거 쫌 개안네", DateTime.now(), [user, follower2, follower3, follower4, follower5], [
-    new Comment(follower3, "뭔데 이게", DateTime.now(), false),
-    new Comment(follower1, "배고프다", DateTime.now(), false),
+  new Post(new AssetImage('lib/assets/post02.jpg'), userList[0], "이거 쫌 개안네", DateTime.now(), [user, userList[1], userList[2], userList[3], userList[4]], [
+    new Comment(userList[2], "뭔데 이게", DateTime.now(), false),
+    new Comment(userList[0], "배고프다", DateTime.now(), false),
     new Comment(user, "짱이네", DateTime.now(), false),
-    new Comment(follower5, "나는야 렉스", DateTime.now(), false)
+    new Comment(userList[4], "나는야 렉스", DateTime.now(), false)
   ], false, false),
-  new Post(new AssetImage('lib/assets/post03.jpg'), follower5, "어케했노", DateTime.now(), [user, follower2, follower3, follower4, follower5], [
-    new Comment(follower3, "아직 모른다", DateTime.now(), false),
-    new Comment(follower1, "우주 최고", DateTime.now(), false),
+  new Post(new AssetImage('lib/assets/post03.jpg'), userList[4], "어케했노", DateTime.now(), [user, userList[1], userList[2], userList[3], userList[4]], [
+    new Comment(userList[2], "아직 모른다", DateTime.now(), false),
+    new Comment(userList[0], "우주 최고", DateTime.now(), false),
     new Comment(user, "짱이네", DateTime.now(), false),
-    new Comment(follower5, "멋있어요!", DateTime.now(), false)
+    new Comment(userList[4], "멋있어요!", DateTime.now(), false)
   ], false, false),
-  new Post(new AssetImage('lib/assets/post04.jpg'), follower3, "ㅋㅋㅋ", DateTime.now(), [user, follower2, follower3, follower4, follower5], [
-    new Comment(follower3, "ㅋㅋㅋㅋㅋㅋㅋ", DateTime.now(), false),
-    new Comment(follower1, "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ아", DateTime.now(), false),
+  new Post(new AssetImage('lib/assets/post04.jpg'), userList[2], "ㅋㅋㅋ", DateTime.now(), [user, userList[1], userList[2], userList[3], userList[4]], [
+    new Comment(userList[2], "ㅋㅋㅋㅋㅋㅋㅋ", DateTime.now(), false),
+    new Comment(userList[0], "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ아", DateTime.now(), false),
     new Comment(user, "나만 안웃김?", DateTime.now(), false),
-    new Comment(follower5, "ㅋㅋ", DateTime.now(), false)
+    new Comment(userList[4], "ㅋㅋ", DateTime.now(), false)
   ], false, false),
-  new Post(new AssetImage('lib/assets/post05.jpg'), follower3, "감성", DateTime.now(), [user, follower2, follower3, follower4, follower5], [
-    new Comment(follower3, "감성충 나가라", DateTime.now(), false),
-    new Comment(follower1, "에휴", DateTime.now(), false),
+  new Post(new AssetImage('lib/assets/post05.jpg'), userList[2], "감성", DateTime.now(), [user, userList[1], userList[2], userList[3], userList[4]], [
+    new Comment(userList[2], "감성충 나가라", DateTime.now(), false),
+    new Comment(userList[0], "에휴", DateTime.now(), false),
     new Comment(user, "왜ㅡㅡ", DateTime.now(), false),
-    new Comment(follower5, "이쁘다", DateTime.now(), false)
+    new Comment(userList[4], "이쁘다", DateTime.now(), false)
   ], false, false),
 
 ];
 
-Post post1 = new Post(new AssetImage('lib/assets/post06.jpg'), user, "내 글", DateTime.now(), [follower1, follower2, follower3], [], false, false);
+Post post1 = new Post(new AssetImage('lib/assets/post06.jpg'), user, "내 글", DateTime.now(), [userList[0], userList[1], userList[2]], [], false, false);
 final User user = new User('우주용사 버즈', AssetImage('lib/assets/profile00.jpg'), [
-  follower1,
-  follower2,
-  follower3
+  userList[0],
+  userList[1],
+  userList[2]
 ], [
-  follower1,
-  follower2,
-  follower3,
-  follower4,
-  follower5,
-  follower6
+  userList[0],
+  userList[1],
+  userList[2],
+  userList[3],
+  userList[4],
+  userList[5]
 ], [], []);
 
 List<Category> trendItems = [
@@ -144,7 +145,7 @@ List<Product> productItems = [
   new Product('Product6', 'lib/assets/c2.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
 ];
 
-ProductList productListItem = ProductList(myItems1, recentView1, wishList1);
+ProductLists productListItem = ProductLists(myItems1, recentView1, wishList1);
 
 
 List<Product> myItems1 = [
