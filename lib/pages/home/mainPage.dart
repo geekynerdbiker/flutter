@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
-import 'package:newnew/widgets/home/popularDesigners.dart';
+
+import 'package:newnew/models/component.dart';
+import 'package:newnew/widgets/home/popularSellers.dart';
 import 'package:newnew/widgets/home/searchBar.dart';
 import 'package:newnew/widgets/home/sideScrollViewerHorizontal.dart';
-import 'package:newnew/widgets/home/squareList(3in1).dart';
+import 'package:newnew/widgets/home/squareList.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
 import 'package:newnew/widgets/home/trendingSearch.dart';
 
-import 'package:newnew/widgets/imageWidget.dart';
+import 'package:newnew/pages/product/productList.dart';
 
 // components -> widgets
 
@@ -113,18 +115,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                      },
                     ),
                   ),
                 ),
@@ -136,7 +143,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                padding:
+                    const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
                 child: new Text(
                   'XXX님, 까먹지 마세요!',
                   style: TextStyle(
@@ -166,30 +174,28 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             height: MediaQuery.of(context).size.width / 3 + 42,
-            child: SquareList3in1(),
+            child: SquareList(),
           ),
           Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
-                child: new Text(
-                  '인기 디자이너',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+            padding: const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+            child: new Text(
+              '인기 셀러',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
               ),
-
-          Container(
-            height: MediaQuery.of(context).size.width / 3 * 2,
-            child: PopularDesigner(),
+            ),
           ),
-
+          Container(
+            height: 100,
+            child: PopularSellers(),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -229,13 +235,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SideScrollViewerVertical(),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -274,14 +279,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-
           SideScrollViewerVertical(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -321,13 +325,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SideScrollViewerVertical(),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, bottom: 12, top: 30),
                 child: Text(
                   'Collection',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
@@ -352,14 +355,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-
           SideScrollViewerHorizontal(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, bottom: 12, top: 30),
                 child: Text(
                   '10만원 미만 ',
                   style: TextStyle(
@@ -387,7 +389,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-
           SideScrollViewerVertical(),
           Stack(
             children: <Widget>[

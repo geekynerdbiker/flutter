@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 import 'package:newnew/testInput.dart';
-import 'package:newnew/models/user.dart';
+import 'package:newnew/models/component.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

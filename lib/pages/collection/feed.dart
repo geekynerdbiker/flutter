@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/user.dart';
+import 'package:newnew/models/component.dart';
 import 'package:newnew/testInput.dart';
 
 class FeedPage extends StatefulWidget {
