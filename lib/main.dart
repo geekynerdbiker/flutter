@@ -20,7 +20,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      //home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/a': (context) => ProductList(),
+        '/b' : (context) => ProductDetail(),
+      },
     );
   }
 }
@@ -36,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     CollectionPage(),
     ProductDetail(),
     CategoryPage(),
-    ProfilePage()
+    ProfilePage(),
   ];
   @override
 
