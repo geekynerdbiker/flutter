@@ -48,7 +48,9 @@ class _ProductListState extends State<ProductList> with TickerProviderStateMixin
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.arrow_back, color: Colors.black,),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                       Text('상품', style: TextStyle(color: Colors.black),)
                     ],

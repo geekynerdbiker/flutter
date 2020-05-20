@@ -241,6 +241,9 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
+            Container(
+              height: 100,
+            )
           ],
         ),
       ),

@@ -131,6 +131,9 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white),
                       ),
                       onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
                       },
                     ),
                   ),
