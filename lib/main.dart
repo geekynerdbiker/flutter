@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/pages/collection/userCollectionPage.dart';
+import 'package:newnew/pages/etc/signInPage.dart';
+import 'package:newnew/pages/etc/signUpPage.dart';
 import 'package:newnew/pages/product/productDetail.dart';
 import 'package:newnew/pages/product/productList.dart';
+import 'package:newnew/widgets/collection/userCollections.dart';
 
 
 import 'pages/home/mainPage.dart';
@@ -10,8 +14,6 @@ import 'pages/collection/mainPage.dart';
 import 'pages/product/addProduct.dart';
 import 'pages/product/productList.dart';
 import 'pages/product/productDetail.dart';
-
-//import 'models/appbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,8 +26,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/a': (context) => ProductList(),
-        '/b' : (context) => ProductDetail(),
+        '/pl': (context) => ProductList(),
+        '/pd': (context) => ProductDetail(),
+        '/cl': (context) => UserCollectionPage(),
       },
     );
   }
@@ -40,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    ProductDetail(),
+    SignUpPage(),
     CategoryPage(),
     ProfilePage(),
   ];
