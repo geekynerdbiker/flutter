@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 
 class User {
   String username;
-  List<Post> posts;
+  String eMail;
+  String phoneNumber;
+
   AssetImage profilePicture;
   List<User> followers;
   List<User> following;
+
+  List<Product> myProducts;
+  List<Collection> myCollection;
+
+  DateTime lastSignIn;
+
+  List<Post> posts;
   List<Post> savedPosts;
 
   User(this.username, this.profilePicture, this.followers, this.following, this.posts, this.savedPosts);
@@ -25,48 +34,38 @@ class Post {
 }
 
 class Comment {
-  String comment;
   User user;
+  String comment;
   DateTime dateOfComment;
   bool isLiked;
   Comment(this.user, this.comment, this.dateOfComment, this.isLiked);
 }
 
-class Category {
-  String title;
-  String imageURI;
+class Tag {
+  String name;
 
-  Category(this.title);
+  Tag(this.name);
 }
 
 class Collection {
   User owner;
-  String imageURI;
-  List<Product> collectionItems;
-
-  Collection(this.owner, this.imageURI, this.collectionItems);
-}
-
-class Designer {
   String title;
   String imageURI;
+  List<Product> productList;
 
-  Designer(this.title);
-}
+  int getSize() {
+    return this.productList.length;
+  }
 
-class Style {
-  String title;
-  String imageURI;
-
-  Style(this.title);
+  Collection(this.owner, this.title, this.imageURI, this.productList);
 }
 
 class Product {
   String title;
   String imageURI;
-  Category category1;
-  Category category2;
-  Category category3;
+  Tag category1;
+  Tag category2;
+  Tag category3;
   int price;
   String description;
   User user;
