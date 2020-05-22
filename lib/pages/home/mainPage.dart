@@ -22,42 +22,54 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget appBar = AppBar(
-      elevation: 0.75,
+      centerTitle: true,
+      elevation: 0,
       backgroundColor: Colors.white,
-      title: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 1 / 2,
-          child: Image.asset('lib/assets/newnew_logo.png'),
-        ),
-      ),
-      leading: IconButton(
-        icon: Icon(
-          Icons.notifications,
-          color: Colors.grey,
-        ),
-        onPressed: () {},
+      title: Container(
+        width: MediaQuery.of(context).size.width * 1 / 2,
+        child: Image.asset('lib/assets/newnew_logo.png'),
       ),
       actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.shopping_cart,
-            color: Colors.grey,
+        Container(
+          child: Material(
+            color: Colors.white,
+            child: InkWell(
+              child: Icon(
+                Icons.message,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
           ),
-          onPressed: () {},
+        ),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Material(
+            color: Colors.white,
+            child: InkWell(
+              child: Icon(
+                Icons.favorite,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
+          ),
         ),
       ],
+      bottom: PreferredSize(
+        preferredSize: Size(0, 40),
+        child: Container(
+          padding: EdgeInsets.all(5),
+          child: SearchBar(),
+        ),
+      ),
     );
 
     return Scaffold(
       appBar: appBar,
-      floatingActionButton: SearchBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-          ),
           Container(
             padding: EdgeInsets.only(top: 10),
             height: MediaQuery.of(context).size.width * 0.8,
@@ -115,30 +127,29 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                padding: EdgeInsets.only(top: 10, right: 5),
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
           SideScrollViewerVertical(),
@@ -158,25 +169,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
@@ -228,25 +238,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
@@ -281,25 +290,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
@@ -334,25 +342,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
@@ -373,25 +380,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/cl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),
@@ -415,25 +421,24 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                child: Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(color: Colors.black),
-                  child: Center(
-                    child: RaisedButton(
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/pl');
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
                       color: Colors.black,
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            '/a');
-                      },
                     ),
                   ),
                 ),

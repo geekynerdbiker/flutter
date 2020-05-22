@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/user.dart';
 
 import 'package:newnew/pages/collection/feed.dart';
+import 'package:newnew/widgets/collection/Recommends.dart';
 import 'package:newnew/widgets/collection/userCollections.dart';
-import 'package:newnew/widgets/collection/recommends.dart';
 
 class CollectionPage extends StatefulWidget {
   @override

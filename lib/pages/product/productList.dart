@@ -43,7 +43,11 @@ class _ProductListState extends State<ProductList>
             child: FloatingActionButton.extended(
                 label: Row(
                   children: <Widget>[
-                    Icon(Icons.settings, size: 20, color: Colors.black,),
+                    Icon(
+                      Icons.settings,
+                      size: 20,
+                      color: Colors.black,
+                    ),
                     Text(
                       " Filter",
                       style: TextStyle(fontSize: 15, color: Colors.black),
@@ -60,30 +64,19 @@ class _ProductListState extends State<ProductList>
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0.75,
+            centerTitle: true,
             backgroundColor: Colors.white,
             title: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      Text(
-                        '상품',
-                        style: TextStyle(color: Colors.black),
-                      )
-                    ],
-                  ),
-                ],
+              child: Text(
+                '상품',
+                style: TextStyle(color: Colors.black),
               ),
+            ),
+            leading: BackButton(
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
             bottom: TabBar(
               controller: _controller,

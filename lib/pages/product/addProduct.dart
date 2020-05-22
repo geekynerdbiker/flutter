@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/widgets/product/products.dart';
-
 class AddProduct extends StatefulWidget {
   @override
   _AddProductState createState() => _AddProductState();
@@ -31,26 +29,20 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.75,
+        centerTitle: true,
         backgroundColor: Colors.white,
         title: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {},
-                  ),
-                  //Text('컬렉션', style: TextStyle(color: Colors.black),)
-                ],
-              ),
-            ],
+          child: Text(
+            '상품',
+            style: TextStyle(color: Colors.black),
           ),
         ),
+        leading: BackButton(
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
       ),
       body: Scaffold(
         backgroundColor: Colors.white,

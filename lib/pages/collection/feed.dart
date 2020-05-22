@@ -77,7 +77,7 @@ class _FeedPageState extends State<FeedPage> {
                       margin: EdgeInsets.only(right: 10),
                       child: CircleAvatar(backgroundImage: post.user.profilePicture,),
                     ),
-                    Text(post.user.username, style: textStyleBold)
+                    Text(post.user.username, style: TextStyle(fontWeight: FontWeight.bold))
                   ],
                 ),
                 IconButton(
@@ -157,7 +157,7 @@ class _FeedPageState extends State<FeedPage> {
             ],
           ),
           FlatButton(
-            child: Text("좋아요 " + post.likes.length.toString() + "개", style: textStyleBold,),
+            child: Text("좋아요 " + post.likes.length.toString() + "개", style: TextStyle(fontWeight: FontWeight.bold),),
             onPressed: () {
                 setState(() {
                   the_post = post;
@@ -172,17 +172,17 @@ class _FeedPageState extends State<FeedPage> {
                 margin: EdgeInsets.only(left: 15, right: 10),
                 child: Text(
                   post.user.username,
-                  style: textStyleBold,
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               Text(
                 post.description,
-                style: textStyle,
+                style: TextStyle(),
               )
             ],
           ),
           FlatButton(
-            child: Text(post.comments.length.toString() + "개의 댓글 보기", style: textStyleLigthGrey,),
+            child: Text(post.comments.length.toString() + "개의 댓글 보기", style: TextStyle(color: Colors.grey),),
             onPressed: () {
               setState(() {
                   the_post = post;
@@ -206,7 +206,7 @@ class _FeedPageState extends State<FeedPage> {
           child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(follower.username, style: textStyleBold),
+            Text(follower.username, style: TextStyle(fontWeight: FontWeight.bold)),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.grey),
@@ -238,17 +238,21 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("좋아요", style: textStyleBold),
+        elevation: 0.75,
+        centerTitle: true,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black,),
-          onPressed: () {
-            setState(() {
-                page = 1;
-                build(context);
-            });
-          },
+        title: Container(
+          child: Text(
+            '상품',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
+        leading: BackButton(
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
       ),
       body: Container(
         child: ListView(
@@ -293,9 +297,9 @@ class _FeedPageState extends State<FeedPage> {
                           color: Colors.black,
                         ),
                         children: <TextSpan>[
-                          new TextSpan(text: comment.user.username, style: textStyleBold),
-                          new TextSpan(text: ' ', style: textStyle),
-                          new TextSpan(text: comment.comment, style: textStyle),
+                          new TextSpan(text: comment.user.username, style: TextStyle(fontWeight: FontWeight.bold)),
+                          new TextSpan(text: ' ', style: TextStyle()),
+                          new TextSpan(text: comment.comment, style: TextStyle()),
                         ],
                       ),
                     ),
@@ -304,14 +308,14 @@ class _FeedPageState extends State<FeedPage> {
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.only(right: 10, top: 5),
-                          child: Text(hoursAgo.toString() + "시간 전", style: textStyleLigthGrey,),
+                          child: Text(hoursAgo.toString() + "시간 전", style: TextStyle(color: Colors.grey),),
                         ),
                         Container(
-                          child: Text("좋아요", style: textStyleLigthGrey,),
+                          child: Text("좋아요", style: TextStyle(color: Colors.grey),),
                           margin: EdgeInsets.only(right: 10, top: 5),
                         ),
                         Container(
-                          child: Text("답글", style: textStyleLigthGrey,),
+                          child: Text("답글", style: TextStyle(color: Colors.grey),),
                           margin: EdgeInsets.only(right: 10, top: 5),
                         )
                       ],
@@ -364,7 +368,7 @@ class _FeedPageState extends State<FeedPage> {
                       });
                     },
                   ),
-                  Text('댓글', style: textStyleBold,)
+                  Text('댓글', style: TextStyle(fontWeight: FontWeight.bold),)
                 ],
               ),
             ],

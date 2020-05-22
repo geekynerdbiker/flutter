@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(user.username, style: textStyleBold,),
+                              Text(user.username, style: TextStyle(fontWeight: FontWeight.bold),),
                               Text("안녕하세요. 버즈 라이트이어입니다."),
                               InkWell(
                                 child: new Text('좋은 물건 보고가세요!'),

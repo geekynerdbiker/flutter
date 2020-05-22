@@ -17,10 +17,10 @@ class _ProductDetailState extends State<ProductDetail> {
           Container(
             width: MediaQuery.of(context).size.width * 2 / 5,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.all(color: Colors.black)
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: Colors.black)),
             child: FloatingActionButton.extended(
+                heroTag: "chat",
                 label: Text(
                   "대화하기",
                   style: TextStyle(color: Colors.black),
@@ -33,6 +33,7 @@ class _ProductDetailState extends State<ProductDetail> {
           Container(
             width: MediaQuery.of(context).size.width * 2 / 5,
             child: FloatingActionButton.extended(
+                heroTag: "buy",
                 label: Text(
                   "구매하기",
                   style: TextStyle(color: Colors.white),
@@ -48,26 +49,20 @@ class _ProductDetailState extends State<ProductDetail> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.75,
+        centerTitle: true,
         backgroundColor: Colors.white,
         title: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {},
-                  ),
-                  //Text('컬렉션', style: TextStyle(color: Colors.black),)
-                ],
-              ),
-            ],
+          child: Text(
+            '상품',
+            style: TextStyle(color: Colors.black),
           ),
         ),
+        leading: BackButton(
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
       ),
       body: Scaffold(
         backgroundColor: Colors.white,
@@ -91,7 +86,8 @@ class _ProductDetailState extends State<ProductDetail> {
                         width: MediaQuery.of(context).size.width - 60,
                         child: Text(
                           "아이디",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Container(
@@ -106,16 +102,17 @@ class _ProductDetailState extends State<ProductDetail> {
                 ],
               ),
             ),
-            Container(height: MediaQuery.of(context).size.width, decoration: BoxDecoration(color: Colors.black),),
+            Container(
+              height: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(color: Colors.black),
+            ),
             Padding(
               padding: EdgeInsets.only(right: 15, left: 15, top: 10),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Text(
                   "제품명",
-                  style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -131,7 +128,8 @@ class _ProductDetailState extends State<ProductDetail> {
                         "1000원",
                         style: TextStyle(
                           fontSize: 25,
-                          fontWeight: FontWeight.bold,),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Container(
