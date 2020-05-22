@@ -100,37 +100,10 @@ List<Designer> designerItems = [
 ];
 
 List<Collection> collectionItems = [
-  new Collection('Collection 1'),
-  new Collection('Collection 2'),
-  new Collection('Collection 3'),
-  new Collection('Collection 4'),
-  new Collection('Collection 5'),
-  new Collection('Collection 6'),
-  new Collection('Collection 7'),
-];
-
-List<Collection> userCollectionItems = [
-  new Collection('User Collection 1'),
-  new Collection('User Collection 2'),
-  new Collection('User Collection 3'),
-  new Collection('User Collection 4'),
-  new Collection('User Collection 5'),
-  new Collection('User Collection 6'),
-  new Collection('User Collection 7'),
-  new Collection('User Collection 8'),
-  new Collection('User Collection 9'),
-  new Collection('User Collection 10'),
-  new Collection('User Collection 11'),
-  new Collection('User Collection 12'),
-  new Collection('User Collection 13'),
-  new Collection('User Collection 14'),
-  new Collection('User Collection 15'),
-  new Collection('User Collection 16'),
-  new Collection('User Collection 17'),
-  new Collection('User Collection 18'),
-  new Collection('User Collection 19'),
-  new Collection('User Collection 20'),
-];
+  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'lib/assets/c1.png', productItems),
+  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'lib/assets/c2.png', productItems),
+  //new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'User Collection 1', productItems),
+  ];
 
 List<Product> productItems = [
   new Product('Product1', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
@@ -141,9 +114,7 @@ List<Product> productItems = [
   new Product('Product6', 'lib/assets/6.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
   new Product('Product6', 'lib/assets/10.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
   new Product('Product6', 'lib/assets/11.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/c1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/c2.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-];
+  ];
 
 ProductLists productListItem = ProductLists(myItems1, recentView1, wishList1);
 
