@@ -40,10 +40,11 @@ class Category {
 }
 
 class Collection {
-  String title;
-  String tagURI;
+  User owner;
+  String imageURI;
+  List<Product> collectionItems;
 
-  Collection(this.title);
+  Collection(this.owner, this.imageURI, this.collectionItems);
 }
 
 class Designer {
