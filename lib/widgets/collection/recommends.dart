@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
 import 'package:newnew/testInput.dart';
 
-class Products2 extends StatelessWidget {
-  List<Widget> getProducts2(BuildContext context) {
+class Recommends extends StatelessWidget {
+  List<Widget> getRecommends(BuildContext context) {
     List<Widget> products = [];
     int index = 0;
     for (Product product in productItems) {
-      products.add(getProduct2(context, product, index));
+      products.add(getRecommand(context, product, index));
       index++;
     }
     return products;
   }
 
-  Widget getProduct2(BuildContext context, Product product, int index) {
+  Widget getRecommand(BuildContext context, Product product, int index) {
     return Padding(
       padding: EdgeInsets.all(0),
       child: Container(
@@ -34,7 +34,7 @@ class Products2 extends StatelessWidget {
         height: 200,
         child: GridView.count(
           crossAxisCount: 3,
-          children: getProducts2(context),
+          children: getRecommends(context),
         ));
   }
 }
