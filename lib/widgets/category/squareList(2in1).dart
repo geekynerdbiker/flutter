@@ -7,16 +7,16 @@ import 'package:newnew/testInput.dart';
 class SquareList2in1 extends StatelessWidget {
 
   List<Widget> getCategories(BuildContext context) {
-    List<Widget> styles = [];
+    List<Widget> tags = [];
     int index = 0;
-    for (Style style in styleItems) {
-      styles.add(getCategory(context, style, index));
+    for (Tag tag in styleItems) {
+      tags.add(getCategory(context, tag, index));
       index ++;
     }
-    return styles;
+    return tags;
   }
 
-  Widget getCategory(BuildContext context, Style style, int index) {
+  Widget getCategory(BuildContext context, Tag tag, int index) {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Container(
@@ -25,7 +25,7 @@ class SquareList2in1 extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            style.title,
+            tag.name,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,

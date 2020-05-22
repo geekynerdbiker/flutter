@@ -8,9 +8,9 @@ class SquareList extends StatelessWidget {
     List<Widget> productLists = [];
     int index = 0;
 
-    productLists.add(getMyItems(context, productListItem, index));
     productLists.add(getRecentView(context, productListItem, index));
     productLists.add(getWishList(context, productListItem, index));
+    productLists.add(getMyItems(context, productListItem, index));
     index++;
 
     return productLists;

@@ -5,9 +5,6 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 50),
-      color: Colors.transparent,
-      child: Container(
           width: MediaQuery.of(context).size.width - 30,
           height: 40,
           decoration: BoxDecoration(
@@ -32,7 +29,6 @@ class SearchBar extends StatelessWidget {
                 child: TextField(textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.bold,
                   ),
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: '검색어를 입력하세요'),
@@ -40,7 +36,6 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           )
-        ),
-      );
+        );
   }
 }

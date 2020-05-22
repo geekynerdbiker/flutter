@@ -21,7 +21,7 @@ class Products extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/b');
+              Navigator.pushNamed(context, '/pd');
             },
             child: Container(
               color: Colors.white,
@@ -57,7 +57,7 @@ class Products extends StatelessWidget {
                               height: 20,
                               width: MediaQuery.of(context).size.width / 2 - 20,
                               child: Text(
-                                product.category1.title,
+                                product.category1.name,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                     color: Colors.black,

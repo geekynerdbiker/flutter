@@ -6,16 +6,16 @@ import 'package:newnew/testInput.dart';
 class TrendingSearch extends StatelessWidget {
 
   List<Widget> getTrends(BuildContext context) {
-    List<Widget> categories = [];
+    List<Widget> tags = [];
     int index = 0;
-    for (Category category in trendItems) {
-      categories.add(getTrend(context, category, index));
+    for (Tag tag in trendItems) {
+      tags.add(getTrend(context, tag, index));
       index ++;
     }
-    return categories;
+    return tags;
   }
 
-  Widget getTrend(BuildContext context, Category category, int index) {
+  Widget getTrend(BuildContext context, Tag tag, int index) {
     return Padding(
       padding: EdgeInsets.only(left: 10),
       child: Container(
@@ -26,7 +26,7 @@ class TrendingSearch extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            category.title,
+            tag.name,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,

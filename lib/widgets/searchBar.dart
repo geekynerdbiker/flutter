@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Widget searchBar(BuildContext context) {
-  child: Container(
+  Container(
     padding: const EdgeInsets.only(left: 15.0, right: 15.0),
     decoration: BoxDecoration(
       color: Theme.of(context).primaryColorLight,
