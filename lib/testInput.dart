@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'models/component.dart';
 
-TextStyle textStyle = new TextStyle(fontFamily: 'Gotham');
-TextStyle textStyleBold = new TextStyle(fontFamily: 'Gotham', fontWeight: FontWeight.bold, color: Colors.black);
-TextStyle textStyleLigthGrey = new TextStyle(fontFamily: 'Gotham', color: Colors.grey);
+TextStyle textTag = new TextStyle(fontFamily: 'Gotham');
+TextStyle textTagBold = new TextStyle(fontFamily: 'Gotham', fontWeight: FontWeight.bold, color: Colors.black);
+TextStyle textTagLigthGrey = new TextStyle(fontFamily: 'Gotham', color: Colors.grey);
 
 List<User> userList = [
 new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []),
@@ -62,86 +62,77 @@ final User user = new User('우주용사 버즈', AssetImage('lib/assets/profile
   userList[5]
 ], [], []);
 
-List<Category> trendItems = [
-  new Category('Nike'),
-  new Category('Adidas'),
-  new Category('Vans'),
-  new Category('Converse'),
-  new Category('Golden Goose'),
-  new Category('Test1'),
-  new Category('Test2'),
+List<Tag> trendItems = [
+  new Tag('Nike'),
+  new Tag('Adidas'),
+  new Tag('Vans'),
+  new Tag('Converse'),
+  new Tag('Golden Goose'),
+  new Tag('Test1'),
+  new Tag('Test2'),
 ];
 
-List<Category> categoryItems = [
-  new Category('Outerwear'),
-  new Category('Top'),
-  new Category('Bottom'),
-  new Category('Footwear'),
-  new Category('Tailoring'),
-  new Category('Accesories'),
+List<Tag> categoryItems = [
+  new Tag('Outerwear'),
+  new Tag('Top'),
+  new Tag('Bottom'),
+  new Tag('Footwear'),
+  new Tag('Tailoring'),
+  new Tag('Accesories'),
 ];
 
-List<Style> styleItems = [
-  new Style('Street'),
-  new Style('Vintage'),
-  new Style('Luxury'),
-  new Style('Casual'),
-  new Style('Avant Garde'),
-  new Style('Minimalist'),
-];
-
-List<Designer> designerItems = [
-  new Designer('Supreme'),
-  new Designer('Palace'),
-  new Designer('Raf Simons'),
-  new Designer('GUCCI'),
-  new Designer('Balenciaga'),
-  new Designer('Off-White'),
+List<Tag> styleItems = [
+  new Tag('Street'),
+  new Tag('Vintage'),
+  new Tag('Luxury'),
+  new Tag('Casual'),
+  new Tag('Avant Garde'),
+  new Tag('Minimalist'),
 ];
 
 List<Collection> collectionItems = [
-  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'lib/assets/c1.png', productItems),
-  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'lib/assets/c2.png', productItems),
+  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []),'collection1', 'lib/assets/c1.png', productItems),
+  new Collection(new User('제시', AssetImage('lib/assets/profile01.jpg'), [], [], [], []),'collection2', 'lib/assets/c2.png', myItems1),
   //new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'User Collection 1', productItems),
   ];
 
 List<Product> productItems = [
-  new Product('Product1', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product2', 'lib/assets/2.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product3', 'lib/assets/3.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product4', 'lib/assets/4.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product5', 'lib/assets/5.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/6.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/10.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/11.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product1', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product2', 'lib/assets/2.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product3', 'lib/assets/3.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product4', 'lib/assets/4.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product5', 'lib/assets/5.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product6', 'lib/assets/6.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product6', 'lib/assets/10.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product6', 'lib/assets/11.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
   ];
 
 ProductLists productListItem = ProductLists(myItems1, recentView1, wishList1);
 
 
 List<Product> myItems1 = [
-  new Product('Product1', 'lib/assets/7.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product2', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product3', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product4', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product5', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product6', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product1', 'lib/assets/7.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
+  new Product('Product2', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
+  new Product('Product3', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
+  new Product('Product4', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
+  new Product('Product5', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
+  new Product('Product6', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 2000),
 ];
 
 List<Product> recentView1 = [
-  new Product('Product11', 'lib/assets/8.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product12', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product13', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product14', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product15', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product16', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product11', 'lib/assets/8.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product12', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product13', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product14', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product15', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product16', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
 ];
 
 List<Product> wishList1 = [
-  new Product('Product21', 'lib/assets/9.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product22', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product23', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product24', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product25', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
-  new Product('Product26', 'lib/assets/1.png', new Category('Clothes'), new Category('Top'), new Category('Shirts'), 1000),
+  new Product('Product21', 'lib/assets/9.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product22', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product23', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product24', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product25', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
+  new Product('Product26', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
 ];
