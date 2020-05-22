@@ -9,7 +9,8 @@ class ProductList extends StatefulWidget {
   _ProductListState createState() => _ProductListState();
 }
 
-class _ProductListState extends State<ProductList> with TickerProviderStateMixin {
+class _ProductListState extends State<ProductList>
+    with TickerProviderStateMixin {
   TabController _controller;
 
   List<Widget> pages = [
@@ -36,6 +37,26 @@ class _ProductListState extends State<ProductList> with TickerProviderStateMixin
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
+          floatingActionButton: Container(
+            padding: EdgeInsets.only(bottom: 20),
+            width: MediaQuery.of(context).size.width / 3,
+            child: FloatingActionButton.extended(
+                label: Row(
+                  children: <Widget>[
+                    Icon(Icons.settings, size: 20, color: Colors.black,),
+                    Text(
+                      " Filter",
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(100))),
+                backgroundColor: Colors.white,
+                onPressed: () {}),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0.75,
@@ -47,18 +68,23 @@ class _ProductListState extends State<ProductList> with TickerProviderStateMixin
                   Row(
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.arrow_back, color: Colors.black,),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
-                      Text('상품', style: TextStyle(color: Colors.black),)
+                      Text(
+                        '상품',
+                        style: TextStyle(color: Colors.black),
+                      )
                     ],
                   ),
                 ],
               ),
             ),
-
             bottom: TabBar(
               controller: _controller,
               labelColor: Colors.black,

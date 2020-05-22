@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/user.dart';
 
 import 'package:newnew/pages/collection/feed.dart';
-import 'package:newnew/widgets/collection/collections.dart';
-import 'package:newnew/widgets/collection/userCollection.dart';
+import 'package:newnew/widgets/collection/userCollections.dart';
+import 'package:newnew/widgets/collection/recommends.dart';
 
 class CollectionPage extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
   TabController _controller;
 
   List<Widget> pages = [
-    Collections(),
+    Recommends(),
     UserCollections(),
     FeedPage(),
   ];
@@ -48,10 +48,6 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.arrow_back, color: Colors.black,),
-                        onPressed: () {},
-                      ),
                       Text('컬렉션', style: TextStyle(color: Colors.black),)
                     ],
                   ),
@@ -66,7 +62,7 @@ class _CollectionPageState extends State<CollectionPage> with TickerProviderStat
               unselectedLabelColor: Colors.grey,
               tabs: [
                 Tab(
-                  icon: Text('기획전'),
+                  icon: Text('Recommends'),
                 ),
                 Tab(
                   icon: Text('컬렉션'),

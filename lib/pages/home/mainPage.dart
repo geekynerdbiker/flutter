@@ -157,18 +157,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
@@ -219,18 +227,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
@@ -264,18 +280,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
@@ -309,18 +333,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
@@ -340,18 +372,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
@@ -374,18 +414,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30, right: 10),
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
                 child: Container(
-                  width: 60,
+                  width: 70,
                   height: 30,
                   decoration: BoxDecoration(color: Colors.black),
                   child: Center(
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: RaisedButton(
+                      color: Colors.black,
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/a');
+                      },
                     ),
                   ),
                 ),
