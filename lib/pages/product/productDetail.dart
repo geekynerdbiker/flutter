@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/component.dart';
 
-import 'package:newnew/widgets/product/products.dart';
+class ProductDetail extends StatelessWidget {
+  final Product product;
+  ProductDetail(Product product): this.product = product;
 
-class ProductDetail extends StatefulWidget {
-  @override
-  _ProductDetailState createState() => _ProductDetailState();
-}
-
-class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +82,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       Container(
                         width: MediaQuery.of(context).size.width - 60,
                         child: Text(
-                          "아이디",
+                          product.owner,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -104,14 +101,14 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
             Container(
               height: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.black),
+              child: Image.asset(product.imageURI, fit: BoxFit.cover,),
             ),
             Padding(
               padding: EdgeInsets.only(right: 15, left: 15, top: 10),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                  "제품명",
+                  product.title,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -125,7 +122,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Text(
-                        "1000원",
+                        product.price.toString() + '원',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,

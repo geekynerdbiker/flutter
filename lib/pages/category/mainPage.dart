@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:newnew/widgets/category/squareList(2in1).dart';
-import 'package:newnew/widgets/collection/recommends.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
