@@ -1,13 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
+import 'package:newnew/pages/product/productDetail.dart';
 import 'package:newnew/testInput.dart';
 
 class SideScrollViewerVertical extends StatelessWidget {
   List<Widget> getProducts(BuildContext context) {
     List<Widget> products = [];
     int index = 0;
+
     for (Product product in productItems) {
       products.add(getProduct(context, product, index));
       index++;
@@ -18,11 +19,6 @@ class SideScrollViewerVertical extends StatelessWidget {
   Widget getProduct(BuildContext context, Product product, int index) {
     return Material(
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-              context,
-              '/b');
-        },
         child: Container(
             padding: EdgeInsets.only(left: 10),
             color: Colors.white,
@@ -32,31 +28,38 @@ class SideScrollViewerVertical extends StatelessWidget {
                   width: 200,
                   height: 280,
                   decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Image.asset(
-                    product.imageURI,
-                    fit: BoxFit.cover,
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Material(
+                    child: InkWell(
+                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product)));},
+                      child: Image.asset(
+                        product.imageURI,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Container(height: 10),
                 Container(
-                  width: 200,
-                  height: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        product.title,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Material(
-                        child: InkWell(
-                          child: Icon(Icons.favorite, size:  16,),
+                    width: 200,
+                    height: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          product.title,
+                          style: TextStyle(fontSize: 16),
                         ),
-                      )
-                    ],
-                  )
-                ),
+                        Material(
+                          child: InkWell(
+                            child: Icon(
+                              Icons.favorite,
+                              size: 16,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
                 Container(
                   width: 200,
                   height: 20,

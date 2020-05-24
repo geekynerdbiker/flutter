@@ -20,9 +20,13 @@ class Products2 extends StatelessWidget {
       child: Container(
         width: 250,
         height: 200,
-        child: Image.asset(
-          product.imageURI,
-          fit: BoxFit.cover,
+        child: Material(
+          child: InkWell(
+            child: Image.asset(
+              product.imageURI,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
     );

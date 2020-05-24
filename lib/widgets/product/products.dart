@@ -21,7 +21,7 @@ class Products extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/pd');
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product)));
             },
             child: Container(
               color: Colors.white,
