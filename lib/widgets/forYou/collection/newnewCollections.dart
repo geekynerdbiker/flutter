@@ -5,19 +5,19 @@ import 'package:newnew/testInput.dart';
 import 'package:newnew/models/component.dart';
 import 'package:newnew/widgets/forYou/sideScrollViewerVertical.dart';
 
-class UserCollections extends StatelessWidget {
-  List<Widget> getUserCollections(BuildContext context) {
+class NewnewCollections extends StatelessWidget {
+  List<Widget> getNewnewCollections(BuildContext context) {
     List<Widget> collections = [];
     int index = 0;
 
     for (Collection collection in collectionItems) {
-      collections.add(getUserCollection(context, collection, index));
+      collections.add(getNewnewCollection(context, collection, index));
       index++;
     }
     return collections;
   }
 
-  Widget getUserCollection(
+  Widget getNewnewCollection(
       BuildContext context, Collection collection, int index) {
     return Padding(
       padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -33,10 +33,10 @@ class UserCollections extends StatelessWidget {
                     Text(
                       collection.title + ' ',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '(' + collection.getSize().toString() + ')',
+                      '(' + collection.productList.length.toString() + ')',
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -48,7 +48,7 @@ class UserCollections extends StatelessWidget {
                 height: 20,
                 width: MediaQuery.of(context).size.width - 30,
                 child: Text(
-                  'by' + collection.owner.username,
+                  'by NEWNEW',
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -74,7 +74,7 @@ class UserCollections extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.width * 1 / 3 + 34,
             width: MediaQuery.of(context).size.width - 20,
-            child: SideScrollViewerVertical(index),
+            child: SideScrollViewerVertical(collection.productList),
           ),
         ],
       ),
@@ -86,7 +86,7 @@ class UserCollections extends StatelessWidget {
     return Container(
       child: ListView(
         scrollDirection: Axis.vertical,
-        children: getUserCollections(context),
+        children: getNewnewCollections(context),
       ),
     );
   }

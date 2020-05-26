@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AddProduct extends StatefulWidget {
+class AddProductPage extends StatefulWidget {
   @override
-  _AddProductState createState() => _AddProductState();
+  _AddProductPageState createState() => _AddProductPageState();
 }
 
-class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
+class _AddProductPageState extends State<AddProductPage> with TickerProviderStateMixin {
   String category1 = '대분류';
   String category2 = '중분류';
   String category3 = '소분류';

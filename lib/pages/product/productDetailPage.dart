@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetailPage extends StatelessWidget {
   final Product product;
-  ProductDetail(Product product): this.product = product;
+  ProductDetailPage(Product product): this.product = product;
 
   @override
   Widget build(BuildContext context) {

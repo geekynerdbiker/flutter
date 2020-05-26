@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/pages/product/productDetail.dart';
+import 'package:newnew/pages/product/productDetailPage.dart';
 
-import 'package:newnew/testInput.dart';
 import 'package:newnew/models/component.dart';
 
 class Products extends StatelessWidget {
+  final List<Product> productItems;
+  Products(List<Product> productItems) : this.productItems = productItems;
+
   List<Widget> getProducts(BuildContext context) {
     List<Widget> products = [];
     int index = 0;
@@ -21,7 +23,7 @@ class Products extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () {
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
             },
             child: Container(
               color: Colors.white,
