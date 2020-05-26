@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/pages/forYou/collectionDetailPage.dart';
+
 import 'package:newnew/pages/forYou/userCollectionPage.dart';
 import 'package:newnew/pages/etc/popularSeller.dart';
-import 'package:newnew/pages/product/productDetail.dart';
-import 'package:newnew/pages/product/productList.dart';
+import 'package:newnew/pages/product/addProductPage.dart';
+
+import 'package:newnew/pages/product/productListPage.dart';
 import 'package:newnew/pages/category/mainPage.dart';
+
 
 import 'pages/home/mainPage.dart';
 import 'pages/forYou/mainPage.dart';
 import 'pages/profile/mainPage.dart';
-import 'pages/product/productList.dart';
-import 'pages/product/productDetail.dart';
+import 'pages/product/productListPage.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -23,8 +25,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/pl': (context) => ProductList(),
+        '/pl': (context) => ProductListPage(),
         '/cl': (context) => UserCollectionPage(),
+        '/ps': (context) => PopularSellerPage(),
       },
     );
   }
@@ -39,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
     HomePage(),
     CollectionPage(),
-    PopularSellerPage(),
+    AddProductPage(),
     CategoryPage(),
     ProfilePage(),
   ];
