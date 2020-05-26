@@ -5,7 +5,7 @@ class User {
   String eMail;
   String phoneNumber;
 
-  AssetImage profilePicture;
+  String profilePicture;
   List<User> followers = [];
   List<User> following = [];
 
@@ -51,11 +51,9 @@ class Collection {
   User owner;
   String title;
   String imageURI;
+  String subscription = '컬렉션 설명이 없습니다.';
   List<Product> productList = [];
 
-  int getSize() {
-    return this.productList.length;
-  }
 
   Collection(this.owner, this.title, this.imageURI, this.productList);
 }
@@ -67,7 +65,7 @@ class Product {
   Tag category2;
   Tag category3;
   int price;
-  String description;
+  String description = '상품 설명이 없습니다.';
   String owner;
   List<User> likes = [];
   List<Comment> comments = [];
