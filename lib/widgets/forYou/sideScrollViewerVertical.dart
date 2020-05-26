@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
-import 'package:newnew/testInput.dart';
+import 'package:newnew/pages/product/productDetailPage.dart';
 
 class SideScrollViewerVertical extends StatelessWidget {
-  final int index;
-  SideScrollViewerVertical(int index): this.index = index;
+  final List<Product> productItems;
+  SideScrollViewerVertical(List<Product> productItems): this.productItems = productItems;
 
   List<Widget> getProducts(BuildContext context) {
     List<Widget> products = [];
     int pIndex = 0;
-    for (Product product in collectionItems[index].productList) {
+    for (Product product in productItems) {
       products.add(getProduct(context, product, pIndex));
       pIndex++;
     }
@@ -24,9 +24,16 @@ class SideScrollViewerVertical extends StatelessWidget {
       height: MediaQuery.of(context).size.width * 1 / 3 - 20,
       child: Column(
         children: <Widget>[
-          Image.asset(
-            product.imageURI,
-            fit: BoxFit.cover,
+          Material(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
+              },
+              child: Image.asset(
+                product.imageURI,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

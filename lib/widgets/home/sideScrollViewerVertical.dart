@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
-import 'package:newnew/pages/product/productDetail.dart';
+import 'package:newnew/pages/product/productDetailPage.dart';
 import 'package:newnew/testInput.dart';
 
 class SideScrollViewerVertical extends StatelessWidget {
@@ -31,7 +31,7 @@ class SideScrollViewerVertical extends StatelessWidget {
                       BoxDecoration(border: Border.all(color: Colors.black)),
                   child: Material(
                     child: InkWell(
-                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product)));},
+                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));},
                       child: Image.asset(
                         product.imageURI,
                         fit: BoxFit.cover,

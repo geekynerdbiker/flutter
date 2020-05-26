@@ -37,7 +37,11 @@ class PopularSeller extends StatelessWidget {
                           padding: EdgeInsets.all(5),
                           height: 40,
                           width: 40,
-                          child: CircleAvatar(),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: Colors.grey
+                          ),
+                          child: Image.asset(user.profilePicture, fit: BoxFit.cover,),
                         ),
                         Container(
                           width: 5,
