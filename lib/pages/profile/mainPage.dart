@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                           Container(
                             height: 50,
                             width: 50,
-                            child: CircleAvatar(backgroundImage: user.profilePicture,),
+                            //child: CircleAvatar(backgroundImage: user.profilePicture,),
                           ),
                           Column(
                             children: <Widget>[

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
+import 'package:newnew/pages/etc/popularSeller.dart';
 
-import 'package:newnew/models/component.dart';
+
 import 'package:newnew/widgets/home/popularSellers.dart';
 import 'package:newnew/widgets/home/searchBar.dart';
 import 'package:newnew/widgets/home/sideScrollViewerHorizontal.dart';
@@ -10,9 +11,6 @@ import 'package:newnew/widgets/home/squareList.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
 import 'package:newnew/widgets/home/trendingSearch.dart';
 
-import 'package:newnew/pages/product/productList.dart';
-
-// components -> widgets
 
 class HomePage extends StatefulWidget {
   @override
@@ -197,16 +195,46 @@ class _HomePageState extends State<HomePage> {
             height: MediaQuery.of(context).size.width / 3 + 42,
             child: SquareList(),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
-            child: new Text(
-              '인기 셀러',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                child: new Text(
+                  '인기 셀러',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
+                child: Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PopularSellerPage()));
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
+                      color: Colors.black,
+                      child: Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
+
           Container(
             height: 130,
             child: PopularSellers(),
