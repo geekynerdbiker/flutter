@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'models/component.dart';
 
 List<User> userList = [
-new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], [], wishList1),
-new User('우디', AssetImage('lib/assets/profile02.jpg'), [], [], [], [], myItems1),
-new User('제시', AssetImage('lib/assets/profile03.jpg'), [], [], [], [], empty),
-new User('저그', AssetImage('lib/assets/profile04.jpg'), [], [], [], [], wishList1),
-new User('렉스', AssetImage('lib/assets/profile05.jpg'), [], [], [], [], myItems1),
-new User('미스터 포테이토', AssetImage('lib/assets/profile06.jpg'), [], [], [], [], recentView1),
+new User('불스아이', ('lib/assets/profile01.jpg'), [], [], [], [], wishList1),
+new User('우디', ('lib/assets/profile02.jpg'), [], [], [], [], myItems1),
+new User('제시', ('lib/assets/profile03.jpg'), [], [], [], [], empty),
+new User('저그', ('lib/assets/profile04.jpg'), [], [], [], [], wishList1),
+new User('렉스', ('lib/assets/profile05.jpg'), [], [], [], [], myItems1),
+new User('미스터 포테이토', ('lib/assets/profile06.jpg'), [], [], [], [], recentView1),
 ];
 
 List<Post> userPosts = [
@@ -45,7 +45,7 @@ List<Post> userPosts = [
 ];
 
 Post post1 = new Post(new AssetImage('lib/assets/post06.jpg'), user, "내 글", DateTime.now(), [userList[0], userList[1], userList[2]], [], false, false);
-final User user = new User('우주용사 버즈', AssetImage('lib/assets/profile00.jpg'), [
+final User user = new User('우주용사 버즈', ('lib/assets/profile00.jpg'), [
   userList[0],
   userList[1],
   userList[2]
@@ -87,8 +87,8 @@ List<Tag> styleItems = [
 ];
 
 List<Collection> collectionItems = [
-  new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], [], productItems),'collection1', 'lib/assets/c1.png', productItems),
-  new Collection(new User('제시', AssetImage('lib/assets/profile01.jpg'), [], [], [], [], wishList1),'collection2', 'lib/assets/c2.png', myItems1),
+  new Collection(new User('불스아이', ('lib/assets/profile01.jpg'), [], [], [], [], productItems),'collection1', 'lib/assets/c1.png', productItems),
+  new Collection(new User('제시', ('lib/assets/profile01.jpg'), [], [], [], [], wishList1),'collection2', 'lib/assets/c2.png', myItems1),
   //new Collection(new User('불스아이', AssetImage('lib/assets/profile01.jpg'), [], [], [], []), 'User Collection 1', productItems),
   ];
 
