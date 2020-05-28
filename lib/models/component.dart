@@ -38,6 +38,7 @@ class Comment {
   String comment;
   DateTime dateOfComment;
   bool isLiked;
+
   Comment(this.user, this.comment, this.dateOfComment, this.isLiked);
 }
 
@@ -45,6 +46,15 @@ class Tag {
   String name;
 
   Tag(this.name);
+}
+
+class Review {
+  User user;
+  String comment;
+  Product product;
+  int rate;
+
+  Review(this.user, this.comment, this.rate, this.product);
 }
 
 class Collection {
