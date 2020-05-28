@@ -5,7 +5,7 @@ import 'package:newnew/testInput.dart';
 import 'package:newnew/models/component.dart';
 import 'package:newnew/widgets/forYou/sideScrollViewerVertical.dart';
 
-class UserCollections extends StatelessWidget {
+class MyCollections extends StatelessWidget {
   List<Widget> getCollections(BuildContext context) {
     List<Widget> collections = [];
     int index = 0;
