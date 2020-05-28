@@ -133,4 +133,9 @@ List<Product> wishList1 = [
   new Product('username','Product26', 'lib/assets/1.png', new Tag('Clothes'), new Tag('Top'), new Tag('Shirts'), 1000),
 ];
 
+List<Review> reviewItems = [
+  new Review(user, "sample review", 5, wishList1[0]),
+  new Review(user, "sample review2", 5, wishList1[1]),
+];
+
 List<Product> empty = [];
