@@ -21,14 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: MyHomePage(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(),
-        '/pl': (context) => ProductListPage(),
-        '/cl': (context) => UserCollectionPage(),
-        '/ps': (context) => PopularSellerPage(),
-      },
+      home: MyHomePage(),
     );
   }
 }
@@ -39,15 +32,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Widget> pages = [
-    HomePage(),
-    CollectionPage(),
-    AddProductPage(),
-    CategoryPage(),
-    ProfilePage(),
-  ];
   @override
-
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
@@ -55,7 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: TabBarView(
-          children: pages,
+          children: <Widget> [
+            HomePage(),
+            CollectionPage(),
+            AddProductPage(),
+            CategoryPage(),
+            ProfilePage(),
+          ],
         ),
         bottomNavigationBar: Container(
           child: new TabBar(
