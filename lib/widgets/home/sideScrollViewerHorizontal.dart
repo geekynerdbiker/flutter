@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:newnew/models/component.dart';
+import 'package:newnew/pages/forYou/collectionDetailPage.dart';
 import 'package:newnew/testInput.dart';
 
 class SideScrollViewerHorizontal extends StatelessWidget {
@@ -23,10 +24,14 @@ class SideScrollViewerHorizontal extends StatelessWidget {
             width: 280,
             height: 200,
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: Image.asset(
-              collection.imageURI,
-              fit: BoxFit.cover,
-            ),
+            child: Material(
+              child: InkWell(
+                onTap: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionDetailPage(collection)));
+                },
+                child: Image.asset(collection.imageURI, fit: BoxFit.cover,),
+              ),
+            )
           ),
           Container(
             padding: EdgeInsets.only(top: 10),

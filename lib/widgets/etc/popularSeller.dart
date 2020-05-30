@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:newnew/pages/product/productListPage.dart';
 
 import 'package:newnew/testInput.dart';
 import 'package:newnew/models/component.dart';
@@ -77,7 +78,7 @@ class PopularSeller extends StatelessWidget {
                       child: Material(
                         child: InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context, '/pl');
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
                           },
                           child: Container(
                             width: 70,
