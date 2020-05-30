@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 import 'package:newnew/testInput.dart';
+import 'package:newnew/pages/product/productListPage.dart';
 import 'package:newnew/models/component.dart';
+import 'package:newnew/widgets/forYou/collection/products.dart';
+import 'package:newnew/widgets/forYou/collection/products2.dart';
+
 
 class ShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        padding: EdgeInsets.zero,
+      body: Column(
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(10),
@@ -123,7 +126,7 @@ class ShopPage extends StatelessWidget {
                           Material(
                             child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, '/pl');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
                               },
                               child: Container(
                                 width: 70,
@@ -147,7 +150,7 @@ class ShopPage extends StatelessWidget {
                           Material(
                             child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, '/pl');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
                               },
                               child: Container(
                                 width: 30,
@@ -166,15 +169,16 @@ class ShopPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.all(10),
-                  child: Text("안녕하세요. 버즈 라이트이어입니다. \n hihi\n hihi\n hihi\n hihi", style: TextStyle(fontSize: 12),),
-                )
+                  child: Text("안녕하세요. 버즈 라이트이어입니다. \n hihi\n hihi\n hihi", style: TextStyle(fontSize: 12),),
+                ),
               ],
             ),
             color: Colors.white,
           ),
-          Column(
-              //children: getPosts(),
-              )
+          Container(
+            height: MediaQuery.of(context).size.height - 400,
+            child: Products(productItems),
+          ),
         ],
       ),
     );

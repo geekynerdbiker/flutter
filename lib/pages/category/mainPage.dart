@@ -42,15 +42,9 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
             backgroundColor: Colors.white,
             title: Container(
               child: Text(
-                '상품',
+                '카테고리',
                 style: TextStyle(color: Colors.black),
               ),
-            ),
-            leading: BackButton(
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
 
             bottom: TabBar(
