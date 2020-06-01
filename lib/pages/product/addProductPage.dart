@@ -33,16 +33,10 @@ class _AddProductPageState extends State<AddProductPage> with TickerProviderStat
         backgroundColor: Colors.white,
         title: Container(
           child: Text(
-            '상품',
+            '등록하기',
             style: TextStyle(color: Colors.black),
           ),
         ),
-        leading: BackButton(
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
       ),
       body: Scaffold(
         backgroundColor: Colors.white,
