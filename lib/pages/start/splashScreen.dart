@@ -16,8 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
           height: MediaQuery.of(context).size.width,
           child: Image.asset('lib/assets/newnew_logo.png'),
         ),
-      )x2wys78\
-  =]-['0p;;;;QP-[-='0P;IQ]345p0-
-    =['-p0o9i8u7=-0]9[p876543Z85']);
+      ),
+    );
   }
 }
