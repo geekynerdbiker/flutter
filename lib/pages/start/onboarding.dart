@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:newnew/pages/etc/signInPage.dart';
+import 'package:newnew/pages/etc/signUpPage.dart';
+import 'package:newnew/pages/home/mainPage.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -7,36 +11,189 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreen extends State<OnboardingScreen>
     with TickerProviderStateMixin {
-  PageController _controller;
-
-  List<Widget> pages = [];
+  int currentIndexPage;
+  int pageLength;
 
   @override
   void initState() {
+    currentIndexPage = 0;
+    pageLength = 3;
     super.initState();
-    _controller = TabController(vsync: this, length: 3);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      physics: new AlwaysScrollableScrollPhysics(),
-      controller: _controller,
-      itemCount: pages.length,
-      itemBuilder: (BuildContext context, int index) {
-        return pages[index % pages.length];
-      },
-      onPageChanged: (int p) {
-        setState(() {
-          _page = p;
-        });
-      },
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          PageView(
+            children: <Widget>[
+              Walkthrougth(textContent: "Walkthrough one"),
+              Walkthrougth(textContent: "Walkthrough two"),
+              Walkthrougth(textContent: "Walkthrough tree"),
+            ],
+            onPageChanged: (value) {
+              setState(() => currentIndexPage = value);
+            },
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
+              child: Material(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: 40,
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        '둘러보기',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.width * 0.25,
+            left: MediaQuery.of(context).size.width * 0.1,
+            child: Text(
+              '취향있는 사람들의\n좋은 물건\nNEW NEW',
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ),
+          Center(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 1.1),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: new DotsIndicator(
+                        dotsCount: pageLength,
+                        position: currentIndexPage.toDouble(),
+                        decorator: DotsDecorator(
+                            shape: Border.all(color: Colors.white),
+                            color: Colors.transparent,
+                            activeShape: Border(),
+                            activeColor: Colors.white)),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignInPage()));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.38,
+                                height: 40,
+                                color: Colors.black,
+                                child: Center(
+                                  child: Text(
+                                    '로그인',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpPage()));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.38,
+                                height: 40,
+                                color: Colors.black,
+                                child: Center(
+                                  child: Text(
+                                    '회원가입',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: 40,
+                    color: Colors.black,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: 40,
+                    color: Colors.black,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: 40,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Walkthrougth extends StatelessWidget {
+  final String textContent;
+
+  Walkthrougth({Key key, @required this.textContent}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(color: Colors.redAccent),
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Center(child: Text(textContent)),
     );
   }
 }
