@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:newnew/pages/home/mainPage.dart';
+import 'package:newnew/pages/start/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,13 +15,13 @@ class _SplashScreenState extends State<SplashScreen> {
     startTime();
   }
   startTime() async {
-    var duration = new Duration(seconds: 3);
+    var duration = new Duration(seconds: 2);
     return new Timer(duration, route);
   }
 
   route() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => HomePage()
+        builder: (context) => OnboardingScreen()
     )
     );
   }
