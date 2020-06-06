@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'package:newnew/pages/etc/popularSeller.dart';
-import 'package:newnew/pages/forYou/collectionDetailPage.dart';
+import 'package:newnew/pages/profile/popularSeller.dart';
 import 'package:newnew/pages/forYou/userCollectionPage.dart';
 import 'package:newnew/pages/product/productListPage.dart';
-import 'package:newnew/widgets/forYou/collection/userCollections.dart';
+import 'package:newnew/pages/start/onboarding.dart';
 
 import 'package:newnew/widgets/home/popularSellers.dart';
 import 'package:newnew/widgets/home/searchBar.dart';
@@ -14,13 +13,26 @@ import 'package:newnew/widgets/home/squareList.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
 import 'package:newnew/widgets/home/trendingSearch.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    onboarding(context);
+  }
+
+  void onboarding(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: OnboardingScreen(),
+            ));
+  }
+
   Widget build(BuildContext context) {
     Widget appBar = AppBar(
       centerTitle: true,
@@ -117,8 +129,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Text(
                   'NEW NEW PICK',
                   style: TextStyle(
@@ -132,7 +144,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,
@@ -158,8 +173,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding:
-                EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
                 child: new Text(
                   'XXX님, 까먹지 마세요!',
                   style: TextStyle(
@@ -173,7 +187,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,
@@ -216,7 +233,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PopularSellerPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PopularSellerPage()));
                     },
                     child: Container(
                       width: 70,
@@ -237,7 +257,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-
           Container(
             height: 130,
             child: PopularSellers(),
@@ -246,8 +265,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -272,7 +291,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,
@@ -298,8 +320,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -324,7 +346,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,
@@ -350,8 +375,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -376,7 +401,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,
@@ -402,8 +430,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Text(
                   'Collection',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
@@ -414,7 +442,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => UserCollectionPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserCollectionPage()));
                     },
                     child: Container(
                       width: 70,
@@ -440,8 +471,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(
-                    right: 12, left: 12, bottom: 12, top: 30),
+                padding:
+                    EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                 child: Text(
                   '10만원 미만 ',
                   style: TextStyle(
@@ -455,7 +486,10 @@ class _HomePageState extends State<HomePage> {
                 child: Material(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListPage()));
                     },
                     child: Container(
                       width: 70,

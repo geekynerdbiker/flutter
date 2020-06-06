@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:newnew/pages/etc/signInPage.dart';
-import 'package:newnew/pages/etc/signUpPage.dart';
-import 'package:newnew/pages/home/mainPage.dart';
+import 'package:newnew/pages/account/signInPage.dart';
+import 'package:newnew/pages/account/signUpPage.dart';
+import 'package:newnew/pages/start/bootPage.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -44,7 +44,7 @@ class _OnboardingScreen extends State<OnboardingScreen>
                 child: InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => BootPage()));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.2,
@@ -190,7 +190,7 @@ class Walkthrougth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.redAccent),
+      //decoration: BoxDecoration(color: Colors.redAccent),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Center(child: Text(textContent)),

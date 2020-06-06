@@ -4,12 +4,12 @@ import 'package:newnew/widgets/forYou/Recommends.dart';
 import 'package:newnew/widgets/forYou/collection/userCollections.dart';
 import 'package:newnew/widgets/forYou/collection/newnewCollections.dart';
 
-class CollectionPage extends StatefulWidget {
+class ForYouPage extends StatefulWidget {
   @override
-  _CollectionPageState createState() => _CollectionPageState();
+  _ForYouPageState createState() => _ForYouPageState();
 }
 
-class _CollectionPageState extends State<CollectionPage> with TickerProviderStateMixin {
+class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
   TabController _controller;
 
   List<Widget> pages = [
