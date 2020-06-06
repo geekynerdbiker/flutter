@@ -9,7 +9,7 @@
 9        android:targetSdkVersion="28" />
 10    <!--
 11         Flutter needs it to communicate with the running application
-12         to allow setting breakpoints, to provide hot reload, etc.
+12         to allow setting breakpoints, to provide hot reload, account.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
 14-->/Users/spaceranger.lightyear/Documents/GitHub/newnew-market/android/app/src/debug/AndroidManifest.xml:6:5-66
