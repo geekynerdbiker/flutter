@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/pages/account/selectFavor.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -142,14 +143,21 @@ class SignUpPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(40),
             ),
-            Container(
-              height: 40,
-              width: 120,
-              color: Colors.black,
-              child: Center(
-                child: Text(
-                  '가입하기',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
+            Material(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SelectFavorPage()));
+                },
+                child: Container(
+                  height: 40,
+                  width: 120,
+                  color: Colors.black,
+                  child: Center(
+                    child: Text(
+                      '가입하기',
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
             ),

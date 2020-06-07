@@ -19,20 +19,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final bool isSignIn = false;
+
   @override
-  void initState() {
-    super.initState();
-    onboarding(context);
-  }
-
-  void onboarding(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              content: OnboardingScreen(),
-            ));
-  }
-
   Widget build(BuildContext context) {
     Widget appBar = AppBar(
       centerTitle: true,
