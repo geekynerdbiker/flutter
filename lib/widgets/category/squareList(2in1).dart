@@ -40,7 +40,7 @@ class SquareList2in1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
+      //physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: 5, right: 5),
       crossAxisCount: 2,
       childAspectRatio: 1,
