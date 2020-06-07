@@ -84,6 +84,12 @@ List<Tag> styleItems = [
   new Tag('Casual'),
   new Tag('Avant Garde'),
   new Tag('Minimalist'),
+  new Tag('Street'),
+  new Tag('Vintage'),
+  new Tag('Luxury'),
+  new Tag('Casual'),
+  new Tag('Avant Garde'),
+  new Tag('Minimalist'),
 ];
 
 List<Collection> collectionItems = [
@@ -136,6 +142,27 @@ List<Product> wishList1 = [
 List<Review> reviewItems = [
   new Review(user, "sample review", 5, wishList1[0]),
   new Review(user, "sample review2", 5, wishList1[1]),
+];
+
+List<Tag> tagItems = [
+  new Tag('tag1'),
+  new Tag('tag2'),
+  new Tag('tag3'),
+  new Tag('tag4'),
+  new Tag('tag5'),
+  new Tag('tag6'),
+  new Tag('tag7'),
+  new Tag('tag8'),
+  new Tag('tag9'),
+  new Tag('tag10'),
+  new Tag('tag11'),
+  new Tag('tag12'),
+  new Tag('tag13'),
+  new Tag('tag14'),
+  new Tag('tag15'),
+  new Tag('tag16'),
+  new Tag('tag17'),
+  new Tag('tag18'),
 ];
 
 List<Product> empty = [];
