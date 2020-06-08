@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newnew/models/user.dart';
 import 'package:newnew/testInput.dart';
 
-import 'package:newnew/widgets/forYou/collection/products.dart';
-import 'package:newnew/widgets/forYou/collection/products2.dart';
+import 'package:newnew/widgets/product/products.dart';
+import 'package:newnew/widgets/product/products2.dart';
 
 class ProductListPage extends StatefulWidget {
   @override

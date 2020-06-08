@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/widgets/forYou/collection/userCollections.dart';
+import 'package:newnew/widgets/collection/userCollections.dart';
 
 class NewnewCollectionPage extends StatelessWidget {
   @override

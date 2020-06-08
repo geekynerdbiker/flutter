@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
 import 'package:newnew/pages/product/productListPage.dart';
+import 'package:newnew/widgets/forYou/comments.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
-import 'package:newnew/widgets/forYou/collection/products.dart';
-import 'package:newnew/widgets/forYou/collection/products2.dart';
+import 'package:newnew/widgets/product/products.dart';
+import 'package:newnew/widgets/product/products2.dart';
+import 'package:newnew/widgets/product/products3.dart';
+import 'package:newnew/widgets/product/products4.dart';
 
 class CollectionDetailPage extends StatefulWidget {
   final Collection collection;
@@ -45,6 +48,22 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         actions: <Widget>[],
       ),
       backgroundColor: Colors.white,
+      floatingActionButton: Container(
+        width: MediaQuery.of(context).size.width * 2 / 5,
+        child: FloatingActionButton.extended(
+            label: Text(
+              "이 기획전 참여하기",
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(100))),
+            backgroundColor: Colors.black,
+            onPressed: () {}),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[
@@ -206,15 +225,86 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
             ],
           ),
           Container(
-            height: 200 + MediaQuery.of(context).size.width * 5 / 8,
+            height: 200 + MediaQuery.of(context).size.width * 1 / 2,
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
+                Products4(widget.collection.productList),
                 Products(widget.collection.productList),
-                Products(widget.collection.productList),
-                Products2(widget.collection.productList),
+                Products3(widget.collection.productList),
               ],
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Container(
+              height: 40,
+              child: Text(
+                '유저들의 ' + widget.collection.title,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 200 + MediaQuery.of(context).size.width * 1 / 2,
+            child: TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                Products4(widget.collection.productList),
+                Products(widget.collection.productList),
+                Products3(widget.collection.productList),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Container(
+              height: 40,
+              child: Text(
+                '댓글',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+          CommentList(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width - 120,
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10, bottom: 3),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                      decoration: InputDecoration(
+                          border: InputBorder.none, hintText: '댓글을 입력하세요.'),
+                    ),
+                  )),
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              Container(
+                  height: 40,
+                  width: 40,
+                  color: Colors.black,
+                  child: Center(
+                    child: Text(
+                      '작성',
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                  )),
+            ],
           ),
         ],
       ),

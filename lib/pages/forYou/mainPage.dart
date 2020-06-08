@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:newnew/widgets/forYou/Recommends.dart';
-import 'package:newnew/widgets/forYou/collection/userCollections.dart';
-import 'package:newnew/widgets/forYou/collection/newnewCollections.dart';
+import 'package:newnew/widgets/collection/userCollections.dart';
+import 'package:newnew/widgets/collection/newnewCollections.dart';
 
 class ForYouPage extends StatefulWidget {
   @override
