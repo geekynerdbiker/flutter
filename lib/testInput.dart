@@ -165,4 +165,11 @@ List<Tag> tagItems = [
   new Tag('tag18'),
 ];
 
+List<Comment> commentItems = [
+  new Comment(userList[0], 'comment', new DateTime.utc(2020, 6, 1), false),
+  new Comment(userList[0], 'comment', new DateTime.utc(2020, 6, 1), false),
+  new Comment(userList[0], 'comment', new DateTime.utc(2020, 6, 1), false),
+  new Comment(userList[0], 'comment', new DateTime.utc(2020, 6, 1), false),
+];
+
 List<Product> empty = [];
