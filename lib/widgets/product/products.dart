@@ -119,8 +119,9 @@ class Products extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        //height: MediaQuery.of(context).size.height - 180,
         child: GridView.count(
+          physics: NeverScrollableScrollPhysics(),
+
       crossAxisSpacing: 4,
       crossAxisCount: 2,
       childAspectRatio: 0.53,
