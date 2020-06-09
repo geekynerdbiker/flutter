@@ -7,7 +7,7 @@ import 'package:newnew/pages/product/productListPage.dart';
 import 'package:newnew/pages/start/onboarding.dart';
 
 import 'package:newnew/widgets/home/popularSellers.dart';
-import 'package:newnew/widgets/home/searchBar.dart';
+import 'package:newnew/widgets/etc/searchBar.dart';
 import 'package:newnew/widgets/home/sideScrollViewerHorizontal.dart';
 import 'package:newnew/widgets/home/squareList.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';

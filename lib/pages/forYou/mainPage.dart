@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:newnew/widgets/forYou/Recommends.dart';
 import 'package:newnew/widgets/collection/userCollections.dart';
-import 'package:newnew/widgets/collection/newnewCollections.dart';
 
 class ForYouPage extends StatefulWidget {
   @override
@@ -15,13 +14,12 @@ class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
   List<Widget> pages = [
     Recommends(),
     UserCollections(),
-    NewnewCollections(),
   ];
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: 3);
+    _controller = TabController(vsync: this, length: 2);
   }
 
   @override
@@ -56,9 +54,6 @@ class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
                 ),
                 Tab(
                   icon: Text('컬렉션'),
-                ),
-                Tab(
-                  icon: Text('기획전'),
                 ),
               ],
             ),
