@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/user.dart';
 import 'package:newnew/testInput.dart';
 
 class NotificationsPage extends StatefulWidget {
