@@ -1,7 +1,3 @@
-import 'product.dart';
-import 'collection.dart';
-import 'tag.dart';
-
 class User {
   String username;
   String password;

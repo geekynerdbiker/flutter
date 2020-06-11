@@ -1,6 +1,3 @@
-import 'user.dart';
-import 'product.dart';
-
 class Collection {
   int userID;
 

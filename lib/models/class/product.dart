@@ -1,6 +1,3 @@
-import 'user.dart';
-import 'tag.dart';
-
 class Product {
   int userID;
 
@@ -40,4 +37,10 @@ class Comment {
   String comment;
   String updatedDate;
   int productID;
+}
+
+class Tag {
+  String name;
+
+  Tag(this.name);
 }
