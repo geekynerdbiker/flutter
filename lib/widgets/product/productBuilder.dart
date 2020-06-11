@@ -3,9 +3,9 @@ import 'package:newnew/pages/product/productDetailPage.dart';
 
 import 'package:newnew/models/component.dart';
 
-class Products extends StatelessWidget {
+class ProductBuilder extends StatelessWidget {
   final List<Product> productItems;
-  Products(List<Product> productItems) : this.productItems = productItems;
+  ProductBuilder(List<Product> productItems) : this.productItems = productItems;
 
   List<Widget> getProducts(BuildContext context) {
     List<Widget> products = [];
