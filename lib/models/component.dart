@@ -48,6 +48,15 @@ class Tag {
   Tag(this.name);
 }
 
+class Review {
+  User user;
+  String comment;
+  String updatedDate;
+  Product product;
+  double rate;
+
+  Review(this.user, this.comment, this.rate, this.product);
+}
 
 
 class Collection {
