@@ -48,7 +48,7 @@ class Tag {
   Tag(this.name);
 }
 
-class Review {
+class Review {s
   User user;
   String comment;
   String updatedDate;
