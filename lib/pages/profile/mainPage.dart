@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/profile/myCollectionPage.dart';
 import 'package:newnew/pages/profile/profilePage.dart';
 import 'package:newnew/pages/profile/shopPage.dart';
@@ -32,17 +33,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.75,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Container(
-          child: Text(
-            '내 정보',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ),
+      appBar: appBarDefault(context, '내 정보'),
       body: ListView(
         children: <Widget>[
           Container(

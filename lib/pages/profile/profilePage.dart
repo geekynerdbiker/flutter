@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/profile/shopPage.dart';
 import 'package:newnew/widgets/profile/myCollections.dart';
 import 'package:newnew/pages/profile/myCollectionPage.dart';
@@ -9,8 +10,21 @@ class DefaultPage extends StatefulWidget {
   _DefaultPageState createState() => _DefaultPageState();
 }
 
-class _DefaultPageState extends State<DefaultPage> with TickerProviderStateMixin {
+class _DefaultPageState extends State<DefaultPage>
+    with TickerProviderStateMixin {
   TabController _controller;
+
+  List<Tab> _tabs = [
+    Tab(
+      icon: Text('상점'),
+    ),
+    Tab(
+      icon: Text('컬렉션'),
+    ),
+    Tab(
+      icon: Text('리뷰'),
+    ),
+  ];
 
   @override
   void initState() {
@@ -32,34 +46,10 @@ class _DefaultPageState extends State<DefaultPage> with TickerProviderStateMixin
         length: 3,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0.75,
-            centerTitle: true,
-            title: Container(
-              child: Text('Profile', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-            ),
-            bottom: TabBar(
-              controller: _controller,
-              labelColor: Colors.black,
-              indicatorColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              tabs: [
-                Tab(
-                  icon: Text('상점'),
-                ),
-                Tab(
-                  icon: Text('컬렉션'),
-                ),
-                Tab(
-                  icon: Text('리뷰'),
-                ),
-              ],
-            ),
-          ),
+          appBar: appBarWithTabDeep(context, '프로필', _tabs, _controller),
           body: TabBarView(
             controller: _controller,
-            children: <Widget> [
+            children: <Widget>[
               ShopPage(),
               MyCollectionPage(),
               Reviews(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/account/changePassword.dart';
 import 'package:newnew/pages/account/signInPage.dart';
 
@@ -6,23 +7,7 @@ class FindPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: Container(
-          child: Text(
-            '비밀번호 찾기',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-        ),
-        leading: BackButton(
-          color: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: appBarDefaultDeep(context, '비밀번호 찾기'),
       backgroundColor: Colors.white,
       body: Container(
         width: MediaQuery

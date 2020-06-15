@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -27,17 +28,7 @@ class _AddProductPageState extends State<AddProductPage> with TickerProviderStat
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.75,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Container(
-          child: Text(
-            '등록하기',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ),
+      appBar: appBarDefaultDeep(context, '상품 등록'),
       body: Scaffold(
         backgroundColor: Colors.white,
         body: new ListView(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 
 import 'package:newnew/widgets/forYou/Recommends.dart';
 import 'package:newnew/widgets/collection/userCollections.dart';
@@ -11,6 +12,14 @@ class ForYouPage extends StatefulWidget {
 class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
   TabController _controller;
 
+  List<Tab> _tabs = [
+    Tab(
+      icon: Text('Recommends'),
+    ),
+    Tab(
+      icon: Text('컬렉션'),
+    ),
+  ];
   List<Widget> pages = [
     Recommends(),
     UserCollections(),
@@ -36,28 +45,7 @@ class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
         length: 3,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            centerTitle: true,
-            title: Container(
-              child: Text('For You', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-            ),
-            bottom: TabBar(
-              controller: _controller,
-              labelColor: Colors.black,
-              indicatorColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              tabs: [
-                Tab(
-                  icon: Text('Recommends'),
-                ),
-                Tab(
-                  icon: Text('컬렉션'),
-                ),
-              ],
-            ),
-          ),
+          appBar: appBarWithTab(context, '포유', _tabs, _controller),
           body: TabBarView(
             controller: _controller,
             children: pages,

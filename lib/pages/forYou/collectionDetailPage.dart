@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/product/productListPage.dart';
 import 'package:newnew/widgets/forYou/comments.dart';
 import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
@@ -24,7 +25,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: 3);
+    _controller = TabController(vsync: this, length: 2);
   }
 
   @override
@@ -36,17 +37,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          '컬렉션',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        leading: BackButton(color: Colors.black),
-        actions: <Widget>[],
-      ),
+      appBar: appBarDefaultDeep(context, '컬렉션 상세'),
       backgroundColor: Colors.white,
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width * 2 / 5,
@@ -203,12 +194,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                   tabs: [
                     Tab(
                       icon: Icon(
-                        Icons.view_headline,
-                        size: 16,
-                      ),
-                    ),
-                    Tab(
-                      icon: Icon(
                         Icons.border_all,
                         size: 16,
                       ),
@@ -229,7 +214,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
-                Products4(widget.collection.productList),
                 Products(widget.collection.productList),
                 Products3(widget.collection.productList),
               ],
@@ -253,7 +237,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
-                Products4(widget.collection.productList),
                 Products(widget.collection.productList),
                 Products3(widget.collection.productList),
               ],

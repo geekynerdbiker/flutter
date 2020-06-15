@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/account/findPassword.dart';
 import 'package:newnew/pages/account/signUpPage.dart';
 
@@ -6,17 +7,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: BackButton(
-          color: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: appBarDefaultDeep(context, '로그인'),
       backgroundColor: Colors.white,
       body: Container(
         width: MediaQuery.of(context).size.width,

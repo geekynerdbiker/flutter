@@ -1,24 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/account/selectFavor.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: Container(
-            child: Text('회원가입', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-        ),
-        leading: BackButton(
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-      ),
+      appBar: appBarDefaultDeep(context, '회원가입'),
       backgroundColor: Colors.white,
       body: Container(
         width: MediaQuery.of(context).size.width,

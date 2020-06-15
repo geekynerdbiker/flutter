@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/models/component.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
@@ -44,23 +45,7 @@ class ProductDetailPage extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.75,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Container(
-          child: Text(
-            '상품',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        leading: BackButton(
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-      ),
+      appBar: appBarDefaultDeep(context, '상품 상세'),
       body: Scaffold(
         backgroundColor: Colors.white,
         body: new ListView(

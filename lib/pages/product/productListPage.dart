@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/testInput.dart';
 
 import 'package:newnew/widgets/product/products.dart';
@@ -12,6 +13,15 @@ class ProductListPage extends StatefulWidget {
 class _ProductListPageState extends State<ProductListPage>
     with TickerProviderStateMixin {
   TabController _controller;
+
+  List<Tab> _tabs = [
+    Tab(
+      icon: Icon(Icons.border_all),
+    ),
+    Tab(
+      icon: Icon(Icons.apps),
+    ),
+  ];
 
   List<Widget> pages = [
     Products(productItems),
@@ -62,37 +72,7 @@ class _ProductListPageState extends State<ProductListPage>
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            elevation: 0.75,
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            title: Container(
-              child: Text(
-                '상품',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            leading: BackButton(
-              color: Colors.black,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            bottom: TabBar(
-              controller: _controller,
-              labelColor: Colors.black,
-              indicatorColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.border_all),
-                ),
-                Tab(
-                  icon: Icon(Icons.apps),
-                ),
-              ],
-            ),
-          ),
+          appBar: appBarWithTabDeep(context, '상품 목록', _tabs, _controller),
           body: TabBarView(
             controller: _controller,
             children: pages,
