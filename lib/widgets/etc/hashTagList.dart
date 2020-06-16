@@ -24,9 +24,9 @@ class HashTagList extends StatelessWidget {
               //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
             },
             child: Padding(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(3),
               child: Container(
-                width: tag.name.length * 12.toDouble(),
+                width: tag.name.length * 13.toDouble(),
                 height: 30,
                 padding: EdgeInsets.only(left: 8, right: 8),
                 decoration: BoxDecoration(

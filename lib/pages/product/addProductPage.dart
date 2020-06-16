@@ -28,7 +28,7 @@ class _AddProductPageState extends State<AddProductPage> with TickerProviderStat
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: Colors.white,
-      appBar: appBarDefaultDeep(context, '상품 등록'),
+      appBar: appBarDefault(context, '상품 등록'),
       body: Scaffold(
         backgroundColor: Colors.white,
         body: new ListView(
