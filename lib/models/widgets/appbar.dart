@@ -69,7 +69,7 @@ Widget appBarWithTab(BuildContext context, String title, List<Tab> _tabs, TabCon
     title: Container(
       child: Text(
         title,
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.black),
       ),
     ),
     bottom: TabBar(
@@ -89,7 +89,7 @@ Widget appBarDefaultDeep(BuildContext context, String title) {
     backgroundColor: Colors.white,
     title: Text(
       title,
-      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      style: TextStyle(color: Colors.black),
     ),
     leading: BackButton(color: Colors.black),
   );
@@ -103,7 +103,7 @@ Widget appBarWithTabDeep(BuildContext context, String title, List<Tab> _tabs, Ta
     title: Container(
       child: Text(
         title,
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.black),
       ),
     ),
     leading: BackButton(color: Colors.black),
