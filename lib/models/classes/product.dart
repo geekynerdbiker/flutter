@@ -1,5 +1,7 @@
+import 'package:newnew/models/classes/user.dart';
+
 class Product {
-  int userID;
+  User userID;
 
   String title;
   List<String> imageURI;
