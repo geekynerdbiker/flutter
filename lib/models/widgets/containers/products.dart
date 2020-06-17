@@ -30,17 +30,21 @@ Container productOneThirdDetail(BuildContext context, Product product, double ma
       height: MediaQuery.of(context).size.width * 1 / 3 + 24 - margin,
       child: Column(
         children: <Widget>[
-          Material(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(product)));
-              },
-              child: Image.asset(
-                product.imageURI[0],
-                fit: BoxFit.cover,
+          Container(
+            width: MediaQuery.of(context).size.width * 1 / 3 - margin,
+            height: MediaQuery.of(context).size.width * 1 / 3 - margin,
+            child: Material(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(product)));
+                },
+                child: Image.asset(
+                  product.imageURI[0],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -70,17 +74,21 @@ Container productVerticalDetail(BuildContext context, Product product, double ma
       height: MediaQuery.of(context).size.width * 2 / 5 * 1.4 + 24 - margin,
       child: Column(
         children: <Widget>[
-          Material(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(product)));
-              },
-              child: Image.asset(
-                product.imageURI[0],
-                fit: BoxFit.cover,
+          Container(
+              width: MediaQuery.of(context).size.width * 2 / 5 - margin,
+              height: MediaQuery.of(context).size.width * 2 / 5 * 1.4 - margin,
+              child: Material(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(product)));
+                },
+                child: Image.asset(
+                  product.imageURI[0],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -110,23 +118,27 @@ Container productVerticalTimeDetail(BuildContext context, Product product, doubl
       height: MediaQuery.of(context).size.width * 2 / 5 * 1.4 + 34 - margin,
       child: Column(
         children: <Widget>[
-          Material(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(product)));
-              },
-              child: Image.asset(
-                product.imageURI[0],
-                fit: BoxFit.cover,
+          Container(
+            width: MediaQuery.of(context).size.width * 2 / 5 - margin,
+            height: MediaQuery.of(context).size.width * 2 / 5 * 1.4 - margin,
+            child: Material(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage(product)));
+                },
+                child: Image.asset(
+                  product.imageURI[0],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
           Container(
             width: MediaQuery.of(context).size.width * 2 / 5 - margin,
-            height: 12,
+            height: 22,
             child: Row(
               children: <Widget>[
                 Column(children: <Widget>[
