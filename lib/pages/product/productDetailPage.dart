@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/models/widgets/appbar.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -67,7 +67,7 @@ class ProductDetailPage extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width - 60,
                         child: Text(
-                          product.owner,
+                          product.userID.toString(),
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -86,7 +86,7 @@ class ProductDetailPage extends StatelessWidget {
             ),
             Container(
               height: MediaQuery.of(context).size.width,
-              child: Image.asset(product.imageURI, fit: BoxFit.cover,),
+              child: Image.asset(product.imageURI[0], fit: BoxFit.cover,),
             ),
             Padding(
               padding: EdgeInsets.only(right: 15, left: 15, top: 10),

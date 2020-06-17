@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:newnew/models/const/textSystem.dart';
 import 'package:newnew/models/widgets/appbar.dart';
+import 'package:newnew/pages/forYou/recommendPage.dart';
 
 import 'package:newnew/widgets/forYou/Recommends.dart';
 import 'package:newnew/widgets/collection/userCollections.dart';
@@ -14,21 +16,25 @@ class _ForYouPageState extends State<ForYouPage> with TickerProviderStateMixin {
 
   List<Tab> _tabs = [
     Tab(
-      icon: Text('Recommends'),
+      icon: Text('추천'),
     ),
     Tab(
-      icon: Text('컬렉션'),
+      icon: Text('shop'),
+    ),
+    Tab(
+      icon: Text('collection'),
     ),
   ];
   List<Widget> pages = [
-    Recommends(),
+    RecommendPage(),
+    UserCollections(),
     UserCollections(),
   ];
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: 2);
+    _controller = TabController(vsync: this, length: 3);
   }
 
   @override

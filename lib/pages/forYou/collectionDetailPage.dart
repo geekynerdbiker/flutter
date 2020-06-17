@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/collection.dart';
+
 import 'package:newnew/models/widgets/appbar.dart';
-import 'package:newnew/pages/product/productListPage.dart';
 import 'package:newnew/widgets/forYou/comments.dart';
-import 'package:newnew/widgets/home/sideScrollViewerVertical.dart';
 import 'package:newnew/widgets/product/products.dart';
-import 'package:newnew/widgets/product/products2.dart';
 import 'package:newnew/widgets/product/products3.dart';
-import 'package:newnew/widgets/product/products4.dart';
 
 class CollectionDetailPage extends StatefulWidget {
   final Collection collection;
@@ -93,11 +90,11 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             Container(
                               height: 20,
                               width: 20 +
-                                  widget.collection.owner.username.length
+                                  widget.collection.userID.username.length
                                           .toDouble() *
                                       10,
                               child: Text(
-                                'by ' + widget.collection.owner.username,
+                                'by ' + widget.collection.userID.username,
                                 style:
                                     TextStyle(fontSize: 12, color: Colors.grey),
                               ),
@@ -113,7 +110,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                                 color: Colors.black,
                               ),
                               child: Image.asset(
-                                widget.collection.owner.profilePicture,
+                                widget.collection.userID.imageURI,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -131,7 +128,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.collection.owner.myProducts.length
+                                widget.collection.userID.myProducts.length
                                     .toString(),
                                 textAlign: TextAlign.left,
                               ),
@@ -151,7 +148,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.collection.owner.followers.length
+                                widget.collection.userID.followers.length
                                     .toString(),
                                 textAlign: TextAlign.left,
                               ),
@@ -214,8 +211,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
-                Products(widget.collection.productList),
-                Products3(widget.collection.productList),
+                Products(widget.collection.products),
+                Products3(widget.collection.products),
               ],
             ),
           ),
@@ -237,8 +234,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
-                Products(widget.collection.productList),
-                Products3(widget.collection.productList),
+                Products(widget.collection.products),
+                Products3(widget.collection.products),
               ],
             ),
           ),
