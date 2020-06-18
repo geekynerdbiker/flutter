@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/models/widgets/appbar.dart';
 import 'package:newnew/pages/profile/myCollectionPage.dart';
-import 'package:newnew/pages/profile/profilePage.dart';
-import 'package:newnew/pages/profile/shopPage.dart';
 import 'package:newnew/testInput.dart';
-import 'package:newnew/widgets/category/squareList(2in1).dart';
 import 'package:newnew/widgets/product/products.dart';
-import 'package:newnew/widgets/profile/reviews.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -50,10 +46,10 @@ class _ProfilePageState extends State<ProfilePage>
                         margin: EdgeInsets.only(right: 10),
                         height: 50,
                         width: 50,
-                        child: Image.asset(
-                          user.profilePicture,
-                          fit: BoxFit.cover,
-                        ),
+//                        child: Image.asset(
+//                          user.profilePicture,
+//                          fit: BoxFit.cover,
+//                        ),
                       ),
                     ),
                     Column(
@@ -62,11 +58,11 @@ class _ProfilePageState extends State<ProfilePage>
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              '@' + user.username,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
+//                            Text(
+//                              '@' + user.username,
+//                              style: TextStyle(
+//                                  fontWeight: FontWeight.bold, fontSize: 20),
+//                            ),
                             Row(
                               children: <Widget>[
                                 Icon(

@@ -252,7 +252,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
               ),
             ),
           ),
-          CommentList(),
+          //CommentList(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

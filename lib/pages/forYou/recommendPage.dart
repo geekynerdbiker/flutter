@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/const/textSystem.dart';
+import 'package:newnew/models/designSystem/textSystem.dart';
 import 'package:newnew/widgets/forYou/recommends.dart';
 
 class RecommendPage extends StatelessWidget {
