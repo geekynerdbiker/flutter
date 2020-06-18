@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/testInput.dart';
 
 class SquareList extends StatelessWidget {
@@ -8,15 +8,15 @@ class SquareList extends StatelessWidget {
     List<Widget> productLists = [];
     int index = 0;
 
-    productLists.add(getRecentView(context, productListItem, index));
-    productLists.add(getWishList(context, productListItem, index));
-    productLists.add(getMyItems(context, productListItem, index));
+    productLists.add(getRecentView(context, productItems, index));
+    productLists.add(getWishList(context, productItems, index));
+    productLists.add(getMyItems(context, productItems, index));
     index++;
 
     return productLists;
   }
 
-  Widget getMyItems(BuildContext context, ProductLists productList, int index) {
+  Widget getMyItems(BuildContext context, List<Product> productList, int index) {
     return Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -27,7 +27,7 @@ class SquareList extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black)),
               child: Image.asset(
-                productList.myItems[0].imageURI, fit: BoxFit.cover,
+                productList[0].imageURI[0], fit: BoxFit.cover,
               ),
             ),
           ],
@@ -35,7 +35,7 @@ class SquareList extends StatelessWidget {
     );
   }
 
-  Widget getRecentView(BuildContext context, ProductLists productList,
+  Widget getRecentView(BuildContext context, List<Product> productList,
       int index) {
     return Padding(
       padding: EdgeInsets.all(5),
@@ -45,7 +45,7 @@ class SquareList extends StatelessWidget {
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             child: Image.asset(
-              productList.recentView[0].imageURI, fit: BoxFit.cover,
+              productList[0].imageURI[0], fit: BoxFit.cover,
             ),
           ),
         ],
@@ -53,7 +53,7 @@ class SquareList extends StatelessWidget {
     );
   }
 
-  Widget getWishList(BuildContext context, ProductLists productList, int index) {
+  Widget getWishList(BuildContext context, List<Product> productList, int index) {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Column(
@@ -62,7 +62,7 @@ class SquareList extends StatelessWidget {
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             child: Image.asset(
-              productList.wishList[0].imageURI, fit: BoxFit.cover,
+              productList[0].imageURI[0], fit: BoxFit.cover,
             ),
           ),
         ],

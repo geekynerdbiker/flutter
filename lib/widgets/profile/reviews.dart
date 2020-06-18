@@ -3,7 +3,7 @@ import 'package:newnew/pages/forYou/collectionDetailPage.dart';
 import 'package:newnew/pages/product/productDetailPage.dart';
 
 import 'package:newnew/testInput.dart';
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/widgets/forYou/sideScrollViewerVertical.dart';
 
 class Reviews extends StatelessWidget {
@@ -36,14 +36,14 @@ class Reviews extends StatelessWidget {
                       height: 30,
                       width: 30,
                       child: Image.asset(
-                        user.profilePicture,
+                        review.writer.imageURI,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(review.user.username),
+                        Text(review.writer.username),
                         Text(review.rate.toString()),
                       ],
                     ),
@@ -81,7 +81,7 @@ class Reviews extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 0),
-                        child: Text(review.product.title),
+                        child: Text(review.productID.title),
                       ),
                     ],
                   ),
@@ -89,7 +89,7 @@ class Reviews extends StatelessWidget {
                     color: Colors.grey[200],
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(review.product)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(review.productID)));
                       },
                         child: Icon(Icons.chevron_right)
                     ),

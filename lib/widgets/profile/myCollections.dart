@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newnew/pages/forYou/collectionDetailPage.dart';
 
 import 'package:newnew/testInput.dart';
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/collection.dart';
 import 'package:newnew/widgets/forYou/sideScrollViewerVertical.dart';
 
 class MyCollections extends StatelessWidget {
@@ -36,7 +36,7 @@ class MyCollections extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '(' + collection.productList.length.toString() + ')',
+                      '(' + collection.products.length.toString() + ')',
                       style: TextStyle(
                         fontSize: 12,
                       ),
@@ -48,7 +48,7 @@ class MyCollections extends StatelessWidget {
                 height: 20,
                 width: MediaQuery.of(context).size.width - 30,
                 child: Text(
-                  'by ' + collection.owner.username,
+                  'by ' + collection.userID.username,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -74,7 +74,7 @@ class MyCollections extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.width * 1 / 3 + 34,
             width: MediaQuery.of(context).size.width - 20,
-            child: SideScrollViewerVertical(collection.productList),
+            child: SideScrollViewerVertical(collection.products),
           ),
         ],
       ),

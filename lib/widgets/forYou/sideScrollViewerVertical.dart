@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/pages/product/productDetailPage.dart';
 
 class SideScrollViewerVertical extends StatelessWidget {
@@ -30,7 +30,7 @@ class SideScrollViewerVertical extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
               },
               child: Image.asset(
-                product.imageURI,
+                product.imageURI[0],
                 fit: BoxFit.cover,
               ),
             ),

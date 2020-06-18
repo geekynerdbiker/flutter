@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/pages/product/productDetailPage.dart';
 import 'package:newnew/testInput.dart';
 
@@ -29,7 +29,7 @@ class Products2 extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
             },
             child: Image.asset(
-              product.imageURI,
+              product.imageURI[0],
               fit: BoxFit.cover,
             ),
           ),

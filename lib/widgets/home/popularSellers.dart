@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/user.dart';
 import 'package:newnew/testInput.dart';
 
 class PopularSellers extends StatelessWidget {

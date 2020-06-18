@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/testInput.dart';
 
 class SideScrollViewerVertical extends StatelessWidget {
@@ -25,7 +25,7 @@ class SideScrollViewerVertical extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image.asset(
-            product.imageURI,
+            product.imageURI[0],
             fit: BoxFit.cover,
           ),
 //          Row(

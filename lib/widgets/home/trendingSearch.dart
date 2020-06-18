@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/testInput.dart';
 
 class TrendingSearch extends StatelessWidget {

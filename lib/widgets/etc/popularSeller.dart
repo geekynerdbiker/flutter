@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newnew/pages/product/productListPage.dart';
 
 import 'package:newnew/testInput.dart';
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/user.dart';
 import 'package:newnew/widgets/etc/sideScrollViewerVertical.dart';
 
 class PopularSeller extends StatelessWidget {
@@ -42,7 +42,7 @@ class PopularSeller extends StatelessWidget {
                             borderRadius: BorderRadius.circular(100),
                             color: Colors.grey
                           ),
-                          child: Image.asset(user.profilePicture, fit: BoxFit.cover,),
+                          child: Image.asset(user.imageURI, fit: BoxFit.cover,),
                         ),
                         Container(
                           width: 5,

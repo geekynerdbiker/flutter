@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 import 'package:newnew/pages/product/productDetailPage.dart';
 import 'package:newnew/testInput.dart';
 
@@ -27,7 +27,7 @@ class Recommends extends StatelessWidget {
             width: 250,
             height: 200,
             child: Image.asset(
-              product.imageURI,
+              product.imageURI[0],
               fit: BoxFit.cover,
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newnew/pages/product/productDetailPage.dart';
 
-import 'package:newnew/models/component.dart';
+import 'package:newnew/models/classes/product.dart';
 
 class Products4 extends StatelessWidget {
   final List<Product> productItems;
@@ -38,7 +38,7 @@ class Products4 extends StatelessWidget {
                     color: Colors.white,
                     height: MediaQuery.of(context).size.height,
                     child: Image.asset(
-                      product.imageURI,
+                      product.imageURI[0],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -85,7 +85,7 @@ class Products4 extends StatelessWidget {
                           height: 20,
                           width: MediaQuery.of(context).size.width / 2 - 2,
                           child: Text(
-                            'by ' + product.owner,
+                            'by ' + product.userID.username,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               color: Colors.black,
