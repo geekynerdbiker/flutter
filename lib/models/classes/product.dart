@@ -27,10 +27,10 @@ class Product {
 }
 
 class Review {
-  int writer;
+  User writer;
   String comment;
   String updatedDate;
-  int productID;
+  Product productID;
   double rate;
 }
 

@@ -1,3 +1,6 @@
+import 'package:newnew/models/classes/product.dart';
+import 'package:newnew/models/classes/collection.dart';
+
 class User {
   String username;
   String password;
@@ -16,6 +19,6 @@ class User {
   List<int> following = [];
   List<int> selectedFavor = [];
 
-  List<int> myProducts = [];
-  List<int> myCollection = [];
+  List<Product> myProducts = [];
+  List<Collection> myCollection = [];
 }
