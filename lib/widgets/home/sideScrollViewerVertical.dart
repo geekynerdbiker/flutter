@@ -35,7 +35,7 @@ class SideScrollViewerVertical extends StatelessWidget {
                     child: InkWell(
                       onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailPage(product)));},
                       child: Image.asset(
-                        product.imageURI[0],
+                        product.imageURItest,
                         fit: BoxFit.cover,
                       ),
                     ),
