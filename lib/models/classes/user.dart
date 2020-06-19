@@ -19,6 +19,7 @@ class User {
   List<int> following = [];
   List<int> selectedFavor = [];
 
+  List<Product> favorite = [];
   List<Product> myProducts = [];
   List<Collection> myCollection = [];
 }

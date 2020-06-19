@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:newnew/models/classes/user.dart';
 
 class Product {
   User userID;
 
   String title;
+  String imageURItest;
   List<String> imageURI;
 
   int price;
@@ -24,6 +26,16 @@ class Product {
   double rate;
   int views;
   bool isSold;
+
+  DocumentReference reference;
+
+  Product.fromMap(Map<String, dynamic> map, {this.reference})
+      : title = map['title'],
+        price = map['price'],
+        imageURItest = map['imageURItest'];
+
+  Product.fromSnapShot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 }
 
 class Review {
