@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:newnew/models/widgets/appbar.dart';
+
+import 'package:newnew/models/classes/product.dart';
+import 'package:newnew/pages/home/builder.dart';
 
 import 'package:newnew/pages/profile/popularSeller.dart';
 import 'package:newnew/pages/forYou/userCollectionPage.dart';
@@ -20,6 +24,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final bool isSignIn = false;
+
+  Firestore firestore = Firestore.instance;
+  Stream<QuerySnapshot> streamData;
+
+  void initState() {
+    super.initState();
+    streamData = firestore.collection('product').snapshots();
+  }
+
+  Widget _fetchData(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('product').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        return _buildBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Product> products =
+        snapshot.map((d) => Product.fromSnapShot(d)).toList();
+    return TestBuilder(products: products,);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +106,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Text(
                     'NEW NEW PICK',
                     style: TextStyle(
@@ -115,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            SideScrollViewerVertical(),
+            //_fetchData(context),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -213,7 +242,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Row(
                     children: <Widget>[
                       Text(
@@ -268,7 +297,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Row(
                     children: <Widget>[
                       Text(
@@ -323,7 +352,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Row(
                     children: <Widget>[
                       Text(
@@ -378,7 +407,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Text(
                     'Collection',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
@@ -419,7 +448,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+                      EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
                   child: Text(
                     '10만원 미만 ',
                     style: TextStyle(
