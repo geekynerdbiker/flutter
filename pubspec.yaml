@@ -26,6 +26,9 @@ dependencies:
   cached_network_image: 2.0.0-rc
   dots_indicator: ^1.0.0
 
+  cloud_firestore: ^0.13.6
+  firebase_core: ^0.4.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
