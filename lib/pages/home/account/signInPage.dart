@@ -1,7 +1,8 @@
+import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/pages/home/account/findPassword.dart';
+import 'package:editsource/pages/home/account/signUpPage.dart';
 import 'package:flutter/material.dart';
-import 'package:newnew/models/widgets/appbar.dart';
-import 'package:newnew/pages/account/findPassword.dart';
-import 'package:newnew/pages/account/signUpPage.dart';
+import 'package:editsource/models/widgets/components/navigation.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -31,7 +32,7 @@ class SignInPage extends StatelessWidget {
                   BoxDecoration(border: Border.all(color: Colors.black)),
               child: Padding(
                 padding: EdgeInsets.only(left: 10, bottom: 3),
-                child: TextField(
+                child: TextFormField(
                   style: TextStyle(
                     fontSize: 12,),
                   decoration: InputDecoration(
@@ -49,7 +50,7 @@ class SignInPage extends StatelessWidget {
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
+                  child: TextFormField(
                     style: TextStyle(
                       fontSize: 12,),
                     decoration: InputDecoration(

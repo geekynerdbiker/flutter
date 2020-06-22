@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/pages/account/findPassword.dart';
-import 'package:newnew/pages/account/signUpPage.dart';
-import 'package:newnew/widgets/category/squareList(2in1).dart';
-import 'package:newnew/widgets/etc/hashTagList.dart';
 
 class SelectFavorPage2 extends StatelessWidget {
   @override
@@ -60,7 +56,7 @@ class SelectFavorPage2 extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width - 10,
               height: MediaQuery.of(context).size.height - 80,
-              child: SquareList2in1(),
+              //child: SquareList2in1(),
             ),
           ],
         ),

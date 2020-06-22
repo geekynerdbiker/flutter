@@ -1,8 +1,8 @@
+import 'package:editsource/models/widgets/components/selection/indicator.dart';
+import 'package:editsource/pages/home/account/signInPage.dart';
+import 'package:editsource/pages/home/account/signUpPage.dart';
+import 'package:editsource/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:newnew/pages/account/signInPage.dart';
-import 'package:newnew/pages/account/signUpPage.dart';
-import 'package:newnew/pages/start/bootPage.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -80,14 +80,7 @@ class _OnboardingScreen extends State<OnboardingScreen>
                       top: MediaQuery.of(context).size.width * 1.1),
                   child: Align(
                     alignment: Alignment.center,
-                    child: new DotsIndicator(
-                        dotsCount: pageLength,
-                        position: currentIndexPage.toDouble(),
-                        decorator: DotsDecorator(
-                            shape: Border.all(color: Colors.white),
-                            color: Colors.transparent,
-                            activeShape: Border(),
-                            activeColor: Colors.white)),
+                    child: imageCarouselIndicator(currentIndexPage, pageLength),
                   ),
                 ),
                 Padding(

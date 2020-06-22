@@ -1,13 +1,18 @@
+import 'package:editsource/pages/home/account/changePassword.dart';
 import 'package:flutter/material.dart';
+import 'package:editsource/models/widgets/components/navigation.dart';
 
-class SignUpPage extends StatelessWidget {
+class FindPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDefaultDeep(context, '회원가입'),
+      appBar: appBarDefaultDeep(context, '비밀번호 찾기'),
       backgroundColor: Colors.white,
       body: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: Column(
           children: <Widget>[
             Container(
@@ -18,19 +23,22 @@ class SignUpPage extends StatelessWidget {
               children: <Widget>[
                 Container(
                     height: 40,
-                    width: MediaQuery.of(context).size.width - 190,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width - 190,
                     decoration:
                     BoxDecoration(border: Border.all(color: Colors.black)),
                     child: Padding(
                       padding: EdgeInsets.only(left: 10, bottom: 3),
-                      child: TextField(
+                      child: TextFormField(
                         style: TextStyle(
-                          fontSize: 12,),
+                          fontSize: 12,
+                        ),
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: '전화번호 입력'),
                       ),
-                    )
-                ),
+                    )),
                 Padding(
                   padding: EdgeInsets.all(5),
                 ),
@@ -39,9 +47,11 @@ class SignUpPage extends StatelessWidget {
                     width: 80,
                     color: Colors.black,
                     child: Center(
-                      child: Text('인증요청', style: TextStyle(fontSize:12, color: Colors.white),),
-                    )
-                ),
+                      child: Text(
+                        '인증요청',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                    )),
               ],
             ),
             Padding(
@@ -49,90 +59,52 @@ class SignUpPage extends StatelessWidget {
             ),
             Container(
                 height: 40,
-                width: MediaQuery.of(context).size.width - 100,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width - 100,
                 decoration:
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
+                  child: TextFormField(
                     style: TextStyle(
-                      fontSize: 12,),
+                      fontSize: 12,
+                    ),
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: '인증번호 입력'),
                   ),
-                )
-            ),
-            Padding(
-              padding: EdgeInsets.all(15),
-            ),
-            Container(
-                height: 40,
-                width: MediaQuery.of(context).size.width - 100,
-                decoration:
-                BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 12,),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '사용자명 입력(영문)'),
-                  ),
-                )
-            ),
-            Container(
-              height: 15,
-              width: MediaQuery.of(context).size.width - 100,
-              child: Text('추후 변경할 수 있습니다.', style: TextStyle(fontSize: 11, color: Colors.grey),),
-            ),
+                )),
             Padding(
               padding: EdgeInsets.all(5),
             ),
             Container(
                 height: 40,
-                width: MediaQuery.of(context).size.width - 100,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width - 100,
                 decoration:
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
+                  child: TextFormField(
                     style: TextStyle(
-                      fontSize: 12,),
+                      fontSize: 12,
+                    ),
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: '이메일 입력'),
                   ),
-                )
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            Container(
-                height: 40,
-                width: MediaQuery.of(context).size.width - 100,
-                decoration:
-                BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: 12,),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '비밀번호 입력'),
-                  ),
-                )
-            ),
-            Container(
-              height: 15,
-              width: MediaQuery.of(context).size.width - 100,
-              child: Text('8 - 16자의 영문, 숫자 조합', style: TextStyle(fontSize: 11, color: Colors.grey),),
-            ),
+                )),
             Padding(
               padding: EdgeInsets.all(40),
             ),
             Material(
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SelectFavorPage()));
+                  Navigator.push(
+                      context, MaterialPageRoute(
+                      builder: (context) => ChangePasswordPage()));
                 },
                 child: Container(
                   height: 40,
@@ -140,15 +112,12 @@ class SignUpPage extends StatelessWidget {
                   color: Colors.black,
                   child: Center(
                     child: Text(
-                      '가입하기',
+                      '다음으로',
                       style: TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -164,14 +133,21 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  height: 20,
-                  width: 40,
-                  color: Colors.white,
-                  child: Center(
-                    child: Text(
-                      '로그인',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 20,
+                      width: 40,
+                      color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          '로그인',
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                      ),
                     ),
                   ),
                 ),

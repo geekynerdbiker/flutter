@@ -1,11 +1,8 @@
+import 'package:editsource/pages/home/homePage.dart';
+import 'package:editsource/pages/newnew/mainPage.dart';
+import 'package:editsource/pages/product/addProductPage.dart';
+import 'package:editsource/pages/profile/mainPage.dart';
 import 'package:flutter/material.dart';
-
-import 'package:newnew/pages/home/mainPage.dart';
-import 'package:newnew/pages/forYou/mainPage.dart';
-import 'package:newnew/pages/product/addProductPage.dart';
-import 'package:newnew/pages/category/mainPage.dart';
-import 'package:newnew/pages/profile/mainPage.dart';
-
 
 class BootPage extends StatefulWidget {
   @override
@@ -23,11 +20,11 @@ class _BootPageState extends State<BootPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: TabBarView(
-          children: <Widget> [
+          children: <Widget>[
             HomePage(),
-            ForYouPage(),
+            NewnewPage(),
             AddProductPage(),
-            CategoryPage(),
+            ProfilePage(),
             ProfilePage(),
           ],
         ),
@@ -53,7 +50,6 @@ class _BootPageState extends State<BootPage> {
                 icon: Icon(Icons.perm_identity),
               ),
             ],
-
           ),
         ),
       ),

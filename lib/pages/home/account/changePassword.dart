@@ -1,6 +1,7 @@
+import 'package:editsource/pages/home/account/signInPage.dart';
 import 'package:flutter/material.dart';
-import 'package:newnew/models/widgets/appbar.dart';
-import 'package:newnew/pages/account/signInPage.dart';
+import 'package:editsource/models/widgets/components/navigation.dart';
+
 
 class ChangePasswordPage extends StatelessWidget {
   @override
@@ -42,7 +43,7 @@ class ChangePasswordPage extends StatelessWidget {
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
+                  child: TextFormField(
                     style: TextStyle(
                       fontSize: 12,
                     ),
@@ -64,7 +65,7 @@ class ChangePasswordPage extends StatelessWidget {
                 BoxDecoration(border: Border.all(color: Colors.black)),
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, bottom: 3),
-                  child: TextField(
+                  child: TextFormField(
                     style: TextStyle(
                       fontSize: 12,
                     ),
