@@ -1,5 +1,6 @@
+import 'dart:async';
+import 'package:editsource/pages/home/splashScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:newnew/pages/start/splashScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,4 +13,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
