@@ -1,5 +1,5 @@
-import 'package:newnew/models/classes/product.dart';
-import 'package:newnew/models/classes/collection.dart';
+import 'package:editsource/models/classes/product.dart';
+import 'package:editsource/models/classes/collection.dart';
 
 class User {
   String username;

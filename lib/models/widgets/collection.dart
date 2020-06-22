@@ -1,6 +1,6 @@
+import 'package:editsource/pages/collection/collectionDetailPage.dart';
 import 'package:flutter/material.dart';
-import 'package:newnew/models/classes/collection.dart';
-import 'package:newnew/pages/forYou/collectionDetailPage.dart';
+import 'package:editsource/models/classes/collection.dart';
 
 Container collectionBanner(
     BuildContext context, Collection collection, double margin) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/widgets/searchBar.dart';
+import 'package:editsource/models/widgets/search.dart';
 
 Widget mainAppBar(BuildContext context) {
   return AppBar(
@@ -14,7 +14,7 @@ Widget mainAppBar(BuildContext context) {
       preferredSize: Size(0, 40),
       child: Container(
         padding: EdgeInsets.all(5),
-        child: SearchBar(),
+        child: SearchField(),
       ),
     ),
     actions: <Widget>[
@@ -61,7 +61,8 @@ Widget appBarDefault(BuildContext context, String title) {
   );
 }
 
-Widget appBarWithTab(BuildContext context, String title, List<Tab> _tabs, TabController _controller) {
+Widget appBarWithTab(BuildContext context, String title, List<Tab> _tabs,
+    TabController _controller) {
   return AppBar(
     elevation: 0,
     centerTitle: true,
@@ -95,7 +96,8 @@ Widget appBarDefaultDeep(BuildContext context, String title) {
   );
 }
 
-Widget appBarWithTabDeep(BuildContext context, String title, List<Tab> _tabs, TabController _controller) {
+Widget appBarWithTabDeep(BuildContext context, String title, List<Tab> _tabs,
+    TabController _controller) {
   return AppBar(
     elevation: 0,
     centerTitle: true,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newnew/models/classes/user.dart';
+import 'package:editsource/models/classes/user.dart';
 
 Container userCircle(BuildContext context, User user) {
   return Container(
