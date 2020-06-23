@@ -13,7 +13,7 @@ class User {
   int lastActivity;
 
   String imageURI;
-  String intro;
+  String bio;
 
   List<int> followers = [];
   List<int> following = [];
@@ -22,4 +22,22 @@ class User {
   List<Product> favorite = [];
   List<Product> myProducts = [];
   List<Collection> myCollection = [];
+
+  int getReviews() {
+    int reviews = 0;
+
+    for(int i = 0; i < myProducts.length; i++)
+      reviews += myProducts[i].getReviews();
+
+    return reviews;
+  }
+
+  double getRate() {
+    double rate = 0;
+
+    for(int i = 0; i < myProducts.length; i++)
+      rate += myProducts[i].getRate();
+
+    return rate / myProducts.length;
+  }
 }

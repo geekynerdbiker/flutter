@@ -10,20 +10,13 @@ Widget mainAppBar(BuildContext context) {
       width: MediaQuery.of(context).size.width * 1 / 2,
       child: Image.asset('lib/assets/newnew_logo.png'),
     ),
-    bottom: PreferredSize(
-      preferredSize: Size(0, 40),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        child: SearchField(),
-      ),
-    ),
     actions: <Widget>[
       Container(
         child: Material(
           color: Colors.white,
           child: InkWell(
             child: Icon(
-              Icons.message,
+              Icons.notifications,
               color: Colors.grey,
               size: 22,
             ),
