@@ -1,4 +1,6 @@
 import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/widgets/components/selection/indicator.dart';
+import 'package:editsource/models/widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,463 +22,84 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              height: MediaQuery.of(context).size.width * 0.8,
-//              child: CarouselSlider(
-//                items: <Widget>[
-//                  Image.asset(
-//                    'lib/assets/c2.png',
-//                    fit: BoxFit.cover,
-//                  ),
-//                  Image.asset(
-//                    'lib/assets/c1.png',
-//                    fit: BoxFit.cover,
-//                  ),
-//                ],
-//                options: CarouselOptions(
-//                  enlargeCenterPage: true,
-//                  viewportFraction: 1.0,
-//                  height: MediaQuery.of(context).size.width * 0.8,
-//                  autoPlay: true,
-//                  autoPlayAnimationDuration: Duration(milliseconds: 2000),
-//                  autoPlayCurve: Curves.fastOutSlowIn,
-//                ),
-//              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Container(
-                    child: Text(
-                      '인기 검색어',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //TrendingSearch(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Text(
-                    'NEW NEW PICK',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10, right: 5),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            //_fetchData(context),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
-                  child: new Text(
-                    'XXX님, 까먹지 마세요!',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              height: MediaQuery.of(context).size.width / 3 + 42,
-              //child: SquareList(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
-                  child: new Text(
-                    '인기 셀러',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => PopularSellerPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              height: 130,
-             // child: PopularSellers(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        '#여행 ',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        '(해시태그 기획전)',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //SideScrollViewerVertical(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        '#골동품 ',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        '(해시태그 기획전)',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //SideScrollViewerVertical(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        '#북유럽 ',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        '(해시태그 기획전)',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //SideScrollViewerVertical(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Text(
-                    'Collection',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => UserCollectionPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //SideScrollViewerHorizontal(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding:
-                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
-                  child: Text(
-                    '10만원 미만 ',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 12, right: 10),
-                  child: Material(
-                    child: InkWell(
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => ProductListPage()));
-//                      },
-                      child: Container(
-                        width: 70,
-                        height: 30,
-                        color: Colors.black,
-                        child: Center(
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //SideScrollViewerVertical(),
             Stack(
-              children: <Widget>[
+              children: [
                 Container(
-                  padding: EdgeInsets.only(top: 30),
-                  height: 300,
-                  child: Image.asset(
-                    'lib/assets/post02.jpg',
-                    fit: BoxFit.none,
+                  width: MediaQuery.of(context).size.width,
+                  // 375
+                  height: MediaQuery.of(context).size.width + 5,
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width - 25),
+                  child: Center(
+                    child: imageCarouselIndicator(0, 5),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 200, left: 60),
-                  padding: EdgeInsets.only(left: 4),
-                  width: 75,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    color: Colors.orange,
-                  ),
-                  child: Text(
-                    '쇼핑하기',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: Center(
+                    child: SearchField(),
                   ),
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 30, right: 20),
+              child: Container(
+                child: Text('인기 검색어'),
+              ),
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 30),
+              child: Text('NEW NEW PICK'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+              child: Text('인기 셀러'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+              child: new Text(
+                '최근 본 상품',
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                  child: new Text(
+                    '#빈티지 가구',
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                  child: new Text(
+                    '+ 더보기',
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                  child: new Text(
+                    '모던한 취미',
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30, bottom: 12.0, left: 12.0),
+                  child: new Text(
+                    '+ 더보기',
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

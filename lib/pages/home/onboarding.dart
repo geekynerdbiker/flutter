@@ -31,25 +31,25 @@ class _OnboardingScreen extends State<OnboardingScreen>
         children: <Widget>[
           PageView(
             children: <Widget>[
-              Walkthrougth(
-                  content: Padding(
-                padding: EdgeInsets.all(20),
-                child:
-                    itemCardLarge(context, new Product('test', 150000, '/lib')),
-              )),
-              Walkthrougth(
-                  content: Padding(
-                padding: EdgeInsets.all(20),
-                child:
-                    itemCardMedium(context, new Product('test', 150000, '/lib')),
-              )),
-              Walkthrougth(
-                  content: Padding(
-                padding: EdgeInsets.all(20),
-                child:
-                    //itemCardSmall(context, new Product('test', 150000, '/lib')),
-                    collectionCoverCard(context, new Collection()),
-              )),
+//              Walkthrougth(
+//                  content: Padding(
+//                padding: EdgeInsets.all(20),
+//                child:
+//                    itemCardLarge(context, new Product('test', 150000, '/lib')),
+//              )),
+//              Walkthrougth(
+//                  content: Padding(
+//                padding: EdgeInsets.all(20),
+//                child:
+//                    itemCardMedium(context, new Product('test', 150000, '/lib')),
+//              )),
+//              Walkthrougth(
+//                  content: Padding(
+//                padding: EdgeInsets.all(20),
+//                child:
+//                    //itemCardSmall(context, new Product('test', 150000, '/lib')),
+//                    collectionCoverCard(context, new Collection()),
+//              )),
             ],
             onPageChanged: (value) {
               setState(() => currentIndexPage = value);
