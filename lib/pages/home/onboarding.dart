@@ -1,3 +1,6 @@
+import 'package:editsource/models/UI/cards.dart';
+import 'package:editsource/models/classes/collection.dart';
+import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/widgets/components/selection/indicator.dart';
 import 'package:editsource/pages/home/account/signInPage.dart';
 import 'package:editsource/pages/home/account/signUpPage.dart';
@@ -28,9 +31,25 @@ class _OnboardingScreen extends State<OnboardingScreen>
         children: <Widget>[
           PageView(
             children: <Widget>[
-              Walkthrougth(textContent: "Walkthrough one"),
-              Walkthrougth(textContent: "Walkthrough two"),
-              Walkthrougth(textContent: "Walkthrough tree"),
+              Walkthrougth(
+                  content: Padding(
+                padding: EdgeInsets.all(20),
+                child:
+                    itemCardLarge(context, new Product('test', 150000, '/lib')),
+              )),
+              Walkthrougth(
+                  content: Padding(
+                padding: EdgeInsets.all(20),
+                child:
+                    itemCardMedium(context, new Product('test', 150000, '/lib')),
+              )),
+              Walkthrougth(
+                  content: Padding(
+                padding: EdgeInsets.all(20),
+                child:
+                    //itemCardSmall(context, new Product('test', 150000, '/lib')),
+                    collectionCoverCard(context, new Collection()),
+              )),
             ],
             onPageChanged: (value) {
               setState(() => currentIndexPage = value);
@@ -176,9 +195,9 @@ class _OnboardingScreen extends State<OnboardingScreen>
 }
 
 class Walkthrougth extends StatelessWidget {
-  final String textContent;
+  final Padding content;
 
-  Walkthrougth({Key key, @required this.textContent}) : super(key: key);
+  Walkthrougth({Key key, @required this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +205,7 @@ class Walkthrougth extends StatelessWidget {
       //decoration: BoxDecoration(color: Colors.redAccent),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Center(child: Text(textContent)),
+      child: Center(child: content),
     );
   }
 }
