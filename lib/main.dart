@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:editsource/pages/home/splashScreen.dart';
 import 'package:flutter/material.dart';
 
