@@ -21,10 +21,26 @@ class Product {
   Tag category3;
 
   List<int> hashTags = [];
+  List<Review> reviews = [];
 
   double rate;
   int views;
   bool isSold;
+
+  int getReviews() {
+    return this.reviews.length;
+  }
+
+  double getRate() {
+    double rate = 0;
+
+    for( int i = 0; i < reviews.length; i++ )
+      rate += reviews[i].rate;
+
+    return rate / reviews.length;
+  }
+
+  Product(this.title, this.price, this.imageURItest);
 }
 
 class Review {

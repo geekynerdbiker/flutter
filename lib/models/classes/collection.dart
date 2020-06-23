@@ -13,4 +13,6 @@ class Collection {
   List<int> hashTags = [];
 
   int views;
+
+  Collection();
 }
