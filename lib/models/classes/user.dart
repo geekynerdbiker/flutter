@@ -40,4 +40,6 @@ class User {
 
     return rate / myProducts.length;
   }
+
+  User(this.username, this.lastActivity, this.imageURI);
 }
