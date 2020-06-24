@@ -1,4 +1,5 @@
 import 'package:editsource/pages/home/homePage.dart';
+import 'package:editsource/pages/message/mainPage.dart';
 import 'package:editsource/pages/newnew/mainPage.dart';
 import 'package:editsource/pages/product/addProductPage.dart';
 import 'package:editsource/pages/profile/mainPage.dart';
@@ -24,7 +25,7 @@ class _BootPageState extends State<BootPage> {
             HomePage(),
             NewnewPage(),
             AddProductPage(),
-            ProfilePage(),
+            MessagePage(),
             ProfilePage(),
           ],
         ),
@@ -44,7 +45,7 @@ class _BootPageState extends State<BootPage> {
                 icon: Icon(Icons.add),
               ),
               Tab(
-                icon: Icon(Icons.view_headline),
+                icon: Icon(Icons.message),
               ),
               Tab(
                 icon: Icon(Icons.perm_identity),
