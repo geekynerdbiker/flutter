@@ -26,13 +26,14 @@ class _HomePageState extends State<HomePage> {
             Stack(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * ( 375 / 375 ),
-                  height: MediaQuery.of(context).size.width * ( 460 / 375 ),
+                  width: MediaQuery.of(context).size.width * (375 / 375),
+                  height: MediaQuery.of(context).size.width * (460 / 375),
                   color: Colors.grey,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * ( 460 / 375 ) - 45),
+                      top:
+                          MediaQuery.of(context).size.width * (460 / 375) - 45),
                   child: Center(
                     child: imageCarouselIndicator(0, 5),
                   ),
@@ -46,28 +47,26 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Container(
-              height: MediaQuery.of(context).size.width * ( 201 / 375 ),
+              height: MediaQuery.of(context).size.width * (201 / 375),
               child: Padding(
                 padding: EdgeInsets.only(top: 30, left: 20),
                 child: Text('인기 검색어'),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.width * ( 336 / 375 ),
-              color: accent1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 30, left: 20),
-                    child: Text('NEW NEW PICK'),
-                  ),
-                ],
-              )
-            ),
-
+                height: MediaQuery.of(context).size.width * (336 / 375),
+                color: accent1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 30, left: 20),
+                      child: Text('NEW NEW PICK'),
+                    ),
+                  ],
+                )),
             Container(
-              height: MediaQuery.of(context).size.width * ( 211 / 375 ),
+              height: MediaQuery.of(context).size.width * (211 / 375),
               color: offWhite,
               child: Padding(
                 padding: EdgeInsets.only(top: 30, left: 20),
@@ -75,55 +74,59 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.width * ( 251 / 375 ),
+              height: MediaQuery.of(context).size.width * (251 / 375),
               color: accent2,
               child: Padding(
                 padding: EdgeInsets.only(top: 30, left: 20),
-                child: new Text(
+                child: Text(
                   '최근 본 상품',
                 ),
               ),
             ),
-
             Container(
-              height: MediaQuery.of(context).size.width * ( 365 / 375 ),
-              child: Column(children: [
-                Container(
-                  height: 75,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 30, left: 20),
-                      child: new Text(
-                        '#' + 'Hashtag Title',
+              height: MediaQuery.of(context).size.width * (365 / 375),
+              child: Column(
+                children: [
+                  Container(
+                    height: 75,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 30, left: 20),
+                        child: Text(
+                          '#' + 'Hashtag Title',
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 30, right: 20),
-                      child: new Text(
-                        '+ 더보기',
+                      Padding(
+                        padding: EdgeInsets.only(top: 30, right: 20),
+                        child: Text(
+                          '+ 더보기',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],),
+                    ],
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
-              child: new Text(
+              child: Text(
                 '컬렉션',
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.width * ( 772 / 375 ),
+              height: MediaQuery.of(context).size.width * (772 / 375),
               color: accent3,
-              child: Column(children: [
+              child: Column(
+                children: [
 
-              ],),
+                ],
+              ),
             ),
-
           ],
         ),
       ),

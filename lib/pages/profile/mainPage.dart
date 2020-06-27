@@ -1,3 +1,6 @@
+import 'package:editsource/models/UI/user.dart';
+import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/widgets/components/buttons.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:editsource/pages/profile/myCollectionPage.dart';
 import 'package:flutter/material.dart';
@@ -30,65 +33,10 @@ class _ProfilePageState extends State<ProfilePage>
       appBar: appBarDefault(context, '내 정보'),
       body: ListView(
         children: <Widget>[
+          userMarqueeMyPage(context, new User('username', 1, 'imageURI')),
           Container(
-            margin: EdgeInsets.all(10),
-            height: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        height: 50,
-                        width: 50,
-//                        child: Image.asset(
-//                          user.profilePicture,
-//                          fit: BoxFit.cover,
-//                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-//                            Text(
-//                              '@' + user.username,
-//                              style: TextStyle(
-//                                  fontWeight: FontWeight.bold, fontSize: 20),
-//                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star, size: 16, color: Colors.orange,
-                                ),
-                                Text(
-                                  ' 4.8',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                ),
-                                Padding(padding: EdgeInsets.only(top: 4), child: Text(
-                                    ' (' + '17' + ')',
-                                    style: TextStyle(fontSize: 10),)
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            color: Colors.white,
+            margin: EdgeInsets.all(20),
+            child: primaryCTAIdle(context, '구매/판매 내역'),
           ),
           TabBar(
             controller: _controller,
