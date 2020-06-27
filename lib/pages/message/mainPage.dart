@@ -1,4 +1,5 @@
 import 'package:editsource/models/UI/message.dart';
+import 'package:editsource/models/UI/user.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/widgets/border.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
@@ -19,12 +20,16 @@ class _MessagePage extends State<MessagePage> {
           appBar: appBarDefault(context, 'Messages'),
           body: ListView(
             children: [
-              messageListItem(context, new User('User1', 5, '/')),
+              userMarqueePopularSeller(context, new User('User1', 5, '/')),
               borderLineGreyLite(context),
-              messageListItem(context, new User('User2', 7, '/')),
+              userMarquee1(context, new User('User1', 5, '/')),
               borderLineGreyLite(context),
-              messageListItem(context, new User('User3', 9, '/')),
+              userMarquee2(context, new User('User1', 5, '/')),
               borderLineGreyLite(context),
+              userMarqueeMyPage(context, new User('User1', 5, '/')),
+              userMarqueeMessageListItem(context, new User('User1', 5, '/')),
+              borderLineGreyLite(context),
+
             ],
           )),
     );
