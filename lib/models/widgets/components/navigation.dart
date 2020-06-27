@@ -1,3 +1,4 @@
+import 'package:editsource/pages/notification/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:editsource/models/widgets/search.dart';
 
@@ -11,18 +12,7 @@ Widget mainAppBar(BuildContext context) {
       child: Image.asset('lib/assets/newnew_logo.png'),
     ),
     actions: <Widget>[
-      Container(
-        child: Material(
-          color: Colors.white,
-          child: InkWell(
-            child: Icon(
-              Icons.notifications,
-              color: Colors.grey,
-              size: 22,
-            ),
-          ),
-        ),
-      ),
+      notification(context),
       Container(
         padding: EdgeInsets.all(10),
         child: Material(
@@ -108,6 +98,23 @@ Widget appBarWithTabDeep(BuildContext context, String title, List<Tab> _tabs,
       indicatorColor: Colors.black,
       unselectedLabelColor: Colors.grey,
       tabs: _tabs,
+    ),
+  );
+}
+
+Widget notification(BuildContext context) {
+  return Material(
+    color: Colors.white,
+    child: InkWell(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NotificationPage()));
+      },
+      child: Icon(
+        Icons.notifications,
+        color: Colors.grey,
+        size: 22,
+      ),
     ),
   );
 }

@@ -23,7 +23,7 @@ class Product {
   List<int> hashTags = [];
   List<Review> reviews = [];
 
-  double rate;
+  double rate = 0;
   int views;
   bool isSold;
 
@@ -32,12 +32,12 @@ class Product {
   }
 
   double getRate() {
-    double rate = 0;
-
     for( int i = 0; i < reviews.length; i++ )
-      rate += reviews[i].rate;
+      this.rate += reviews[i].rate;
 
-    return rate / reviews.length;
+    if( this.rate == 0 )
+      return 0;
+    return this.rate / reviews.length;
   }
 
   Product(this.title, this.price, this.imageURItest);
@@ -48,7 +48,7 @@ class Review {
   String comment;
   String updatedDate;
   Product productID;
-  double rate;
+  double rate = 0;
 }
 
 class Comment {

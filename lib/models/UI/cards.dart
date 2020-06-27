@@ -1,3 +1,4 @@
+import 'package:editsource/models/widgets/components/buttons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:editsource/models/classes/product.dart';
@@ -9,137 +10,72 @@ import 'package:editsource/pages/collection/collectionDetailPage.dart';
 Widget itemCardLarge(BuildContext context, Product product) {
   const double _width = 185;
   const double _height = 240;
-  const double _space = 14;
-
-  const double _tWidth = 141;
-  const double _tHeight = 17;
-  const double _tSpace = 4;
-
+  const double _space1 = 14;
+  const double _space2 = 4;
   const double _icon = 44;
 
+  bool isMyProduct = false;
+
   return Container(
-      width: _width,
-      height: _height + _space + _tHeight + _tSpace + _tHeight,
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: _width,
-            height: _height,
-            color: Colors.grey,
-            child: Material(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductDetailPage(product)));
-                },
-                child: Image.asset(
-                  product.imageURItest,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: _space,
-          ),
-          Container(
-            width: _width,
-            height: _tHeight + _tSpace + _tHeight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+    width: _width,
+    child: Column(
+      children: <Widget>[
+        productImageBox(context, product, _width, _height),
+        hSpacer(_space1),
+        Container(
+            child: SizedBox(
+                width: _width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: _tWidth,
-                      height: _tHeight,
-                      child: Text(product.title),
+                    Column(
+                      children: [
+                        Text(product.title),
+                        hSpacer(_space2),
+                        Text(product.price.toString()),
+                      ],
                     ),
                     Container(
-                      height: _tSpace,
-                    ),
-                    Container(
-                      width: _tWidth,
-                      height: _tHeight,
-                      child: Text(product.price.toString()),
+                      width: _icon,
+                      height: _icon,
+                      child: Center(
+                        child: Icon(Icons.favorite),
+                      ),
                     ),
                   ],
                 ),
-                Container(
-                  width: _icon,
-                  height: _icon,
-                  child: Center(
-                    child: Icon(Icons.favorite),
-                  ),
-                ),
-              ],
             ),
-          )
-        ],
-      ));
+        )
+      ],
+    ),
+  );
 }
 
 Widget itemCardMedium(BuildContext context, Product product) {
   const double _width = 160;
   const double _height = 200;
-  const double _space = 14;
-
-  const double _tWidth = 116;
-  const double _tHeight = 17;
-  const double _tSpace = 4;
-
+  const double _space1 = 14;
+  const double _space2 = 4;
   const double _icon = 44;
 
+  bool isMyProduct = false;
+
   return Container(
-      width: _width,
-      height: _height + _space + _tHeight + _tSpace + _tHeight,
-      child: Column(
-        children: <Widget>[
-          Container(
+    child: Column(
+      children: <Widget>[
+        productImageBox(context, product, _width, _height),
+        hSpacer(_space1),
+        Container(
+          child: SizedBox(
             width: _width,
-            height: _height,
-            color: Colors.grey,
-            child: Material(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductDetailPage(product)));
-                },
-                child: Image.asset(
-                  product.imageURItest,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: _space,
-          ),
-          Container(
-            width: _width,
-            height: _tHeight + _tSpace + _tHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
-                    Container(
-                      width: _tWidth,
-                      height: _tHeight,
-                      child: Text(product.title),
-                    ),
-                    Container(
-                      height: _tSpace,
-                    ),
-                    Container(
-                      width: _tWidth,
-                      height: _tHeight,
-                      child: Text(product.price.toString()),
-                    ),
+                    Text(product.title),
+                    hSpacer(_space2),
+                    Text(product.price.toString()),
                   ],
                 ),
                 Container(
@@ -151,70 +87,42 @@ Widget itemCardMedium(BuildContext context, Product product) {
                 ),
               ],
             ),
-          )
-        ],
-      ));
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 Widget itemCardSmall(BuildContext context, Product product) {
   const double _width = 119;
   const double _height = 119;
-  const double _space = 8;
+  const double _space1 = 8;
+  const double _space2 = 4;
 
-  const double _tWidth = 119;
-  const double _tHeight = 15;
-  const double _tSpace = 4;
+  bool isMyProduct = false;
 
   return Container(
-      width: _width,
-      height: _height + _space + _tHeight + _tSpace + _tHeight,
-      child: Column(
-        children: <Widget>[
-          Container(
+    child: Column(
+      children: <Widget>[
+        productImageBox(context, product, _width, _height),
+        hSpacer(_space1),
+        Container(
+          child: SizedBox(
             width: _width,
-            height: _height,
-            color: Colors.grey,
-            child: Material(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductDetailPage(product)));
-                },
-                child: Image.asset(
-                  product.imageURItest,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: _space,
-          ),
-          Container(
-            width: _width,
-            height: _tHeight + _tSpace + _tHeight,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: _tWidth,
-                  height: _tHeight,
-                  child: Text(product.title),
-                ),
-                Container(
-                  height: _tSpace,
-                ),
-                Container(
-                  width: _tWidth,
-                  height: _tHeight,
-                  child: Text(product.price.toString()),
-                ),
+                Text(product.title),
+                hSpacer(_space2),
+                Text(product.price.toString()),
               ],
             ),
-          ),
-        ],
-      ));
+          )
+        )
+      ],
+    ),
+  );
 }
 
 Widget collectionCoverCard(BuildContext context, Collection collection) {
@@ -222,127 +130,138 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
   const double _height = 280;
   const double _space1 = 16;
   const double _space2 = 20;
+  const double _space3 = 7;
+  const double _space4 = 4;
 
-  const double _tWidth = 310;
-  const double _tHeight = 17;
-  const double _tSpace1 = 7;
-  const double _tSpace2 = 4;
-  const double _tSpace3 = 16;
-
-  const double _bWidth = 32;
-  const double _bHeight = 15;
-
-  const double _iWidth = 65;
-  const double _iHeight = 24;
+  bool isMyCollection = false;
 
   return Container(
-    width: _width,
-    height: _height +
-        _space1 +
-        _tHeight +
-        _tSpace1 +
-        _bHeight +
-        _space2 +
-        _tHeight +
-        _tSpace2 +
-        _tHeight,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Material(
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CollectionDetailPage(collection)));
-            },
-            child: Container(
-              width: _width,
-              height: _height,
-              child: Image.asset(
-                collection.imageURI,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          height: _space1,
-        ),
+        collectionImageBox(context, collection, _width, _height),
+        hSpacer(_space1),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: _tWidth,
-                  height: _tHeight,
-                  child: Text(collection.title),
-                ),
-                Container(
-                  height: _tSpace1,
-                ),
+                Text(collection.title),
+                hSpacer(_space3),
                 Row(
                   children: [
-                    Container(
-                      width: _bWidth,
-                      height: _bHeight,
-                      child: Text('아이템'),
-                    ),
-                    Container(
-                      width: _tSpace2,
-                    ),
-                    Container(
-                      width: _bWidth,
-                      height: _bHeight,
-                      child: Text(collection.products.length.toString()),
-                    ),
-                    Container(
-                      width: _tSpace3,
-                    ),
-                    Container(
-                      width: _bWidth,
-                      height: _bHeight,
-                      child: Text('팔로워'),
-                    ),
-                    Container(
-                      width: _tSpace2,
-                    ),
-                    Container(
-                      width: _bWidth,
-                      height: _bHeight,
-                      child: Text(collection.followers.toString()),
-                    ),
+                    Text('아이템'),
+                    wSpacer(_space3),
+                    Text(collection.products.length.toString()),
+                    wSpacer(_space4),
+                    Text('팔로워'),
+                    wSpacer(_space3),
+                    Text(collection.getFollowers().toString()),
                   ],
                 ),
               ],
             ),
-            Container(
-              width: _iWidth,
-              height: _iHeight,
-              child: Center(
-                child: Text('+ Follow'),
-              ),
-            )
+            action2Idle(context, '+ Follow'),
           ],
         ),
-        Container(
-          width: _space2,
+        hSpacer(_space2),
+        Text('@' + collection.userID.username),
+        hSpacer(_space3),
+        Text(collection.subscription),
+      ],
+    ),
+  );
+}
+
+Widget productImageBox(BuildContext context, Product product, double _width,
+    double _height) {
+  return Material(
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProductDetailPage(product)));
+      },
+      child: Container(
+        width: _width,
+        height: _height,
+        color: Colors.grey,
+        child: Image.asset(
+          product.imageURItest,
+          fit: BoxFit.cover,
         ),
-        Container(
-          width: _tWidth,
-          height: _tHeight,
-          child: Text(collection.userID.username),
+      ),
+    ),
+  );
+}
+
+Widget collectionImageBox(BuildContext context, Collection collection,
+    double _width, double _height) {
+  return Material(
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CollectionDetailPage(collection)));
+      },
+      child: Container(
+        width: _width,
+        height: _height,
+        color: Colors.grey,
+        child: Image.asset(
+          collection.imageURI,
+          fit: BoxFit.cover,
         ),
+      ),
+    ),
+  );
+}
+
+Widget keywordNotificationListItem() {
+  const double _size = 52;
+  const double _space1 = 8;
+  const double _space2 = 4;
+
+  return Container(
+    margin: EdgeInsets.only(right: 20, left: 20, top: 20),
+    child: Row(
+      children: <Widget>[
         Container(
-          width: _tSpace2,
+          width: _size,
+          height: _size,
+          color: Colors.grey,
         ),
-        Container(
-          width: _tWidth,
-          height: _tHeight,
-          child: Text(collection.subscription),
+        wSpacer(_space1),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text('[' + 'keyword' + ']'),
+                wSpacer(_space2),
+                Text('Notification Message'),
+              ],
+            ),
+            hSpacer(_space2),
+            Text('Time'),
+          ],
         ),
       ],
     ),
+  );
+}
+
+Widget wSpacer(double _space) {
+  return Container(
+    width: _space,
+  );
+}
+
+Widget hSpacer(double _space) {
+  return Container(
+    height: _space,
   );
 }

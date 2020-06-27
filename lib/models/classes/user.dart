@@ -12,6 +12,8 @@ class User {
   int createDate;
   int lastActivity;
 
+  double rate = 0;
+
   String imageURI;
   String bio;
 
@@ -23,6 +25,10 @@ class User {
   List<Product> myProducts = [];
   List<Collection> myCollection = [];
 
+  int getMyProducts() {
+    return this.myProducts.length;
+  }
+
   int getReviews() {
     int reviews = 0;
 
@@ -33,12 +39,12 @@ class User {
   }
 
   double getRate() {
-    double rate = 0;
-
     for(int i = 0; i < myProducts.length; i++)
-      rate += myProducts[i].getRate();
+      this.rate += myProducts[i].getRate();
 
-    return rate / myProducts.length;
+    if( this.rate == 0 )
+      return 0;
+    return this.rate / myProducts.length;
   }
 
   User(this.username, this.lastActivity, this.imageURI);

@@ -5,137 +5,137 @@ import 'package:flutter/material.dart';
 // Android
 
 // Text
-TextStyle style1(Color color) {
-  return TextStyle(color: color);
+TextStyle style1(Color _color) {
+  return TextStyle(color: _color);
 }
 
-TextStyle title1(Color color) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w900);
+TextStyle title1(Color _color) {
+  return TextStyle(fontSize: 20, color: _color, fontWeight: FontWeight.w900);
 }
 
-TextStyle title2(Color color) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w200);
+TextStyle title2(Color _color) {
+  return TextStyle(fontSize: 20, color: _color, fontWeight: FontWeight.w200);
 }
 
-TextStyle title3(Color color) {
-  return TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
+TextStyle title3(Color _color) {
+  return TextStyle(fontSize: 18, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle subTitle1(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w700);
+TextStyle subTitle1(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w700);
 }
 
-TextStyle subTitle2(Color color) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
+TextStyle subTitle2(Color _color) {
+  return TextStyle(fontSize: 20, color: _color, fontWeight: FontWeight.w500);
 }
 
-TextStyle body1(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
+TextStyle body1(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle body2(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w200);
+TextStyle body2(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w200);
 }
 
-TextStyle caption1(Color color) {
-  return TextStyle(fontSize: 12, fontWeight: FontWeight.w300);
+TextStyle caption1(Color _color) {
+  return TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w300);
 }
 
-TextStyle caption2(Color color) {
-  return TextStyle(fontSize: 12, fontWeight: FontWeight.w200);
+TextStyle caption2(Color _color) {
+  return TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w200);
 }
 
-TextStyle subCaption(Color color) {
-  return TextStyle(fontSize: 10, fontWeight: FontWeight.w200);
+TextStyle subCaption(Color _color) {
+  return TextStyle(fontSize: 10, color: _color, fontWeight: FontWeight.w200);
 }
 
-TextStyle label(Color color) {
-  return TextStyle(fontSize: 12, fontWeight: FontWeight.w600);
+TextStyle label(Color _color) {
+  return TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w600);
 }
 
 // Navigation
-TextStyle topNavigationTitle(Color color) {
-  return TextStyle(fontSize: 18, fontWeight: FontWeight.w700);
+TextStyle topNavigationTitle(Color _color) {
+  return TextStyle(fontSize: 18, color: _color, fontWeight: FontWeight.w700);
 }
 
-TextStyle tabNavigation(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w700);
+TextStyle tabNavigation(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w700);
 }
 
 // Buttons
-TextStyle CTA(Color color) {
-  return TextStyle(fontSize: 16, fontWeight: FontWeight.w700);
+TextStyle CTA(Color _color) {
+  return TextStyle(fontSize: 16, color: _color, fontWeight: FontWeight.w700);
 }
 
-TextStyle action1(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w700);
+TextStyle action1(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w700);
 }
 
-TextStyle action2(Color color) {
-  return TextStyle(fontSize: 11, fontWeight: FontWeight.w400);
+TextStyle action2(Color _color) {
+  return TextStyle(fontSize: 11, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle text1(Color color) {
-  return TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
+TextStyle text1(Color _color) {
+  return TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w500);
 }
 
 // List Item
-TextStyle searchListTitle(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle searchListTitle(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w500);
 }
 
-TextStyle searchListItem(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle searchListItem(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w500);
 }
 
 // Input
-TextStyle placeholder(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle placeholder(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w500);
 }
 
-TextStyle inputText(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle inputText(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w500);
 }
 
 // Tags
-TextStyle selectionTag(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle selectionTag(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w500);
 }
 
 // Messages
-TextStyle usernameLabel(Color color) {
-  return TextStyle(fontSize: 16, fontWeight: FontWeight.w900);
+TextStyle usernameLabel(Color _color) {
+  return TextStyle(fontSize: 16, color: _color, fontWeight: FontWeight.w900);
 }
 
-TextStyle content(Color color) {
-  return TextStyle(fontSize: 14, fontWeight: FontWeight.w300);
+TextStyle content(Color _color) {
+  return TextStyle(fontSize: 14, color: _color, fontWeight: FontWeight.w300);
 }
 
-TextStyle caption(Color color) {
-  return TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
+TextStyle caption(Color _color) {
+  return TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w500);
 }
 
 // ETC
-TextStyle titleText(Color color) {
-  return TextStyle(fontSize: 28, fontWeight: FontWeight.w100);
+TextStyle titleText(Color _color) {
+  return TextStyle(fontSize: 28, color: _color, fontWeight: FontWeight.w100);
 }
 
-TextStyle popularSearchEngLarge(Color color) {
-  return TextStyle(fontSize: 48, fontWeight: FontWeight.w400);
+TextStyle popularSearchEngLarge(Color _color) {
+  return TextStyle(fontSize: 48, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle popularSearchKRLarge(Color color) {
-  return TextStyle(fontSize: 45, fontWeight: FontWeight.w700);
+TextStyle popularSearchKRLarge(Color _color) {
+  return TextStyle(fontSize: 45, color: _color, fontWeight: FontWeight.w700);
 }
 
-TextStyle collectionTitle(Color color) {
-  return TextStyle(fontSize: 70, fontWeight: FontWeight.w400);
+TextStyle collectionTitle(Color _color) {
+  return TextStyle(fontSize: 70, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle popularSearchEngSmall(Color color) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w400);
+TextStyle popularSearchEngSmall(Color _color) {
+  return TextStyle(fontSize: 20, color: _color, fontWeight: FontWeight.w400);
 }
 
-TextStyle popularSearchKRSmall(Color color) {
-  return TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
+TextStyle popularSearchKRSmall(Color _color) {
+  return TextStyle(fontSize: 20, color: _color, fontWeight: FontWeight.w700);
 }

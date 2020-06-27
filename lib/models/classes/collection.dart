@@ -12,7 +12,14 @@ class Collection {
   List<int> followers = [];
   List<int> hashTags = [];
 
+  int getProducts() {
+    return this.products.length;
+  }
+
+  int getFollowers() {
+    return this.followers.length;
+  }
   int views;
 
-  Collection();
+  Collection(this.title, this.userID, this.imageURI);
 }
