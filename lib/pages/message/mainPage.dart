@@ -47,13 +47,13 @@ class _MessagePage extends State<MessagePage> {
               keywordNotificationListItem(),
               borderLineGreyLite(context),
 
-              itemCardLarge(context, new Product('title', 500, '/')),
+              productItemCardLarge(context, new Product('title', 500, '/')),
               borderLineGreyLite(context),
 
-              itemCardMedium(context, new Product('title', 500, '/')),
+              productItemCardMedium(context, new Product('title', 500, '/')),
               borderLineGreyLite(context),
 
-              itemCardSmall(context, new Product('title', 500, '/')),
+              productItemCardSmall(context, new Product('title', 500, '/')),
               borderLineGreyLite(context),
 
               collectionCoverCard(context, new Collection('title', new User('username', 5, 'imageURI'), '/')),
