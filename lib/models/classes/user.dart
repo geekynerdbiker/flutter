@@ -25,6 +25,14 @@ class User {
   List<Product> myProducts = [];
   List<Collection> myCollection = [];
 
+  int getFollowers() {
+    return this.followers.length;
+  }
+
+  int getFollowing() {
+    return this.following.length;
+  }
+
   int getMyProducts() {
     return this.myProducts.length;
   }

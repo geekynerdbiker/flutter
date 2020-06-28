@@ -1,3 +1,4 @@
+import 'package:editsource/models/widgets/border.dart';
 import 'package:editsource/models/widgets/components/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/pages/product/productDetailPage.dart';
 import 'package:editsource/pages/collection/collectionDetailPage.dart';
 
-Widget itemCardLarge(BuildContext context, Product product) {
+Widget productItemCardLarge(BuildContext context, Product product) {
   const double _width = 185;
   const double _height = 240;
   const double _space1 = 14;
@@ -23,35 +24,36 @@ Widget itemCardLarge(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
-            child: SizedBox(
-                width: _width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: SizedBox(
+            width: _width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        Text(product.title),
-                        hSpacer(_space2),
-                        Text(product.price.toString()),
-                      ],
-                    ),
-                    Container(
-                      width: _icon,
-                      height: _icon,
-                      child: Center(
-                        child: Icon(Icons.favorite),
-                      ),
-                    ),
+                    Text(product.title),
+                    hSpacer(_space2),
+                    Text(product.price.toString()),
                   ],
                 ),
+                Container(
+                  width: _icon,
+                  height: _icon,
+                  child: Center(
+                    child: Icon(Icons.favorite),
+                  ),
+                ),
+              ],
             ),
+          ),
         )
       ],
     ),
   );
 }
 
-Widget itemCardMedium(BuildContext context, Product product) {
+Widget productItemCardMedium(BuildContext context, Product product) {
   const double _width = 160;
   const double _height = 200;
   const double _space1 = 14;
@@ -94,7 +96,7 @@ Widget itemCardMedium(BuildContext context, Product product) {
   );
 }
 
-Widget itemCardSmall(BuildContext context, Product product) {
+Widget productItemCardSmall(BuildContext context, Product product) {
   const double _width = 119;
   const double _height = 119;
   const double _space1 = 8;
@@ -108,18 +110,17 @@ Widget itemCardSmall(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
-          child: SizedBox(
-            width: _width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(product.title),
-                hSpacer(_space2),
-                Text(product.price.toString()),
-              ],
-            ),
-          )
-        )
+            child: SizedBox(
+          width: _width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(product.title),
+              hSpacer(_space2),
+              Text(product.price.toString()),
+            ],
+          ),
+        ))
       ],
     ),
   );
@@ -174,8 +175,8 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
   );
 }
 
-Widget productImageBox(BuildContext context, Product product, double _width,
-    double _height) {
+Widget productImageBox(
+    BuildContext context, Product product, double _width, double _height) {
   return Material(
     child: InkWell(
       onTap: () {
@@ -199,6 +200,7 @@ Widget productImageBox(BuildContext context, Product product, double _width,
 
 Widget collectionImageBox(BuildContext context, Collection collection,
     double _width, double _height) {
+
   return Material(
     child: InkWell(
       onTap: () {
@@ -251,17 +253,5 @@ Widget keywordNotificationListItem() {
         ),
       ],
     ),
-  );
-}
-
-Widget wSpacer(double _space) {
-  return Container(
-    width: _space,
-  );
-}
-
-Widget hSpacer(double _space) {
-  return Container(
-    height: _space,
   );
 }

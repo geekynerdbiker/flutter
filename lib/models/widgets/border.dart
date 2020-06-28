@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Container borderLineGreyLite(BuildContext context) {
+Widget borderLineGreyLite(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 0.5,
@@ -8,7 +8,7 @@ Container borderLineGreyLite(BuildContext context) {
   );
 }
 
-Container borderLineGrey(BuildContext context) {
+Widget borderLineGrey(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 1,
@@ -16,7 +16,7 @@ Container borderLineGrey(BuildContext context) {
   );
 }
 
-Container borderLineGreyBold(BuildContext context) {
+Widget borderLineGreyBold(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 2,
@@ -24,7 +24,7 @@ Container borderLineGreyBold(BuildContext context) {
   );
 }
 
-Container borderLineBlackLite(BuildContext context) {
+Widget borderLineBlackLite(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 0.5,
@@ -32,7 +32,7 @@ Container borderLineBlackLite(BuildContext context) {
   );
 }
 
-Container borderLineBlack(BuildContext context) {
+Widget borderLineBlack(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 1,
@@ -40,10 +40,22 @@ Container borderLineBlack(BuildContext context) {
   );
 }
 
-Container borderLineBlackBold(BuildContext context) {
+Widget borderLineBlackBold(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 2,
     color: Colors.black,
+  );
+}
+
+Widget wSpacer(double _space) {
+  return Container(
+    width: _space,
+  );
+}
+
+Widget hSpacer(double _space) {
+  return Container(
+    height: _space,
   );
 }

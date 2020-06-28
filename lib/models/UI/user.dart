@@ -1,3 +1,4 @@
+import 'package:editsource/models/widgets/border.dart';
 import 'package:editsource/models/widgets/components/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:editsource/models/classes/user.dart';
@@ -258,17 +259,5 @@ Widget profileImage(User user, double _r) {
       user.imageURI,
       fit: BoxFit.cover,
     )),
-  );
-}
-
-Widget wSpacer(double _space) {
-  return Container(
-    width: _space,
-  );
-}
-
-Widget hSpacer(double _space) {
-  return Container(
-    height: _space,
   );
 }
