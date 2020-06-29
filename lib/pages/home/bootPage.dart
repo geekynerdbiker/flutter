@@ -32,7 +32,7 @@ class _BootPageState extends State<BootPage> {
         bottomNavigationBar: Container(
           child: new TabBar(
             labelColor: Colors.black,
-            indicatorColor: Colors.black,
+            indicatorColor: Colors.transparent,
             unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(
