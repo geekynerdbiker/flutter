@@ -15,11 +15,3 @@ Widget profileImage(User user, double _r) {
         )),
   );
 }
-
-Widget wSpacer(double _space) {
-  return Container(width: _space,);
-}
-
-Widget hSpacer(double _space) {
-  return Container(height: _space,);
-}
