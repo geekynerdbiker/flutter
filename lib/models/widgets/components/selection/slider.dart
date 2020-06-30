@@ -1,4 +1,3 @@
-import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
 class Slider extends StatefulWidget {

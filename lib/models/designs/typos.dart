@@ -63,7 +63,7 @@ TextStyle tabNavigation(Color _color) {
 }
 
 // Buttons
-TextStyle CTA(Color _color) {
+TextStyle cta(Color _color) {
   return TextStyle(fontSize: 16, color: _color, fontWeight: FontWeight.w700);
 }
 

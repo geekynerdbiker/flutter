@@ -10,7 +10,7 @@ class _SearchField extends State<SearchField> {
   final Color idle = primary;
   final Color active = accent1;
 
-  Color _color = primary;
+  //Color _color = primary;
 
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class _SearchField extends State<SearchField> {
         height: 48,
         decoration: BoxDecoration(
           border: Border.all(color: primary),
-          color: Colors.white,
+          color: offWhite,
         ),
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,

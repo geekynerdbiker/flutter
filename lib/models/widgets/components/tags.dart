@@ -12,7 +12,7 @@ Container tagIdle(BuildContext context, String textContext) {
     child: Text(
       textContext,
       textAlign: TextAlign.center,
-      style: CTA(primary),
+      style: cta(primary),
     ),
   );
 }

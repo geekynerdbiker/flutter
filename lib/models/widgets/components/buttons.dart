@@ -12,7 +12,7 @@ Container primaryCTAIdle(BuildContext context, String textContext) {
     child: Center(
       child: Text(
         textContext,
-        style: CTA(offWhite),
+        style: cta(offWhite),
       ),
     ),
   );
@@ -26,7 +26,7 @@ Container primaryCTADisabled(BuildContext context, String textContext) {
     child: Center(
       child: Text(
         textContext,
-        style: CTA(offWhite),
+        style: cta(offWhite),
       ),
     ),
   );
@@ -41,7 +41,7 @@ Container secondaryCTAIdle(BuildContext context, String textContext) {
     child: Center(
       child: Text(
         textContext,
-        style: CTA(primary),
+        style: cta(primary),
       ),
     ),
   );
@@ -56,7 +56,7 @@ Container secondaryCTADisabled(BuildContext context, String textContext) {
     child: Center(
       child: Text(
         textContext,
-        style: CTA(light),
+        style: cta(light),
       ),
     ),
   );
@@ -120,7 +120,7 @@ Container action2Disabled(BuildContext context, String textContext) {
   );
 }
 
-Container FAB1Idle(BuildContext context, String textContext) {
+Container fab1Idle(BuildContext context, String textContext) {
   return Container(
     width: 74,
     height: 74,
@@ -137,7 +137,7 @@ Container FAB1Idle(BuildContext context, String textContext) {
   );
 }
 
-Container FAB1Disabled(BuildContext context, String textContext) {
+Container fab1Disabled(BuildContext context, String textContext) {
   return Container(
     width: 74,
     height: 74,
@@ -154,7 +154,7 @@ Container FAB1Disabled(BuildContext context, String textContext) {
   );
 }
 
-Container FAB2Idle(BuildContext context, String textContext) {
+Container fab2Idle(BuildContext context, String textContext) {
   return Container(
     width: 57,
     height: 57,
@@ -171,7 +171,7 @@ Container FAB2Idle(BuildContext context, String textContext) {
   );
 }
 
-Container FAB2Disabled(BuildContext context, String textContext) {
+Container fab2Disabled(BuildContext context, String textContext) {
   return Container(
     width: 57,
     height: 57,

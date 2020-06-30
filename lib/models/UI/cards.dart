@@ -74,6 +74,7 @@ Widget productItemCardMedium(BuildContext context, Product product) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(product.title),
                     hSpacer(_space2),
@@ -97,8 +98,8 @@ Widget productItemCardMedium(BuildContext context, Product product) {
 }
 
 Widget productItemCardSmall(BuildContext context, Product product) {
-  const double _width = 119;
-  const double _height = 119;
+  const double _width = 120;
+  const double _height = 120;
   const double _space1 = 8;
   const double _space2 = 4;
 
