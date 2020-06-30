@@ -1,5 +1,6 @@
 import 'package:editsource/models/UI/user.dart';
 import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/buttons.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:editsource/pages/profile/myCollectionPage.dart';
@@ -43,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       appBar: appBarDefault(context, '내 정보'),
       body: ListView(
         physics: ClampingScrollPhysics(),

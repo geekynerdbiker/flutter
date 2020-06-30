@@ -1,4 +1,5 @@
 import 'package:editsource/models/classes/collection.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarDefaultDeep(context, '컬렉션 상세'),
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width * 2 / 5,
         child: FloatingActionButton.extended(
@@ -40,7 +41,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
               style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: offWhite),
             ),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(100))),
@@ -167,7 +168,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                 Container(
                   height: 60,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
+                  color: offWhite,
                   child: Text(widget.collection.subscription),
                 ),
               ],
@@ -277,7 +278,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                   child: Center(
                     child: Text(
                       '작성',
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                      style: TextStyle(fontSize: 12, color: offWhite),
                     ),
                   )),
             ],

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/pages/home/onboarding.dart';
 import 'package:flutter/material.dart';
 
@@ -30,12 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width,
-          child: Image.asset('lib/assets/newnew_logo.png'),
+          child: Image.asset('lib/assets/icons/drawable-xxxhdpi/new_new_logo_horizontal.png'),
         ),
       ),
     );

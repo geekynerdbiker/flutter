@@ -1,7 +1,6 @@
 import 'package:editsource/models/UI/user.dart';
 import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
 class ActivityPage extends StatefulWidget {
@@ -13,7 +12,7 @@ class _ActivityPage extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       body: ListView(
         children: [
           userMarqueeNotificationAction(context, new User('username', 111, 'imageURI')),

@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/pages/home/homePage.dart';
 import 'package:editsource/pages/message/mainPage.dart';
 import 'package:editsource/pages/newnew/mainPage.dart';
@@ -12,6 +13,7 @@ class BootPage extends StatefulWidget {
 
 class _BootPageState extends State<BootPage> {
   bool signIn = false;
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class _BootPageState extends State<BootPage> {
       length: 5,
       initialIndex: 0,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: offWhite,
         body: TabBarView(
           children: <Widget>[
             HomePage(),
@@ -31,25 +33,29 @@ class _BootPageState extends State<BootPage> {
         ),
         bottomNavigationBar: Container(
           child: new TabBar(
-            labelColor: Colors.black,
+            labelColor: accent1,
             indicatorColor: Colors.transparent,
-            unselectedLabelColor: Colors.grey,
+            unselectedLabelColor: primary,
             tabs: [
               Tab(
-                icon: Icon(Icons.home),
+                icon: ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/tab_bar_home_idle.png')),
               ),
               Tab(
-                icon: Icon(Icons.favorite),
-              ),
+                icon: ImageIcon(AssetImage(
+                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_discover_idle.png'),
+                ),),
               Tab(
-                icon: Icon(Icons.add),
-              ),
+                icon: ImageIcon(AssetImage(
+                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_new_item_idle.png'),
+              ),),
               Tab(
-                icon: Icon(Icons.message),
-              ),
+                icon: ImageIcon(AssetImage(
+                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_message_idle.png'),
+              ),),
               Tab(
-                icon: Icon(Icons.perm_identity),
-              ),
+                icon: ImageIcon(AssetImage(
+                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_my_page_idle.png'),
+              ),),
             ],
           ),
         ),

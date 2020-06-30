@@ -1,4 +1,5 @@
 import 'package:editsource/models/classes/product.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class ProductDetailPage extends StatelessWidget {
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
-                backgroundColor: Colors.white,
+                backgroundColor: offWhite,
                 onPressed: () {}),
           ),
           Container(
@@ -34,7 +35,7 @@ class ProductDetailPage extends StatelessWidget {
                 heroTag: "buy",
                 label: Text(
                   "구매하기",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: offWhite),
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -44,10 +45,10 @@ class ProductDetailPage extends StatelessWidget {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       appBar: appBarDefaultDeep(context, '상품 상세'),
       body: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: offWhite,
         body: new ListView(
           children: <Widget>[
             Container(
@@ -202,7 +203,7 @@ class ProductDetailPage extends StatelessWidget {
                         width: 60,
                         padding: EdgeInsets.only(left: 8, right: 8),
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: offWhite,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.black)),
                         child: Center(

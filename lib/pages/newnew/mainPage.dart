@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: offWhite,
           appBar: appBarWithTab(context, '포유', _tabs, _controller),
           body: TabBarView(
             controller: _controller,

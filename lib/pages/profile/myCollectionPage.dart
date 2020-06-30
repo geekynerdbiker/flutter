@@ -3,6 +3,7 @@ import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/widgets/border.dart';
+import 'package:editsource/pages/collection/collectionDetailPage.dart';
 import 'package:flutter/material.dart';
 
 class MyCollectionPage extends StatelessWidget {
@@ -12,14 +13,29 @@ class MyCollectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      children: [
-        infoLine(user),
-Expanded(child: collectionProductItemList(context, new Collection('title', new User('username', 1, '/'), '/')))
-//        collectionItem(context,
-//            new Collection('title', new User('username', 1, '/'), '/')),
-      ],
+    return Scaffold(
+      body: ListView(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        children: [
+          infoLine(user),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: collectionItem(context,
+                new Collection('title', new User('username', 1, '/'), '/')),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: collectionItem(context,
+                new Collection('title', new User('username', 1, '/'), '/')),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: collectionItem(context,
+                new Collection('title', new User('username', 1, '/'), '/')),
+          ),
+        ],
+      ),
     );
   }
 
@@ -62,12 +78,14 @@ Expanded(child: collectionProductItemList(context, new Collection('title', new U
   }
 
   Widget collectionItem(BuildContext context, Collection collection) {
-    return Column(
-      children: [
-        collectionInfoLine(context, collection),
-        collectionBannerItem(context, collection),
-        Expanded(child: collectionProductItemList(context, collection)),
-      ],
+    return Container(
+        height: MediaQuery.of(context).size.width * (500 / 375),
+      child: Column(
+        children: [
+          collectionBannerItem(context, collection),
+          Expanded(child: collectionProductItemList(context, collection)),
+        ],
+      ),
     );
   }
 
@@ -80,9 +98,19 @@ Expanded(child: collectionProductItemList(context, new Collection('title', new U
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('@' + collection.userID.username),
-            Text(
-              '+ 더보기',
-              style: TextStyle(decoration: TextDecoration.underline),
+            Material(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CollectionDetailPage(collection)));
+                },
+                child: Text(
+                  '+ 더보기',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
             ),
           ],
         ),
@@ -98,27 +126,37 @@ Expanded(child: collectionProductItemList(context, new Collection('title', new U
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: collectionInfoLine(context, collection),
           ),
           collectionImageBox(context, collection, _width, _height),
-          hSpacer(8),
         ],
       ),
     );
   }
 
-  Widget collectionProductItemList(BuildContext context, Collection collection) {
-    return ListView(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      children: [
-        Container(color: Colors.black,),
-        Container(color: Colors.black,),
-        Container(color: Colors.black,),
-        Container(color: Colors.black,),
-        Container(color: Colors.black,),
-      ],
-    );
-  }
+  Widget collectionProductItemList(
+      BuildContext context, Collection collection) {
+      return ListView(
+        physics: ClampingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 8, right: 8),
+            child:
+            productItemCardSmall(context, new Product('title', 100000, '/')),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8, right: 8),
+            child:
+            productItemCardSmall(context, new Product('title', 100000, '/')),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8, right: 8),
+            child:
+            productItemCardSmall(context, new Product('title', 100000, '/')),
+          ),
+        ],
+      );
+    }
 }

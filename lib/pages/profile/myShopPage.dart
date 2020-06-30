@@ -12,6 +12,7 @@ class MyShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: ClampingScrollPhysics(),
       //shrinkWrap: true,
       children: [
         infoLine(context, user),

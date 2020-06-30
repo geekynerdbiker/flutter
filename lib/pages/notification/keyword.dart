@@ -1,6 +1,5 @@
 import 'package:editsource/models/UI/cards.dart';
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
 class KeywordPage extends StatefulWidget {
@@ -12,7 +11,7 @@ class _KeywordPage extends State<KeywordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       body: ListView(
         children: [
           keywordNotificationListItem(),

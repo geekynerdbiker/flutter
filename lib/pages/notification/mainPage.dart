@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:editsource/pages/notification/activity.dart';
 import 'package:editsource/pages/notification/keyword.dart';
@@ -44,7 +45,7 @@ class _NotificationPage extends State<NotificationPage> with SingleTickerProvide
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: offWhite,
           appBar: appBarWithTabDeep(context, '알림', _tabs, _controller),
           body: TabBarView(
             controller: _controller,

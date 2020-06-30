@@ -1,9 +1,9 @@
 import 'package:editsource/models/UI/cards.dart';
-import 'package:editsource/models/UI/message.dart';
 import 'package:editsource/models/UI/user.dart';
 import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/border.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _MessagePage extends State<MessagePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: offWhite,
           appBar: appBarDefault(context, 'Messages'),
           body: ListView(
             children: [

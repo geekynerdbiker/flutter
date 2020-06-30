@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/pages/home/account/selectFavor.dart';
 import 'package:flutter/material.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
@@ -7,7 +8,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarDefaultDeep(context, '회원가입'),
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -41,7 +42,7 @@ class SignUpPage extends StatelessWidget {
                     width: 80,
                     color: Colors.black,
                     child: Center(
-                      child: Text('인증요청', style: TextStyle(fontSize:12, color: Colors.white),),
+                      child: Text('인증요청', style: TextStyle(fontSize:12, color: offWhite),),
                     )
                 ),
               ],
@@ -143,7 +144,7 @@ class SignUpPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '가입하기',
-                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      style: TextStyle(fontSize: 14, color: offWhite),
                     ),
                   ),
                 ),
@@ -158,7 +159,7 @@ class SignUpPage extends StatelessWidget {
                 Container(
                   height: 20,
                   width: 130,
-                  color: Colors.white,
+                  color: offWhite,
                   child: Center(
                     child: Text(
                       '이미 계정이 있으신가요?',
@@ -169,7 +170,7 @@ class SignUpPage extends StatelessWidget {
                 Container(
                   height: 20,
                   width: 40,
-                  color: Colors.white,
+                  color: offWhite,
                   child: Center(
                     child: Text(
                       '로그인',

@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/pages/home/account/signInPage.dart';
 import 'package:flutter/material.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
@@ -8,7 +9,7 @@ class ChangePasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarDefaultDeep(context, '비밀번호 찾기'),
-      backgroundColor: Colors.white,
+      backgroundColor: offWhite,
       body: Container(
         width: MediaQuery
             .of(context)
@@ -89,7 +90,7 @@ class ChangePasswordPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '비밀번호 변경',
-                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      style: TextStyle(fontSize: 14, color: offWhite),
                     ),
                   ),
                 ),
@@ -101,7 +102,7 @@ class ChangePasswordPage extends StatelessWidget {
             Container(
               height: 20,
               width: 130,
-              color: Colors.white,
+              color: offWhite,
               child: Center(
                 child: Text(
                   '로그인',
