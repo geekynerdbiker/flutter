@@ -1,3 +1,4 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class _PageNameHere extends State<PageNameHere> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: offWhite,
         appBar: appBarDefault(context, 'Messages'),
         body: Container(),
       ),
