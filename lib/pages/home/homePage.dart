@@ -5,7 +5,7 @@ import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/widgets/border.dart';
 import 'package:editsource/models/widgets/components/navigation.dart';
-import 'package:editsource/models/widgets/components/selection/indicator.dart';
+import 'package:editsource/models/widgets/components/selection.dart';
 import 'package:editsource/models/widgets/search.dart';
 import 'package:flutter/material.dart';
 
