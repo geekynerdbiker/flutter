@@ -24,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage>
       icon: Text('나의 컬렉션' + ' ('+'9'+')'),
     ),
   ];
+
   List<Widget> _pages = [
     MyShopPage(user: new User('username', 1, 'imageURI'),),
     MyCollectionPage(user: new User('username', 1, 'imageURI'),),
@@ -51,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage>
         children: <Widget>[
           userMarqueeMyPage(context, new User('username', 1, 'imageURI')),
           Container(
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
             child: primaryCTAIdle(context, '구매/판매 내역'),
           ),
           TabBar(

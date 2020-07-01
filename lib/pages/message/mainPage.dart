@@ -16,9 +16,7 @@ class MessagePage extends StatefulWidget {
 class _MessagePage extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
           backgroundColor: offWhite,
           appBar: appBarDefault(context, 'Messages'),
           body: ListView(
@@ -59,7 +57,7 @@ class _MessagePage extends State<MessagePage> {
               collectionCoverCard(context, new Collection('title', new User('username', 5, 'imageURI'), '/')),
               borderLineGreyLite(context),
             ],
-          )),
+          ),
     );
   }
 }
