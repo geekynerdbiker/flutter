@@ -19,7 +19,7 @@ Widget userMarqueePopularSeller(BuildContext context, User user) {
 }
 
 Widget userMarqueeMyPage(BuildContext context, User user) {
-  const double _r = 48;
+  const double _r = 64;
   const double _space1 = 12;
   const double _space2 = 12;
   const double _space3 = 4;
@@ -42,15 +42,15 @@ Widget userMarqueeMyPage(BuildContext context, User user) {
                 hSpacer(_space2),
                 Row(
                   children: [
-                    Icon(Icons.watch_later),
+                    ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/12_px_time.png'), size: 12,),
                     wSpacer(_space3),
                     Text(user.lastActivity.toString()),
                     wSpacer(_space4),
-                    Icon(Icons.label),
+                    ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/12_px_sales.png'), size: 12,),
                     wSpacer(_space3),
                     Text(user.getMyProducts().toString()),
                     wSpacer(_space4),
-                    Icon(Icons.directions_car),
+                    ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/12_px_quick_delivery.png'), size: 12,),
                     wSpacer(_space3),
                     Text('Delivery'),
                   ],
@@ -59,7 +59,7 @@ Widget userMarqueeMyPage(BuildContext context, User user) {
             ),
           ],
         ),
-        Icon(Icons.edit),
+        ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/24_px_edit_idle.png'),),
       ],
     ),
   );

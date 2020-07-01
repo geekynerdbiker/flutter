@@ -1,36 +1,34 @@
+import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
-class Slider extends StatefulWidget {
-  final double minimum, maximum;
-
-  @override
-  Slider({this.minimum, this.maximum});
-
-  _Slider createState() => _Slider();
+class StateSlider extends StatefulWidget {
+  _StateSlider createState() => _StateSlider();
 }
 
-class _Slider extends State<Slider> {
-  bool isSwitched = true;
+class _StateSlider extends State<StateSlider> {
+  double _value = 0;
 
   @override
   Widget build(BuildContext context) {
-    RangeValues values = RangeValues(widget.minimum, widget.maximum);
-    RangeLabels labes = RangeLabels(
-        widget.minimum.toString(), widget.maximum.toString());
-
-    return RangeSlider(
-        min: widget.minimum,
-        max: widget.maximum,
-        values: values,
-        labels: labes,
-        divisions: ((widget.maximum - widget.minimum) ~/ 1000),
-        onChanged: (value) {
-          setState(() {
-            values = value;
-            labes = RangeLabels(
-                value.start.toInt().toString(), value.end.toInt().toString());
-          });
-        }
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+        activeTrackColor: primary,
+        activeTickMarkColor: primary,
+        inactiveTrackColor: semiDark,
+        inactiveTickMarkColor: semiDark,
+        thumbColor: primary,
+        overlayColor: Colors.transparent
+      ),
+      child: Slider(
+          min: 0,
+          max: 10,
+          value: _value,
+          divisions: 10,
+          onChanged: (value) {
+            setState(() {
+              _value = value;
+            });
+          }),
     );
   }
 }
