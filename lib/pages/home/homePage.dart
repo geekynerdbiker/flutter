@@ -1,9 +1,9 @@
+import 'package:editsource/models/components/buttons.dart';
 import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/border.dart';
 import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/models/components/selection.dart';
 import 'package:editsource/models/components/search.dart';
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(top: 30, left: 20),
                   child: Text('NEW NEW PICK'),
                 ),
-                seeMore(context, offWhite, ProductList()),
+                seeMore(context, offWhite, ProductListPage()),
               ],
             ),
             Expanded(child: sampleListView())
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                   '#' + collection.title,
                 ),
               ),
-              seeMore(context, accent1, ProductList()),
+              seeMore(context, accent1, ProductListPage()),
             ],
           ),
           Expanded(child:
@@ -177,25 +177,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget seeMore(BuildContext context, Color _color, Widget _nav) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => _nav));
-        },
-        child: Container(
-          margin: EdgeInsets.only(top: 30, right: 20),
-          child: Text(
-            '+ 더보기',
-            style:
-                TextStyle(decoration: TextDecoration.underline, color: _color),
-          ),
-        ),
-      ),
     );
   }
 

@@ -1,5 +1,8 @@
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/pages/newnew/follwingCollections.dart';
+import 'package:editsource/pages/newnew/follwingShops.dart';
+import 'package:editsource/pages/newnew/recommend.dart';
 import 'package:flutter/material.dart';
 
 class NewnewPage extends StatefulWidget {
@@ -22,9 +25,9 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
     ),
   ];
   List<Widget> pages = [
-    //RecommendPage(),
-    //UserCollections(),
-    //UserCollections(),
+    RecommendPage(),
+    FollowingShopsPage(),
+    FollowingCollectionsPage(),
   ];
 
   @override

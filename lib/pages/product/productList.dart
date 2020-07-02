@@ -4,18 +4,18 @@ import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
-class ProductList extends StatefulWidget {
+class ProductListPage extends StatefulWidget {
 //  Collection _collection;
 //
-//  ProductList(Collection _collection) {
+//  ProductListPage(Collection _collection) {
 //    this._collection = _collection;
 //  }
 
   @override
-  _ProductList createState() => _ProductList();
+  _ProductListPage createState() => _ProductListPage();
 }
 
-class _ProductList extends State<ProductList> {
+class _ProductListPage extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

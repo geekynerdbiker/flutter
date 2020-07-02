@@ -2,6 +2,7 @@ import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/components/border.dart';
+import 'package:editsource/pages/profile/review.dart';
 import 'package:flutter/material.dart';
 
 class MyShopPage extends StatelessWidget {
@@ -61,7 +62,14 @@ class MyShopPage extends StatelessWidget {
               wSpacer(_space1),
               Text(user.getRate().toString()),
               wSpacer(_space2),
-              Text('(' + user.getReviews().toString() + ' Reviews' + ')'),
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewPage()));
+                  },
+                  child: Text('(' + user.getReviews().toString() + ' Reviews' + ')'),
+                ),
+              )
             ],
           ),
         ),

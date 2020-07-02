@@ -3,18 +3,24 @@ import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/components/buttons.dart';
 import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/pages/message/chat.dart';
 import 'package:editsource/pages/profile/myCollectionPage.dart';
 import 'package:editsource/pages/profile/myShopPage.dart';
 import 'package:editsource/pages/profile/tradeList.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatefulWidget {
+class SellerPage extends StatefulWidget {
+  User _user;
+
+  SellerPage(User _user) {
+    this._user = _user;
+  }
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _SellerPageState createState() => _SellerPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
-    with TickerProviderStateMixin {
+class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
   TabController _controller;
 
   List<Tab> _tabs = [
@@ -57,18 +63,35 @@ class _ProfilePageState extends State<ProfilePage>
         children: <Widget>[
           userMarqueeMyPage(context, new User('username', 1, 'imageURI')),
           Container(
-              margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
-              child: Material(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TradeListPage()));
-                  },
-                  child: primaryCTAIdle(context, '구매/판매 내역'),
+            margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TradeListPage()));
+                    },
+                    child: shortButton(context, offWhite, true, Text('팔로우')),
+                  ),
                 ),
-              )),
+                Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatRoomPage(widget._user)));
+                    },
+                    child: shortButton(context, offWhite, true, Text('메세지 보내기')),
+                  ),
+                ),
+              ],
+            ),
+          ),
           TabBar(
               controller: _controller,
               labelColor: Colors.black,
