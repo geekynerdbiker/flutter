@@ -1,5 +1,8 @@
+import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/components/border.dart';
 import 'package:editsource/models/components/buttons.dart';
+import 'package:editsource/models/components/user.dart';
+import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:editsource/models/classes/product.dart';
@@ -180,21 +183,21 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
 }
 
 Widget productImageBox(
-    BuildContext context, Product product, double _width, double _height) {
+    BuildContext context, Product _product, double _width, double _height) {
   return Material(
     child: InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ProductDetailPage(product)));
+                builder: (context) => ProductDetailPage(_product)));
       },
       child: Container(
         width: _width,
         height: _height,
         color: Colors.grey,
         child: Image.asset(
-          product.imageURItest,
+          _product.imageURItest,
           fit: BoxFit.cover,
         ),
       ),
@@ -256,5 +259,74 @@ Widget keywordNotificationListItem() {
         ),
       ],
     ),
+  );
+}
+
+Widget collectionShowcase(BuildContext context, Collection collection) {
+  const double _width = 240;
+  const double _height = 160;
+  const double _space1 = 8;
+  const double _space2 = 6;
+
+  bool isMyCollection = false;
+
+  return Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        collectionImageBox(context, collection, _width, _height),
+        hSpacer(_space1),
+        Container(
+          width: _width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(collection.title),
+                    hSpacer(_space2),
+                    Text('@' + collection.userID.username),
+                  ],
+                ),
+              ),
+              action2Idle(context, '+ 팔로우'),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget productItem1(BuildContext context, Product _product) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          productImageBox(context, _product, 48, 48),
+          wSpacer(12),
+          Column(children: [
+            Text(_product.title),
+            Text(_product.price.toString()),
+          ],),
+          Column(children: [
+            Text(_product.getStaus()),
+            shortButton(context, offWhite, true, Text('리뷰 쓰기')),
+          ],),
+        ],
+      ),
+      Row(
+        children: [
+          profileImage(_product.userID, 16),
+          wSpacer(4),
+          Text(_product.userID.username),
+        ],
+      )
+    ],
   );
 }

@@ -1,5 +1,8 @@
+import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/components/border.dart';
 import 'package:editsource/models/components/buttons.dart';
+import 'package:editsource/pages/product/productDetailPage.dart';
+import 'package:editsource/pages/profile/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/designs/icons.dart';
@@ -9,6 +12,7 @@ Widget userMarqueePopularSeller(BuildContext context, User _user) {
   const double _space = 8;
 
   return Container(
+    margin: EdgeInsets.only(right: 8),
     child: Column(
       children: <Widget>[
         profileImage(_user, _r),
@@ -44,24 +48,21 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
                 Row(
                   children: [
                     ImageIcon(
-                      AssetImage(
-                          time),
+                      AssetImage(time),
                       size: 12,
                     ),
                     wSpacer(_space3),
                     Text(_user.lastActivity.toString()),
                     wSpacer(_space4),
                     ImageIcon(
-                      AssetImage(
-                          sales),
+                      AssetImage(sales),
                       size: 12,
                     ),
                     wSpacer(_space3),
                     Text(_user.getMyProducts().toString()),
                     wSpacer(_space4),
                     ImageIcon(
-                      AssetImage(
-                          quick_delivery),
+                      AssetImage(quick_delivery),
                       size: 12,
                     ),
                     wSpacer(_space3),
@@ -72,9 +73,17 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
             ),
           ],
         ),
-        ImageIcon(
-          AssetImage(edit_idle),
-        ),
+        Material(
+          child: InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+            },
+            child: ImageIcon(
+              AssetImage(edit_idle),
+            ),
+          ),
+        )
       ],
     ),
   );
@@ -135,8 +144,11 @@ Widget userMarquee2(BuildContext context, User _user) {
           ),
           Row(
             children: [
-              ImageIcon(AssetImage(
-                  'lib/assets/icons/drawable-xxxhdpi/12_px_star_active.png'), size: 12,),
+              ImageIcon(
+                AssetImage(
+                    'lib/assets/icons/drawable-xxxhdpi/12_px_star_active.png'),
+                size: 12,
+              ),
               wSpacer(_space2),
               Text(_user.getRate().toString()),
               wSpacer(_space3),
@@ -147,7 +159,8 @@ Widget userMarquee2(BuildContext context, User _user) {
       ));
 }
 
-Widget userMarqueeMessageListItem(BuildContext context, User _user, Widget _nav) {
+Widget userMarqueeMessageListItem(
+    BuildContext context, User _user, Widget _nav) {
   const double _r = 48;
   const double _space1 = 12;
   const double _space2 = 8;
@@ -268,6 +281,48 @@ Widget userMarqueeNotificationAction(BuildContext context, User _user) {
         ),
       ],
     ),
+  );
+}
+
+Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        children: [
+          profileImage(_user, 48),
+          wSpacer(10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(_user.username),
+              Row(
+                children: [
+                  Text(_review.rate.toString()),
+                  wSpacer(8),
+                  Text(_review.updatedDate),
+                ],
+              )
+            ],
+          )
+        ],
+      ),
+      hSpacer(20),
+      Material(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ProductDetailPage(_review.productID)));
+          },
+          child: Text(_review.productID.title),
+        ),
+      ),
+      hSpacer(8),
+      Text(_review.comment),
+    ],
   );
 }
 

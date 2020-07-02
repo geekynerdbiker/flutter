@@ -6,12 +6,14 @@ class Product {
   String title;
   String imageURItest;
   List<String> imageURI;
+  int status = 0;
 
   int price;
   int deliveryFee;
 
   String description = '상품 설명이 없습니다.';
   String updatedDate;
+  String soldDate;
 
   List<int> likes = [];
   List<Comment> comments = [];
@@ -27,15 +29,28 @@ class Product {
   int views;
   bool isSold;
 
+  String getStaus() {
+    if (this.status == 0)
+      return '판매중';
+    else if (this.status == 1)
+      return '판매완료';
+    else if (this.status == 2)
+      return '배송완료';
+    else if (this.status == 3)
+      return '승인대기';
+    else if (this.status == 4)
+      return  this.soldDate + ' 거래완료';
+  }
+
   int getReviews() {
     return this.reviews.length;
   }
 
   double getRate() {
-    for( int i = 0; i < reviews.length; i++ )
+    for (int i = 0; i < reviews.length; i++)
       this.rate += reviews[i].rate;
 
-    if( this.rate == 0 )
+    if (this.rate == 0)
       return 0;
     return this.rate / reviews.length;
   }
@@ -49,6 +64,8 @@ class Review {
   String updatedDate;
   Product productID;
   double rate = 0;
+
+  Review(this.comment, this.updatedDate, this.productID);
 }
 
 class Comment {

@@ -192,14 +192,14 @@ Container fab2Disabled(BuildContext context, String textContext) {
   );
 }
 
-Widget textField(BuildContext context, String _textContext) {
+Widget shortTextField(BuildContext context, String _textContext) {
   return Container(
-    width: MediaQuery.of(context).size.width * (335 / 375),
+    width: MediaQuery.of(context).size.width * (163 / 375),
     height: 44,
     margin: EdgeInsets.symmetric(vertical: 8),
     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
     child: Padding(
-      padding: EdgeInsets.only(left: 10, bottom: 3),
+      padding: EdgeInsets.only(left: 10, bottom: 7),
       child: TextFormField(
         style: TextStyle(
           fontSize: 12,
@@ -211,14 +211,14 @@ Widget textField(BuildContext context, String _textContext) {
   );
 }
 
-Widget shortTextField(BuildContext context, String _textContext) {
+Widget textField(BuildContext context, String _textContext) {
   return Container(
-    width: MediaQuery.of(context).size.width * (163 / 375),
+    width: MediaQuery.of(context).size.width * (335 / 375),
     height: 44,
     margin: EdgeInsets.symmetric(vertical: 8),
     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
     child: Padding(
-      padding: EdgeInsets.only(left: 10, bottom: 3),
+      padding: EdgeInsets.only(left: 10, bottom: 7),
       child: TextFormField(
         style: TextStyle(
           fontSize: 12,
@@ -237,8 +237,9 @@ Widget textFieldLarge(BuildContext context, String _textContext) {
     margin: EdgeInsets.symmetric(vertical: 8),
     decoration: BoxDecoration(border: Border.all(color: Colors.black)),
     child: Padding(
-      padding: EdgeInsets.only(left: 10, bottom: 3),
+      padding: EdgeInsets.only(left: 10),
       child: TextFormField(
+        maxLines: 5,
         style: TextStyle(
           fontSize: 12,
         ),
@@ -545,4 +546,22 @@ Widget shortButtonPop(
         ),
       ),
     );
+}
+
+Widget seeMore(BuildContext context, Color _color, Widget _nav) {
+  return Material(
+    color: Colors.transparent,
+    child: InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => _nav));
+      },
+      child: Container(
+        child: Text(
+          '+ 더보기',
+          style:
+          TextStyle(decoration: TextDecoration.underline, color: _color),
+        ),
+      ),
+    ),
+  );
 }
