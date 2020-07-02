@@ -1,4 +1,7 @@
+import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/components/user.dart';
 import 'package:editsource/models/designs/colors.dart';
+import 'package:editsource/models/designs/icons.dart';
 import 'package:editsource/pages/favorite/mainPage.dart';
 import 'package:editsource/pages/notification/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +69,7 @@ Widget appBarDefaultDeep(BuildContext context, String _title) {
   );
 }
 
-Widget appBarWithskip(BuildContext context, String _title, Widget _skipRoute) {
+Widget appBarWithSkip(BuildContext context, String _title, Widget _skipRoute) {
   return AppBar(
     backgroundColor: offWhite,
     elevation: 0,
@@ -88,14 +91,15 @@ Widget appBarWithskip(BuildContext context, String _title, Widget _skipRoute) {
         child: Material(
           color: offWhite,
           child: InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => _skipRoute));
-            },
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => _skipRoute));
+              },
               child: Container(
-            padding: EdgeInsets.only(top: 15),
-            width: 60,
-            child: Text('건너뛰기'),
-          )),
+                padding: EdgeInsets.only(top: 15),
+                width: 60,
+                child: Text('건너뛰기'),
+              )),
         ),
       ),
     ],
@@ -148,8 +152,8 @@ Widget favorite(BuildContext context) {
     color: offWhite,
     child: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => FavoritePage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FavoritePage()));
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
@@ -158,5 +162,44 @@ Widget favorite(BuildContext context) {
           child: Image.asset(
               'lib/assets/icons/drawable-xxxhdpi/24_px_favorite_idle.png'),
         )),
+  );
+}
+
+Widget chat(BuildContext context, User _user) {
+  return AppBar(
+    elevation: 0,
+    //centerTitle: true,
+    backgroundColor: offWhite,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          child: profileImage(_user, 20),
+        ),
+        Text(
+          _user.username,
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+    leading: Material(
+      child: InkWell(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: ImageIcon(AssetImage(back_idle), size: 8, color: primary,),
+          )
+      ),
+    ),
+    actions: [
+      Material(
+        child: InkWell(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 14),
+            child: ImageIcon(AssetImage(more_idle), size: 24, color: primary,),
+          )
+        ),
+      ),
+    ],
   );
 }

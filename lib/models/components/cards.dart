@@ -1,5 +1,5 @@
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/buttons.dart';
+import 'package:editsource/models/components/border.dart';
+import 'package:editsource/models/components/buttons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:editsource/models/classes/product.dart';
@@ -10,7 +10,7 @@ import 'package:editsource/pages/collection/collectionDetailPage.dart';
 
 Widget productItemCardLarge(BuildContext context, Product product) {
   const double _width = 185;
-  const double _height = 240;
+  const double _height = 250;
   const double _space1 = 14;
   const double _space2 = 4;
   const double _icon = 44;
@@ -24,8 +24,9 @@ Widget productItemCardLarge(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
+          padding: EdgeInsets.only(left: 12),
           child: SizedBox(
-            width: _width,
+            width: _width - 12,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -68,8 +69,9 @@ Widget productItemCardMedium(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
+          padding: EdgeInsets.only(left: 12),
           child: SizedBox(
-            width: _width,
+            width: _width - 12,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -111,17 +113,18 @@ Widget productItemCardSmall(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
+            padding: EdgeInsets.only(left: 12),
             child: SizedBox(
-          width: _width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(product.title),
-              hSpacer(_space2),
-              Text(product.price.toString()),
-            ],
-          ),
-        ))
+              width: _width - 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.title),
+                  hSpacer(_space2),
+                  Text(product.price.toString()),
+                ],
+              ),
+            ))
       ],
     ),
   );
@@ -201,7 +204,6 @@ Widget productImageBox(
 
 Widget collectionImageBox(BuildContext context, Collection collection,
     double _width, double _height) {
-
   return Material(
     child: InkWell(
       onTap: () {
