@@ -1,6 +1,6 @@
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/selection.dart';
+import 'package:editsource/models/components/border.dart';
+import 'package:editsource/models/components/selection.dart';
 import 'package:editsource/pages/home/account/signInPage.dart';
 import 'package:editsource/pages/home/account/signUpPage.dart';
 import 'package:editsource/pages/home/bootPage.dart';

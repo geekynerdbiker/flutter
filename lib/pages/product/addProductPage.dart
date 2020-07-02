@@ -1,7 +1,10 @@
+import 'package:editsource/models/components/buttons.dart';
+import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
-import 'package:editsource/models/widgets/components/selection.dart';
+import 'package:editsource/models/components/border.dart';
+import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/models/components/selection.dart';
+import 'package:editsource/pages/product/afterAddProdct.dart';
 import 'package:flutter/material.dart';
 
 class AddProductPage extends StatefulWidget {
@@ -26,6 +29,7 @@ class _AddProductPageState extends State<AddProductPage> {
             stateSlider(context),
             addTag(context),
             acceptCardPayment(context),
+            longButtonNav(context, primary, false, Text('등록하기', style: TextStyle(color: offWhite),), AfterAddProduct()),
           ],
         ),
       ),
@@ -145,63 +149,6 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 
-  Widget textField(BuildContext context, String _textContext) {
-    return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
-      height: 44,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      child: Padding(
-        padding: EdgeInsets.only(left: 10, bottom: 3),
-        child: TextFormField(
-          style: TextStyle(
-            fontSize: 12,
-          ),
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: _textContext),
-        ),
-      ),
-    );
-  }
-
-  Widget shortTextField(BuildContext context, String _textContext) {
-    return Container(
-      width: MediaQuery.of(context).size.width * (163 / 375),
-      height: 44,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      child: Padding(
-        padding: EdgeInsets.only(left: 10, bottom: 3),
-        child: TextFormField(
-          style: TextStyle(
-            fontSize: 12,
-          ),
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: _textContext),
-        ),
-      ),
-    );
-  }
-
-  Widget textFieldLarge(BuildContext context, String _textContext) {
-    return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
-      height: 88,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      child: Padding(
-        padding: EdgeInsets.only(left: 10, bottom: 3),
-        child: TextFormField(
-          style: TextStyle(
-            fontSize: 12,
-          ),
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: _textContext),
-        ),
-      ),
-    );
-  }
-
   Widget stateSlider(BuildContext context) {
     return Column(
       children: [
@@ -232,7 +179,7 @@ class _AddProductPageState extends State<AddProductPage> {
       ),
     );
   }
-  
+
   Widget productTags(BuildContext context) {
     return Container(
       height: 45,
@@ -262,7 +209,7 @@ class _AddProductPageState extends State<AddProductPage> {
       ),
     );
   }
-  
+
   Widget acceptCardPayment(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),

@@ -1,4 +1,4 @@
-import 'package:editsource/models/UI/cards.dart';
+import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 

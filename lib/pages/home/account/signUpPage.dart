@@ -1,7 +1,7 @@
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/pages/home/account/selectFavor.dart';
 import 'package:flutter/material.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/navigation.dart';
 
 class SignUpPage extends StatelessWidget {
   @override

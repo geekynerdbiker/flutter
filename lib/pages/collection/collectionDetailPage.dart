@@ -1,6 +1,6 @@
 import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPage extends StatefulWidget {

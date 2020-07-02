@@ -1,5 +1,5 @@
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/pages/home/account/findPassword.dart';
 import 'package:editsource/pages/home/account/selectFavor.dart';
 import 'package:editsource/pages/home/account/signUpPage.dart';
@@ -68,7 +68,7 @@ class SignInPage extends StatelessWidget {
           padding: EdgeInsets.only(left: 10, bottom: 3),
           child: TextFormField(
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none, hintText: _textContext),

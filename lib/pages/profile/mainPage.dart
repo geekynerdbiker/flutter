@@ -1,8 +1,9 @@
-import 'package:editsource/models/UI/user.dart';
+import 'package:editsource/models/components/user.dart';
 import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/components/user.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/components/buttons.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/buttons.dart';
+import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/pages/profile/myCollectionPage.dart';
 import 'package:editsource/pages/profile/myShopPage.dart';
 import 'package:flutter/material.dart';

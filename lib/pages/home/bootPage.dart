@@ -1,4 +1,5 @@
 import 'package:editsource/models/designs/colors.dart';
+import 'package:editsource/models/designs/icons.dart';
 import 'package:editsource/pages/home/homePage.dart';
 import 'package:editsource/pages/message/mainPage.dart';
 import 'package:editsource/pages/newnew/mainPage.dart';
@@ -38,23 +39,23 @@ class _BootPageState extends State<BootPage> {
             unselectedLabelColor: primary,
             tabs: [
               Tab(
-                icon: ImageIcon(AssetImage('lib/assets/icons/drawable-xxxhdpi/tab_bar_home_idle.png')),
+                icon: ImageIcon(AssetImage(tab_bar_home)),
               ),
               Tab(
                 icon: ImageIcon(AssetImage(
-                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_discover_idle.png'),
+                    tab_bar_discover),
                 ),),
               Tab(
                 icon: ImageIcon(AssetImage(
-                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_new_item_idle.png'),
+                    tab_bar_new_item),
               ),),
               Tab(
                 icon: ImageIcon(AssetImage(
-                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_message_idle.png'),
+                    tab_bar_message),
               ),),
               Tab(
                 icon: ImageIcon(AssetImage(
-                    'lib/assets/icons/drawable-xxxhdpi/tab_bar_my_page_idle.png'),
+                    tab_bar_my_page),
               ),),
             ],
           ),

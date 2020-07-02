@@ -1,7 +1,7 @@
-import 'package:editsource/models/UI/cards.dart';
+import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/widgets/border.dart';
+import 'package:editsource/models/components/border.dart';
 import 'package:flutter/material.dart';
 
 class MyShopPage extends StatelessWidget {

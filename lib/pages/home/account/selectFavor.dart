@@ -1,5 +1,5 @@
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/pages/home/account/selectFavor2.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class SelectFavorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWithskip(context, '취향 선택', SelectFavorPage2()),
+      appBar: appBarWithSkip(context, '취향 선택', SelectFavorPage2()),
       backgroundColor: offWhite,
       body: Container(
         width: MediaQuery.of(context).size.width,

@@ -1,12 +1,13 @@
-import 'package:editsource/models/UI/cards.dart';
+import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/classes/collection.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/border.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
-import 'package:editsource/models/widgets/components/selection.dart';
-import 'package:editsource/models/widgets/search.dart';
+import 'package:editsource/models/components/border.dart';
+import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/models/components/selection.dart';
+import 'package:editsource/models/components/search.dart';
+import 'package:editsource/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(top: 30, left: 20),
                   child: Text('NEW NEW PICK'),
                 ),
-                seeMore(context, offWhite),
+                seeMore(context, offWhite, ProductList()),
               ],
             ),
             Expanded(child: sampleListView())
@@ -148,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                   '#' + collection.title,
                 ),
               ),
-              seeMore(context, accent1),
+              seeMore(context, accent1, ProductList()),
             ],
           ),
           Expanded(child:
@@ -179,10 +180,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget seeMore(BuildContext context, Color _color) {
+  Widget seeMore(BuildContext context, Color _color, Widget _nav) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => _nav));
+        },
         child: Container(
           margin: EdgeInsets.only(top: 30, right: 20),
           child: Text(

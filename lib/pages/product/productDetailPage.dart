@@ -1,232 +1,217 @@
 import 'package:editsource/models/classes/product.dart';
+import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/components/border.dart';
+import 'package:editsource/models/components/buttons.dart';
+import 'package:editsource/models/components/cards.dart';
+import 'package:editsource/models/components/selection.dart';
+import 'package:editsource/models/components/user.dart';
 import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/widgets/components/navigation.dart';
+import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/models/designs/icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final Product product;
-  ProductDetailPage(Product product): this.product = product;
+  Product product;
+
+  ProductDetailPage(Product product) : this.product = product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width * 2 / 5,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                border: Border.all(color: Colors.black)),
-            child: FloatingActionButton.extended(
-                heroTag: "chat",
-                label: Text(
-                  "대화하기",
-                  style: TextStyle(color: Colors.black),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                backgroundColor: offWhite,
-                onPressed: () {}),
+      appBar: appBarDefaultDeep(context, '상품 상세'),
+      body: ListView(
+        physics: ClampingScrollPhysics(),
+        children: [
+          userMarquee2(context, new User('username', 1, '.')),
+          carousel(context),
+          productInfo(context),
+          productInfo2(context),
+          productScroll(context),
+          productScroll(context),
+          borderLineGreyLite(context),
+          actionButtons(context),
+        ],
+      ),
+    );
+  }
+
+  Widget carousel(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width * (375 / 375),
+          height: MediaQuery.of(context).size.width * (360 / 375),
+          color: Colors.grey,
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * (360 / 375) - 30),
+          child: Center(
+            child: imageCarouselIndicator(0, 5),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 2 / 5,
-            child: FloatingActionButton.extended(
-                heroTag: "buy",
-                label: Text(
-                  "구매하기",
-                  style: TextStyle(color: offWhite),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                backgroundColor: Colors.black,
-                onPressed: () {}),
+        ),
+      ],
+    );
+  }
+
+  Widget productInfo(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Item Name'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('Item Price'),
+              wSpacer(9),
+              Text('Update Time'),
+            ],
+          ),
+          hSpacer(18),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Delivery Fee'),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      ImageIcon(AssetImage(favorite_idle)),
+                      Text('111')
+                    ],
+                  ),
+                  wSpacer(20),
+                  Column(
+                    children: [ImageIcon(AssetImage(save_idle)), Text('111')],
+                  ),
+                  wSpacer(20),
+                  ImageIcon(AssetImage(share_idle)),
+                ],
+              )
+            ],
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      backgroundColor: offWhite,
-      appBar: appBarDefaultDeep(context, '상품 상세'),
-      body: Scaffold(
-        backgroundColor: offWhite,
-        body: new ListView(
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      child: CircleAvatar(),
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width - 60,
-                        child: Text(
-                          product.userID.toString(),
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width - 60,
-                        child: Text(
-                          "평점: 4.3",
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                      ),
-                    ],
-                  ),
+    );
+  }
+
+  Widget productInfo2(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('사이즈: ' + 'Item Size'),
+                  Text('소재: ' + 'Item Material'),
+                  Text('색상: ' + 'Item Color'),
+                  Text('상태: ' + 'Item State'),
+                  hSpacer(15)
                 ],
               ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.width,
-              child: Image.asset(product.imageURI[0], fit: BoxFit.cover,),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15, top: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  product.title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        product.price.toString() + '원',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        "+ 배송비 3000원",
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15, top: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다. 상품 소개입니다.",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15, top: 20),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        "  사이즈: ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        "  상태: ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        "  소재: ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        "  색상: ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15, top: 30),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "해시태그",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 15, left: 15, top: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Wrap(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Container(
-                        width: 60,
-                        padding: EdgeInsets.only(left: 8, right: 8),
-                        decoration: BoxDecoration(
-                            color: offWhite,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.black)),
-                        child: Center(
-                          child: Text(
-                            "태그1",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 100,
-            )
-          ],
+              ShortStateSlider(4),
+            ],
+          ),
+          hSpacer(20),
+          Text(
+              'User Item Description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.'),
+          tagList(context),
+        ],
+      ),
+    );
+  }
+
+  Widget tagList(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      height: 20,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          tagItem(context),
+          tagItem(context),
+          tagItem(context),
+        ],
+      ),
+    );
+  }
+
+  Widget tagItem(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      child: Text(
+        '#' + 'ItemTag',
+        style: TextStyle(color: semiDark),
+      ),
+    );
+  }
+
+  Widget productScroll(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: Row(
+            children: [
+              Text('Section title'),
+              ImageIcon(AssetImage(forward_idle)),
+            ],
+          ),
         ),
+        productList(context),
+      ],
+    );
+  }
+  
+  Widget productList(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      height: 200,
+      child: ListView(
+        physics: ClampingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 8),
+            child: productItemCardSmall(context, new Product('title', 111, '/')),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 8),
+            child: productItemCardSmall(context, new Product('title', 111, '/')),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 8),
+            child: productItemCardSmall(context, new Product('title', 111, '/')),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 8),
+            child: productItemCardSmall(context, new Product('title', 111, '/')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget actionButtons(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          shortButton(context, offWhite, true, Text('대화하기')),
+          shortButton(context, primary, true, Text('구매하기', style: TextStyle(color: offWhite),)),
+        ],
       ),
     );
   }
