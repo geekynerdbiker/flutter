@@ -1,6 +1,7 @@
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/components/border.dart';
 import 'package:editsource/models/components/navigation.dart';
+import 'package:editsource/pages/product/addProductPage.dart';
 import 'package:flutter/material.dart';
 
 class UnderCategoryPage extends StatelessWidget {
@@ -20,6 +21,7 @@ class UnderCategoryPage extends StatelessWidget {
           categoryItem(context, 'category 3'),
         ],
       ),
+      appBar: appBarDefaultDeep(context, '카테고리 선택'),
     );
   }
 
@@ -28,6 +30,9 @@ class UnderCategoryPage extends StatelessWidget {
       children: [
         Material(
           child: InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AddProductPage(isCategorySelected: true, category: _category,)));
+            },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Align(

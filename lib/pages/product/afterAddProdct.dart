@@ -3,6 +3,7 @@ import 'package:editsource/models/components/buttons.dart';
 import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/models/designs/colors.dart';
+import 'package:editsource/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
 
 class AfterAddProduct extends StatelessWidget {
@@ -34,7 +35,7 @@ class AfterAddProduct extends StatelessWidget {
           hSpacer(135),
           Text('다른 물건도 등록해보세요!'),
           hSpacer(28),
-          longButtonPop(context, primary, false, Text('다른 상품 등록하기', style: TextStyle(color: offWhite),)),
+          longButtonNavHome(context, primary, false, Text('다른 상품 등록하기', style: TextStyle(color: offWhite),)),
         ],
       ),
     );

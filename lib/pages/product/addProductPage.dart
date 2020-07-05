@@ -1,3 +1,4 @@
+import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/components/buttons.dart';
 import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/designs/colors.dart';
@@ -11,6 +12,12 @@ import 'package:editsource/pages/category/category.dart';
 import 'package:flutter/material.dart';
 
 class AddProductPage extends StatefulWidget {
+  bool isCategorySelected;
+  Category category;
+
+  AddProductPage({Key key, @required this.isCategorySelected, this.category})
+      : super(key: key);
+
   @override
   _AddProductPageState createState() => _AddProductPageState();
 }
@@ -83,23 +90,7 @@ class _AddProductPageState extends State<AddProductPage> {
       child: Column(
         children: [
           textField(context, '상품명 입력'),
-          longButtonNav(
-              context,
-              offWhite,
-              true,
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('카테고리 선택'),
-                      ),
-                      ImageIcon(AssetImage(forward_idle), size: 12, color: semiDark,)
-                    ],
-                  )),
-              CategoryPage()),
+          categorySelector(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -121,7 +112,11 @@ class _AddProductPageState extends State<AddProductPage> {
                         alignment: Alignment.centerLeft,
                         child: Text('취향 선택 (선택)'),
                       ),
-                      ImageIcon(AssetImage(forward_idle), size: 12, color: semiDark,)
+                      ImageIcon(
+                        AssetImage(forward_idle),
+                        size: 12,
+                        color: semiDark,
+                      )
                     ],
                   )),
               CategoryPage()),
@@ -136,6 +131,45 @@ class _AddProductPageState extends State<AddProductPage> {
         ],
       ),
     );
+  }
+
+  Widget categorySelector(BuildContext context) {
+    if (widget.isCategorySelected)
+      return longButton(
+        context,
+        offWhite,
+        true,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(widget.category.parent.toString() + ' > ' + widget.category.name.toString()),
+          ),
+        ),
+      );
+
+    else
+      return longButtonNav(
+        context,
+        offWhite,
+        true,
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('카테고리 선택'),
+                ),
+                ImageIcon(
+                  AssetImage(forward_idle),
+                  size: 12,
+                  color: semiDark,
+                )
+              ],
+            )),
+        CategoryPage());
   }
 
   Widget palette(BuildContext context) {

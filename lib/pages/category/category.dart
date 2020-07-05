@@ -8,6 +8,7 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBarDefaultDeep(context, '카테고리 선택'),
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [

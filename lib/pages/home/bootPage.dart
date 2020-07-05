@@ -27,7 +27,7 @@ class _BootPageState extends State<BootPage> {
           children: <Widget>[
             HomePage(),
             NewnewPage(),
-            AddProductPage(),
+            AddProductPage(isCategorySelected: false,),
             MessagePage(),
             ProfilePage(),
           ],

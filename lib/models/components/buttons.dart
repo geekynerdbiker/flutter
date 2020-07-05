@@ -1,5 +1,6 @@
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/designs/typos.dart';
+import 'package:editsource/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
 
 // Buttons
@@ -356,6 +357,44 @@ Widget longButtonNav(BuildContext context, Color _color, bool _border,
       ),
     );
 }
+
+Widget longButtonNavHome(BuildContext context, Color _color, bool _border,
+    Widget _widget) {
+  if (_border)
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => BootPage()), (route) => false);
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * (335 / 375),
+          height: 44,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black), color: _color),
+          child: _widget,
+        ),
+      ),
+    );
+  else
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => BootPage()), (route) => false);
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * (335 / 375),
+          height: 44,
+          color: _color,
+          child: Center(
+            child: _widget,
+          ),
+        ),
+      ),
+    );
+}
+
 
 Widget mediumButtonNav(BuildContext context, Color _color, bool _border,
     Widget _widget, Widget _nav) {
