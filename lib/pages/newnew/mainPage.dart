@@ -44,19 +44,25 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: offWhite,
-          appBar: appBarWithTab(context, '포유', _tabs, _controller),
-          body: TabBarView(
-            controller: _controller,
-            children: pages,
-          ),
-        ),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: offWhite,
+        appBar: appBarWithSearch(context, 'Explore', _tabs, _controller),
+        body: Column(
+          children: [
+            TabBar(
+              controller: _controller,
+              labelColor: Colors.black,
+              indicatorColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              tabs: _tabs,
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _controller,
+                children: pages,
+              ),
+            )
+          ],
+        ));
   }
 }

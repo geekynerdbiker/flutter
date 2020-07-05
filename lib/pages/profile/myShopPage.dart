@@ -2,6 +2,7 @@ import 'package:editsource/models/components/cards.dart';
 import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/components/border.dart';
+import 'package:editsource/pages/profile/follow.dart';
 import 'package:editsource/pages/profile/review.dart';
 import 'package:flutter/material.dart';
 
@@ -43,13 +44,27 @@ class MyShopPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('팔로워'),
-              wSpacer(_space1),
-              Text(user.getFollowers().toString()),
+              Material(
+                child: InkWell(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowerPage()));},
+                  child: Row(children: [
+                    Text('팔로워'),
+                    wSpacer(_space1),
+                    Text(user.getFollowers().toString()),
+                  ],),
+                ),
+              ),
               wSpacer(_space2),
-              Text('팔로잉'),
-              wSpacer(_space1),
-              Text(user.getFollowing().toString()),
+              Material(
+                child: InkWell(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowingPage()));},
+                  child: Row(children: [
+                    Text('팔로잉'),
+                    wSpacer(_space1),
+                    Text(user.getFollowing().toString()),
+                  ],),
+                ),
+              ),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/designs/icons.dart';
-import 'package:editsource/pages/home/homePage.dart';
+import 'package:editsource/pages/home/mainPage.dart';
 import 'package:editsource/pages/message/mainPage.dart';
 import 'package:editsource/pages/newnew/mainPage.dart';
 import 'package:editsource/pages/product/addProductPage.dart';

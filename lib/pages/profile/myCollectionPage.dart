@@ -4,6 +4,7 @@ import 'package:editsource/models/classes/product.dart';
 import 'package:editsource/models/classes/user.dart';
 import 'package:editsource/models/components/border.dart';
 import 'package:editsource/pages/collection/collectionDetailPage.dart';
+import 'package:editsource/pages/profile/follow.dart';
 import 'package:flutter/material.dart';
 
 class MyCollectionPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class MyCollectionPage extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         children: [
-          infoLine(user),
+          infoLine(context, user),
           Container(
             margin: EdgeInsets.symmetric(vertical: 15),
             child: collectionItem(context,
@@ -39,7 +40,7 @@ class MyCollectionPage extends StatelessWidget {
     );
   }
 
-  Widget infoLine(User user) {
+  Widget infoLine(BuildContext context, User user) {
     const double _space1 = 4;
     const double _space2 = 8;
     return Row(
@@ -50,13 +51,27 @@ class MyCollectionPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('팔로워'),
-              wSpacer(_space1),
-              Text(user.getFollowers().toString()),
+              Material(
+                child: InkWell(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowerPage()));},
+                  child: Row(children: [
+                    Text('팔로워'),
+                    wSpacer(_space1),
+                    Text(user.getFollowers().toString()),
+                  ],),
+                ),
+              ),
               wSpacer(_space2),
-              Text('팔로잉'),
-              wSpacer(_space1),
-              Text(user.getFollowing().toString()),
+              Material(
+                child: InkWell(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowingPage()));},
+                  child: Row(children: [
+                    Text('팔로잉'),
+                    wSpacer(_space1),
+                    Text(user.getFollowing().toString()),
+                  ],),
+                ),
+              ),
             ],
           ),
         ),

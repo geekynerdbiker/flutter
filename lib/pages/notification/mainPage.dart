@@ -9,7 +9,8 @@ class NotificationPage extends StatefulWidget {
   _NotificationPage createState() => _NotificationPage();
 }
 
-class _NotificationPage extends State<NotificationPage> with SingleTickerProviderStateMixin {
+class _NotificationPage extends State<NotificationPage>
+    with SingleTickerProviderStateMixin {
   TabController _controller;
 
   List<Tab> _tabs = [
@@ -40,18 +41,12 @@ class _NotificationPage extends State<NotificationPage> with SingleTickerProvide
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: offWhite,
-          appBar: appBarWithTabDeep(context, '알림', _tabs, _controller),
-          body: TabBarView(
-            controller: _controller,
-            children: pages,
-          ),
-        ),
+    return Scaffold(
+      backgroundColor: offWhite,
+      appBar: appBarWithTabDeep(context, '알림', _tabs, _controller),
+      body: TabBarView(
+        controller: _controller,
+        children: pages,
       ),
     );
   }

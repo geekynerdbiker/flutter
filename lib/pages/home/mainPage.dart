@@ -7,6 +7,7 @@ import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/models/components/selection.dart';
 import 'package:editsource/models/components/search.dart';
+import 'package:editsource/models/designs/typos.dart';
 import 'package:editsource/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: mainAppBar(context),
         backgroundColor: offWhite,
         body: ListView(
@@ -39,7 +38,6 @@ class _HomePageState extends State<HomePage> {
             collection(context),
           ],
         ),
-      ),
     );
   }
 
@@ -76,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text('인기 검색어'),
+          child: Text('인기 검색어', style: subTitle1(accent1),),
         ),
       ],
     );
@@ -93,9 +91,12 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 30, left: 20),
-                  child: Text('NEW NEW PICK'),
+                  child: Text('NEW NEW PICK', style: subTitle2(offWhite),),
                 ),
-                seeMore(context, offWhite, ProductListPage()),
+                Padding(
+                  padding: EdgeInsets.only(top: 30, right: 20),
+                  child: seeMore(context, offWhite, ProductListPage()),
+                ),
               ],
             ),
             Expanded(child: sampleListView())
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text('인기 셀러'),
+          child: Text('인기 셀러', style: subTitle1(primary),),
         ),
       ],
     );
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
           child: Text(
-            '최근 본 상품',
+            '최근 본 상품',style: subTitle2(primary),
           ),
         ),
       ],
@@ -147,9 +148,14 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(top: 30, left: 20),
                 child: Text(
                   '#' + collection.title,
+                  style: title2(primary),
                 ),
               ),
-              seeMore(context, accent1, ProductListPage()),
+              Padding(
+                padding: EdgeInsets.only(top: 30, right: 20),
+                child: seeMore(context, primary, ProductListPage()),
+              ),
+
             ],
           ),
           Expanded(child:
@@ -173,7 +179,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
           child: Text(
-            '컬렉션',
+            '컬렉션', style: subTitle1(primary),
           ),
         ),
       ],

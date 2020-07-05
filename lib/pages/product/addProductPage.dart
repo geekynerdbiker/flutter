@@ -4,7 +4,10 @@ import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/components/border.dart';
 import 'package:editsource/models/components/navigation.dart';
 import 'package:editsource/models/components/selection.dart';
+import 'package:editsource/models/designs/icons.dart';
+import 'package:editsource/pages/home/bootPage.dart';
 import 'package:editsource/pages/product/afterAddProdct.dart';
+import 'package:editsource/pages/category/category.dart';
 import 'package:flutter/material.dart';
 
 class AddProductPage extends StatefulWidget {
@@ -29,7 +32,15 @@ class _AddProductPageState extends State<AddProductPage> {
             stateSlider(context),
             addTag(context),
             acceptCardPayment(context),
-            longButtonNav(context, primary, false, Text('등록하기', style: TextStyle(color: offWhite),), AfterAddProduct()),
+            longButtonNav(
+                context,
+                primary,
+                false,
+                Text(
+                  '등록하기',
+                  style: TextStyle(color: offWhite),
+                ),
+                AfterAddProduct()),
           ],
         ),
       ),
@@ -72,7 +83,23 @@ class _AddProductPageState extends State<AddProductPage> {
       child: Column(
         children: [
           textField(context, '상품명 입력'),
-          textField(context, '카테고리'),
+          longButtonNav(
+              context,
+              offWhite,
+              true,
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('카테고리 선택'),
+                      ),
+                      ImageIcon(AssetImage(forward_idle), size: 12, color: semiDark,)
+                    ],
+                  )),
+              CategoryPage()),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -81,6 +108,23 @@ class _AddProductPageState extends State<AddProductPage> {
             ],
           ),
           textField(context, '브랜드 입력 (선택)'),
+          longButtonNav(
+              context,
+              offWhite,
+              true,
+              Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('취향 선택 (선택)'),
+                      ),
+                      ImageIcon(AssetImage(forward_idle), size: 12, color: semiDark,)
+                    ],
+                  )),
+              CategoryPage()),
           textFieldLarge(context, '설명 입력'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,10 +216,7 @@ class _AddProductPageState extends State<AddProductPage> {
       margin: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('태그 추가'),
-          productTags(context)
-        ],
+        children: [Text('태그 추가'), productTags(context)],
       ),
     );
   }
@@ -219,13 +260,13 @@ class _AddProductPageState extends State<AddProductPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            Text('카드 결제 허용하기'),
+              Text('카드 결제 허용하기'),
               SelectionSwitch(),
-          ],),
+            ],
+          ),
           Text('택배 어쩌구 저쩌구'),
         ],
       ),
     );
   }
 }
-

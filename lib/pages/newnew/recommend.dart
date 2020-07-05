@@ -21,7 +21,10 @@ class RecommendPage extends StatelessWidget {
             margin: EdgeInsets.only(top: 20),
             child: collections(context),
           ),
-          sellers(context),
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            child: sellers(context),
+          ),
           products(context),
         ],
       ),
@@ -100,7 +103,7 @@ class RecommendPage extends StatelessWidget {
 
   Widget userList(BuildContext context) {
     return Container(
-      height: 200,
+      height: 130,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
