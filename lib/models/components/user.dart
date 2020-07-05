@@ -326,6 +326,39 @@ Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
   );
 }
 
+Widget userMarqueeFollow(BuildContext context, User _user) {
+  const double _r = 48;
+  const double _space1 = 12;
+  const double _space2 = 8;
+
+  return Container(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: <Widget>[
+            profileImage(_user, _r),
+            wSpacer(_space1),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(_user.username),
+                hSpacer(_space2),
+                Row(
+                  children: [
+                    Text('_user.bio'),
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+        action2Idle(context, '팔로우'),
+      ],
+    ),
+  );
+}
+
 Widget profileImage(User _user, double _r) {
   return Container(
     width: _r,

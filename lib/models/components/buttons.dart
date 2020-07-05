@@ -334,9 +334,7 @@ Widget longButtonNav(BuildContext context, Color _color, bool _border,
           height: 44,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black), color: _color),
-          child: Center(
-            child: _widget,
-          ),
+          child: _widget,
         ),
       ),
     );
@@ -559,7 +557,7 @@ Widget seeMore(BuildContext context, Color _color, Widget _nav) {
         child: Text(
           '+ 더보기',
           style:
-          TextStyle(decoration: TextDecoration.underline, color: _color),
+          TextStyle(decoration: TextDecoration.underline, fontSize: 14, color: _color, fontFamily: 'SpoqaHanSans', fontWeight: FontWeight.w400),
         ),
       ),
     ),

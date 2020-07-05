@@ -1,7 +1,9 @@
 import 'package:editsource/models/classes/user.dart';
+import 'package:editsource/models/components/search.dart';
 import 'package:editsource/models/components/user.dart';
 import 'package:editsource/models/designs/colors.dart';
 import 'package:editsource/models/designs/icons.dart';
+import 'package:editsource/pages/category/mainPage.dart';
 import 'package:editsource/pages/favorite/mainPage.dart';
 import 'package:editsource/pages/notification/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ Widget mainAppBar(BuildContext context) {
       child: Image.asset(
           'lib/assets/icons/drawable-xxxhdpi/new_new_logo_horizontal.png'),
     ),
+    leading: category(context),
     actions: <Widget>[notification(context), favorite(context)],
   );
 }
@@ -52,6 +55,28 @@ Widget appBarWithTab(BuildContext context, String _title, List<Tab> _tabs,
       indicatorColor: Colors.black,
       unselectedLabelColor: Colors.grey,
       tabs: _tabs,
+    ),
+  );
+}
+
+Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
+    TabController _controller) {
+  return AppBar(
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: offWhite,
+    title: Container(
+      child: Text(
+        _title,
+        style: TextStyle(color: Colors.black),
+      ),
+    ),
+    bottom: PreferredSize(
+      preferredSize: Size(0, 40),
+      child: Container(
+        padding: EdgeInsets.all(5),
+        child: SearchField(),
+      ),
     ),
   );
 }
@@ -129,6 +154,23 @@ Widget appBarWithTabDeep(BuildContext context, String _title, List<Tab> _tabs,
   );
 }
 
+Widget category(BuildContext context){
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+    child: Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryMainPage()));
+        },
+        child: ImageIcon(
+          AssetImage(category_idle),
+          color: primary,
+          size: 12,
+        ),
+      ),
+    ),
+  );
+}
 Widget notification(BuildContext context) {
   return Material(
     color: offWhite,
@@ -139,7 +181,7 @@ Widget notification(BuildContext context) {
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          width: 24,
+          width: 28,
           height: 24,
           child: Image.asset(
               'lib/assets/icons/drawable-xxxhdpi/24_px_notification_idle.png'),
@@ -157,7 +199,7 @@ Widget favorite(BuildContext context) {
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          width: 24,
+          width: 28,
           height: 24,
           child: Image.asset(
               'lib/assets/icons/drawable-xxxhdpi/24_px_favorite_idle.png'),
@@ -186,19 +228,25 @@ Widget chat(BuildContext context, User _user) {
     leading: Material(
       child: InkWell(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            child: ImageIcon(AssetImage(back_idle), size: 8, color: primary,),
-          )
-      ),
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        child: ImageIcon(
+          AssetImage(back_idle),
+          size: 8,
+          color: primary,
+        ),
+      )),
     ),
     actions: [
       Material(
         child: InkWell(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 14),
-            child: ImageIcon(AssetImage(more_idle), size: 24, color: primary,),
-          )
-        ),
+            child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 14),
+          child: ImageIcon(
+            AssetImage(more_idle),
+            size: 24,
+            color: primary,
+          ),
+        )),
       ),
     ],
   );

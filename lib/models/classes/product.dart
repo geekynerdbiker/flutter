@@ -80,3 +80,9 @@ class Tag {
 
   Tag(this.name);
 }
+
+class Category {
+  int level;
+  String parent;
+  String name;
+}
