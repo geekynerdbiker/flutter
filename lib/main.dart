@@ -1,5 +1,5 @@
-import 'package:editsource/pages/home/bootPage.dart';
-import 'package:editsource/pages/home/splashScreen.dart';
+import 'package:bak/pages/home/bootPage.dart';
+import 'package:bak/pages/home/splashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
