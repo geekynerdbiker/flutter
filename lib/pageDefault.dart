@@ -1,5 +1,5 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 class PageNameHere extends StatefulWidget {
