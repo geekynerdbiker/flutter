@@ -1,7 +1,7 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/notification/activity.dart';
-import 'package:editsource/pages/notification/keyword.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/notification/activity.dart';
+import 'package:bak/pages/notification/keyword.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {

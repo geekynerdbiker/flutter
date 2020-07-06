@@ -1,10 +1,10 @@
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/classes/collection.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/pages/collection/collectionDetailPage.dart';
-import 'package:editsource/pages/profile/follow.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/pages/collection/collectionDetailPage.dart';
+import 'package:bak/pages/profile/follow.dart';
 import 'package:flutter/material.dart';
 
 class MyCollectionPage extends StatelessWidget {
@@ -23,17 +23,17 @@ class MyCollectionPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(vertical: 15),
             child: collectionItem(context,
-                new Collection('title', new User('username', 1, '/'), '/')),
+                new Collection('title', new User('username', '1', '/'), '/')),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 15),
             child: collectionItem(context,
-                new Collection('title', new User('username', 1, '/'), '/')),
+                new Collection('title', new User('username', '1', '/'), '/')),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 15),
             child: collectionItem(context,
-                new Collection('title', new User('username', 1, '/'), '/')),
+                new Collection('title', new User('username', '1', '/'), '/')),
           ),
         ],
       ),
@@ -158,18 +158,18 @@ class MyCollectionPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(top: 8, right: 8),
-            child:
-            productItemCardSmall(context, new Product('title', 100000, '/')),
+//            child:
+//            productItemCardSmall(context, new Product('title', 100000, '/')),
           ),
           Container(
             margin: EdgeInsets.only(top: 8, right: 8),
-            child:
-            productItemCardSmall(context, new Product('title', 100000, '/')),
+//            child:
+//            productItemCardSmall(context, new Product('title', 100000, '/')),
           ),
           Container(
             margin: EdgeInsets.only(top: 8, right: 8),
-            child:
-            productItemCardSmall(context, new Product('title', 100000, '/')),
+//            child:
+//            productItemCardSmall(context, new Product('title', 100000, '/')),
           ),
         ],
       );

@@ -1,20 +1,21 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/selection.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/models/designs/icons.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/selection.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  Product product;
+  final DocumentSnapshot product;
 
-  ProductDetailPage(Product product) : this.product = product;
+  ProductDetailPage({this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class ProductDetailPage extends StatelessWidget {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          userMarquee2(context, new User('username', 1, '.')),
+          userMarquee2(context, new User('username', '1', '.')),
           carousel(context),
           productInfo(context),
           productInfo2(context),
@@ -61,13 +62,13 @@ class ProductDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Item Name'),
+          Text(product.data['title']),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Item Price'),
+              Text(product.data['price'].toString()),
               wSpacer(9),
-              Text('Update Time'),
+              Text(product.data['updateDate']),
             ],
           ),
           hSpacer(18),
@@ -75,7 +76,7 @@ class ProductDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Delivery Fee'),
+              Text(product.data['deliveryFee']),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -184,19 +185,19 @@ class ProductDetailPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(right: 8),
-            child: productItemCardSmall(context, new Product('title', 111, '/')),
+            //child: productItemCardSmall(context, new Product('title', 111, '/')),
           ),
           Container(
             margin: EdgeInsets.only(right: 8),
-            child: productItemCardSmall(context, new Product('title', 111, '/')),
+            //child: productItemCardSmall(context, new Product('title', 111, '/')),
           ),
           Container(
             margin: EdgeInsets.only(right: 8),
-            child: productItemCardSmall(context, new Product('title', 111, '/')),
+            //child: productItemCardSmall(context, new Product('title', 111, '/')),
           ),
           Container(
             margin: EdgeInsets.only(right: 8),
-            child: productItemCardSmall(context, new Product('title', 111, '/')),
+            //child: productItemCardSmall(context, new Product('title', 111, '/')),
           ),
         ],
       ),

@@ -1,9 +1,9 @@
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/pages/home/bootPage.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
 
 class AfterAddProduct extends StatelessWidget {

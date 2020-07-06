@@ -1,6 +1,6 @@
-import 'package:editsource/models/classes/collection.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPage extends StatefulWidget {
@@ -169,7 +169,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                   height: 60,
                   width: MediaQuery.of(context).size.width,
                   color: offWhite,
-                  child: Text(widget.collection.subscription),
+                  child: Text(widget.collection.description),
                 ),
               ],
             ),

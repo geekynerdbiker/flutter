@@ -1,11 +1,11 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/pages/product/productList.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
 class FollowingShopsPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class FollowingShopsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          userMarquee1(context, new User('username', 1, 'imageURI')),
+          userMarquee1(context, new User('username', '1', 'imageURI')),
           seeMore(context, accent1, ProductListPage()),
         ],
       )
@@ -53,13 +53,13 @@ class FollowingShopsPage extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
-          productItemCardMedium(context, new Product('title', 1, 'imageURItest')),
-          wSpacer(4),
-          productItemCardMedium(context, new Product('title', 1, 'imageURItest')),
-          wSpacer(4),
-          productItemCardMedium(context, new Product('title', 1, 'imageURItest')),
-          wSpacer(4),
-          productItemCardMedium(context, new Product('title', 1, 'imageURItest')),
+//          productItemCardMedium(context, new Product('title', 1, 'imageURI[0]')),
+//          wSpacer(4),
+//          productItemCardMedium(context, new Product('title', 1, 'imageURI[0]')),
+//          wSpacer(4),
+//          productItemCardMedium(context, new Product('title', 1, 'imageURI[0]')),
+//          wSpacer(4),
+//          productItemCardMedium(context, new Product('title', 1, 'imageURI[0]')),
         ],
       ),
     );

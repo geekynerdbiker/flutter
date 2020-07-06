@@ -1,12 +1,12 @@
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/message/chat.dart';
-import 'package:editsource/pages/profile/myCollectionPage.dart';
-import 'package:editsource/pages/profile/myShopPage.dart';
-import 'package:editsource/pages/profile/tradeList.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/message/chat.dart';
+import 'package:bak/pages/profile/myCollectionPage.dart';
+import 'package:bak/pages/profile/myShopPage.dart';
+import 'package:bak/pages/profile/tradeList.dart';
 import 'package:flutter/material.dart';
 
 class SellerPage extends StatefulWidget {
@@ -34,10 +34,10 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
 
   List<Widget> _pages = [
     MyShopPage(
-      user: new User('username', 1, 'imageURI'),
+      user: new User('username', '1', 'imageURI'),
     ),
     MyCollectionPage(
-      user: new User('username', 1, 'imageURI'),
+      user: new User('username', '1', 'imageURI'),
     ),
   ];
 
@@ -61,7 +61,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: <Widget>[
-          userMarqueeMyPage(context, new User('username', 1, 'imageURI')),
+          userMarqueeMyPage(context, new User('username', '1', 'imageURI')),
           Container(
             margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
             child: Row(

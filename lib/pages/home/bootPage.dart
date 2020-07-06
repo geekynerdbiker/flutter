@@ -1,10 +1,10 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/designs/icons.dart';
-import 'package:editsource/pages/home/mainPage.dart';
-import 'package:editsource/pages/message/mainPage.dart';
-import 'package:editsource/pages/newnew/mainPage.dart';
-import 'package:editsource/pages/product/addProductPage.dart';
-import 'package:editsource/pages/profile/mainPage.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:bak/pages/home/mainPage.dart';
+import 'package:bak/pages/message/mainPage.dart';
+import 'package:bak/pages/newnew/mainPage.dart';
+import 'package:bak/pages/product/addProductPage.dart';
+import 'package:bak/pages/profile/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class BootPage extends StatefulWidget {

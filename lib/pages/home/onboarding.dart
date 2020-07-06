@@ -1,9 +1,9 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/selection.dart';
-import 'package:editsource/pages/home/account/signInPage.dart';
-import 'package:editsource/pages/home/account/signUpPage.dart';
-import 'package:editsource/pages/home/bootPage.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/selection.dart';
+import 'package:bak/pages/home/account/signInPage.dart';
+import 'package:bak/pages/home/account/signUpPage.dart';
+import 'package:bak/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatelessWidget {

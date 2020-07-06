@@ -1,13 +1,13 @@
-import 'package:editsource/models/classes/collection.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/pages/collection/collectionDetailPage.dart';
-import 'package:editsource/pages/product/productList.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/collection/collectionDetailPage.dart';
+import 'package:bak/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
 class FollowingCollectionsPage extends StatelessWidget {
@@ -17,9 +17,9 @@ class FollowingCollectionsPage extends StatelessWidget {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          collectionItem(context, new Collection('title', new User('username', 1, 'imageURI'), 'imageURI')),
-          collectionItem(context, new Collection('title', new User('username', 1, 'imageURI'), 'imageURI')),
-          collectionItem(context, new Collection('title', new User('username', 1, 'imageURI'), 'imageURI')),
+          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
+          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
+          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
         ],
       ),
     );
@@ -91,18 +91,18 @@ class FollowingCollectionsPage extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(top: 8, right: 8),
-          child:
-          productItemCardSmall(context, new Product('title', 100000, '/')),
+//          child:
+//          productItemCardSmall(context, new Product('title', 100000, '/')),
         ),
         Container(
           margin: EdgeInsets.only(top: 8, right: 8),
-          child:
-          productItemCardSmall(context, new Product('title', 100000, '/')),
+//          child:
+//          productItemCardSmall(context, new Product('title', 100000, '/')),
         ),
         Container(
           margin: EdgeInsets.only(top: 8, right: 8),
-          child:
-          productItemCardSmall(context, new Product('title', 100000, '/')),
+//          child:
+//          productItemCardSmall(context, new Product('title', 100000, '/')),
         ),
       ],
     );

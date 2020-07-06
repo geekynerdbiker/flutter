@@ -1,6 +1,6 @@
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/components/navigation.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -17,10 +17,10 @@ class FavoritePage extends StatelessWidget {
             physics: ScrollPhysics(),
             shrinkWrap: true,
             children: [
-              productItemCardLarge(context, new Product('title', 10000000, '/')),
-              productItemCardLarge(context, new Product('title', 10000000, '/')),
-              productItemCardLarge(context, new Product('title', 10000000, '/')),
-              productItemCardLarge(context, new Product('title', 10000000, '/')),
+//              productItemCardLarge(context, new Product('title', 10000000, '/')),
+//              productItemCardLarge(context, new Product('title', 10000000, '/')),
+//              productItemCardLarge(context, new Product('title', 10000000, '/')),
+//              productItemCardLarge(context, new Product('title', 10000000, '/')),
 
             ],)
         ],

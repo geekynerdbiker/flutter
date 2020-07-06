@@ -1,7 +1,7 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/home/bootPage.dart';
-import 'package:editsource/pages/home/mainPage.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/home/bootPage.dart';
+import 'package:bak/pages/home/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class SelectFavorPage2 extends StatelessWidget {

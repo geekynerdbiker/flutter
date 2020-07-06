@@ -1,6 +1,6 @@
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/category/category.dart';
-import 'package:editsource/pages/category/favor.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/category/category.dart';
+import 'package:bak/pages/category/favor.dart';
 import 'package:flutter/material.dart';
 
 class CategoryMainPage extends StatefulWidget {

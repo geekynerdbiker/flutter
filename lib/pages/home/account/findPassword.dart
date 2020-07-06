@@ -1,7 +1,7 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/pages/home/account/changePassword.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/home/account/changePassword.dart';
 import 'package:flutter/material.dart';
-import 'package:editsource/models/components/navigation.dart';
+import 'package:bak/models/components/navigation.dart';
 
 class FindPasswordPage extends StatelessWidget {
   @override

@@ -1,8 +1,8 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/newnew/follwingCollections.dart';
-import 'package:editsource/pages/newnew/follwingShops.dart';
-import 'package:editsource/pages/newnew/recommend.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/newnew/follwingCollections.dart';
+import 'package:bak/pages/newnew/follwingShops.dart';
+import 'package:bak/pages/newnew/recommend.dart';
 import 'package:flutter/material.dart';
 
 class NewnewPage extends StatefulWidget {

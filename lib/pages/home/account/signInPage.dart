@@ -1,8 +1,8 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/home/account/findPassword.dart';
-import 'package:editsource/pages/home/account/selectFavor.dart';
-import 'package:editsource/pages/home/account/signUpPage.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/home/account/findPassword.dart';
+import 'package:bak/pages/home/account/selectFavor.dart';
+import 'package:bak/pages/home/account/signUpPage.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {

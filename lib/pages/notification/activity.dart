@@ -1,7 +1,7 @@
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 
 class ActivityPage extends StatefulWidget {
@@ -16,12 +16,12 @@ class _ActivityPage extends State<ActivityPage> {
       backgroundColor: offWhite,
       body: ListView(
         children: [
-          userMarqueeNotificationFollow(context, new User('username', 111, 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', 111, 'imageURI')),
-          userMarqueeNotificationAction(context, new User('username', 111, 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', 111, 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', 111, 'imageURI')),
-          userMarqueeNotificationAction(context, new User('username', 111, 'imageURI')),
+          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
+          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
         ],
       ),
     );

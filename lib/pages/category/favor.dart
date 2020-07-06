@@ -1,7 +1,7 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/pages/category/underCategory.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/pages/category/underCategory.dart';
 import 'package:flutter/material.dart';
 
 class FavorPage extends StatelessWidget {
@@ -12,9 +12,9 @@ class FavorPage extends StatelessWidget {
         crossAxisCount: 2,
         physics: ClampingScrollPhysics(),
         children: [
-          categoryItem(context, 'category 1', new Category()),
-          categoryItem(context, 'category 2', new Category()),
-          categoryItem(context, 'category 3', new Category()),
+          categoryItem(context, 'category 1', new Category('1')),
+          categoryItem(context, 'category 2', new Category('2')),
+          categoryItem(context, 'category 3', new Category('3')),
         ],
       ),
     );
@@ -25,9 +25,9 @@ class FavorPage extends StatelessWidget {
       children: [
         Material(
           child: InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderCategoryPage(_category)));
-            },
+//            onTap: () {
+//              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderCategoryPage(_category)));
+//            },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Align(

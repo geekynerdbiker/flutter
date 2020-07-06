@@ -1,14 +1,15 @@
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/classes/collection.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/models/components/selection.dart';
-import 'package:editsource/models/components/search.dart';
-import 'package:editsource/models/designs/typos.dart';
-import 'package:editsource/pages/product/productList.dart';
+
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/components/selection.dart';
+import 'package:bak/models/components/search.dart';
+import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/product/productList.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
   void initState() {
     super.initState();
   }
@@ -24,20 +26,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: mainAppBar(context),
-        backgroundColor: offWhite,
-        body: ListView(
-          children: <Widget>[
-            carouselAndSearchBar(context),
-            trendSearch(context),
-            newNewPick(context),
-            popularSeller(context),
-            recentView(context),
-            hashTagCollection(context,
-                new Collection('title', new User('username', 5, '/'), '/')),
-            collection(context),
-          ],
-        ),
+      appBar: mainAppBar(context),
+      backgroundColor: offWhite,
+      body: ListView(
+        children: <Widget>[
+          carouselAndSearchBar(context),
+          trendSearch(context),
+          newNewPick(context),
+          popularSeller(context),
+          recentView(context),
+          hashTagCollection(context,
+              new Collection('title', new User('username', '1', '/'), '/')),
+          collectionBanner(context),
+        ],
+      ),
     );
   }
 
@@ -74,7 +76,10 @@ class _HomePageState extends State<HomePage> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text('인기 검색어', style: subTitle1(accent1),),
+          child: Text(
+            '인기 검색어',
+            style: subTitle1(accent1),
+          ),
         ),
       ],
     );
@@ -91,15 +96,18 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 30, left: 20),
-                  child: Text('NEW NEW PICK', style: subTitle2(offWhite),),
+                  child: Text(
+                    'NEW NEW PICK',
+                    style: subTitle2(offWhite),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 30, right: 20),
-                  child: seeMore(context, offWhite, ProductListPage()),
+                  child: seeMore(context, offWhite, ProductListPage(collectionName: 'newnewpick',)),
                 ),
               ],
             ),
-            Expanded(child: sampleListView())
+            itemList(context, 'newnewpick')
           ],
         ));
   }
@@ -113,7 +121,10 @@ class _HomePageState extends State<HomePage> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text('인기 셀러', style: subTitle1(primary),),
+          child: Text(
+            '인기 셀러',
+            style: subTitle1(primary),
+          ),
         ),
       ],
     );
@@ -129,7 +140,8 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
           child: Text(
-            '최근 본 상품',style: subTitle2(primary),
+            '최근 본 상품',
+            style: subTitle2(primary),
           ),
         ),
       ],
@@ -155,20 +167,15 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(top: 30, right: 20),
                 child: seeMore(context, primary, ProductListPage()),
               ),
-
             ],
           ),
-          Expanded(child:
-          Container(
-              margin: EdgeInsets.only(left: 10),
-              child: sampleListView()),
-          )
+          itemList(context, 'hashtag1'),
         ],
       ),
     );
   }
 
-  Widget collection(BuildContext context) {
+  Widget collectionBanner(BuildContext context) {
     return Stack(
       children: [
         Container(
@@ -179,34 +186,50 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
           child: Text(
-            '컬렉션', style: subTitle1(primary),
+            '컬렉션',
+            style: subTitle1(primary),
           ),
         ),
       ],
     );
   }
 
-  Widget sampleListView() {
-    return ListView(
-      physics: ClampingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 5),
-          child:
-              productItemCardMedium(context, new Product('title', 100000, '/')),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 5),
-          child:
-              productItemCardMedium(context, new Product('title', 100000, '/')),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 5),
-          child:
-              productItemCardMedium(context, new Product('title', 100000, '/')),
-        ),
-      ],
-    );
+  Widget itemList(BuildContext context, String collectionName) {
+    int length = 0;
+    return FutureBuilder(
+        future: getProducts(),
+        builder: (_, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Text('Loading..'),
+            );
+          } else {
+            return Expanded(
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      DocumentSnapshot product = snapshot.data[index];
+                      for (int i = 0;
+                          i < product.data['collections'].length;
+                          i++) {
+                        if (product.data['collections'][index] !=
+                            collectionName)
+                          return Container();
+                        else
+                          return Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: productItemCardMedium(context, product),
+                          );
+                      }
+                    }));
+          }
+        });
+  }
+
+  Future getProducts() async {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore.collection('products').getDocuments();
+    return qn.documents;
   }
 }

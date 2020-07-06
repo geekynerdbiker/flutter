@@ -1,12 +1,12 @@
-import 'package:editsource/models/classes/collection.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/pages/product/productList.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
 class RecommendPage extends StatelessWidget {
@@ -59,27 +59,27 @@ class RecommendPage extends StatelessWidget {
           collectionShowcase(
               context,
               new Collection(
-                  'title', new User('username', 1, 'imageURI'), 'imageURI')),
+                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
           wSpacer(4),
           collectionShowcase(
               context,
               new Collection(
-                  'title', new User('username', 1, 'imageURI'), 'imageURI')),
+                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
           wSpacer(4),
           collectionShowcase(
               context,
               new Collection(
-                  'title', new User('username', 1, 'imageURI'), 'imageURI')),
+                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
           wSpacer(4),
           collectionShowcase(
               context,
               new Collection(
-                  'title', new User('username', 1, 'imageURI'), 'imageURI')),
+                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
           wSpacer(4),
           collectionShowcase(
               context,
               new Collection(
-                  'title', new User('username', 1, 'imageURI'), 'imageURI')),
+                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
         ],
       ),
     );
@@ -108,17 +108,17 @@ class RecommendPage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
           userMarqueePopularSeller(
-              context, new User('username', 1, 'imageURI')),
+              context, new User('username', '1', 'imageURI')),
         ],
       ),
     );
@@ -151,28 +151,28 @@ class RecommendPage extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 3,
         children: [
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
-          productImageBox(
-              context, new Product('title', 1, 'imageURItest'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
+//          productImageBox(
+//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
         ],
       ),
     );

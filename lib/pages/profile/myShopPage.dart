@@ -1,9 +1,9 @@
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/pages/profile/follow.dart';
-import 'package:editsource/pages/profile/review.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/pages/profile/follow.dart';
+import 'package:bak/pages/profile/review.dart';
 import 'package:flutter/material.dart';
 
 class MyShopPage extends StatelessWidget {
@@ -23,10 +23,10 @@ class MyShopPage extends StatelessWidget {
         physics: ScrollPhysics(),
         shrinkWrap: true,
         children: [
-          productItemCardLarge(context, new Product('title', 10000000, '/')),
-          productItemCardLarge(context, new Product('title', 10000000, '/')),
-          productItemCardLarge(context, new Product('title', 10000000, '/')),
-          productItemCardLarge(context, new Product('title', 10000000, '/')),
+//          productItemCardLarge(context, new Product('title', 10000000, '/')),
+//          productItemCardLarge(context, new Product('title', 10000000, '/')),
+//          productItemCardLarge(context, new Product('title', 10000000, '/')),
+//          productItemCardLarge(context, new Product('title', 10000000, '/')),
 
         ],)
       ],

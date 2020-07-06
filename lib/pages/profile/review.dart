@@ -1,8 +1,8 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/models/components/user.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/components/user.dart';
 import 'package:flutter/material.dart';
 
 class ReviewPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class ReviewPage extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: userMarqueeRiview(context, new User('username', 1, 'imageURI'), new Review('comment', 'updatedDate',  new Product('title', 1, 'imageURItest'))),
+          child: userMarqueeRiview(context, new User('username', '1', 'imageURI'), new Review('comment', 'updateDate',  new Product('title', 1, 'imageURI[0]'))),
         ),
         borderLineGreyLite(context),
       ],

@@ -1,6 +1,6 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/components/cards.dart';
-import 'package:editsource/models/components/navigation.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/components/cards.dart';
+import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 class TradeListPage extends StatefulWidget {
@@ -48,7 +48,7 @@ class BuyingListPage extends StatelessWidget {
     return ListView(
       physics: ClampingScrollPhysics(),
       children: [
-        productItem1(context, new Product('title', 1, '/')),
+        //productItem1(context, new Product('title', 1, '/')),
       ],
     );
   }
@@ -60,7 +60,7 @@ class SellingListPage extends StatelessWidget {
     return ListView(
       physics: ClampingScrollPhysics(),
       children: [
-        productItem1(context, new Product('title', 1, '/')),
+        //productItem1(context, new Product('title', 1, '/')),
       ],
     );
   }

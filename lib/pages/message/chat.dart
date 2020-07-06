@@ -1,8 +1,8 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/navigation.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/designs/icons.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -109,7 +109,7 @@ class _ChatRoomPage extends State<ChatRoomPage> {
               ),
             ),
             Container(
-              child: Image.asset(_product.imageURItest, fit: BoxFit.cover,),
+              child: Image.asset(_product.imageURI[0], fit: BoxFit.cover,),
             )
           ],
         ),
