@@ -1,11 +1,11 @@
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/pages/product/productDetailPage.dart';
-import 'package:editsource/pages/profile/editProfile.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/pages/product/productDetailPage.dart';
+import 'package:bak/pages/profile/editProfile.dart';
 import 'package:flutter/material.dart';
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/designs/icons.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/designs/icons.dart';
 
 Widget userMarqueePopularSeller(BuildContext context, User _user) {
   const double _r = 64;
@@ -300,7 +300,7 @@ Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
                 children: [
                   Text(_review.rate.toString()),
                   wSpacer(8),
-                  Text(_review.updatedDate),
+                  Text(_review.updateDate),
                 ],
               )
             ],
@@ -310,13 +310,13 @@ Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
       hSpacer(20),
       Material(
         child: InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ProductDetailPage(_review.productID)));
-          },
+//          onTap: () {
+//            Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                    builder: (context) =>
+//                        ProductDetailPage(_review.productID)));
+//          },
           child: Text(_review.productID.title),
         ),
       ),

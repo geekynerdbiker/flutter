@@ -1,33 +1,55 @@
-import 'package:editsource/models/classes/user.dart';
+import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
   User userID;
 
   String title;
-  String imageURItest;
-  List<String> imageURI;
-  int status = 0;
+  List<String> imageURI = [];
+  String imageURITest;
 
+  String description = '상품 설명이 없습니다.';
+  String updateDate;
+  String soldDate;
+
+  int status = 0;
   int price;
   int deliveryFee;
 
-  String description = '상품 설명이 없습니다.';
-  String updatedDate;
-  String soldDate;
+  bool isLiked = false;
 
-  List<int> likes = [];
-  List<Comment> comments = [];
+  Category category;
 
-  Tag category1;
-  Tag category2;
-  Tag category3;
-
-  List<int> hashTags = [];
+  List<Tag> tags = [];
   List<Review> reviews = [];
+  List<Collection> collections = [];
 
   double rate = 0;
-  int views;
-  bool isSold;
+
+  DocumentReference reference;
+
+  Product(this.title, this.price, this.imageURITest);
+
+  Product.fromMap(Map<String, dynamic> map, {this.reference})
+      : userID = map['userID'],
+        title = map['title'],
+        imageURI = map['imageURI'],
+        description = map['description'],
+        updateDate = map['updateDate'],
+        soldDate = map['soldDate'],
+        status = map['status'],
+        price = map['price'],
+        deliveryFee = map['deliveryFee'],
+        isLiked = map['isLiked'],
+        category = map['category'],
+        tags = map['tags'],
+        reviews = map['reviews'],
+        collections = map['collections'],
+        rate = map['rate'];
+
+  Product.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 
   String getStaus() {
     if (this.status == 0)
@@ -38,8 +60,7 @@ class Product {
       return '배송완료';
     else if (this.status == 3)
       return '승인대기';
-    else if (this.status == 4)
-      return  this.soldDate + ' 거래완료';
+    else if (this.status == 4) return this.soldDate + ' 거래완료';
   }
 
   int getReviews() {
@@ -47,42 +68,64 @@ class Product {
   }
 
   double getRate() {
-    for (int i = 0; i < reviews.length; i++)
-      this.rate += reviews[i].rate;
+    for (int i = 0; i < reviews.length; i++) this.rate += reviews[i].rate;
 
-    if (this.rate == 0)
-      return 0;
+    if (this.rate == 0) return 0;
     return this.rate / reviews.length;
   }
-
-  Product(this.title, this.price, this.imageURItest);
 }
 
 class Review {
-  User writer;
-  String comment;
-  String updatedDate;
+  User userID;
   Product productID;
-  double rate = 0;
 
-  Review(this.comment, this.updatedDate, this.productID);
-}
-
-class Comment {
-  int writer;
   String comment;
-  String updatedDate;
-  int productID;
+  String updateDate;
+
+  double rate = 0;
+  DocumentReference reference;
+
+  Review(this.comment, this.updateDate, this.productID);
+
+  Review.fromMap(Map<String, dynamic> map, {this.reference})
+      : userID = map['userID'],
+        productID = map['productID'],
+        comment = map['comment'],
+        updateDate = map['updateDate'],
+        rate = map['rate'];
+
+  Review.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 }
 
 class Tag {
-  String name;
+  String title;
+  bool isLiked;
+  DocumentReference reference;
 
-  Tag(this.name);
+  Tag(this.title);
+
+  Tag.fromMap(Map<String, dynamic> map, {this.reference})
+      : title = map['title'],
+        isLiked = map['isLiked'];
+
+  Tag.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 }
 
 class Category {
   int level;
   String parent;
-  String name;
+  String title;
+  DocumentReference reference;
+
+  Category(this.title);
+
+  Category.fromMap(Map<String, dynamic> map, {this.reference})
+      : level = map['level'],
+        parent = map['parent'],
+        title = map['title'];
+
+  Category.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 }

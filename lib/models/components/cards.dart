@@ -1,17 +1,18 @@
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/border.dart';
-import 'package:editsource/models/components/buttons.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'package:editsource/models/classes/product.dart';
-import 'package:editsource/models/classes/collection.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/collection.dart';
 
-import 'package:editsource/pages/product/productDetailPage.dart';
-import 'package:editsource/pages/collection/collectionDetailPage.dart';
+import 'package:bak/pages/product/productDetailPage.dart';
+import 'package:bak/pages/collection/collectionDetailPage.dart';
 
-Widget productItemCardLarge(BuildContext context, Product product) {
+Widget productItemCardLarge(BuildContext context, DocumentSnapshot product) {
   const double _width = 185;
   const double _height = 250;
   const double _space1 = 14;
@@ -36,9 +37,9 @@ Widget productItemCardLarge(BuildContext context, Product product) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.title),
+                    Text(product.data['title']),
                     hSpacer(_space2),
-                    Text(product.price.toString()),
+                    Text(product.data['price'].toString()),
                   ],
                 ),
                 Container(
@@ -57,7 +58,7 @@ Widget productItemCardLarge(BuildContext context, Product product) {
   );
 }
 
-Widget productItemCardMedium(BuildContext context, Product product) {
+Widget productItemCardMedium(BuildContext context, DocumentSnapshot product) {
   const double _width = 160;
   const double _height = 200;
   const double _space1 = 14;
@@ -81,9 +82,9 @@ Widget productItemCardMedium(BuildContext context, Product product) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.title),
+                    Text(product.data['title']),
                     hSpacer(_space2),
-                    Text(product.price.toString()),
+                    Text(product.data['price'].toString()),
                   ],
                 ),
                 Container(
@@ -102,7 +103,7 @@ Widget productItemCardMedium(BuildContext context, Product product) {
   );
 }
 
-Widget productItemCardSmall(BuildContext context, Product product) {
+Widget productItemCardSmall(BuildContext context, DocumentSnapshot product) {
   const double _width = 120;
   const double _height = 120;
   const double _space1 = 8;
@@ -122,9 +123,9 @@ Widget productItemCardSmall(BuildContext context, Product product) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.title),
+                  Text(product.data['title']),
                   hSpacer(_space2),
-                  Text(product.price.toString()),
+                  Text(product.data['price'].toString()),
                 ],
               ),
             ))
@@ -176,28 +177,28 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
         hSpacer(_space2),
         Text('@' + collection.userID.username),
         hSpacer(_space3),
-        Text(collection.subscription),
+        Text(collection.description),
       ],
     ),
   );
 }
 
 Widget productImageBox(
-    BuildContext context, Product _product, double _width, double _height) {
+    BuildContext context, DocumentSnapshot _product, double _width, double _height) {
   return Material(
     child: InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ProductDetailPage(_product)));
+                builder: (context) => ProductDetailPage(product: _product,)));
       },
       child: Container(
         width: _width,
         height: _height,
         color: Colors.grey,
         child: Image.asset(
-          _product.imageURItest,
+          _product.data['imageURI'][0],
           fit: BoxFit.cover,
         ),
       ),
@@ -301,7 +302,7 @@ Widget collectionShowcase(BuildContext context, Collection collection) {
   );
 }
 
-Widget productItem1(BuildContext context, Product _product) {
+Widget productItem1(BuildContext context, DocumentSnapshot _product) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -311,20 +312,20 @@ Widget productItem1(BuildContext context, Product _product) {
           productImageBox(context, _product, 48, 48),
           wSpacer(12),
           Column(children: [
-            Text(_product.title),
-            Text(_product.price.toString()),
+            Text(_product.data['title']),
+            Text(_product.data['price'].toString()),
           ],),
           Column(children: [
-            Text(_product.getStaus()),
+            Text(_product.data['status']),
             shortButton(context, offWhite, true, Text('리뷰 쓰기')),
           ],),
         ],
       ),
       Row(
         children: [
-          profileImage(_product.userID, 16),
+          profileImage(_product.data['userID'], 16),
           wSpacer(4),
-          Text(_product.userID.username),
+          Text(_product.data['userID'].username),
         ],
       )
     ],

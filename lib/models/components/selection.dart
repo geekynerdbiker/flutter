@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:editsource/models/designs/colors.dart';
+import 'package:bak/models/designs/colors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 DotsIndicator imageCarouselIndicator(int currentIndexPage, int pageLength) {

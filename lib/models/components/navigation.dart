@@ -1,11 +1,12 @@
-import 'package:editsource/models/classes/user.dart';
-import 'package:editsource/models/components/search.dart';
-import 'package:editsource/models/components/user.dart';
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/designs/icons.dart';
-import 'package:editsource/pages/category/mainPage.dart';
-import 'package:editsource/pages/favorite/mainPage.dart';
-import 'package:editsource/pages/notification/mainPage.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/search.dart';
+import 'package:bak/models/components/user.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:bak/pages/category/category.dart';
+import 'package:bak/pages/category/mainPage.dart';
+import 'package:bak/pages/favorite/mainPage.dart';
+import 'package:bak/pages/notification/mainPage.dart';
 import 'package:flutter/material.dart';
 
 Widget mainAppBar(BuildContext context) {
@@ -18,7 +19,7 @@ Widget mainAppBar(BuildContext context) {
       child: Image.asset(
           'lib/assets/icons/drawable-xxxhdpi/new_new_logo_horizontal.png'),
     ),
-    leading: category(context),
+    leading: categoryList(context),
     actions: <Widget>[notification(context), favorite(context)],
   );
 }

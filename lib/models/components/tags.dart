@@ -1,5 +1,5 @@
-import 'package:editsource/models/designs/colors.dart';
-import 'package:editsource/models/designs/typos.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/typos.dart';
 import 'package:flutter/material.dart';
 
 // Tags
