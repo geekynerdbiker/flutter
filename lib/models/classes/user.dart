@@ -18,13 +18,14 @@ class User {
   String name;
   String bio;
 
-  List<User> followers = [];
-  List<User> following = [];
-  List<User> selectedFavor = [];
+  List<String> followers = [];
+  List<String> following = [];
+  List<String> selectedFavor = [];
+  List<String> reviews = [];
 
-  List<Product> favorite = [];
-  List<Product> myProducts = [];
-  List<Collection> myCollections = [];
+  List<String> favorite = [];
+  List<String> myProducts = [];
+  List<String> myCollections = [];
 
   DocumentReference reference;
 
@@ -40,45 +41,28 @@ class User {
         imageURI = map['imageURI'],
         name = map['name'],
         bio = map['bio'],
-        followers = map['followers'],
-        following = map['following'],
-        selectedFavor = map['selectedFavor'],
-        favorite = map['favorite'],
-        myProducts = map['myProduct'],
-        myCollections = map['myCollection'];
+        followers = List.from(
+          map['followers'],
+        ),
+        following = List.from(
+          map['following'],
+        ),
+        selectedFavor = List.from(
+          map['selectedFavor'],
+        ),
+        reviews = List.from(
+          map['reviews'],
+        ),
+        favorite = List.from(
+          map['favorite'],
+        ),
+        myProducts = List.from(
+          map['myProduct'],
+        ),
+        myCollections = List.from(map['myCollection']);
 
   User.fromSnapshot(DocumentSnapshot snapshot)
-    : this.fromMap(snapshot.data, reference : snapshot.reference);
-
-
-  int getFollowers() {
-    return this.followers.length;
-  }
-
-  int getFollowing() {
-    return this.following.length;
-  }
-
-  int getMyProducts() {
-    return this.myProducts.length;
-  }
-
-  int getReviews() {
-    int reviews = 0;
-
-    for (int i = 0; i < myProducts.length; i++)
-      reviews += myProducts[i].getReviews();
-
-    return reviews;
-  }
-
-  double getRate() {
-    for (int i = 0; i < myProducts.length; i++)
-      this.rate += myProducts[i].getRate();
-
-    if (this.rate == 0) return 0;
-    return this.rate / myProducts.length;
-  }
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
 
   User(this.username, this.lastActivity, this.imageURI);
 }

@@ -1,6 +1,8 @@
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/profile/editProfile.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,7 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
                       size: 12,
                     ),
                     wSpacer(_space3),
-                    Text(_user.getMyProducts().toString()),
+                    Text(_user.myProducts.length.toString()),
                     wSpacer(_space4),
                     ImageIcon(
                       AssetImage(quick_delivery),
@@ -139,7 +141,7 @@ Widget userMarquee2(BuildContext context, User _user) {
             children: [
               profileImage(_user, _r),
               wSpacer(_space1),
-              Text(_user.username),
+              Text(_user.username, style: caption2(primary),),
             ],
           ),
           Row(
@@ -150,9 +152,9 @@ Widget userMarquee2(BuildContext context, User _user) {
                 size: 12,
               ),
               wSpacer(_space2),
-              Text(_user.getRate().toString()),
+              Text(_user.rate.toString(), style: caption2(primary),),
               wSpacer(_space3),
-              Text('(' + _user.getReviews().toString() + ' Reviews' + ')'),
+              Text('(' + _user.reviews.length.toString() + ' Reviews' + ')', style: label(primary),),
             ],
           )
         ],

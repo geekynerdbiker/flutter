@@ -19,7 +19,15 @@ Widget mainAppBar(BuildContext context) {
       child: Image.asset(
           'lib/assets/icons/drawable-xxxhdpi/new_new_logo_horizontal.png'),
     ),
-    leading: categoryList(context),
+    leading: Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => categoryList(context)));
+        },
+        child: ImageIcon(AssetImage(category_idle), color: primary),
+      ),
+    ),
     actions: <Widget>[notification(context), favorite(context)],
   );
 }
@@ -84,7 +92,7 @@ Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
 
 Widget appBarDefaultDeep(BuildContext context, String _title) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Text(
@@ -155,13 +163,14 @@ Widget appBarWithTabDeep(BuildContext context, String _title, List<Tab> _tabs,
   );
 }
 
-Widget category(BuildContext context){
+Widget category(BuildContext context) {
   return Container(
-    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     child: Material(
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryMainPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CategoryMainPage()));
         },
         child: ImageIcon(
           AssetImage(category_idle),
@@ -172,6 +181,7 @@ Widget category(BuildContext context){
     ),
   );
 }
+
 Widget notification(BuildContext context) {
   return Material(
     color: offWhite,

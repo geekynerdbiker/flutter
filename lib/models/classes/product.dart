@@ -3,11 +3,11 @@ import 'package:bak/models/classes/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Product {
-  User userID;
+  String userID;
 
   String title;
   List<String> imageURI = [];
-  String imageURITest;
+  String imageRUITEST;
 
   String description = '상품 설명이 없습니다.';
   String updateDate;
@@ -17,62 +17,59 @@ class Product {
   int price;
   int deliveryFee;
 
+  int state;
+  String size;
+  String material;
+  List<String> color = [];
+
   bool isLiked = false;
 
-  Category category;
+  String category;
 
-  List<Tag> tags = [];
-  List<Review> reviews = [];
-  List<Collection> collections = [];
+  List<String> tags = [];
+  List<String> reviews = [];
+  List<String> collections = [];
 
   double rate = 0;
 
   DocumentReference reference;
 
-  Product(this.title, this.price, this.imageURITest);
+  Product(this.title, this.price, this.imageRUITEST);
 
   Product.fromMap(Map<String, dynamic> map, {this.reference})
       : userID = map['userID'],
         title = map['title'],
-        imageURI = map['imageURI'],
+        imageURI = List.from(map['imageURI']),
         description = map['description'],
         updateDate = map['updateDate'],
         soldDate = map['soldDate'],
         status = map['status'],
         price = map['price'],
         deliveryFee = map['deliveryFee'],
+  state = map['state'],
+  size = map['size'],
+  material = map['material'],
+  color = List.from(map['color']),
         isLiked = map['isLiked'],
         category = map['category'],
-        tags = map['tags'],
-        reviews = map['reviews'],
-        collections = map['collections'],
+        tags = List.from(map['tags']),
+        reviews = List.from(map['reviews'],),
+        collections = List.from(map['collections'],),
         rate = map['rate'];
 
   Product.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
-  String getStaus() {
-    if (this.status == 0)
-      return '판매중';
-    else if (this.status == 1)
-      return '판매완료';
-    else if (this.status == 2)
-      return '배송완료';
-    else if (this.status == 3)
-      return '승인대기';
-    else if (this.status == 4) return this.soldDate + ' 거래완료';
-  }
-
   int getReviews() {
     return this.reviews.length;
   }
 
-  double getRate() {
-    for (int i = 0; i < reviews.length; i++) this.rate += reviews[i].rate;
-
-    if (this.rate == 0) return 0;
-    return this.rate / reviews.length;
-  }
+//  double getRate() {
+//    for (int i = 0; i < reviews.length; i++) this.rate += reviews[i].rate;
+//
+//    if (this.rate == 0) return 0;
+//    return this.rate / reviews.length;
+//  }
 }
 
 class Review {

@@ -1,9 +1,10 @@
-import 'package:bak/models/classes/user.dart';
+import 'package:bak/database/initialize.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
-import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:bak/models/designs/typos.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bak/models/classes/product.dart';
@@ -12,7 +13,7 @@ import 'package:bak/models/classes/collection.dart';
 import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/collection/collectionDetailPage.dart';
 
-Widget productItemCardLarge(BuildContext context, DocumentSnapshot product) {
+Widget productItemCardLarge(BuildContext context, Product product) {
   const double _width = 185;
   const double _height = 250;
   const double _space1 = 14;
@@ -37,9 +38,9 @@ Widget productItemCardLarge(BuildContext context, DocumentSnapshot product) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.data['title']),
+                    Text(product.title),
                     hSpacer(_space2),
-                    Text(product.data['price'].toString()),
+                    Text(product.price.toString()),
                   ],
                 ),
                 Container(
@@ -58,14 +59,13 @@ Widget productItemCardLarge(BuildContext context, DocumentSnapshot product) {
   );
 }
 
-Widget productItemCardMedium(BuildContext context, DocumentSnapshot product) {
+Widget productItemCardMedium(
+    BuildContext context, Product product, Color _color) {
   const double _width = 160;
   const double _height = 200;
   const double _space1 = 14;
   const double _space2 = 4;
   const double _icon = 44;
-
-  bool isMyProduct = false;
 
   return Container(
     child: Column(
@@ -82,16 +82,25 @@ Widget productItemCardMedium(BuildContext context, DocumentSnapshot product) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.data['title']),
+                    Text(
+                      product.title,
+                      style: body1(_color),
+                    ),
                     hSpacer(_space2),
-                    Text(product.data['price'].toString()),
+                    Text(
+                      product.price.toString() + '원',
+                      style: body1(_color),
+                    ),
                   ],
                 ),
                 Container(
                   width: _icon,
                   height: _icon,
                   child: Center(
-                    child: Icon(Icons.favorite),
+                    child: ImageIcon(
+                      AssetImage(favorite_idle_inverse),
+                      color: _color,
+                    ),
                   ),
                 ),
               ],
@@ -103,7 +112,7 @@ Widget productItemCardMedium(BuildContext context, DocumentSnapshot product) {
   );
 }
 
-Widget productItemCardSmall(BuildContext context, DocumentSnapshot product) {
+Widget productItemCardSmall(BuildContext context, Product product) {
   const double _width = 120;
   const double _height = 120;
   const double _space1 = 8;
@@ -123,9 +132,9 @@ Widget productItemCardSmall(BuildContext context, DocumentSnapshot product) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.data['title']),
+                  Text(product.title),
                   hSpacer(_space2),
-                  Text(product.data['price'].toString()),
+                  Text(product.price.toString()),
                 ],
               ),
             ))
@@ -175,7 +184,7 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
           ],
         ),
         hSpacer(_space2),
-        Text('@' + collection.userID.username),
+        Text('@' + collection.userID),
         hSpacer(_space3),
         Text(collection.description),
       ],
@@ -183,22 +192,93 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
   );
 }
 
+Widget collectionCardSmall(
+    BuildContext context, Collection collection, Color _color) {
+  const double _width = 180;
+  const double _height = 184;
+  const double _space1 = 12;
+  const double _space2 = 6;
+
+  bool isMyCollection = false;
+
+  return Container(
+    height: 250,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        collectionImageBox(context, collection, _width, _height),
+        hSpacer(_space1),
+        Text(
+          collection.title + '(#' + collection.products.length.toString() + ')',
+          style: body1(_color),
+        ),
+        hSpacer(_space2),
+        Text(
+          '@' + collection.userID,
+          style: body1(_color),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget collectionCardLarge(
+    BuildContext context, Collection collection, Color _color) {
+  const double _width = 264;
+  const double _height = 236;
+  const double _space1 = 12;
+  const double _space2 = 6;
+
+  bool isMyCollection = false;
+
+  return Container(
+    height: 302,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        collectionImageBox(context, collection, _width, _height),
+        hSpacer(_space1),
+        Text(
+          collection.title +
+              ' (#' +
+              collection.products.length.toString() +
+              ')',
+          style: body1(_color),
+        ),
+        hSpacer(_space2),
+        Text(
+          '@' + collection.userID,
+          style: body1(_color),
+        ),
+      ],
+    ),
+  );
+}
+
 Widget productImageBox(
-    BuildContext context, DocumentSnapshot _product, double _width, double _height) {
+    BuildContext context, Product product, double _width, double _height) {
   return Material(
     child: InkWell(
+      onLongPress: () {
+        addProduct();
+      },
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ProductDetailPage(product: _product,)));
+                builder: (context) => ProductDetailPage(
+                      product: product,
+                    )));
       },
       child: Container(
         width: _width,
         height: _height,
         color: Colors.grey,
-        child: Image.asset(
-          _product.data['imageURI'][0],
+        child: Image(
+          image: FirebaseImage(product.imageURI[0],
+              shouldCache: true,
+              maxSizeBytes: 3000 * 1000,
+              cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
         ),
       ),
@@ -220,13 +300,17 @@ Widget collectionImageBox(BuildContext context, Collection collection,
         width: _width,
         height: _height,
         color: Colors.grey,
-        child: Image.asset(
-          collection.imageURI,
+        child: Image(
+          image: FirebaseImage(
+            collection.imageURI,
+              shouldCache: true,
+              maxSizeBytes: 5000 * 1000,
+              cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
+          ),
         ),
       ),
-    ),
-  );
+    );
 }
 
 Widget keywordNotificationListItem() {
@@ -289,7 +373,7 @@ Widget collectionShowcase(BuildContext context, Collection collection) {
                   children: [
                     Text(collection.title),
                     hSpacer(_space2),
-                    Text('@' + collection.userID.username),
+                    Text('@' + collection.userID),
                   ],
                 ),
               ),
@@ -302,30 +386,34 @@ Widget collectionShowcase(BuildContext context, Collection collection) {
   );
 }
 
-Widget productItem1(BuildContext context, DocumentSnapshot _product) {
+Widget productItem1(BuildContext context, Product product) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          productImageBox(context, _product, 48, 48),
+          productImageBox(context, product, 48, 48),
           wSpacer(12),
-          Column(children: [
-            Text(_product.data['title']),
-            Text(_product.data['price'].toString()),
-          ],),
-          Column(children: [
-            Text(_product.data['status']),
-            shortButton(context, offWhite, true, Text('리뷰 쓰기')),
-          ],),
+          Column(
+            children: [
+              Text(product.title),
+              Text(product.price.toString()),
+            ],
+          ),
+          Column(
+            children: [
+              Text(product.status.toString()),
+              shortButton(context, offWhite, true, Text('리뷰 쓰기')),
+            ],
+          ),
         ],
       ),
       Row(
         children: [
-          profileImage(_product.data['userID'], 16),
+          //profileImage(product.userID, 16),
           wSpacer(4),
-          Text(_product.data['userID'].username),
+          //Text(product.userID.username),
         ],
       )
     ],

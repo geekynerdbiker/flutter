@@ -3,15 +3,15 @@ import 'package:bak/models/classes/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Collection {
-  User userID;
+  String userID;
 
   String title;
   String imageURI;
   String description = '컬렉션 설명이 없습니다.';
 
-  List<Product> products = [];
-  List<User> followers = [];
-  List<Tag> tags = [];
+  List<String> products = [];
+  List<String> followers = [];
+  List<String> tags = [];
 
   DocumentReference reference;
 
@@ -22,9 +22,9 @@ class Collection {
         title = map['title'],
         imageURI = map['imageURI'],
         description = map['description'],
-        products = map['products'],
-        followers = map['followers'],
-        tags = map['tags'];
+        products = List.from(map['products'],),
+        followers = List.from(map['followers'],),
+        tags = List.from(map['tags'],);
 
   Collection.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
