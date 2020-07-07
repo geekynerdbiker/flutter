@@ -56,30 +56,6 @@ class RecommendPage extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          collectionShowcase(
-              context,
-              new Collection(
-                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
-          wSpacer(4),
-          collectionShowcase(
-              context,
-              new Collection(
-                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
-          wSpacer(4),
-          collectionShowcase(
-              context,
-              new Collection(
-                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
-          wSpacer(4),
-          collectionShowcase(
-              context,
-              new Collection(
-                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
-          wSpacer(4),
-          collectionShowcase(
-              context,
-              new Collection(
-                  'title', new User('username', '1', 'imageURI'), 'imageURI')),
         ],
       ),
     );

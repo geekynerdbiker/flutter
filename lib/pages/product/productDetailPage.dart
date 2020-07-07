@@ -9,11 +9,12 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final DocumentSnapshot product;
+  final Product product;
 
   ProductDetailPage({this.product});
 
@@ -44,6 +45,7 @@ class ProductDetailPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * (375 / 375),
           height: MediaQuery.of(context).size.width * (360 / 375),
           color: Colors.grey,
+          child: Image(image: FirebaseImage(product.imageURI[0], shouldCache: true, maxSizeBytes: 3 * 1024*1024, cacheRefreshStrategy: CacheRefreshStrategy.NEVER), fit: BoxFit.cover,),
         ),
         Padding(
           padding: EdgeInsets.only(
@@ -62,13 +64,13 @@ class ProductDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(product.data['title']),
+          Text(product.title),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(product.data['price'].toString()),
+              Text(product.price.toString()),
               wSpacer(9),
-              Text(product.data['updateDate']),
+              Text(product.updateDate),
             ],
           ),
           hSpacer(18),
@@ -76,7 +78,7 @@ class ProductDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(product.data['deliveryFee']),
+              Text(product.deliveryFee.toString()),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

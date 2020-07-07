@@ -23,7 +23,6 @@ class ReviewPage extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: userMarqueeRiview(context, new User('username', '1', 'imageURI'), new Review('comment', 'updateDate',  new Product('title', 1, 'imageURI[0]'))),
         ),
         borderLineGreyLite(context),
       ],

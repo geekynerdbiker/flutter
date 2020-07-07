@@ -1,4 +1,5 @@
-
+import 'package:bak/database/initialize.dart';
+import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/classes/collection.dart';
@@ -35,122 +36,133 @@ class _HomePageState extends State<HomePage> {
           newNewPick(context),
           popularSeller(context),
           recentView(context),
-          hashTagCollection(context,
-              new Collection('title', new User('username', '1', '/'), '/')),
+          hashTagCollection(context, new Collection('title', 'username', '/')),
           collectionBanner(context),
         ],
       ),
     );
   }
+}
 
-  Widget carouselAndSearchBar(BuildContext context) {
-    return Stack(
+Widget carouselAndSearchBar(BuildContext context) {
+  return Stack(
+    children: [
+      Container(
+        width: MediaQuery.of(context).size.width * (375 / 375),
+        height: MediaQuery.of(context).size.width * (460 / 375),
+        color: Colors.grey,
+      ),
+      Padding(
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.width * (460 / 375) - 45),
+        child: Center(
+          child: imageCarouselIndicator(0, 5),
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: Center(
+          child: SearchField(),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget trendSearch(BuildContext context) {
+  return Container(
+    height: MediaQuery.of(context).size.width * (231 / 375),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * (375 / 375),
-          height: MediaQuery.of(context).size.width * (460 / 375),
-          color: Colors.grey,
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * (460 / 375) - 45),
-          child: Center(
-            child: imageCarouselIndicator(0, 5),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30),
-          child: Center(
-            child: SearchField(),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget trendSearch(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.width * (201 / 375),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, left: 20),
+          padding: EdgeInsets.only(left: 20, top: 30),
           child: Text(
             '인기 검색어',
             style: subTitle1(accent1),
           ),
         ),
-      ],
-    );
-  }
-
-  Widget newNewPick(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.width * (336 / 375),
-        color: accent1,
-        child: Column(
+        Container(
+            child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 30, left: 20),
-                  child: Text(
-                    'NEW NEW PICK',
-                    style: subTitle2(offWhite),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30, right: 20),
-                  child: seeMore(context, offWhite, ProductListPage(collectionName: 'newnewpick',)),
-                ),
-              ],
+            Container(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Keyword',
+                          style: popularSearchEngSmall(primary),
+                        ),
+                        Text(
+                          'Keyword',
+                          style: popularSearchEngLarge(primary),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
+            Container(
+              height: 60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 100),
+                      ),
+                      Text(
+                        '빈티지 가구',
+                        style: popularSearchKRLarge(primary),
+                      ),
+                      Text(
+                        'acne JEAN',
+                        style: popularSearchEngSmall(primary),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-            itemList(context, 'newnewpick')
+            Container(
+              height: 60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 30),
+                  ),
+                  Text(
+                    'nike',
+                    style: popularSearchEngSmall(primary),
+                  ),
+                  Text(
+                    'JORDAN',
+                    style: popularSearchEngLarge(primary),
+                  ),
+                  Text(
+                    '슈프림',
+                    style: popularSearchKRLarge(primary),
+                  ),
+                ],
+              ),
+            ),
           ],
-        ));
-  }
-
-  Widget popularSeller(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.width * (211 / 375),
-          color: offWhite,
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text(
-            '인기 셀러',
-            style: subTitle1(primary),
-          ),
-        ),
+        )),
       ],
-    );
-  }
+    ),
+  );
+}
 
-  Widget recentView(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.width * (251 / 375),
-          color: accent2,
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, left: 20),
-          child: Text(
-            '최근 본 상품',
-            style: subTitle2(primary),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget hashTagCollection(BuildContext context, Collection collection) {
-    return Container(
-      height: MediaQuery.of(context).size.width * (365 / 375),
+Widget newNewPick(BuildContext context) {
+  return Container(
+      height: MediaQuery.of(context).size.width * (336 / 375),
+      color: accent1,
       child: Column(
         children: [
           Row(
@@ -159,77 +171,233 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: EdgeInsets.only(top: 30, left: 20),
                 child: Text(
-                  '#' + collection.title,
-                  style: title2(primary),
+                  'NEW NEW PICK',
+                  style: subTitle2(offWhite),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30, right: 20),
-                child: seeMore(context, primary, ProductListPage()),
+                child: seeMore(
+                    context,
+                    offWhite,
+                    ProductListPage(
+                      collectionName: 'newnewpick',
+                    )),
               ),
             ],
           ),
-          itemList(context, 'hashtag1'),
+          productItemList(context, offWhite),
         ],
-      ),
-    );
-  }
+      ));
+}
 
-  Widget collectionBanner(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 60),
-          height: MediaQuery.of(context).size.width * (772 / 375),
-          color: accent3,
+Widget popularSeller(BuildContext context) {
+  return Stack(
+    children: [
+      Container(
+        height: MediaQuery.of(context).size.width * (211 / 375),
+        color: offWhite,
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: 30, left: 20),
+        child: Text(
+          '인기 셀러',
+          style: subTitle1(primary),
         ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
-          child: Text(
-            '컬렉션',
-            style: subTitle1(primary),
+      ),
+    ],
+  );
+}
+
+Widget recentView(BuildContext context) {
+  return Container(
+      height: MediaQuery.of(context).size.width * (336 / 375),
+      color: accent2,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 30, left: 20),
+                child: Text(
+                  '최근 본 상품',
+                  style: subTitle2(primary),
+                ),
+              ),
+            ],
           ),
+          productItemList(context, primary),
+        ],
+      ));
+}
+
+Widget hashTagCollection(BuildContext context, Collection collection) {
+  return Container(
+    height: MediaQuery.of(context).size.width * (365 / 375),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 30, left: 20),
+              child: Text(
+                '#' + collection.title,
+                style: title2(primary),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30, right: 20),
+              child: seeMore(context, primary, ProductListPage()),
+            ),
+          ],
         ),
       ],
-    );
-  }
+    ),
+  );
+}
 
-  Widget itemList(BuildContext context, String collectionName) {
-    int length = 0;
-    return FutureBuilder(
-        future: getProducts(),
-        builder: (_, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Text('Loading..'),
-            );
-          } else {
-            return Expanded(
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) {
-                      DocumentSnapshot product = snapshot.data[index];
-                      for (int i = 0;
-                          i < product.data['collections'].length;
-                          i++) {
-                        if (product.data['collections'][index] !=
-                            collectionName)
-                          return Container();
-                        else
-                          return Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: productItemCardMedium(context, product),
-                          );
-                      }
-                    }));
-          }
-        });
-  }
+Widget collectionBanner(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
+        child: Text(
+          '컬렉션',
+          style: subTitle1(primary),
+        ),
+      ),
+      Container(
+        height: MediaQuery.of(context).size.width * (800 / 375),
+        color: accent3,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 170,
+                child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Column(
+                  children: [
+                    Text(' MAKE YOUR', style: collectionTitle(offWhite),),
+                    Text('COLLECTION', style: collectionTitle(offWhite),),
+                  ],
+                )
+              ],
+            )),
+            collectionItemList(context),
+            collectionItemList2(context),
+          ],
+        ),
+      ),
+    ],
+  );
+}
 
-  Future getProducts() async {
-    var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection('products').getDocuments();
-    return qn.documents;
-  }
+Widget productItemList(BuildContext context, Color color) {
+  return StreamBuilder<QuerySnapshot>(
+    stream: Firestore.instance.collection('products').snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return CircularProgressIndicator();
+      return buildProductBody(context, snapshot.data.documents, color);
+    },
+  );
+}
+
+Widget buildProductBody(BuildContext context, List<DocumentSnapshot> snapshot, Color color) {
+  List<Product> productItems =
+      snapshot.map((e) => Product.fromSnapshot(e)).toList();
+  return Expanded(
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: productItems.length,
+      itemBuilder: (context, index) {
+        return Container(
+          margin: EdgeInsets.only(top: 10, right: 10),
+          child: productItemCardMedium(context, productItems[index], color),
+        );
+      },
+    ),
+  );
+}
+
+Widget collectionItemList(BuildContext context) {
+  return StreamBuilder<QuerySnapshot>(
+    stream: Firestore.instance.collection('collections').snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return CircularProgressIndicator();
+      return buildCollectionBody(context, snapshot.data.documents);
+    },
+  );
+}
+
+Widget buildCollectionBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+  List<Collection> collectionItems =
+  snapshot.map((e) => Collection.fromSnapshot(e)).toList();
+  return Expanded(
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: collectionItems.length,
+      itemBuilder: (context, index) {
+        return Container(
+          height: 300,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: collectionCardSmall(context, collectionItems[0], offWhite),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: collectionCardLarge(context, collectionItems[1], offWhite),
+              )
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
+Widget collectionItemList2(BuildContext context) {
+  return StreamBuilder<QuerySnapshot>(
+    stream: Firestore.instance.collection('collections').snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return CircularProgressIndicator();
+      return buildCollectionBody2(context, snapshot.data.documents);
+    },
+  );
+}
+
+Widget buildCollectionBody2(BuildContext context, List<DocumentSnapshot> snapshot) {
+  List<Collection> collectionItems =
+  snapshot.map((e) => Collection.fromSnapshot(e)).toList();
+  return Expanded(
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: collectionItems.length,
+      itemBuilder: (context, index) {
+        return Container(
+          height: 300,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: collectionCardLarge(context, collectionItems[3], offWhite),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: collectionCardSmall(context, collectionItems[2], offWhite),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
 }

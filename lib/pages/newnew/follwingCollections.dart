@@ -17,9 +17,6 @@ class FollowingCollectionsPage extends StatelessWidget {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
-          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
-          collectionItem(context, new Collection('title', new User('username', '1', 'imageURI'), 'imageURI')),
         ],
       ),
     );
@@ -45,7 +42,7 @@ class FollowingCollectionsPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('@' + collection.userID.username),
+            Text('@' + collection.userID),
             Material(
               child: InkWell(
                 onTap: () {

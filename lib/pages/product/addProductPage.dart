@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bak/database/initialize.dart';
-import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
@@ -60,7 +59,6 @@ class _AddProductPageState extends State<AddProductPage> {
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: <Widget>[
-            buildGridView(),
             productImages(context),
             productField(context),
             palette(context),
@@ -97,10 +95,13 @@ class _AddProductPageState extends State<AddProductPage> {
     else
       return Container(
         height: 118,
-        child: ListView(
+        child: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           scrollDirection: Axis.horizontal,
-          children: <Widget>[],
+          itemCount: _images.length,
+          itemBuilder: (_, index) {
+            return imageBox(context, _images[index]);
+          },
         ),
       );
   }
@@ -115,38 +116,28 @@ class _AddProductPageState extends State<AddProductPage> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 30,
+        maxImages: 3,
+          enableCamera: true,
+          selectedAssets: _images,
+          cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+          materialOptions: MaterialOptions(
+            actionBarColor: "#abcdef",
+            actionBarTitle: "Example App",
+            allViewTitle: "All Photos",
+            useDetailsView: false,
+            selectCircleStrokeColor: "#000000",
+          ),
       );
     } on Exception catch (e) {
       error = e.toString();
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
       _images = resultList;
-      if (error == null) _error = 'No Error Dectected';
+      _error = error;
     });
-  }
-
-  Widget buildGridView() {
-    if (_images != null)
-      return GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(_images.length, (index) {
-          Asset asset = _images[index];
-          return AssetThumb(
-            asset: asset,
-            width: 300,
-            height: 300,
-          );
-        }),
-      );
-    else
-      return Container(color: Colors.white);
   }
 
   Widget emptyImageBox(BuildContext context) {
@@ -171,6 +162,28 @@ class _AddProductPageState extends State<AddProductPage> {
         ),
       ),
     );
+  }
+
+  Widget imageBox(BuildContext context, Asset image) {
+    const double _length = 92;
+
+    return Material(
+      child: InkWell(
+        onTap: () {
+          loadAssets();
+        },
+        child: Container(
+          margin: EdgeInsets.only(right: 15),
+          width: _length,
+          height: _length,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            color: offWhite,
+          ),
+          child: AssetThumb(asset: image, width: 92, height: 92,),
+          ),
+        ),
+      );
   }
 
   Widget productField(BuildContext context) {
@@ -279,7 +292,7 @@ class _AddProductPageState extends State<AddProductPage> {
                       )
                     ],
                   )),
-              FirestoreCRUD()),
+              favorite(context)),
           Container(
             width: MediaQuery.of(context).size.width * (335 / 375),
             height: 88,

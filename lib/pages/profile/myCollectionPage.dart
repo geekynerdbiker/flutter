@@ -20,21 +20,6 @@ class MyCollectionPage extends StatelessWidget {
         shrinkWrap: true,
         children: [
           infoLine(context, user),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 15),
-            child: collectionItem(context,
-                new Collection('title', new User('username', '1', '/'), '/')),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 15),
-            child: collectionItem(context,
-                new Collection('title', new User('username', '1', '/'), '/')),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 15),
-            child: collectionItem(context,
-                new Collection('title', new User('username', '1', '/'), '/')),
-          ),
         ],
       ),
     );
@@ -57,7 +42,7 @@ class MyCollectionPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로워'),
                     wSpacer(_space1),
-                    Text(user.getFollowers().toString()),
+                    Text(user.followers.length.toString()),
                   ],),
                 ),
               ),
@@ -68,7 +53,7 @@ class MyCollectionPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로잉'),
                     wSpacer(_space1),
-                    Text(user.getFollowing().toString()),
+                    Text(user.following.length.toString()),
                   ],),
                 ),
               ),
@@ -82,9 +67,9 @@ class MyCollectionPage extends StatelessWidget {
             children: [
               Icon(Icons.star_border),
               wSpacer(_space1),
-              Text(user.getRate().toString()),
+              Text(user.rate.toString()),
               wSpacer(_space2),
-              Text('(' + user.getReviews().toString() + ' Reviews' + ')'),
+              Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
             ],
           ),
         )
@@ -112,7 +97,7 @@ class MyCollectionPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('@' + collection.userID.username),
+            Text('@' + collection.userID),
             Material(
               child: InkWell(
                 onTap: () {

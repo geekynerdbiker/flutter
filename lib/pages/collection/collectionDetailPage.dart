@@ -87,11 +87,11 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             Container(
                               height: 20,
                               width: 20 +
-                                  widget.collection.userID.username.length
+                                  widget.collection.userID.length
                                           .toDouble() *
                                       10,
                               child: Text(
-                                'by ' + widget.collection.userID.username,
+                                'by ' + widget.collection.userID,
                                 style:
                                     TextStyle(fontSize: 12, color: Colors.grey),
                               ),
@@ -107,7 +107,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                                 color: Colors.black,
                               ),
                               child: Image.asset(
-                                widget.collection.userID.imageURI,
+                                widget.collection.userID,//.imageURI,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -125,7 +125,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.collection.userID.myProducts.length
+                                widget.collection.userID//.myProducts.length
                                     .toString(),
                                 textAlign: TextAlign.left,
                               ),
@@ -145,7 +145,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.collection.userID.followers.length
+                                widget.collection.userID//.followers.length
                                     .toString(),
                                 textAlign: TextAlign.left,
                               ),
