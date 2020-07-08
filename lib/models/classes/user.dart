@@ -12,7 +12,7 @@ class User {
   String createDate;
   String lastActivity;
 
-  double rate = 0;
+  String rate;
 
   String imageURI;
   String name;
@@ -65,4 +65,14 @@ class User {
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
   User(this.username, this.lastActivity, this.imageURI);
+}
+
+class EditProfileForm {
+  String imageURI;
+  String username;
+  String name;
+  String webSite;
+  String bio;
+
+  EditProfileForm(this.imageURI, this.username, this.name, this.webSite, this.bio);
 }

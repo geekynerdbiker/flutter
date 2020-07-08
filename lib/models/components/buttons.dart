@@ -193,7 +193,7 @@ Container fab2Disabled(BuildContext context, String textContext) {
   );
 }
 
-Widget shortTextField(BuildContext context, String _textContext, TextEditingController _controller) {
+Widget shortTextField(BuildContext context, String _textContext, FormFieldValidator validator) {
   return Container(
     width: MediaQuery.of(context).size.width * (163 / 375),
     height: 44,
@@ -202,7 +202,7 @@ Widget shortTextField(BuildContext context, String _textContext, TextEditingCont
     child: Padding(
       padding: EdgeInsets.only(left: 10, bottom: 7),
       child: TextFormField(
-        controller: _controller,
+        validator: validator,
         style: TextStyle(
           fontSize: 12,
         ),
@@ -213,7 +213,7 @@ Widget shortTextField(BuildContext context, String _textContext, TextEditingCont
   );
 }
 
-Widget textField(BuildContext context, String _textContext, TextEditingController _controller) {
+Widget textField(BuildContext context, String _textContext, String Function(String) validator) {
   return Container(
     width: MediaQuery.of(context).size.width * (335 / 375),
     height: 44,
@@ -222,7 +222,7 @@ Widget textField(BuildContext context, String _textContext, TextEditingControlle
     child: Padding(
       padding: EdgeInsets.only(left: 10, bottom: 7),
       child: TextFormField(
-        controller: _controller,
+        validator: validator,
         style: TextStyle(
           fontSize: 12,
         ),
@@ -233,7 +233,7 @@ Widget textField(BuildContext context, String _textContext, TextEditingControlle
   );
 }
 
-Widget textFieldLarge(BuildContext context, String _textContext, TextEditingController _controller) {
+Widget textFieldLarge(BuildContext context, String _textContext, FormFieldValidator validator) {
   return Container(
     width: MediaQuery.of(context).size.width * (335 / 375),
     height: 88,
@@ -242,7 +242,7 @@ Widget textFieldLarge(BuildContext context, String _textContext, TextEditingCont
     child: Padding(
       padding: EdgeInsets.only(left: 10),
       child: TextFormField(
-        controller: _controller,
+        validator: validator,
         maxLines: 5,
         style: TextStyle(
           fontSize: 12,

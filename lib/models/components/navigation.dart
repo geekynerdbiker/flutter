@@ -114,20 +114,14 @@ Widget appBarWithSkip(BuildContext context, String _title, Widget _skipRoute) {
         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
     ),
-    leading: BackButton(
-      color: Colors.black,
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    ),
     actions: <Widget>[
       Container(
         child: Material(
           color: offWhite,
           child: InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => _skipRoute));
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: (context) => _skipRoute), (route) => false);
               },
               child: Container(
                 padding: EdgeInsets.only(top: 15),

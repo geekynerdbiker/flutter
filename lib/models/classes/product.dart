@@ -9,20 +9,18 @@ class Product {
   List<String> imageURI = [];
   String imageRUITEST;
 
-  String description = '상품 설명이 없습니다.';
+  String description;
   String updateDate;
   String soldDate;
 
-  int status = 0;
-  int price;
-  int deliveryFee;
+  String status;
+  String price;
+  String deliveryFee;
 
-  int state;
+  String state;
   String size;
   String material;
   List<String> color = [];
-
-  bool isLiked = false;
 
   String category;
 
@@ -30,7 +28,7 @@ class Product {
   List<String> reviews = [];
   List<String> collections = [];
 
-  double rate = 0;
+  String rate;
 
   DocumentReference reference;
 
@@ -46,15 +44,18 @@ class Product {
         status = map['status'],
         price = map['price'],
         deliveryFee = map['deliveryFee'],
-  state = map['state'],
-  size = map['size'],
-  material = map['material'],
-  color = List.from(map['color']),
-        isLiked = map['isLiked'],
+        state = map['state'],
+        size = map['size'],
+        material = map['material'],
+        color = List.from(map['color']),
         category = map['category'],
         tags = List.from(map['tags']),
-        reviews = List.from(map['reviews'],),
-        collections = List.from(map['collections'],),
+        reviews = List.from(
+          map['reviews'],
+        ),
+        collections = List.from(
+          map['collections'],
+        ),
         rate = map['rate'];
 
   Product.fromSnapshot(DocumentSnapshot snapshot)

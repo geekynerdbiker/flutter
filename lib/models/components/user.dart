@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
@@ -5,6 +7,7 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/profile/editProfile.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/icons.dart';
@@ -141,7 +144,7 @@ Widget userMarquee2(BuildContext context, User _user) {
             children: [
               profileImage(_user, _r),
               wSpacer(_space1),
-              Text(_user.username, style: caption2(primary),),
+              //Text(_user.username, style: caption2(primary),),
             ],
           ),
           Row(
@@ -152,9 +155,9 @@ Widget userMarquee2(BuildContext context, User _user) {
                 size: 12,
               ),
               wSpacer(_space2),
-              Text(_user.rate.toString(), style: caption2(primary),),
+              //Text(_user.rate.toString(), style: caption2(primary),),
               wSpacer(_space3),
-              Text('(' + _user.reviews.length.toString() + ' Reviews' + ')', style: label(primary),),
+              //Text('(' + _user.reviews.length.toString() + ' Reviews' + ')', style: label(primary),),
             ],
           )
         ],
@@ -368,8 +371,9 @@ Widget profileImage(User _user, double _r) {
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50), color: Colors.grey),
     child: Center(
-        child: Image.asset(
-      _user.imageURI,
+        child: Image(image: FirebaseImage(
+          _user.imageURI, shouldCache: true, maxSizeBytes: 3 * 1000 * 1000, cacheRefreshStrategy: CacheRefreshStrategy.NEVER,
+        ),
       fit: BoxFit.cover,
     )),
   );
