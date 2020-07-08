@@ -26,23 +26,23 @@ class EditProfilePage extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
-            child: textField(context, '상점명', usernameController),
+            //child: textField(context, '상점명', usernameController, validator1),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
-            child: textField(context, '이름', nameController),
+            //child: textField(context, '이름', nameController),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
-            child: textField(context, '웹사이트 (선택)', webSiteController),
+            //child: textField(context, '웹사이트 (선택)', webSiteController),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
-            child: textFieldLarge(context, '소개', bioController)
+            //child: textFieldLarge(context, '소개', bioController)
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child: longButtonPop(context, primary, false, Text('확인', style: TextStyle(color: offWhite),))
+            //child: longButtonPop(context, primary, false, Text('확인', style: TextStyle(color: offWhite),))
           ),
         ],
       ),

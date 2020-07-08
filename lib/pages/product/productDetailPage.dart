@@ -1,3 +1,4 @@
+import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
@@ -25,7 +26,7 @@ class ProductDetailPage extends StatelessWidget {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          userMarquee2(context, new User('username', '1', '.')),
+          getUserInfo(context),
           carousel(context),
           productInfo(context),
           productInfo2(context),
@@ -38,6 +39,27 @@ class ProductDetailPage extends StatelessWidget {
     );
   }
 
+  Widget getUserInfo(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('users').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return findOwner(context, snapshot.data.documents, product.userID);
+      },
+    );
+  }
+
+  Widget findOwner(
+      BuildContext context, List<DocumentSnapshot> snapshot, String userID) {
+    List<User> users = snapshot.map((e) => User.fromSnapshot(e)).toList();
+    User owner;
+
+    for (int i = 0; i < users.length; i++)
+      if (users[i].username == userID) owner = users[i];
+
+    return userMarquee2(context, owner);
+  }
+
   Widget carousel(BuildContext context) {
     return Stack(
       children: [
@@ -45,7 +67,13 @@ class ProductDetailPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * (375 / 375),
           height: MediaQuery.of(context).size.width * (360 / 375),
           color: Colors.grey,
-          child: Image(image: FirebaseImage(product.imageURI[0], shouldCache: true, maxSizeBytes: 3 * 1024*1024, cacheRefreshStrategy: CacheRefreshStrategy.NEVER), fit: BoxFit.cover,),
+          child: Image(
+            image: FirebaseImage(product.imageURI[0],
+                shouldCache: true,
+                maxSizeBytes: 3 * 1024 * 1024,
+                cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+            fit: BoxFit.cover,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(
@@ -176,7 +204,7 @@ class ProductDetailPage extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget productList(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -213,7 +241,14 @@ class ProductDetailPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           shortButton(context, offWhite, true, Text('대화하기')),
-          shortButton(context, primary, true, Text('구매하기', style: TextStyle(color: offWhite),)),
+          shortButton(
+              context,
+              primary,
+              true,
+              Text(
+                '구매하기',
+                style: TextStyle(color: offWhite),
+              )),
         ],
       ),
     );

@@ -1,21 +1,24 @@
 import 'dart:async';
 
 import 'package:bak/database/initialize.dart';
+import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/designs/icons.dart';
+import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/afterAddProdct.dart';
 import 'package:bak/pages/category/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddProductPage extends StatefulWidget {
   bool isCategorySelected;
-  DocumentSnapshot category;
+  Category category;
 
   AddProductPage({Key key, @required this.isCategorySelected, this.category})
       : super(key: key);
@@ -27,16 +30,18 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<Asset> _images;
-  TextEditingController productNameController = TextEditingController();
-  TextEditingController productSizeController = TextEditingController();
-  TextEditingController productFabricController = TextEditingController();
-  TextEditingController productBrandController = TextEditingController();
-  TextEditingController productDescriptionController = TextEditingController();
-  TextEditingController productPriceController = TextEditingController();
-  TextEditingController productDeliveryFeeController = TextEditingController();
+  int index = 0;
+
+  String title;
+  String size;
+  String material;
+  String brand; //tag
+  String description;
+  String price;
+  String deliveryFee;
   String _error = 'No Error Detected';
 
-  List<DocumentSnapshot> categories = <DocumentSnapshot> [];
+  List<DocumentSnapshot> categories = <DocumentSnapshot>[];
 
   Future getCategories() async {
     var firestore = Firestore.instance;
@@ -65,15 +70,6 @@ class _AddProductPageState extends State<AddProductPage> {
             stateSlider(context),
             addTag(context),
             acceptCardPayment(context),
-            longButtonNav(
-                context,
-                primary,
-                false,
-                Text(
-                  '등록하기',
-                  style: TextStyle(color: offWhite),
-                ),
-                AfterAddProduct()),
           ],
         ),
       ),
@@ -81,34 +77,26 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget productImages(BuildContext context) {
-    if (_images == null)
-      return Container(
-        height: 112,
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            emptyImageBox(context),
-          ],
-        ),
-      );
-    else
-      return Container(
-        height: 118,
-        child: ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          scrollDirection: Axis.horizontal,
-          itemCount: _images.length,
-          itemBuilder: (_, index) {
-            return imageBox(context, _images[index]);
-          },
-        ),
-      );
+    List<Widget> imageList = [emptyImageBox(context)];
+
+    if (_images != null)
+      for (int i = 0; i < _images.length; i++)
+        imageList.add(imageBox(context, _images[i]));
+
+    return Container(
+      height: 118,
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        scrollDirection: Axis.horizontal,
+        children: imageList,
+      ),
+    );
   }
 
   Future<void> loadAssets() async {
     setState(() {
-      _images = List<Asset>();
+      _formKey.currentState.save();
+      if (_images == null) _images = List<Asset>();
     });
 
     List<Asset> resultList;
@@ -116,17 +104,14 @@ class _AddProductPageState extends State<AddProductPage> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 3,
-          enableCamera: true,
-          selectedAssets: _images,
-          cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-          materialOptions: MaterialOptions(
-            actionBarColor: "#abcdef",
-            actionBarTitle: "Example App",
-            allViewTitle: "All Photos",
-            useDetailsView: false,
-            selectCircleStrokeColor: "#000000",
-          ),
+        maxImages: 10,
+        enableCamera: true,
+        selectedAssets: _images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          useDetailsView: false,
+          selectCircleStrokeColor: "#FFFFFF",
+        ),
       );
     } on Exception catch (e) {
       error = e.toString();
@@ -135,7 +120,8 @@ class _AddProductPageState extends State<AddProductPage> {
     if (!mounted) return;
 
     setState(() {
-      _images = resultList;
+      for (int i = index; i < resultList.length + index; i++)
+        _images = resultList;
       _error = error;
     });
   }
@@ -169,9 +155,6 @@ class _AddProductPageState extends State<AddProductPage> {
 
     return Material(
       child: InkWell(
-        onTap: () {
-          loadAssets();
-        },
         child: Container(
           margin: EdgeInsets.only(right: 15),
           width: _length,
@@ -180,10 +163,15 @@ class _AddProductPageState extends State<AddProductPage> {
             border: Border.all(color: Colors.black),
             color: offWhite,
           ),
-          child: AssetThumb(asset: image, width: 92, height: 92,),
+          child: AssetThumb(
+            asset: image,
+            quality: 100,
+            width: image.originalWidth,
+            height: image.originalHeight,
           ),
         ),
-      );
+      ),
+    );
   }
 
   Widget productField(BuildContext context) {
@@ -191,87 +179,16 @@ class _AddProductPageState extends State<AddProductPage> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width * (335 / 375),
-            height: 44,
-            margin: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, bottom: 7),
-              child: TextFormField(
-                controller: productNameController,
-                validator: (value) {
-                  if(value.isEmpty) {
-                    return '상품명을 입력하세요.';
-                  }
-                },
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: '상품명 입력'),
-              ),
-            ),
-          ),
+          textFieldTitle(context),
           categorySelector(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width * (163 / 375),
-                height: 44,
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 7),
-                  child: TextFormField(
-                    controller: productSizeController,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '사이즈 입력 (선택)'),
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * (163 / 375),
-                height: 44,
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 7),
-                  child: TextFormField(
-                    controller: productFabricController,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '재질 입력 (선택)'),
-                  ),
-                ),
-              ),
+              smallTextFieldSize(context),
+              smallTextFieldMaterial(context),
             ],
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * (335 / 375),
-            height: 44,
-            margin: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, bottom: 7),
-              child: TextFormField(
-                controller: productBrandController,
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: '브랜드 입력 (선택)'),
-              ),
-            ),
-          ),
+          textFieldBrand(context),
           longButtonNav(
               context,
               offWhite,
@@ -293,76 +210,38 @@ class _AddProductPageState extends State<AddProductPage> {
                     ],
                   )),
               favorite(context)),
-          Container(
-            width: MediaQuery.of(context).size.width * (335 / 375),
-            height: 88,
-            margin: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: TextFormField(
-                controller: productDescriptionController,
-                validator: (value) {
-                  if(value.isEmpty) {
-                    return '상품 설명을 입력하세요.';
-                  }
-                },
-                maxLines: 5,
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: '설명 입력'),
-              ),
-            ),
-          ),
+          longTextField(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width * (163 / 375),
-                height: 44,
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 7),
-                  child: TextFormField(
-                    controller: productPriceController,
-                    validator: (value) {
-                      if(value.isEmpty) {
-                        return '가격을 입력하세요.';
-                      }
-                    },
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '가격 입력'),
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * (163 / 375),
-                height: 44,
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10, bottom: 7),
-                  child: TextFormField(
-                    controller: productDeliveryFeeController,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '배송비 입력 (선택)'),
-                  ),
-                ),
-              ),
+              smallTextFieldPrice(context),
+              smallTextFieldDeliveryFee(context),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget textFieldTitle(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (335 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        validator: (value) {
+          if (value.isEmpty) return '상품명을 입력하세요.';
+          return null;
+        },
+        onSaved: (value) => title = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '상품명'),
       ),
     );
   }
@@ -377,34 +256,168 @@ class _AddProductPageState extends State<AddProductPage> {
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(widget.category.data['parent'] +
+            child: Text(widget.category.parent +
                 ' > ' +
-                widget.category.data['title']),
+                widget.category.title),
           ),
         ),
       );
     else
       return longButtonNav(
-          context,
-          offWhite,
-          true,
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('카테고리 선택'),
-                  ),
-                  ImageIcon(
-                    AssetImage(forward_idle),
-                    size: 12,
-                    color: semiDark,
-                  )
-                ],
-              )),
-          CategoryPage());
+        context,
+        offWhite,
+        true,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text('카테고리 선택'),
+              ),
+              ImageIcon(
+                AssetImage(forward_idle),
+                size: 12,
+                color: semiDark,
+              ),
+            ],
+          ),
+        ),
+        CategoryPage(),
+      );
+  }
+
+  Widget smallTextFieldSize(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (163 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        onSaved: (value) => size = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '사이즈 (선택)'),
+      ),
+    );
+  }
+
+  Widget smallTextFieldMaterial(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (163 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        onSaved: (value) => material = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '재질 (선택)'),
+      ),
+    );
+  }
+
+  Widget textFieldBrand(BuildContext context) {
+    //tag
+    return Container(
+      width: MediaQuery.of(context).size.width * (335 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        onSaved: (value) => title = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '브랜드 (선택)'),
+      ),
+    );
+  }
+
+  Widget longTextField(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (335 / 375),
+      height: 88,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        validator: (value) {
+          if (value.isEmpty) return '상품 설명을 입력하세요.';
+          return null;
+        },
+        onSaved: (value) => title = value,
+        maxLines: 5,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '상품 설명'),
+      ),
+    );
+  }
+
+  Widget smallTextFieldPrice(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (163 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+        keyboardType: TextInputType.numberWithOptions(signed: true),
+        validator: (value) {
+          if (value.isEmpty) return '가격을 입력하세요.';
+          return null;
+        },
+        onSaved: (value) => price = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '가격'),
+      ),
+    );
+  }
+
+  Widget smallTextFieldDeliveryFee(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * (163 / 375),
+      height: 44,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      child: TextFormField(
+        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+        keyboardType: TextInputType.numberWithOptions(signed: true),
+        validator: (value) {
+          if (value.isEmpty) return '배송비를 입력하세요.';
+          return null;
+        },
+        onSaved: (value) => deliveryFee = value,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 10),
+            border: InputBorder.none,
+            hintText: '배송비 (선택)'),
+      ),
+    );
   }
 
   Widget palette(BuildContext context) {
@@ -535,6 +548,25 @@ class _AddProductPageState extends State<AddProductPage> {
           ),
           Text('택배 어쩌구 저쩌구'),
         ],
+      ),
+    );
+  }
+
+  Widget uploadButton(BuildContext context) {
+    return Material(
+      child: InkWell(
+        //onTap: signIn,
+        child: Container(
+          width: MediaQuery.of(context).size.width * (335 / 375),
+          height: 44,
+          color: primary,
+          child: Center(
+            child: Text(
+              '등록하기',
+              style: label(offWhite),
+            ),
+          ),
+        ),
       ),
     );
   }

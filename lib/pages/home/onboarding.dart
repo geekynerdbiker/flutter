@@ -1,8 +1,8 @@
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/selection.dart';
-import 'package:bak/pages/home/account/signInPage.dart';
-import 'package:bak/pages/home/account/signUpPage.dart';
+import 'package:bak/pages/account/signInPage.dart';
+import 'package:bak/pages/account/signUpPage.dart';
 import 'package:bak/pages/home/bootPage.dart';
 import 'package:flutter/material.dart';
 
