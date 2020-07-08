@@ -6,73 +6,73 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Widget productItemList(BuildContext context) {
+Widget getProductItemList(BuildContext context, Widget widget) {
   return StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('products').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return CircularProgressIndicator();
-      return buildBody(context, snapshot.data.documents);
+      return widget;
     },
   );
 }
 
-List<Product> getProductItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
+List<Product> productItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return snapshot.map((e) => Product.fromSnapshot(e)).toList();
 }
 
-Widget collectionItemList(BuildContext context) {
+Widget getCollectionItemList(BuildContext context, Widget widget) {
   return StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('collections').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return CircularProgressIndicator();
-      return buildBody(context, snapshot.data.documents);
+      return widget;
     },
   );
 }
 
-List<Collection> getCollectionItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
+List<Collection> collectionItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return snapshot.map((e) => Collection.fromSnapshot(e)).toList();
 }
 
-Widget userItemList(BuildContext context) {
+Widget getUserItemList(BuildContext context, Widget widget) {
   return StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('users').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return CircularProgressIndicator();
-      return buildBody(context, snapshot.data.documents);
+      return widget;
     },
   );
 }
 
-List<User> getUserItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
+List<User> userItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return snapshot.map((e) => User.fromSnapshot(e)).toList();
 }
 
-Widget tagsItemList(BuildContext context) {
+Widget getTagItemList(BuildContext context, Widget widget) {
   return StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('tags').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return CircularProgressIndicator();
-      return buildBody(context, snapshot.data.documents);
+      return widget;
     },
   );
 }
 
-List<Tag> getTagItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
+List<Tag> tagItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return snapshot.map((e) => Tag.fromSnapshot(e)).toList();
 }
 
-Widget reviewsItemList(BuildContext context) {
+Widget getReviewItemList(BuildContext context, Widget widget) {
   return StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('reviews').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return CircularProgressIndicator();
-      return buildBody(context, snapshot.data.documents);
+      return widget;
     },
   );
 }
 
-List<Review> getReviewItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
+List<Review> reviewItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
   return snapshot.map((e) => Review.fromSnapshot(e)).toList();
 }
 
