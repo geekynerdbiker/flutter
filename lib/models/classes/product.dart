@@ -20,37 +20,40 @@ class Product {
   String material;
   List<String> color = [];
 
+  String rate;
   String category;
 
   List<String> tags = [];
   List<String> reviews = [];
   List<String> collections = [];
 
-  String rate;
-
   DocumentReference reference;
 
-  Product({
-      @required this.userID,
-  @required this.title,
-  @required this.imageURI,
-    @required this.description,
-    @required this.updateDate,
-    @required this.soldDate,
-    @required this.status,
-    @required this.price,
-    @required this.deliveryFee,
-    @required this.state,
-    @required this.size,
-    @required this.material,
-    @required this.color,
-    @required this.category,
-    @required this.tags,
-    @required this.reviews,
-    @required this.collections,
-    @required this.rate});
 
-  Product.fromMap(Map<String, dynamic> map, {this.reference})
+  Map<String, dynamic> toMap() {
+    return {
+      "userID": userID,
+      "title": title,
+      "imageURI": imageURI,
+      "description": description,
+      "updateDate": updateDate,
+      "soldDate": soldDate,
+      "status": status,
+      "price": price,
+      "deliveryFee": deliveryFee,
+      "state": state,
+      "size": size,
+      "material": material,
+      "color": color,
+      "category": category,
+      "tags": tags,
+      "reviews": reviews,
+      "collection": collections,
+      "rate": rate,
+    };
+  }
+
+  Product.fromMap(Map <String, dynamic> map, {this.reference})
       : userID = map['userID'],
         title = map['title'],
         imageURI = List.from(map['imageURI']),
@@ -76,10 +79,6 @@ class Product {
 
   Product.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  int getReviews() {
-    return this.reviews.length;
-  }
 }
 
 class Review {

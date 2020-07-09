@@ -1,4 +1,4 @@
-import 'package:bak/database/initialize.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
@@ -29,7 +29,7 @@ Widget productItemCardLarge(BuildContext context, Product product) {
         productImageBox(context, product, _width, _height),
         hSpacer(_space1),
         Container(
-          padding: EdgeInsets.only(left: 12),
+          padding: EdgeInsets.only(left: 10),
           child: SizedBox(
             width: _width - 12,
             child: Row(
@@ -38,9 +38,10 @@ Widget productItemCardLarge(BuildContext context, Product product) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.title),
+                    Text(
+                      product.title.length < 10 ? product.title : product.title.substring(0, 10) + '..', style: body1(primary),),
                     hSpacer(_space2),
-                    Text(product.price.toString()),
+                    Text(product.price.toString() + '원', style: body1(primary),),
                   ],
                 ),
                 Container(
@@ -83,7 +84,7 @@ Widget productItemCardMedium(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title,
+                      product.title.length < 9 ? product.title : product.title.substring(0, 8) + ' ..',
                       style: body1(_color),
                     ),
                     hSpacer(_space2),
@@ -143,7 +144,7 @@ Widget productItemCardSmall(BuildContext context, Product product) {
   );
 }
 
-Widget collectionCoverCard(BuildContext context, Collection collection) {
+Widget collectionCoverCard(BuildContext context, Collection collection, User user) {
   const double _width = 375;
   const double _height = 280;
   const double _space1 = 16;
@@ -157,7 +158,7 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        collectionImageBox(context, collection, _width, _height),
+        collectionImageBox(context, collection, _width, _height, user),
         hSpacer(_space1),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +194,7 @@ Widget collectionCoverCard(BuildContext context, Collection collection) {
 }
 
 Widget collectionCardSmall(
-    BuildContext context, Collection collection, Color _color) {
+    BuildContext context, Collection collection, User user, Color _color) {
   const double _width = 180;
   const double _height = 184;
   const double _space1 = 12;
@@ -206,7 +207,7 @@ Widget collectionCardSmall(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        collectionImageBox(context, collection, _width, _height),
+        collectionImageBox(context, collection, _width, _height, user),
         hSpacer(_space1),
         Text(
           collection.title + '(#' + collection.products.length.toString() + ')',
@@ -223,7 +224,7 @@ Widget collectionCardSmall(
 }
 
 Widget collectionCardLarge(
-    BuildContext context, Collection collection, Color _color) {
+    BuildContext context, Collection collection, User user, Color _color) {
   const double _width = 264;
   const double _height = 236;
   const double _space1 = 12;
@@ -236,7 +237,7 @@ Widget collectionCardLarge(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        collectionImageBox(context, collection, _width, _height),
+        collectionImageBox(context, collection, _width, _height, user),
         hSpacer(_space1),
         Text(
           collection.title +
@@ -284,14 +285,14 @@ Widget productImageBox(
 }
 
 Widget collectionImageBox(BuildContext context, Collection collection,
-    double _width, double _height) {
+    double _width, double _height, User user) {
   return Material(
     child: InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CollectionDetailPage(collection)));
+                builder: (context) => CollectionDetailPage(collection: collection, user: user,)));
       },
       child: Container(
         width: _width,
@@ -344,7 +345,7 @@ Widget keywordNotificationListItem() {
   );
 }
 
-Widget collectionShowcase(BuildContext context, Collection collection) {
+Widget collectionShowcase(BuildContext context, Collection collection, User user) {
   const double _width = 240;
   const double _height = 160;
   const double _space1 = 8;
@@ -356,7 +357,7 @@ Widget collectionShowcase(BuildContext context, Collection collection) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        collectionImageBox(context, collection, _width, _height),
+        collectionImageBox(context, collection, _width, _height, user),
         hSpacer(_space1),
         Container(
           width: _width,

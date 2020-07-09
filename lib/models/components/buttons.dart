@@ -110,6 +110,20 @@ Container action2Idle(BuildContext context, String textContext) {
       ));
 }
 
+Container action2Activate(BuildContext context, String textContext) {
+  return Container(
+      width: MediaQuery.of(context).size.width * (54 / 375),
+      height: 24,
+      decoration:
+      BoxDecoration(border: Border.all(color: primary), color: primary),
+      child: Center(
+        child: Text(
+          textContext,
+          style: action2(offWhite),
+        ),
+      ));
+}
+
 Container action2Disabled(BuildContext context, String textContext) {
   return Container(
     width: MediaQuery.of(context).size.width * (54 / 375),
