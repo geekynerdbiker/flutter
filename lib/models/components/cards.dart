@@ -259,9 +259,6 @@ Widget productImageBox(
     BuildContext context, Product product, double _width, double _height) {
   return Material(
     child: InkWell(
-      onLongPress: () {
-        addProduct();
-      },
       onTap: () {
         Navigator.push(
             context,

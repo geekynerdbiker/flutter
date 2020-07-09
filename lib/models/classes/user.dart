@@ -64,7 +64,6 @@ class User {
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
-  User(this.username, this.lastActivity, this.imageURI);
 }
 
 class EditProfileForm {

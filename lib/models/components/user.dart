@@ -3,9 +3,6 @@ import 'dart:ffi';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
-import 'package:bak/models/designs/colors.dart';
-import 'package:bak/models/designs/typos.dart';
-import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/profile/editProfile.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
@@ -155,9 +152,9 @@ Widget userMarquee2(BuildContext context, User _user) {
                 size: 12,
               ),
               wSpacer(_space2),
-              //Text(_user.rate.toString(), style: caption2(primary),),
+              //Text(_user..length, style: caption2(primary),),
               wSpacer(_space3),
-              //Text('(' + _user.reviews.length.toString() + ' Reviews' + ')', style: label(primary),),
+              //Text('(' + _user.reviews..length + ' Reviews' + ')', style: label(primary),),
             ],
           )
         ],
@@ -303,7 +300,7 @@ Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
               Text(_user.username),
               Row(
                 children: [
-                  Text(_review.rate.toString()),
+                  Text(_review.comment),
                   wSpacer(8),
                   Text(_review.updateDate),
                 ],
@@ -322,7 +319,7 @@ Widget userMarqueeRiview(BuildContext context, User _user, Review _review) {
 //                    builder: (context) =>
 //                        ProductDetailPage(_review.productID)));
 //          },
-          child: Text(_review.productID.title),
+          child: Text(_review.productID),
         ),
       ),
       hSpacer(8),

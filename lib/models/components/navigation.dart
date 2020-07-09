@@ -3,11 +3,16 @@ import 'package:bak/models/components/search.dart';
 import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
+import 'package:bak/pages/account/signInPage.dart';
 import 'package:bak/pages/category/category.dart';
 import 'package:bak/pages/category/mainPage.dart';
 import 'package:bak/pages/favorite/mainPage.dart';
+import 'package:bak/pages/home/onboarding.dart';
 import 'package:bak/pages/notification/mainPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
 
 Widget mainAppBar(BuildContext context) {
   return AppBar(
@@ -22,8 +27,9 @@ Widget mainAppBar(BuildContext context) {
     leading: Material(
       child: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => categoryList(context)));
+          auth.signOut().then((onValue) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OnboardingScreen()), (route) => false);
+          });
         },
         child: ImageIcon(AssetImage(category_idle), color: primary),
       ),

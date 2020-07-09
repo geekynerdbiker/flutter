@@ -1,13 +1,11 @@
-import 'package:bak/models/classes/collection.dart';
-import 'package:bak/models/classes/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class Product {
   String userID;
 
   String title;
   List<String> imageURI = [];
-  String imageRUITEST;
 
   String description;
   String updateDate;
@@ -32,7 +30,25 @@ class Product {
 
   DocumentReference reference;
 
-  Product(this.title, this.price, this.imageRUITEST);
+  Product({
+      @required this.userID,
+  @required this.title,
+  @required this.imageURI,
+    @required this.description,
+    @required this.updateDate,
+    @required this.soldDate,
+    @required this.status,
+    @required this.price,
+    @required this.deliveryFee,
+    @required this.state,
+    @required this.size,
+    @required this.material,
+    @required this.color,
+    @required this.category,
+    @required this.tags,
+    @required this.reviews,
+    @required this.collections,
+    @required this.rate});
 
   Product.fromMap(Map<String, dynamic> map, {this.reference})
       : userID = map['userID'],
@@ -64,23 +80,16 @@ class Product {
   int getReviews() {
     return this.reviews.length;
   }
-
-//  double getRate() {
-//    for (int i = 0; i < reviews.length; i++) this.rate += reviews[i].rate;
-//
-//    if (this.rate == 0) return 0;
-//    return this.rate / reviews.length;
-//  }
 }
 
 class Review {
-  User userID;
-  Product productID;
+  String userID;
+  String productID;
 
   String comment;
   String updateDate;
 
-  double rate = 0;
+  String rate;
   DocumentReference reference;
 
   Review(this.comment, this.updateDate, this.productID);
@@ -112,9 +121,10 @@ class Tag {
 }
 
 class Category {
-  int level;
+  String level;
   String parent;
   String title;
+
   DocumentReference reference;
 
   Category(this.title);
