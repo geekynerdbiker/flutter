@@ -1,4 +1,3 @@
-import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';

@@ -13,6 +13,9 @@ import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class RecommendPage extends StatelessWidget {
+  final User user;
+  RecommendPage({this.user});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +77,7 @@ class RecommendPage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: collectionItems.length,
         itemBuilder: (context, index) {
-          return collectionCardLarge(context, collectionItems[index], primary);
+          return collectionCardLarge(context, collectionItems[index], user, primary);
         },
       ),
     );

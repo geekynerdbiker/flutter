@@ -11,6 +11,9 @@ import 'package:bak/pages/product/productList.dart';
 import 'package:flutter/material.dart';
 
 class FollowingCollectionsPage extends StatelessWidget {
+  final User user;
+
+  FollowingCollectionsPage({this.user});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +25,12 @@ class FollowingCollectionsPage extends StatelessWidget {
     );
   }
 
-  Widget collectionItem(BuildContext context, Collection collection) {
+  Widget collectionItem(BuildContext context, Collection collection, User user) {
     return Container(
       height: MediaQuery.of(context).size.width * (500 / 375),
       child: Column(
         children: [
-          collectionBannerItem(context, collection),
+          collectionBannerItem(context, collection, user),
           Expanded(child:collectionProductItemList(context, collection)),
         ],
       ),
@@ -49,7 +52,7 @@ class FollowingCollectionsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CollectionDetailPage(collection)));
+                          builder: (context) => CollectionDetailPage(collection: collection, user: user,)));
                 },
                 child: Text(
                   '+ 더보기',
@@ -63,7 +66,7 @@ class FollowingCollectionsPage extends StatelessWidget {
     );
   }
 
-  Widget collectionBannerItem(BuildContext context, Collection collection) {
+  Widget collectionBannerItem(BuildContext context, Collection collection, User user) {
     final double _width = MediaQuery.of(context).size.width;
     final double _height = MediaQuery.of(context).size.width * (260 / 375);
 
@@ -74,7 +77,7 @@ class FollowingCollectionsPage extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: collectionInfoLine(context, collection),
           ),
-          collectionImageBox(context, collection, _width, _height),
+          collectionImageBox(context, collection, _width, _height, user),
         ],
       ),
     );

@@ -33,13 +33,26 @@ class _AddProductPageState extends State<AddProductPage> {
   List<Tag> _tags;
   int index = 0;
 
+  String userID;
   String title;
-  String size;
-  String material;
-  String brand; //tag
+  String imageURI;
   String description;
+  String updateDate;
+  String soldDate;
+  String status;
   String price;
   String deliveryFee;
+  String state;
+  String size;
+  String material;
+  String color;
+  String category;
+  String tags;
+  String reviews;
+  String collection;
+  String rate;
+
+  String brand;
 
   @override
   void initState() {
@@ -333,7 +346,7 @@ class _AddProductPageState extends State<AddProductPage> {
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: TextFormField(
-        onSaved: (value) => title = value,
+        onSaved: (value) => brand = value,
         style: TextStyle(
           fontSize: 12,
         ),
@@ -356,7 +369,7 @@ class _AddProductPageState extends State<AddProductPage> {
           if (value.isEmpty) return '상품 설명을 입력하세요.';
           return null;
         },
-        onSaved: (value) => title = value,
+        onSaved: (value) => description = value,
         maxLines: 5,
         style: TextStyle(
           fontSize: 12,
@@ -605,9 +618,10 @@ class _AddProductPageState extends State<AddProductPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Center(child: Text(tag.title),)
-                ),
+                    margin: EdgeInsets.only(left: 10),
+                    child: Center(
+                      child: Text(tag.title),
+                    )),
                 Material(
                   child: InkWell(
                     onTap: () {
@@ -615,7 +629,10 @@ class _AddProductPageState extends State<AddProductPage> {
                         _tags.remove(tag);
                       });
                     },
-                    child: ImageIcon(AssetImage(delete_tag_idle), size: 12,),
+                    child: ImageIcon(
+                      AssetImage(delete_tag_idle),
+                      size: 12,
+                    ),
                   ),
                 )
               ],
@@ -668,11 +685,9 @@ class _AddProductPageState extends State<AddProductPage> {
     final FormState formState = _formKey.currentState;
     _autoValidate = true;
 
-    Product product = Product(userID: null, title: title, imageURI: null, description: description, updateDate: DateTime.now().toString(), soldDate: 'default', status: 'onSale', price: price, deliveryFee: deliveryFee, state: null, size: size, material: material, color: ['default'], category: categoryItem.title, tags: ['default'], reviews: ['default'], collections: ['default'], rate: 'default');
-
     if (formState.validate()) {
       formState.save();
-      addProduct(product);
+      addProduct();
       try {
         Navigator.pushAndRemoveUntil(
             context,
@@ -682,6 +697,29 @@ class _AddProductPageState extends State<AddProductPage> {
         print(e.message);
       }
     }
+  }
+
+  void addProduct() {
+    Firestore.instance.collection('products').add({
+      "userID": userID ?? "_NULL",
+      "title": title ?? "_NULL",
+      "imageURI": imageURI ?? ["_NULL"],
+      "description": description ?? "_NULL",
+      "updateDate": DateTime.now().toString(),
+      "soldDate": soldDate ?? "_NULL",
+      "status": "onSale",
+      "price": price ?? "_NULL",
+      "deliveryFee": deliveryFee ?? "_NULL",
+      "state": state ?? "_NULL",
+      "size": size ?? "_NULL",
+      "material": material ?? "_NULL",
+      "color": color ?? ["_NULL"],
+      "category": categoryItem.title ?? "_NULL",
+      "tags": tags ?? ["_NULL"],
+      "reviews": reviews ?? ["_NULL"],
+      "collection": collection ?? ["_NULL"],
+      "rate": rate ?? "_NULL",
+    });
   }
 }
 
@@ -817,28 +855,4 @@ class _SelectionSwitch extends State<SelectionSwitch> {
       ),
     );
   }
-}
-
-void addProduct(Product product) {
-  Firestore.instance.collection('products').add(
-      {
-        "userID" : '',
-        "title" : product.title,
-        "imageURI" : product.imageURI,
-        "description" : product.description,
-        "updateDate" : DateTime.now(),
-        "soldDate" : "",
-        "status" : "onSale",
-        "price" : "480000",
-        "deliveryFee" : "4000",
-        "state" : product.state,
-        "size" : product.size,
-        "material" : product.material,
-        "color" : product.color,
-        "category" : product.category,
-        "tags" : ['default'],
-        "reviews" : ['default'],
-        "collection" : ['default'],
-        "rate" : product.rate,
-      });
 }

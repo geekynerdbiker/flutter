@@ -1,12 +1,22 @@
 import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:bak/models/designs/typos.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPage extends StatefulWidget {
   final Collection collection;
+  final User user;
 
-  const CollectionDetailPage(this.collection);
+  CollectionDetailPage({this.collection, this.user});
 
   @override
   _CollectionDetailPageState createState() => _CollectionDetailPageState();
@@ -15,6 +25,7 @@ class CollectionDetailPage extends StatefulWidget {
 class _CollectionDetailPageState extends State<CollectionDetailPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -31,258 +42,261 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDefaultDeep(context, '컬렉션 상세'),
+      appBar: appBarDefaultDeep(context, 'Collection'),
       backgroundColor: offWhite,
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width * 2 / 5,
-        child: FloatingActionButton.extended(
-            label: Text(
-              "이 기획전 참여하기",
-              style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: offWhite),
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(100))),
-            backgroundColor: Colors.black,
-            onPressed: () {}),
+        child: floatingButton(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: ListView(
         shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-            child: Column(
+          collectionInfo(context),
+          widget.user.username == widget.collection.userID
+              ? productItemList(context)
+              : tabBar(context),
+        ],
+      ),
+    );
+  }
+
+  Widget floatingButton(BuildContext context) {
+    return FloatingActionButton.extended(
+        label: Text(
+          "컬렉션 참여하기",
+          style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.bold, color: offWhite),
+        ),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(100))),
+        backgroundColor: Colors.black,
+        onPressed: () {});
+  }
+
+  Widget collectionInfo(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.width * (260 / 375),
+          width: MediaQuery.of(context).size.width,
+          child: Image(
+            image: FirebaseImage(widget.collection.imageURI,
+                shouldCache: true,
+                maxSizeBytes: 5000 * 1000,
+                cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+            fit: BoxFit.cover,
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.width * 5 / 8,
-                  width: MediaQuery.of(context).size.width - 40,
-                  child: Image.asset(
-                    widget.collection.imageURI,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Container(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          height: 20,
-                          width: widget.collection.title.length.toDouble() * 10,
-                          child: Text(
-                            widget.collection.title + ' ',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              height: 20,
-                              width: 20 +
-                                  widget.collection.userID.length
-                                          .toDouble() *
-                                      10,
-                              child: Text(
-                                'by ' + widget.collection.userID,
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                            ),
-                            Container(
-                              width: 3,
-                            ),
-                            Container(
-                              height: 14,
-                              width: 14,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.black,
-                              ),
-                              child: Image.asset(
-                                widget.collection.userID,//.imageURI,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Container(
-                          height: 30,
-                          width: 50,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                widget.collection.userID//.myProducts.length
-                                    .toString(),
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Items',
-                                textAlign: TextAlign.start,
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 30,
-                          width: 60,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                widget.collection.userID//.followers.length
-                                    .toString(),
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Followers',
-                                textAlign: TextAlign.start,
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 10,
-                ),
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  color: offWhite,
-                  child: Text(widget.collection.description),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                height: 30,
-                width: 90,
-                child: TabBar(
-                  controller: _controller,
-                  labelColor: Colors.black,
-                  indicatorColor: Colors.transparent,
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab(
-                      icon: Icon(
-                        Icons.border_all,
-                        size: 16,
+                    Container(
+                      margin: EdgeInsets.only(left: 20, top: 20),
+                      child: Text(
+                        widget.collection.title +
+                            ' (' +
+                            widget.collection.products.length.toString() +
+                            ')',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Tab(
-                      icon: Icon(
-                        Icons.apps,
-                        size: 16,
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        'by ' + widget.collection.userID,
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          Container(
-            height: 200 + MediaQuery.of(context).size.width * 1 / 2,
-            child: TabBarView(
-              controller: _controller,
-              children: <Widget>[
-                //Products(widget.collection.products),
-                //Products3(widget.collection.products),
+                widget.user.username != widget.collection.userID
+                    ? Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        child: Material(
+                          child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isFollowing = !isFollowing;
+                                });
+                              },
+                              child: !isFollowing
+                                  ? action2Idle(context, '+ 팔로우')
+                                  : action2Activate(context, '팔로잉')),
+                        ))
+                    : Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        child: Material(
+                          child:
+                              InkWell(child: ImageIcon(AssetImage(edit_idle))),
+                        ),
+                      )
               ],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Container(
-              height: 40,
-              child: Text(
-                '유저들의 ' + widget.collection.title,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 200 + MediaQuery.of(context).size.width * 1 / 2,
-            child: TabBarView(
-              controller: _controller,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //Products(widget.collection.products),
-                //Products3(widget.collection.products),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Container(
-              height: 40,
-              child: Text(
-                '댓글',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-          //CommentList(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width - 120,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, bottom: 3),
-                    child: TextFormField(
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                      decoration: InputDecoration(
-                          border: InputBorder.none, hintText: '댓글을 입력하세요.'),
-                    ),
-                  )),
-              Padding(
-                padding: EdgeInsets.all(5),
-              ),
-              Container(
-                  height: 40,
-                  width: 40,
-                  color: Colors.black,
-                  child: Center(
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
-                      '작성',
-                      style: TextStyle(fontSize: 12, color: offWhite),
-                    ),
-                  )),
+                      '아이템 ' + widget.collection.products.length.toString(),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    )),
+                Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      '팔로워 ' + widget.collection.followers.length.toString(),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    )),
+              ],
+            ),
+          ],
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          width: MediaQuery.of(context).size.width,
+          color: primary,
+          child: Text(widget.collection.description),
+        ),
+      ],
+    );
+  }
+
+  Widget tabBar(BuildContext context) {
+    int myProducts = 0;
+    int usersProducts = 0;
+
+    for (int i = 0; i < widget.collection.products.length; i++)
+      for (int j = 0; j < widget.user.myProducts.length; j++)
+        widget.collection.products[i] == widget.user.myProducts[j]
+            ? myProducts++
+            : usersProducts++;
+
+    return Expanded(
+        child: ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        TabBar(
+          controller: _controller,
+          labelColor: primary,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: primary,
+
+          tabs: [
+            Tab(
+              icon: Text('나의 컬렉션 (' + myProducts.toString() + ')'),
+            ),
+            Tab(
+              icon: Text('유저들의 컬렉션 (' + usersProducts.toString() + ')'),
+            ),
+          ],
+        ),
+        Container(
+          height: 300,
+          child: TabBarView(
+            controller: _controller,
+            children: <Widget>[
+              ListView(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), children: [Container(height: 100, width: 100, color: primary,)],),
+              ListView(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), children: [],),
             ],
           ),
+        )
+      ],
+    ));
+  }
+
+  Widget productItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('products').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildProductBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Product> productItems =
+        snapshot.map((e) => Product.fromSnapshot(e)).toList();
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: productItems.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(top: 10, right: 10),
+            child: productItemCardMedium(context, productItems[index]),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget productItemCardMedium(BuildContext context, Product product) {
+    const double _width = 160;
+    const double _height = 200;
+    const double _space1 = 14;
+    const double _space2 = 4;
+    const double _icon = 44;
+
+    return Container(
+      child: Column(
+        children: <Widget>[
+          productImageBox(context, product, _width, _height),
+          hSpacer(_space1),
+          Container(
+            padding: EdgeInsets.only(left: 12),
+            child: SizedBox(
+              width: _width - 12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.title.length < 9
+                            ? product.title
+                            : product.title.substring(0, 8) + ' ..',
+                        style: body1(primary),
+                      ),
+                      hSpacer(_space2),
+                      Text(
+                        product.price.toString() + '원',
+                        style: body1(primary),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: _icon,
+                    height: _icon,
+                    child: Center(
+                      child: ImageIcon(
+                        AssetImage(favorite_idle_inverse),
+                        color: primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

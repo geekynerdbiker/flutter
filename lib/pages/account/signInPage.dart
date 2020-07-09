@@ -1,3 +1,4 @@
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
@@ -158,8 +159,7 @@ class _SignInPage extends State<SignInPage> {
 
   void signIn() async{
     Future<QuerySnapshot> snapshot = Firestore.instance.collection('users').getDocuments();
-
-
-
+    User user = User('temp');
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BootPage(user: user)), (route) => false);
   }
 }

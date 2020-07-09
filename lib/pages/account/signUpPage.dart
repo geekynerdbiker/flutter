@@ -1,4 +1,3 @@
-import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/designs/colors.dart';
@@ -250,7 +249,6 @@ class _SignUpPage extends State<SignUpPage> {
         obscureText: true,
         validator: (value) {
           if (value != password) {
-            print(password);
             return '비밀번호가 일치하지 않습니다.';
           }
           return null;

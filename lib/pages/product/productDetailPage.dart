@@ -1,9 +1,7 @@
-import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
-import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';

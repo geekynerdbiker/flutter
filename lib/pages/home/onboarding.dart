@@ -1,4 +1,3 @@
-import 'package:bak/database/initialize.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/selection.dart';

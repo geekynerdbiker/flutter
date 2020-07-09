@@ -1,4 +1,4 @@
-import 'package:bak/database/initialize.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/pages/account/signInPage.dart';
@@ -11,6 +11,9 @@ import 'package:bak/pages/profile/mainPage.dart';
 import 'package:flutter/material.dart';
 
 class BootPage extends StatefulWidget {
+  final User user;
+
+  BootPage({this.user});
   @override
   _BootPageState createState() => _BootPageState();
 }
@@ -25,7 +28,7 @@ class _BootPageState extends State<BootPage> {
         backgroundColor: offWhite,
         body: TabBarView(
           children: <Widget>[
-            buildMainPage(context),
+            HomePage(user: widget.user,),
             NewnewPage(),
             AddProductPage(),
             MessagePage(),

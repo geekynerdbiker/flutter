@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:bak/database/initialize.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/pages/home/bootPage.dart';
 import 'package:bak/pages/home/onboarding.dart';
@@ -27,12 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    if (auth.currentUser() == null)
+    User user;
+
+    if (user == null)
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
     else
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BootPage()));
+          context, MaterialPageRoute(builder: (context) => BootPage(user: user,)));
   }
 
   @override

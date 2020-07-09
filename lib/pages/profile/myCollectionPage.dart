@@ -104,7 +104,7 @@ class MyCollectionPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CollectionDetailPage(collection)));
+                          builder: (context) => CollectionDetailPage(collection: collection)));
                 },
                 child: Text(
                   '+ 더보기',
@@ -129,7 +129,7 @@ class MyCollectionPage extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: collectionInfoLine(context, collection),
           ),
-          collectionImageBox(context, collection, _width, _height),
+          collectionImageBox(context, collection, _width, _height, user),
         ],
       ),
     );
