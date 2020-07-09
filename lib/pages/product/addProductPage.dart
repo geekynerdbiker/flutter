@@ -1,35 +1,36 @@
 import 'dart:async';
 
-import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
-import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
-import 'package:bak/pages/product/afterAddProdct.dart';
+import 'package:bak/pages/home/bootPage.dart';
 import 'package:bak/pages/category/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddProductPage extends StatefulWidget {
-  bool isCategorySelected;
   Category category;
 
-  AddProductPage({Key key, @required this.isCategorySelected, this.category})
-      : super(key: key);
+  AddProductPage({this.category});
 
   @override
   _AddProductPageState createState() => _AddProductPageState();
 }
 
 class _AddProductPageState extends State<AddProductPage> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _autoValidate = false;
+
+  Category categoryItem;
   List<Asset> _images;
+  List<Tag> _tags;
   int index = 0;
 
   String title;
@@ -39,15 +40,6 @@ class _AddProductPageState extends State<AddProductPage> {
   String description;
   String price;
   String deliveryFee;
-  String _error = 'No Error Detected';
-
-  List<DocumentSnapshot> categories = <DocumentSnapshot>[];
-
-  Future getCategories() async {
-    var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection('categories').getDocuments();
-    return qn.documents;
-  }
 
   @override
   void initState() {
@@ -61,6 +53,7 @@ class _AddProductPageState extends State<AddProductPage> {
       appBar: appBarDefault(context, '상품 등록'),
       body: Form(
         key: _formKey,
+        autovalidate: _autoValidate,
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: <Widget>[
@@ -68,8 +61,9 @@ class _AddProductPageState extends State<AddProductPage> {
             productField(context),
             palette(context),
             stateSlider(context),
-            addTag(context),
+            productTags(context),
             acceptCardPayment(context),
+            uploadButton(context),
           ],
         ),
       ),
@@ -100,7 +94,7 @@ class _AddProductPageState extends State<AddProductPage> {
     });
 
     List<Asset> resultList;
-    String error;
+    String _error;
 
     try {
       resultList = await MultiImagePicker.pickImages(
@@ -114,7 +108,7 @@ class _AddProductPageState extends State<AddProductPage> {
         ),
       );
     } on Exception catch (e) {
-      error = e.toString();
+      _error = e.toString();
     }
 
     if (!mounted) return;
@@ -122,7 +116,7 @@ class _AddProductPageState extends State<AddProductPage> {
     setState(() {
       for (int i = index; i < resultList.length + index; i++)
         _images = resultList;
-      _error = error;
+      _error = _error;
     });
   }
 
@@ -247,44 +241,49 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget categorySelector(BuildContext context) {
-    if (widget.isCategorySelected)
-      return longButton(
-        context,
-        offWhite,
-        true,
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(widget.category.parent +
-                ' > ' +
-                widget.category.title),
+    return Material(
+      child: InkWell(
+        onTap: () async {
+          categoryItem = await Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CategoryPage()));
+          setState(() {
+            categoryItem == null ? null : categoryItem;
+          });
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * (335 / 375),
+          height: 44,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black), color: offWhite),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: isCategorySelected(context, categoryItem),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget isCategorySelected(BuildContext context, Category categoryItem) {
+    if (categoryItem == null)
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text('카테고리 선택'),
+          ),
+          ImageIcon(
+            AssetImage(forward_idle),
+            size: 12,
+            color: semiDark,
+          ),
+        ],
       );
     else
-      return longButtonNav(
-        context,
-        offWhite,
-        true,
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('카테고리 선택'),
-              ),
-              ImageIcon(
-                AssetImage(forward_idle),
-                size: 12,
-                color: semiDark,
-              ),
-            ],
-          ),
-        ),
-        CategoryPage(),
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(categoryItem.parent + ' > ' + categoryItem.title),
       );
   }
 
@@ -363,7 +362,7 @@ class _AddProductPageState extends State<AddProductPage> {
           fontSize: 12,
         ),
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 10),
+            contentPadding: EdgeInsets.only(top: 10, left: 10),
             border: InputBorder.none,
             hintText: '상품 설명'),
       ),
@@ -428,50 +427,28 @@ class _AddProductPageState extends State<AddProductPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              colorCircle(context, Colors.red),
-              colorCircle(context, Colors.orange),
-              colorCircle(context, Colors.yellow),
-              colorCircle(context, Colors.lightGreen),
-              colorCircle(context, Colors.green),
-              colorCircle(context, Colors.lightBlueAccent),
+              ColorCircle(color: Colors.red),
+              ColorCircle(color: Colors.orange),
+              ColorCircle(color: Colors.yellow),
+              ColorCircle(color: Colors.lightGreen),
+              ColorCircle(color: Colors.green),
+              ColorCircle(color: Colors.lightBlueAccent),
             ],
           ),
           hSpacer(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              colorCircle(context, Colors.blue),
-              colorCircle(context, Colors.purple),
-              colorCircle(context, Colors.pink),
-              colorCircle(context, Colors.white),
-              colorCircle(context, Colors.grey),
-              colorCircle(context, Colors.black),
+              ColorCircle(color: Colors.blue),
+              ColorCircle(color: Colors.purple),
+              ColorCircle(color: Colors.pink),
+              ColorCircle(color: Colors.white),
+              ColorCircle(color: Colors.grey),
+              ColorCircle(color: Colors.black),
             ],
           )
         ],
       ),
-    );
-  }
-
-  Widget colorCircle(BuildContext context, Color _color) {
-    const double _r = 32;
-
-    if (_color == Colors.white) {
-      return Container(
-        width: _r,
-        height: _r,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(100),
-            color: _color),
-      );
-    }
-
-    return Container(
-      width: _r,
-      height: _r,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100), color: _color),
     );
   }
 
@@ -493,42 +470,158 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 
-  Widget addTag(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Text('태그 추가'), productTags(context)],
-      ),
-    );
-  }
-
   Widget productTags(BuildContext context) {
     return Container(
-      height: 45,
-      child: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          tagBox(context),
-          tagBox(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text('태그 추가'),
+          ),
+          productTagList(context),
         ],
       ),
     );
   }
 
-  Widget tagBox(BuildContext context) {
-    const double _length = 30;
+  Widget productTagList(BuildContext context) {
+    List<Widget> tagList = [emptyTagBox(context)];
+
+    if (_tags != null)
+      for (int i = 0; i < _tags.length; i++)
+        tagList.add(tagBox(context, _tags[i]));
+
     return Container(
-      margin: EdgeInsets.only(right: 15),
-      width: _length,
-      height: _length,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        color: offWhite,
+        height: 45,
+        child: Expanded(
+          child: ListView(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            scrollDirection: Axis.horizontal,
+            children: tagList,
+          ),
+        ));
+  }
+
+  Future<void> loadTags() async {
+    setState(() {
+      _formKey.currentState.save();
+      if (_tags == null) _tags = List<Tag>();
+    });
+
+    String tag;
+    String _error;
+
+    try {
+      tag = await showDialog<String>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('태그를 추가하세요.'),
+              content: TextFormField(
+                onChanged: (value) => tag = value,
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+                cursorColor: primary,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      borderSide: BorderSide(
+                        color: primary,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0),
+                      borderSide: BorderSide(
+                        color: primary,
+                      ),
+                    ),
+                    hintText: ''),
+              ),
+              actions: [
+                FlatButton(
+                  onPressed: () => Navigator.pop(context),
+                  color: primary,
+                  child: Text('취소'),
+                ),
+                FlatButton(
+                  onPressed: () => Navigator.pop(context, tag),
+                  color: primary,
+                  child: Text('추가'),
+                )
+              ],
+            );
+          });
+    } on Exception catch (e) {
+      _error = e.toString();
+    }
+
+    setState(() {
+      if (tag != null) _tags.add(Tag(tag));
+      _error = _error;
+    });
+  }
+
+  Widget emptyTagBox(BuildContext context) {
+    const double _length = 30;
+
+    return Material(
+      child: InkWell(
+        onTap: () {
+          loadTags();
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: 20),
+          width: _length,
+          height: _length,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            color: offWhite,
+          ),
+          child: Center(
+            child: Icon(Icons.add),
+          ),
+        ),
       ),
-      child: Center(
-        child: Icon(Icons.add),
+    );
+  }
+
+  Widget tagBox(BuildContext context, Tag tag) {
+    return Material(
+      child: InkWell(
+        child: Container(
+          margin: EdgeInsets.only(left: 10),
+          width: tag.title.length * 7 + 35.0,
+          height: 30,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            color: offWhite,
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Center(child: Text(tag.title),)
+                ),
+                Material(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _tags.remove(tag);
+                      });
+                    },
+                    child: ImageIcon(AssetImage(delete_tag_idle), size: 12,),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -555,7 +648,7 @@ class _AddProductPageState extends State<AddProductPage> {
   Widget uploadButton(BuildContext context) {
     return Material(
       child: InkWell(
-        //onTap: signIn,
+        onTap: add,
         child: Container(
           width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
@@ -570,4 +663,182 @@ class _AddProductPageState extends State<AddProductPage> {
       ),
     );
   }
+
+  Future<void> add() async {
+    final FormState formState = _formKey.currentState;
+    _autoValidate = true;
+
+    Product product = Product(userID: null, title: title, imageURI: null, description: description, updateDate: DateTime.now().toString(), soldDate: 'default', status: 'onSale', price: price, deliveryFee: deliveryFee, state: null, size: size, material: material, color: ['default'], category: categoryItem.title, tags: ['default'], reviews: ['default'], collections: ['default'], rate: 'default');
+
+    if (formState.validate()) {
+      formState.save();
+      addProduct(product);
+      try {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => BootPage()),
+            (route) => false);
+      } catch (e) {
+        print(e.message);
+      }
+    }
+  }
+}
+
+class ColorCircle extends StatefulWidget {
+  final Color color;
+
+  ColorCircle({this.color});
+
+  @override
+  _ColorCircle createState() => _ColorCircle();
+}
+
+class _ColorCircle extends State<ColorCircle> {
+  bool isSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return colorCircle(context, widget.color);
+  }
+
+  Widget colorCircle(BuildContext context, Color _color) {
+    const double _r = 32;
+    var checkIcon = ImageIcon(
+      AssetImage(check_idle),
+      color: offWhite,
+    );
+
+    if (_color == Colors.white) {
+      var checkIcon = ImageIcon(
+        AssetImage(check_idle),
+        color: primary,
+      );
+      return Material(
+        child: InkWell(
+            onTap: () {
+              setState(() {
+                isSelected = !isSelected;
+                checkIcon = isSelected ? checkIcon : null;
+              });
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: _r,
+                  height: _r,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(100),
+                      color: _color),
+                ),
+                Align(child: isSelected ? checkIcon : null),
+              ],
+            )),
+      );
+    }
+
+    return Material(
+      child: InkWell(
+          onTap: () {
+            setState(() {
+              isSelected = !isSelected;
+              checkIcon = isSelected ? checkIcon : null;
+            });
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: _r,
+                height: _r,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100), color: _color),
+              ),
+              Center(child: isSelected ? checkIcon : null),
+            ],
+          )),
+    );
+  }
+}
+
+class StateSlider extends StatefulWidget {
+  _StateSlider createState() => _StateSlider();
+}
+
+class _StateSlider extends State<StateSlider> {
+  double _value = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliderTheme(
+      data: SliderTheme.of(context).copyWith(
+          activeTrackColor: primary,
+          activeTickMarkColor: primary,
+          inactiveTrackColor: semiDark,
+          inactiveTickMarkColor: semiDark,
+          thumbColor: primary,
+          overlayColor: Colors.transparent),
+      child: Slider(
+          min: 0,
+          max: 10,
+          value: _value,
+          divisions: 10,
+          onChanged: (value) {
+            setState(() {
+              _value = value;
+            });
+          }),
+    );
+  }
+}
+
+class SelectionSwitch extends StatefulWidget {
+  @override
+  _SelectionSwitch createState() => _SelectionSwitch();
+}
+
+class _SelectionSwitch extends State<SelectionSwitch> {
+  bool isSwitched = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: 0.8,
+      child: CupertinoSwitch(
+        activeColor: primary,
+        value: isSwitched,
+        onChanged: (value) {
+          setState(() {
+            isSwitched = value;
+          });
+        },
+      ),
+    );
+  }
+}
+
+void addProduct(Product product) {
+  Firestore.instance.collection('products').add(
+      {
+        "userID" : '',
+        "title" : product.title,
+        "imageURI" : product.imageURI,
+        "description" : product.description,
+        "updateDate" : DateTime.now(),
+        "soldDate" : "",
+        "status" : "onSale",
+        "price" : "480000",
+        "deliveryFee" : "4000",
+        "state" : product.state,
+        "size" : product.size,
+        "material" : product.material,
+        "color" : product.color,
+        "category" : product.category,
+        "tags" : ['default'],
+        "reviews" : ['default'],
+        "collection" : ['default'],
+        "rate" : product.rate,
+      });
 }

@@ -3,13 +3,17 @@ import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/classes/collection.dart';
-import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/components/search.dart';
+import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/message/mainPage.dart';
+import 'package:bak/pages/newnew/mainPage.dart';
+import 'package:bak/pages/product/addProductPage.dart';
 import 'package:bak/pages/product/productList.dart';
+import 'package:bak/pages/profile/mainPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -20,28 +24,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: mainAppBar(context),
-      backgroundColor: offWhite,
-      body: ListView(
-        children: <Widget>[
-          carouselAndSearchBar(context),
-          trendSearch(context),
-          newNewPick(context),
-          popularSeller(context),
-          recentView(context),
-          hashTagCollection(context, new Collection('title', 'username', '/')),
-          collectionBanner(context),
-        ],
-      ),
-    );
+
   }
+}
+
+Widget buildMainPage(BuildContext context) {
+  return Scaffold(
+    appBar: mainAppBar(context),
+    backgroundColor: offWhite,
+    body: ListView(
+      children: <Widget>[
+        carouselAndSearchBar(context),
+        trendSearch(context),
+        newNewPick(context),
+        popularSeller(context),
+        recentView(context),
+        hashTagCollection(context, new Collection('title', 'username', '/')),
+        collectionBanner(context),
+      ],
+    ),
+  ); 
 }
 
 Widget carouselAndSearchBar(BuildContext context) {

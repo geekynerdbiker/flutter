@@ -42,7 +42,7 @@ class MyCollectionPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로워'),
                     wSpacer(_space1),
-                    Text(user.followers.length.toString()),
+                    //Text(user.followers.length.toString()),
                   ],),
                 ),
               ),
@@ -53,7 +53,7 @@ class MyCollectionPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로잉'),
                     wSpacer(_space1),
-                    Text(user.following.length.toString()),
+                    //Text(user.following.length.toString()),
                   ],),
                 ),
               ),
@@ -67,9 +67,9 @@ class MyCollectionPage extends StatelessWidget {
             children: [
               Icon(Icons.star_border),
               wSpacer(_space1),
-              Text(user.rate.toString()),
+              //Text(user.myProducts.length.toString()),
               wSpacer(_space2),
-              Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
+              //Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
             ],
           ),
         )

@@ -38,7 +38,7 @@ class FollowingShopsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          userMarquee1(context, new User('username', '1', 'imageURI')),
+          //userMarquee1(context, new User('username', '1', 'imageURI')),
           seeMore(context, accent1, ProductListPage()),
         ],
       )

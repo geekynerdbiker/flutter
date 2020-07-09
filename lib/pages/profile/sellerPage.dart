@@ -34,10 +34,10 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
 
   List<Widget> _pages = [
     MyShopPage(
-      user: new User('username', '1', 'imageURI'),
+      //user: new User('username', '1', 'imageURI'),
     ),
     MyCollectionPage(
-      user: new User('username', '1', 'imageURI'),
+//      user: new User('username', '1', 'imageURI'),
     ),
   ];
 
@@ -61,7 +61,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: <Widget>[
-          userMarqueeMyPage(context, new User('username', '1', 'imageURI')),
+          //userMarqueeMyPage(context, new User('username', '1', 'imageURI')),
           Container(
             margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
             child: Row(

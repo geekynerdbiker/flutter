@@ -1,13 +1,11 @@
-import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/account/findPassword.dart';
-import 'package:bak/pages/account/selectFavor.dart';
 import 'package:bak/pages/account/signUpPage.dart';
 import 'package:bak/pages/home/bootPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,7 +13,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPage extends State<SignInPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
   String account;
@@ -100,8 +98,7 @@ class _SignInPage extends State<SignInPage> {
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: TextFormField(
         validator: (value) {
-          if(value.isEmpty)
-            return '상점명 또는 이메일을 입력하세요.';
+          if (value.isEmpty) return '상점명 또는 이메일을 입력하세요.';
           return null;
         },
         onSaved: (value) => account = value,
@@ -125,8 +122,7 @@ class _SignInPage extends State<SignInPage> {
       child: TextFormField(
         obscureText: true,
         validator: (value) {
-          if(value.isEmpty)
-            return '비밀번호를 입력하세요.';
+          if (value.isEmpty) return '비밀번호를 입력하세요.';
           return null;
         },
         onSaved: (value) => password = value,
@@ -160,20 +156,10 @@ class _SignInPage extends State<SignInPage> {
     );
   }
 
-  Future<void> signIn() async {
-    final FormState formState = _formKey.currentState;
-    _autoValidate = true;
+  void signIn() async{
+    Future<QuerySnapshot> snapshot = Firestore.instance.collection('users').getDocuments();
 
-    if (formState.validate()) {
-      formState.save();
-      try {
-        FirebaseUser user = (await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: account, password: password)).user;
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BootPage()), (route) => false);
-      } catch (e) {
-        print(e.message);
-      }
-    }
+
+
   }
 }

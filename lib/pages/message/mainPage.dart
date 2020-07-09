@@ -22,12 +22,12 @@ class _MessagePage extends State<MessagePage> {
       appBar: appBarDefault(context, 'Messages'),
       body: ListView(
         children: [
-          userMarqueeMessageListItem(context, new User('121', '5', '/'), ChatRoomPage(new User('121', '2', 'imageURI'))),
-          borderLineGreyLite(context),
-          userMarqueeMessageListItem(context, new User('11221', '5', '/'), ChatRoomPage(new User('11221', '2', 'imageURI'))),
-          borderLineGreyLite(context),
-          userMarqueeMessageListItem(context, new User('1ss21', '5', '/'), ChatRoomPage(new User('1ss21', '2', 'imageURI'))),
-          borderLineGreyLite(context),
+//          userMarqueeMessageListItem(context, new User('121', '5', '/'), ChatRoomPage(new User('121', '2', 'imageURI'))),
+//          borderLineGreyLite(context),
+//          userMarqueeMessageListItem(context, new User('11221', '5', '/'), ChatRoomPage(new User('11221', '2', 'imageURI'))),
+//          borderLineGreyLite(context),
+//          userMarqueeMessageListItem(context, new User('1ss21', '5', '/'), ChatRoomPage(new User('1ss21', '2', 'imageURI'))),
+//          borderLineGreyLite(context),
         ],
       ),
     );

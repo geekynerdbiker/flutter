@@ -1,6 +1,9 @@
+import 'package:bak/database/initialize.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
+import 'package:bak/pages/account/signInPage.dart';
 import 'package:bak/pages/home/mainPage.dart';
+import 'package:bak/pages/home/onboarding.dart';
 import 'package:bak/pages/message/mainPage.dart';
 import 'package:bak/pages/newnew/mainPage.dart';
 import 'package:bak/pages/product/addProductPage.dart';
@@ -13,9 +16,6 @@ class BootPage extends StatefulWidget {
 }
 
 class _BootPageState extends State<BootPage> {
-  bool signIn = false;
-  bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,9 +25,9 @@ class _BootPageState extends State<BootPage> {
         backgroundColor: offWhite,
         body: TabBarView(
           children: <Widget>[
-            HomePage(),
+            buildMainPage(context),
             NewnewPage(),
-            AddProductPage(isCategorySelected: false,),
+            AddProductPage(),
             MessagePage(),
             ProfilePage(),
           ],
@@ -42,21 +42,25 @@ class _BootPageState extends State<BootPage> {
                 icon: ImageIcon(AssetImage(tab_bar_home)),
               ),
               Tab(
-                icon: ImageIcon(AssetImage(
-                    tab_bar_discover),
-                ),),
+                icon: ImageIcon(
+                  AssetImage(tab_bar_discover),
+                ),
+              ),
               Tab(
-                icon: ImageIcon(AssetImage(
-                    tab_bar_new_item),
-              ),),
+                icon: ImageIcon(
+                  AssetImage(tab_bar_new_item),
+                ),
+              ),
               Tab(
-                icon: ImageIcon(AssetImage(
-                    tab_bar_message),
-              ),),
+                icon: ImageIcon(
+                  AssetImage(tab_bar_message),
+                ),
+              ),
               Tab(
-                icon: ImageIcon(AssetImage(
-                    tab_bar_my_page),
-              ),),
+                icon: ImageIcon(
+                  AssetImage(tab_bar_my_page),
+                ),
+              ),
             ],
           ),
         ),
@@ -64,3 +68,4 @@ class _BootPageState extends State<BootPage> {
     );
   }
 }
+

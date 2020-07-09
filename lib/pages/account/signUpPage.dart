@@ -1,8 +1,11 @@
+import 'package:bak/database/initialize.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/account/selectFavor.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +15,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPage extends State<SignUpPage> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
   String phoneNumber;
@@ -170,7 +173,7 @@ class _SignUpPage extends State<SignUpPage> {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(left: 10),
             border: InputBorder.none,
-            hintText: '상점명(영문)을 입력하세요.'),
+            hintText: '상점명을 입력하세요.'),
       ),
     );
   }
@@ -272,13 +275,13 @@ class _SignUpPage extends State<SignUpPage> {
       child: InkWell(
         onTap: () {
           _autoValidate = true;
-          if (_formKey.currentState.validate()) {
+          if (validateAndSave()) {
             form.save();
+            signUp();
             print("OK!");
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SelectFavorPage()));
-          } else
-            print("NOPE");
+                MaterialPageRoute(builder: (context) => SelectFavorPage(username: username,)));
+          }
         },
         child: Container(
           width: MediaQuery.of(context).size.width * (335 / 375),
@@ -293,5 +296,38 @@ class _SignUpPage extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void signUp() {
+    Firestore.instance.collection('users').document(username).setData(
+        {
+          'username' : username,
+          'password' : password,
+          'contact' : phoneNumber,
+          'eMail' : eMail,
+          'address' : "",
+          'createDate' : DateTime.now().toString(),
+          'lastActivity' : DateTime.now().toString(),
+          'rate' : "",
+          'imageURI' : 'default',
+          'name' : "",
+          'bio' : "",
+          'followers' : ['default'],
+          'following': ['default'],
+          'selectedFavor' : ['default'],
+          'reviews':['default'],
+          'favorite':['default'],
+          'myProducts':['default'],
+          'myCollections':['default']
+    });
   }
 }

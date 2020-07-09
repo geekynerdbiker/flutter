@@ -6,7 +6,10 @@ import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
+import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/product/productList.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class RecommendPage extends StatelessWidget {
@@ -44,19 +47,35 @@ class RecommendPage extends StatelessWidget {
             ],
           ),
         ),
-        collectionList(context)
+        Container(
+          height: 300,
+          child: collectionItemList(context),
+        )
       ],
     );
   }
 
-  Widget collectionList(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 20),
-      height: 220,
-      child: ListView(
+  Widget collectionItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('collections').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildCollectionBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildCollectionBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Collection> collectionItems =
+        snapshot.map((e) => Collection.fromSnapshot(e)).toList();
+    return Expanded(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-        ],
+        itemCount: collectionItems.length,
+        itemBuilder: (context, index) {
+          return collectionCardLarge(context, collectionItems[index], primary);
+        },
       ),
     );
   }
@@ -70,34 +89,42 @@ class RecommendPage extends StatelessWidget {
           child: Text('추천 셀러'),
         ),
         Container(
+          height: 150,
           margin: EdgeInsets.only(left: 20),
-          child: userList(context),
+          child: userItemList(context),
         ),
       ],
     );
   }
 
-  Widget userList(BuildContext context) {
-    return Container(
-      height: 130,
+  Widget userItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('users').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildUserBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildUserBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<User> userItems = snapshot.map((e) => User.fromSnapshot(e)).toList();
+    return Expanded(
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: [
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-          userMarqueePopularSeller(
-              context, new User('username', '1', 'imageURI')),
-        ],
+        physics: ClampingScrollPhysics(),
+        children: userItemBuilder(context, userItems),
       ),
     );
+  }
+
+  List<Widget> userItemBuilder(BuildContext context, List<User> users) {
+    List<Widget> items = List<Widget>();
+
+    for (int i = 0; i < users.length; i++)
+      items.add(userMarqueePopularSeller(context, users[i]));
+
+    return items;
   }
 
   Widget products(BuildContext context) {
@@ -113,43 +140,68 @@ class RecommendPage extends StatelessWidget {
             ],
           ),
         ),
-        productList(context)
+        Container(
+          height: MediaQuery.of(context).size.height * 5,
+          child: productItemList(context),
+        ),
       ],
     );
   }
 
-  Widget productList(BuildContext context) {
-    double _size = MediaQuery.of(context).size.width / 3 - 4;
+  Widget productItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('products').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildProductBody(context, snapshot.data.documents);
+      },
+    );
+  }
 
-    return Container(
-      height: _size * 4,
+  Widget buildProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Product> productItems =
+        snapshot.map((e) => Product.fromSnapshot(e)).toList();
+    return Expanded(
       child: GridView.count(
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 3,
-        children: [
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-//          productImageBox(
-//              context, new Product('title', 1, 'imageURI[0]'), _size, _size),
-        ],
+        children: productItemBuilder(context, productItems),
+      ),
+    );
+  }
+
+  List<Widget> productItemBuilder(
+      BuildContext context, List<Product> products) {
+    List<Widget> items = List<Widget>();
+
+    for (int i = 0; i < products.length; i++)
+      items.add(productImageBox(context, products[i]));
+
+    return items;
+  }
+
+  Widget productImageBox(BuildContext context, Product product) {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductDetailPage(
+                        product: product,
+                      )));
+        },
+        child: Container(
+          color: Colors.grey,
+          child: Image(
+            image: FirebaseImage(product.imageURI[0],
+                shouldCache: true,
+                maxSizeBytes: 3000 * 1000,
+                cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

@@ -16,12 +16,12 @@ class _ActivityPage extends State<ActivityPage> {
       backgroundColor: offWhite,
       body: ListView(
         children: [
-          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
-          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
-          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
-          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationFollow(context, new User('username', '1', 'imageURI')),
+//          userMarqueeNotificationAction(context, new User('username', '1', 'imageURI')),
         ],
       ),
     );

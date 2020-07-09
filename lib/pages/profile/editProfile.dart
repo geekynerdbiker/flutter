@@ -21,7 +21,7 @@ class EditProfilePage extends StatelessWidget {
           Center(
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 40),
-              child: profileImage(new User('username', '1', 'imageURI'), 84),
+          //    child: profileImage(new User('username', '1', 'imageURI'), 84),
             ),
           ),
           Container(

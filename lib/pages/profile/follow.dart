@@ -13,8 +13,8 @@ class FollowingPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child:
-                userMarqueeFollow(context, new User('username', '1', 'imageURI')),
+//            child:
+//                userMarqueeFollow(context, new User('username', '1', 'imageURI')),
           ),
         ],
       ),
@@ -32,8 +32,8 @@ class FollowerPage extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child:
-                userMarqueeFollow(context, new User('username', '1', 'imageURI')),
+//            child:
+//                userMarqueeFollow(context, new User('username', '1', 'imageURI')),
           ),
         ],
       ),

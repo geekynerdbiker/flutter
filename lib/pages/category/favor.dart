@@ -1,7 +1,7 @@
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
-import 'package:bak/pages/category/underCategory.dart';
+import 'package:bak/pages/category/categoryPage2.dart';
 import 'package:flutter/material.dart';
 
 class FavorPage extends StatelessWidget {
@@ -26,7 +26,7 @@ class FavorPage extends StatelessWidget {
         Material(
           child: InkWell(
 //            onTap: () {
-//              Navigator.push(context, MaterialPageRoute(builder: (context) => UnderCategoryPage(_category)));
+//              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage2(_category)));
 //            },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

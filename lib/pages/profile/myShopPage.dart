@@ -50,7 +50,7 @@ class MyShopPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로워'),
                     wSpacer(_space1),
-                    Text(user.followers.length.toString()),
+                    //Text(user.followers.length.toString()),
                   ],),
                 ),
               ),
@@ -61,7 +61,7 @@ class MyShopPage extends StatelessWidget {
                   child: Row(children: [
                     Text('팔로잉'),
                     wSpacer(_space1),
-                    Text(user.following.length.toString()),
+                    //Text(user.following.length.toString()),
                   ],),
                 ),
               ),
@@ -75,14 +75,14 @@ class MyShopPage extends StatelessWidget {
             children: [
               Icon(Icons.star_border),
               wSpacer(_space1),
-              Text(user.rate.toString()),
+              //Text(user.lastActivity),
               wSpacer(_space2),
               Material(
                 child: InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewPage()));
                   },
-                  child: Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
+                  //child: Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
                 ),
               )
             ],
