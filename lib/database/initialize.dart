@@ -3,6 +3,7 @@ import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/designs/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -42,6 +43,11 @@ Widget getUserItemList(BuildContext context, Widget widget) {
       return widget;
     },
   );
+}
+
+void getCurrentUserInfo(BuildContext context) {
+  Firestore.instance.collection('users').snapshots().where((event) => false);
+  
 }
 
 List<User> userItemList(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -90,26 +96,6 @@ Widget buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
   );
 }
 
-void addProduct() {
-  Firestore.instance.collection('products').add(
-      {
-        "userID" : "admin",
-        "title" : "마르지엘라 흰색 타비 부츠",
-        "description" : "송아지가죽 소재의 흰색 타비 부츠입니다. 굽8cm이지만 그렇게 높게 느껴지지않아요. 5번정도 신었음. 스크래치 거의 없고, 상태 양호.",
-        "updateDate" : "2020/07/07",
-        "soldDate" : "2020/07/07",
-        "status" : 0,
-        "price" : 480000,
-        "deliveryFee" : 4000,
-        "state" : 0,
-        "size" : "",
-        "material" : "",
-       // "color" = FieldValue.arrayUnion(String s);
-        "isLiked" : false,
-        "category" : "여성 잡화",
-        "rate" : 0.0
-      });
-}
 
 void addCollection() {
   Firestore.instance.collection('collections').add (
@@ -123,4 +109,8 @@ void addCollection() {
       'tags' : {}
     }
   );
+}
+
+void dateTimeParser() {
+
 }
