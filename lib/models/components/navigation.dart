@@ -16,7 +16,7 @@ FirebaseAuth auth = FirebaseAuth.instance;
 
 Widget mainAppBar(BuildContext context) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Container(
@@ -40,7 +40,7 @@ Widget mainAppBar(BuildContext context) {
 
 Widget appBarDefault(BuildContext context, String _title) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Container(
@@ -55,7 +55,7 @@ Widget appBarDefault(BuildContext context, String _title) {
 Widget appBarWithTab(BuildContext context, String _title, List<Tab> _tabs,
     TabController _controller) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Container(
@@ -77,7 +77,7 @@ Widget appBarWithTab(BuildContext context, String _title, List<Tab> _tabs,
 Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
     TabController _controller) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Container(
@@ -112,7 +112,7 @@ Widget appBarDefaultDeep(BuildContext context, String _title) {
 Widget appBarWithSkip(BuildContext context, String _title, Widget _skipRoute) {
   return AppBar(
     backgroundColor: offWhite,
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     title: Container(
       child: Text(
@@ -143,7 +143,7 @@ Widget appBarWithSkip(BuildContext context, String _title, Widget _skipRoute) {
 Widget appBarWithTabDeep(BuildContext context, String _title, List<Tab> _tabs,
     TabController _controller) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     centerTitle: true,
     backgroundColor: offWhite,
     title: Container(
@@ -220,7 +220,7 @@ Widget favorite(BuildContext context) {
 
 Widget chat(BuildContext context, User _user) {
   return AppBar(
-    elevation: 0,
+    elevation: 0.5,
     //centerTitle: true,
     backgroundColor: offWhite,
     title: Row(
@@ -238,6 +238,9 @@ Widget chat(BuildContext context, User _user) {
     ),
     leading: Material(
       child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
           child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
         child: ImageIcon(
@@ -260,5 +263,34 @@ Widget chat(BuildContext context, User _user) {
         )),
       ),
     ],
+  );
+}
+
+Widget myPage(BuildContext context, User user) {
+  return AppBar(
+    elevation: 0.5,
+    //centerTitle: true,
+    backgroundColor: offWhite,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          user.username,
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+    leading: Material(
+      child: InkWell(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: ImageIcon(
+              AssetImage(setting_idle),
+              size: 8,
+              color: primary,
+            ),
+          )),
+    ),
+    actions: <Widget>[notification(context), favorite(context)],
   );
 }

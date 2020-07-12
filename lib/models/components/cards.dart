@@ -200,8 +200,6 @@ Widget collectionCardSmall(
   const double _space1 = 12;
   const double _space2 = 6;
 
-  bool isMyCollection = false;
-
   return Container(
     height: 250,
     child: Column(

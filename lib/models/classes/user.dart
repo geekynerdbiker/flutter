@@ -64,7 +64,7 @@ class User {
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
-  User(this.username);
+  User(this.username, this.imageURI);
 
 }
 

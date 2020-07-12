@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
+import 'package:bak/pages/message/chatRoom.dart';
 import 'package:bak/pages/profile/editProfile.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
   const double _space4 = 12;
 
   return Container(
-    margin: EdgeInsets.only(right: 20, left: 20, top: 20),
+    margin: EdgeInsets.only(right: 20, left: 20, top: 40),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -45,7 +46,10 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('_user.bio'),
+                Container(
+                  height: 40,
+                  child: Text('_user.bio'),
+                ),
                 hSpacer(_space2),
                 Row(
                   children: [
@@ -75,17 +79,19 @@ Widget userMarqueeMyPage(BuildContext context, User _user) {
             ),
           ],
         ),
+        _user.username != 'guest' ?
         Material(
           child: InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+                  MaterialPageRoute(
+                      builder: (context) => EditProfilePage(user: _user,)));
             },
             child: ImageIcon(
               AssetImage(edit_idle),
             ),
           ),
-        )
+        ) : Container()
       ],
     ),
   );
@@ -161,8 +167,7 @@ Widget userMarquee2(BuildContext context, User _user) {
       ));
 }
 
-Widget userMarqueeMessageListItem(
-    BuildContext context, User _user, Widget _nav) {
+Widget userMarqueeMessageListItem(BuildContext context, User _user) {
   const double _r = 48;
   const double _space1 = 12;
   const double _space2 = 8;
@@ -173,43 +178,49 @@ Widget userMarqueeMessageListItem(
   return Material(
     child: InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => _nav));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage(_user)));
       },
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                profileImage(_user, _r),
-                wSpacer(_space1),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    profileImage(_user, _r),
+                    wSpacer(_space1),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(_user.username),
-                        wSpacer(_space2),
-                        Text(_user.lastActivity.toString() + '전'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(_user.username),
+                            wSpacer(_space2),
+                            Text(_user.lastActivity.toString() + '전'),
+                          ],
+                        ),
+                        hSpacer(_space3),
+                        Text('Message Text'),
                       ],
                     ),
-                    hSpacer(_space3),
-                    Text('Message Text'),
                   ],
+                ),
+                Container( //productImage will be here
+                  width: _iSize,
+                  height: _iSize,
+                  color: Colors.grey,
                 ),
               ],
             ),
-            Container(
-              width: _iSize,
-              height: _iSize,
-              color: Colors.grey,
-            ),
-          ],
-        ),
-      ),
+          ),
+          borderLineGreyLite(context),
+        ],
+      )
     ),
   );
 }
@@ -367,11 +378,16 @@ Widget profileImage(User _user, double _r) {
     height: _r,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50), color: Colors.grey),
-    child: Center(
-        child: Image(image: FirebaseImage(
-          _user.imageURI, shouldCache: true, maxSizeBytes: 3 * 1000 * 1000, cacheRefreshStrategy: CacheRefreshStrategy.NEVER,
-        ),
+    child: _user.username == 'guest'
+        ? null
+        : Image(
+      image: FirebaseImage(
+        _user.imageURI,
+        shouldCache: true,
+        maxSizeBytes: 3 * 1000 * 1000,
+        cacheRefreshStrategy: CacheRefreshStrategy.NEVER,
+      ),
       fit: BoxFit.cover,
-    )),
+    ),
   );
 }

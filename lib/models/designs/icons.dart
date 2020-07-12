@@ -30,6 +30,7 @@ const String new_new_logo_horizontal = 'lib/assets/icons/drawable-xxxhdpi/new_ne
 
 const String photo_idle = 'lib/assets/icons/drawable-xxxhdpi/24_px_photo_idle.png';
 
+const String setting_idle = 'lib/assets/icons/drawable-xxxhdpi/24_px_settings_idle.png';
 const String save_idle = 'lib/assets/icons/drawable-xxxhdpi/24_px_save_idle.png';
 const String share_idle = 'lib/assets/icons/drawable-xxxhdpi/24_px_share_idle.png';
 
