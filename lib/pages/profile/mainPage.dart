@@ -1,14 +1,18 @@
-import 'package:bak/models/components/user.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/navigation.dart';
+import 'package:bak/models/components/user.dart';
 import 'package:bak/pages/profile/myCollectionPage.dart';
 import 'package:bak/pages/profile/myShopPage.dart';
 import 'package:bak/pages/profile/tradeList.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
+  final User user;
+
+  ProfilePage({this.user});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -26,15 +30,6 @@ class _ProfilePageState extends State<ProfilePage>
     ),
   ];
 
-  List<Widget> _pages = [
-    MyShopPage(
-      //user: new User('username', '1', 'imageURI'),
-    ),
-    MyCollectionPage(
-      //user: new User('username', '1', 'imageURI'),
-    ),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -49,15 +44,24 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _pages = [
+      MyShopPage(
+        user: widget.user,
+      ),
+      MyCollectionPage(
+        user: widget.user,
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: offWhite,
-      appBar: appBarDefault(context, '내 정보'),
+      appBar: myPage(context, widget.user),
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: <Widget>[
-          //userMarqueeMyPage(context, new User('username', '1', 'imageURI')),
+          userMarqueeMyPage(context, widget.user),
           Container(
-              margin: EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 20),
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Material(
                 child: InkWell(
                   onTap: () {

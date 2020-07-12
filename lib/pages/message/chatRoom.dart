@@ -5,6 +5,7 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class ChatRoomPage extends StatefulWidget {
   User _user;
@@ -18,6 +19,8 @@ class ChatRoomPage extends StatefulWidget {
 }
 
 class _ChatRoomPage extends State<ChatRoomPage> {
+  List<Asset> _images;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +31,7 @@ class _ChatRoomPage extends State<ChatRoomPage> {
           ListView(
             shrinkWrap: true,
             children: [
+              timeBox(context),
               message(context, '_message', true),
               message(context, '_message', false),
             ],
@@ -38,11 +42,11 @@ class _ChatRoomPage extends State<ChatRoomPage> {
     );
   }
 
-  Widget timeBox(BuildContext context, String _message) {
+  Widget timeBox(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 24),
+      margin: EdgeInsets.symmetric(vertical: 20),
       child: Center(
-        child: Text('Time'),
+        child: Text(DateTime.now().toString()),
       ),
     );
   }
@@ -67,53 +71,56 @@ class _ChatRoomPage extends State<ChatRoomPage> {
   }
 
   Widget product(BuildContext context, Product _product, bool _isMine) {
-   if (_isMine )
-     return Container(
-       margin: EdgeInsets.only(bottom: 8, left: 40, right: 8),
-       child: produtItem(context, _product),
-     );
-   else
-     return Container(
-       margin: EdgeInsets.only(bottom: 8, left: 8, right: 40),
-       child: produtItem(context, _product),
-     );
+    if (_isMine)
+      return Container(
+        margin: EdgeInsets.only(bottom: 8, left: 40, right: 8),
+        child: produtItem(context, _product),
+      );
+    else
+      return Container(
+        margin: EdgeInsets.only(bottom: 8, left: 8, right: 40),
+        child: produtItem(context, _product),
+      );
   }
 
   Widget produtItem(BuildContext context, Product _product) {
-      return Container(
-        width: 200,
-        height: 200,
-        color: semiLight,
-        child: Column(
-          children: [
-            Container(
-              width: 200,
-              height: 50,
-              padding: EdgeInsets.all(8),
-              color: offWhite,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(_product.title),
-                      Text(_product.price.toString()),
-                    ],
-                  ),
-                  ImageIcon(
-                    AssetImage(forward_idle),
-                    size: 12,
-                  )
-                ],
-              ),
+    return Container(
+      width: 200,
+      height: 200,
+      color: semiLight,
+      child: Column(
+        children: [
+          Container(
+            width: 200,
+            height: 50,
+            padding: EdgeInsets.all(8),
+            color: offWhite,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(_product.title),
+                    Text(_product.price.toString()),
+                  ],
+                ),
+                ImageIcon(
+                  AssetImage(forward_idle),
+                  size: 12,
+                )
+              ],
             ),
-            Container(
-              child: Image.asset(_product.imageURI[0], fit: BoxFit.cover,),
-            )
-          ],
-        ),
-      );
+          ),
+          Container(
+            child: Image.asset(
+              _product.imageURI[0],
+              fit: BoxFit.cover,
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget inputBox(BuildContext context) {
@@ -138,12 +145,52 @@ class _ChatRoomPage extends State<ChatRoomPage> {
                   border: InputBorder.none, hintText: '메세지를 입력하세요.'),
             ),
           ),
-          ImageIcon(
-            AssetImage(photo_idle),
-            size: 24,
-          ),
+          sendImage(context),
         ],
       ),
     );
+  }
+
+  Widget sendImage(BuildContext context) {
+    return Material(
+      child: InkWell(
+        onTap: loadAssets,
+        child: ImageIcon(
+          AssetImage(photo_idle),
+          size: 24,
+        ),
+      ),
+    );
+  }
+
+  Future<void> loadAssets() async {
+    setState(() {
+      if (_images == null) _images = List<Asset>();
+    });
+
+    List<Asset> resultList;
+    String _error;
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 1,
+        enableCamera: true,
+        selectedAssets: _images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          useDetailsView: false,
+          selectCircleStrokeColor: "#FFFFFF",
+        ),
+      );
+    } on Exception catch (e) {
+      _error = e.toString();
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _images = resultList;
+      _error = _error;
+    });
   }
 }

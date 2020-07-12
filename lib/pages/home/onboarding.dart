@@ -1,3 +1,4 @@
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/selection.dart';
@@ -60,6 +61,8 @@ class OnboardingScreen extends StatelessWidget {
   }
 
   Widget explore(BuildContext context) {
+    User guest = User('guest', 'no image');
+
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
@@ -68,7 +71,7 @@ class OnboardingScreen extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => BootPage()));
+                  context, MaterialPageRoute(builder: (context) => BootPage(user: guest,)));
             },
             child: Container(
               width: MediaQuery.of(context).size.width * 0.2,

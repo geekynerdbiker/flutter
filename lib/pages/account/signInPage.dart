@@ -159,7 +159,7 @@ class _SignInPage extends State<SignInPage> {
 
   void signIn() async{
     Future<QuerySnapshot> snapshot = Firestore.instance.collection('users').getDocuments();
-    User user = User('temp');
+    User user = User('guest', 'no image');
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BootPage(user: user)), (route) => false);
   }
 }

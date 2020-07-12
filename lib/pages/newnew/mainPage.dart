@@ -1,3 +1,4 @@
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/pages/newnew/follwingCollections.dart';
@@ -6,6 +7,9 @@ import 'package:bak/pages/newnew/recommend.dart';
 import 'package:flutter/material.dart';
 
 class NewnewPage extends StatefulWidget {
+  final User user;
+  NewnewPage({this.user});
+
   @override
   _NewnewPageState createState() => _NewnewPageState();
 }

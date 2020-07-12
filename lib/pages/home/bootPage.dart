@@ -1,9 +1,7 @@
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
-import 'package:bak/pages/account/signInPage.dart';
 import 'package:bak/pages/home/mainPage.dart';
-import 'package:bak/pages/home/onboarding.dart';
 import 'package:bak/pages/message/mainPage.dart';
 import 'package:bak/pages/newnew/mainPage.dart';
 import 'package:bak/pages/product/addProductPage.dart';
@@ -12,8 +10,8 @@ import 'package:flutter/material.dart';
 
 class BootPage extends StatefulWidget {
   final User user;
-
   BootPage({this.user});
+
   @override
   _BootPageState createState() => _BootPageState();
 }
@@ -29,10 +27,10 @@ class _BootPageState extends State<BootPage> {
         body: TabBarView(
           children: <Widget>[
             HomePage(user: widget.user,),
-            NewnewPage(),
-            AddProductPage(),
-            MessagePage(),
-            ProfilePage(),
+            NewnewPage(user: widget.user,),
+            AddProductPage(user: widget.user,),
+            MessagePage(user: widget.user,),
+            ProfilePage(user: widget.user,),
           ],
         ),
         bottomNavigationBar: Container(

@@ -13,23 +13,21 @@ class MyShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: ClampingScrollPhysics(),
-      //shrinkWrap: true,
-      children: [
-        infoLine(context, user),
-        GridView.count(crossAxisCount: 2,
-        childAspectRatio: 0.6,
-        physics: ScrollPhysics(),
+    return Scaffold(
+      body: ListView(
         shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        //shrinkWrap: true,
         children: [
-//          productItemCardLarge(context, new Product('title', 10000000, '/')),
-//          productItemCardLarge(context, new Product('title', 10000000, '/')),
-//          productItemCardLarge(context, new Product('title', 10000000, '/')),
-//          productItemCardLarge(context, new Product('title', 10000000, '/')),
-
-        ],)
-      ],
+          infoLine(context, user),
+          GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+          )
+        ],
+      ),
     );
   }
 
@@ -46,23 +44,37 @@ class MyShopPage extends StatelessWidget {
             children: [
               Material(
                 child: InkWell(
-                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowerPage()));},
-                  child: Row(children: [
-                    Text('팔로워'),
-                    wSpacer(_space1),
-                    //Text(user.followers.length.toString()),
-                  ],),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FollowerPage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text('팔로워'),
+                      wSpacer(_space1),
+                      //Text(user.followers.length.toString()),
+                    ],
+                  ),
                 ),
               ),
               wSpacer(_space2),
               Material(
                 child: InkWell(
-                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FollowingPage()));},
-                  child: Row(children: [
-                    Text('팔로잉'),
-                    wSpacer(_space1),
-                    //Text(user.following.length.toString()),
-                  ],),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FollowingPage()));
+                  },
+                  child: Row(
+                    children: [
+                      Text('팔로잉'),
+                      wSpacer(_space1),
+                      //Text(user.following.length.toString()),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -80,7 +92,8 @@ class MyShopPage extends StatelessWidget {
               Material(
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewPage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ReviewPage()));
                   },
                   //child: Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
                 ),

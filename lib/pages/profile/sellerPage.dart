@@ -3,7 +3,7 @@ import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/navigation.dart';
-import 'package:bak/pages/message/chat.dart';
+import 'package:bak/pages/message/chatRoom.dart';
 import 'package:bak/pages/profile/myCollectionPage.dart';
 import 'package:bak/pages/profile/myShopPage.dart';
 import 'package:bak/pages/profile/tradeList.dart';

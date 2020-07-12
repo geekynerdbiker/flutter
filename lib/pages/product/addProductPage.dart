@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
@@ -16,9 +17,9 @@ import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddProductPage extends StatefulWidget {
-  Category category;
+  final User user;
 
-  AddProductPage({this.category});
+  AddProductPage({this.user});
 
   @override
   _AddProductPageState createState() => _AddProductPageState();
@@ -100,6 +101,30 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 
+  Widget emptyImageBox(BuildContext context) {
+    const double _length = 92;
+
+    return Material(
+      child: InkWell(
+        onTap: () {
+          loadAssets();
+        },
+        child: Container(
+          margin: EdgeInsets.only(right: 15),
+          width: _length,
+          height: _length,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            color: offWhite,
+          ),
+          child: Center(
+            child: Icon(Icons.add),
+          ),
+        ),
+      ),
+    );
+  }
+
   Future<void> loadAssets() async {
     setState(() {
       _formKey.currentState.save();
@@ -131,30 +156,6 @@ class _AddProductPageState extends State<AddProductPage> {
         _images = resultList;
       _error = _error;
     });
-  }
-
-  Widget emptyImageBox(BuildContext context) {
-    const double _length = 92;
-
-    return Material(
-      child: InkWell(
-        onTap: () {
-          loadAssets();
-        },
-        child: Container(
-          margin: EdgeInsets.only(right: 15),
-          width: _length,
-          height: _length,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-            color: offWhite,
-          ),
-          child: Center(
-            child: Icon(Icons.add),
-          ),
-        ),
-      ),
-    );
   }
 
   Widget imageBox(BuildContext context, Asset image) {
@@ -232,7 +233,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget textFieldTitle(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -264,7 +268,10 @@ class _AddProductPageState extends State<AddProductPage> {
           });
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * (335 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * (335 / 375),
           height: 44,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black), color: offWhite),
@@ -302,7 +309,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldSize(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (163 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -321,7 +331,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldMaterial(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (163 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -341,7 +354,10 @@ class _AddProductPageState extends State<AddProductPage> {
   Widget textFieldBrand(BuildContext context) {
     //tag
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -360,7 +376,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget longTextField(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 88,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -384,7 +403,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldPrice(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (163 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -409,7 +431,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldDeliveryFee(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (163 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -663,17 +688,85 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget uploadButton(BuildContext context) {
+    bool confirm = false;
+
     return Material(
       child: InkWell(
-        onTap: add,
+        onTap: () async {
+          confirm = await showDialog<bool>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('잠깐만!'),
+                content: Text('지금 등록하신 상품이 택배 발송이 가능한 상품이 확실한가요?'),
+                actions: [
+                  Row(
+                    children: [
+                      buttonNo(context),
+                      wSpacer(20),
+                      buttonYes(context),
+                    ],
+                  )
+                ],
+              );
+            },
+          );
+          if(confirm) add;
+        },
         child: Container(
-          width: MediaQuery.of(context).size.width * (335 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
             child: Text(
               '등록하기',
               style: label(offWhite),
+            ),
+          ),
+        ),
+      )
+      ,
+    );
+  }
+
+  Widget buttonNo(BuildContext context) {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context, false);
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * (120 / 375),
+          height: 36,
+          decoration: BoxDecoration(border: Border.all(color: primary), color: offWhite),
+          child: Center(
+            child: Text(
+            '아니요',
+              style: action1(primary),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buttonYes(BuildContext context) {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context, true);
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * (120 / 375),
+          height: 36,
+          color: primary,
+          child: Center(
+            child: Text(
+              '네!',
+              style: action1(offWhite),
             ),
           ),
         ),
@@ -692,7 +785,7 @@ class _AddProductPageState extends State<AddProductPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => BootPage()),
-            (route) => false);
+                (route) => false);
       } catch (e) {
         print(e.message);
       }
