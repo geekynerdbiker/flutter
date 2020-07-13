@@ -9,6 +9,7 @@ import 'package:bak/pages/category/mainPage.dart';
 import 'package:bak/pages/favorite/mainPage.dart';
 import 'package:bak/pages/home/onboarding.dart';
 import 'package:bak/pages/notification/mainPage.dart';
+import 'package:bak/pages/setting/mainPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -28,13 +29,54 @@ Widget mainAppBar(BuildContext context) {
       child: InkWell(
         onTap: () {
           auth.signOut().then((onValue) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => OnboardingScreen()), (route) => false);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => OnboardingScreen()),
+                (route) => false);
           });
         },
         child: ImageIcon(AssetImage(category_idle), color: primary),
       ),
     ),
     actions: <Widget>[notification(context), favorite(context)],
+  );
+}
+
+Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
+    TabController _controller) {
+  return AppBar(
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: offWhite,
+    title: Container(
+      width: MediaQuery.of(context).size.width * 2 / 5,
+      child: Image.asset(
+          'lib/assets/icons/drawable-xxxhdpi/new_new_logo_horizontal.png'),
+    ),
+    leading: Material(
+      child: InkWell(
+        onTap: () {
+          auth.signOut().then((onValue) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => OnboardingScreen()),
+                (route) => false);
+          });
+        },
+        child: ImageIcon(AssetImage(category_idle), color: primary),
+      ),
+    ),
+    actions: <Widget>[notification(context), favorite(context)],
+    bottom: PreferredSize(
+      preferredSize: Size(0, 40),
+      child: Container(
+          padding: EdgeInsets.all(5),
+          child: Material(
+            child: InkWell(
+              child: searchBarDisable(context),
+            ),
+          )),
+    ),
   );
 }
 
@@ -74,28 +116,6 @@ Widget appBarWithTab(BuildContext context, String _title, List<Tab> _tabs,
   );
 }
 
-Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
-    TabController _controller) {
-  return AppBar(
-    elevation: 0.5,
-    centerTitle: true,
-    backgroundColor: offWhite,
-    title: Container(
-      child: Text(
-        _title,
-        style: TextStyle(color: Colors.black),
-      ),
-    ),
-    bottom: PreferredSize(
-      preferredSize: Size(0, 40),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        child: SearchField(),
-      ),
-    ),
-  );
-}
-
 Widget appBarDefaultDeep(BuildContext context, String _title) {
   return AppBar(
     elevation: 0.5,
@@ -126,8 +146,10 @@ Widget appBarWithSkip(BuildContext context, String _title, Widget _skipRoute) {
           color: offWhite,
           child: InkWell(
               onTap: () {
-                Navigator.pushAndRemoveUntil(context,
-                    MaterialPageRoute(builder: (context) => _skipRoute), (route) => false);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => _skipRoute),
+                    (route) => false);
               },
               child: Container(
                 padding: EdgeInsets.only(top: 15),
@@ -238,17 +260,17 @@ Widget chat(BuildContext context, User _user) {
     ),
     leading: Material(
       child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        child: ImageIcon(
-          AssetImage(back_idle),
-          size: 8,
-          color: primary,
-        ),
-      )),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: ImageIcon(
+              AssetImage(back_idle),
+              size: 8,
+              color: primary,
+            ),
+          )),
     ),
     actions: [
       Material(
@@ -282,14 +304,17 @@ Widget myPage(BuildContext context, User user) {
     ),
     leading: Material(
       child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage(user: user)));
+        },
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            child: ImageIcon(
-              AssetImage(setting_idle),
-              size: 8,
-              color: primary,
-            ),
-          )),
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        child: ImageIcon(
+          AssetImage(setting_idle),
+          size: 8,
+          color: primary,
+        ),
+      )),
     ),
     actions: <Widget>[notification(context), favorite(context)],
   );
