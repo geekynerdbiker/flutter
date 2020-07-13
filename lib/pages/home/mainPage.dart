@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
+
   HomePage({this.user});
 
   @override
@@ -44,22 +45,13 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: [
         Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * (375 / 375),
-          height: MediaQuery
-              .of(context)
-              .size
-              .width * (460 / 375),
+          width: MediaQuery.of(context).size.width * (375 / 375),
+          height: MediaQuery.of(context).size.width * (460 / 375),
           color: Colors.grey,
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: MediaQuery
-                  .of(context)
-                  .size
-                  .width * (460 / 375) - 45),
+              top: MediaQuery.of(context).size.width * (460 / 375) - 45),
           child: Center(
             child: imageCarouselIndicator(0, 5),
           ),
@@ -67,8 +59,11 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30),
           child: Center(
-            child: SearchField(),
-          ),
+              child: Material(
+            child: InkWell(
+              child: searchBarDisable(context),
+            ),
+          )),
         ),
       ],
     );
@@ -76,10 +71,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget trendSearch(BuildContext context) {
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .width * (231 / 375),
+      height: MediaQuery.of(context).size.width * (231 / 375),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,76 +84,76 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
               child: Column(
-                children: [
-                  Container(
-                      height: 60,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
+            children: [
+              Container(
+                  height: 60,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Keyword',
-                                style: popularSearchEngSmall(primary),
-                              ),
-                              Text(
-                                'Keyword',
-                                style: popularSearchEngLarge(primary),
-                              ),
-                            ],
+                          Text(
+                            'Keyword',
+                            style: popularSearchEngSmall(primary),
+                          ),
+                          Text(
+                            'Keyword',
+                            style: popularSearchEngLarge(primary),
                           ),
                         ],
-                      )),
-                  Container(
-                    height: 60,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 100),
-                            ),
-                            Text(
-                              '빈티지 가구',
-                              style: popularSearchKRLarge(primary),
-                            ),
-                            Text(
-                              'acne JEAN',
-                              style: popularSearchEngSmall(primary),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 60,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
+                      ),
+                    ],
+                  )),
+              Container(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 30),
+                          margin: EdgeInsets.only(left: 100),
                         ),
                         Text(
-                          'nike',
-                          style: popularSearchEngSmall(primary),
-                        ),
-                        Text(
-                          'JORDAN',
-                          style: popularSearchEngLarge(primary),
-                        ),
-                        Text(
-                          '슈프림',
+                          '빈티지 가구',
                           style: popularSearchKRLarge(primary),
                         ),
+                        Text(
+                          'acne JEAN',
+                          style: popularSearchEngSmall(primary),
+                        ),
                       ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30),
                     ),
-                  ),
-                ],
-              )),
+                    Text(
+                      'nike',
+                      style: popularSearchEngSmall(primary),
+                    ),
+                    Text(
+                      'JORDAN',
+                      style: popularSearchEngLarge(primary),
+                    ),
+                    Text(
+                      '슈프림',
+                      style: popularSearchKRLarge(primary),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )),
         ],
       ),
     );
@@ -169,10 +161,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget newNewPick(BuildContext context) {
     return Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .width * (336 / 375),
+        height: MediaQuery.of(context).size.width * (336 / 375),
         color: accent1,
         child: Column(
           children: [
@@ -206,10 +195,7 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: [
         Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .width * (211 / 375),
+          height: MediaQuery.of(context).size.width * (211 / 375),
           color: offWhite,
         ),
         Padding(
@@ -225,10 +211,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget recentView(BuildContext context) {
     return Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .width * (336 / 375),
+        height: MediaQuery.of(context).size.width * (336 / 375),
         color: accent2,
         child: Column(
           children: [
@@ -251,10 +234,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget hashTagCollection(BuildContext context, Collection collection) {
     return Container(
-      height: MediaQuery
-          .of(context)
-          .size
-          .width * (365 / 375),
+      height: MediaQuery.of(context).size.width * (365 / 375),
       child: Column(
         children: [
           Row(
@@ -290,10 +270,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .width * (800 / 375),
+          height: MediaQuery.of(context).size.width * (800 / 375),
           color: accent3,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -305,8 +282,14 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Column(
                         children: [
-                          Text(' MAKE YOUR', style: collectionTitle(offWhite),),
-                          Text('COLLECTION', style: collectionTitle(offWhite),),
+                          Text(
+                            ' MAKE YOUR',
+                            style: collectionTitle(offWhite),
+                          ),
+                          Text(
+                            'COLLECTION',
+                            style: collectionTitle(offWhite),
+                          ),
                         ],
                       )
                     ],
@@ -330,10 +313,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildProductBody(BuildContext context, List<DocumentSnapshot> snapshot,
-      Color color) {
+  Widget buildProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot, Color color) {
     List<Product> productItems =
-    snapshot.map((e) => Product.fromSnapshot(e)).toList();
+        snapshot.map((e) => Product.fromSnapshot(e)).toList();
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -358,10 +341,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildCollectionBody(BuildContext context,
-      List<DocumentSnapshot> snapshot) {
+  Widget buildCollectionBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Collection> collectionItems =
-    snapshot.map((e) => Collection.fromSnapshot(e)).toList();
+        snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -400,10 +383,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildCollectionBody2(BuildContext context,
-      List<DocumentSnapshot> snapshot) {
+  Widget buildCollectionBody2(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Collection> collectionItems =
-    snapshot.map((e) => Collection.fromSnapshot(e)).toList();
+        snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
