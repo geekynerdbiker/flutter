@@ -1,3 +1,4 @@
+import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
@@ -5,9 +6,10 @@ import 'package:bak/pages/newnew/follwingCollections.dart';
 import 'package:bak/pages/newnew/follwingShops.dart';
 import 'package:bak/pages/newnew/recommend.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NewnewPage extends StatefulWidget {
-  final User user;
+  User user;
   NewnewPage({this.user});
 
   @override
@@ -28,11 +30,6 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
       icon: Text('collection'),
     ),
   ];
-  List<Widget> pages = [
-    RecommendPage(),
-    FollowingShopsPage(),
-    FollowingCollectionsPage(),
-  ];
 
   @override
   void initState() {
@@ -50,7 +47,7 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: offWhite,
-        appBar: appBarWithSearch(context, 'Explore', _tabs, _controller),
+        appBar: appBarWithSearch(context, 'Explore', widget.user, _tabs, _controller),
         body: Column(
           children: [
             TabBar(
@@ -63,7 +60,11 @@ class _NewnewPageState extends State<NewnewPage> with TickerProviderStateMixin {
             Expanded(
               child: TabBarView(
                 controller: _controller,
-                children: pages,
+                children: [
+                  RecommendPage(user: widget.user,),
+                  FollowingShopsPage(user: widget.user),
+                  FollowingCollectionsPage(user: widget.user),
+                ],
               ),
             )
           ],

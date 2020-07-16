@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SelectFavorPage extends StatefulWidget {
-  String username;
-  SelectFavorPage({this.username});
+  User user;
+  SelectFavorPage({this.user});
 
   _SelectFavorPage createState() => _SelectFavorPage();
 }
@@ -70,7 +70,7 @@ class _SelectFavorPage extends State<SelectFavorPage> {
             heroTag: "confirm1",
             label: Text(
               "선택 완료",
-              style: TextStyle(color: Colors.white),
+              style: cta(offWhite),
             ),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(0))),
@@ -78,7 +78,7 @@ class _SelectFavorPage extends State<SelectFavorPage> {
             onPressed: () {
               addTags();
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => BootPage()));
+                  context, MaterialPageRoute(builder: (context) => BootPage(user: widget.user,)));
             }),
 
 //            label: Text(
@@ -101,7 +101,9 @@ class _SelectFavorPage extends State<SelectFavorPage> {
 
   Widget productTagList(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       child: Wrap(
+        alignment: WrapAlignment.center,
         children: tagItemBuilder(context),
       ),
     );
@@ -161,7 +163,7 @@ class _SelectFavorPage extends State<SelectFavorPage> {
 
     var result;
     for (int i = 0; i < users.length; i++) {
-      if (users[i].username == widget.username) {
+      if (users[i].username == widget.user.username) {
         for (int j = 0; j < _tags.length; j++) {
           String eachTag = _tags[j].title;
           if (_tags[j].isSelected)

@@ -7,55 +7,45 @@ import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
+import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/message/chatRoom.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final Product product;
+  User user;
+  Product product;
 
-  ProductDetailPage({this.product});
+  ProductDetailPage({this.user, this.product});
 
   @override
   Widget build(BuildContext context) {
+    print(user.username);
     return Scaffold(
       appBar: appBarDefaultDeep(context, '상품 상세'),
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          getUserInfo(context),
+          //getUserInfo(context),
           carousel(context),
           productInfo(context),
           productInfo2(context),
           productScroll(context),
           productScroll(context),
           borderLineGreyLite(context),
-          actionButtons(context),
+          actionButtons(context, user),
         ],
       ),
     );
   }
 
   Widget getUserInfo(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('users').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return CircularProgressIndicator();
-        return findOwner(context, snapshot.data.documents, product.userID);
-      },
-    );
-  }
-
-  Widget findOwner(
-      BuildContext context, List<DocumentSnapshot> snapshot, String userID) {
-    List<User> users = snapshot.map((e) => User.fromSnapshot(e)).toList();
-    User owner;
-
-    for (int i = 0; i < users.length; i++)
-      if (users[i].username == userID) owner = users[i];
-
-    return userMarquee2(context, owner);
+    Firestore.instance.collection('users').document(product.userID).get().then((e) {
+      User user = User.getUserData(e);
+      return userMarquee2(context, user);
+    });
   }
 
   Widget carousel(BuildContext context) {
@@ -133,6 +123,7 @@ class ProductDetailPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,19 +133,19 @@ class ProductDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('사이즈: ' + 'Item Size'),
-                  Text('소재: ' + 'Item Material'),
-                  Text('색상: ' + 'Item Color'),
-                  Text('상태: ' + 'Item State'),
+                  product.size == '' ? Container() : Text('사이즈: ' + product.size),
+                  product.material == '' ? Container() : Text('소재: ' + product.material),
+                  product.color.length == 0 ? Container() : Text('색상: '),
+                  product.state == '' ? Container() : Text('상태: '),
                   hSpacer(15)
                 ],
               ),
-              ShortStateSlider(4),
+              product.state == '' ? Container() : ShortStateSlider(double.parse(product.state)),
             ],
           ),
           hSpacer(20),
           Text(
-              'User Item Description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.'),
+              product.description),
           tagList(context),
         ],
       ),
@@ -162,25 +153,27 @@ class ProductDetailPage extends StatelessWidget {
   }
 
   Widget tagList(BuildContext context) {
+    if(product.tags.length == 0)
+      return Text("등록된 태그가 없습니다.");
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 20,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-          tagItem(context),
-          tagItem(context),
-          tagItem(context),
-        ],
+        itemCount: product.tags.length,
+        itemBuilder: (context, index) {
+          return tagItem(context, product.tags[index]);
+        },
       ),
     );
   }
 
-  Widget tagItem(BuildContext context) {
+  Widget tagItem(BuildContext context, String tag) {
     return Container(
       margin: EdgeInsets.only(right: 10),
       child: Text(
-        '#' + 'ItemTag',
+        '#' + tag,
         style: TextStyle(color: semiDark),
       ),
     );
@@ -232,22 +225,51 @@ class ProductDetailPage extends StatelessWidget {
     );
   }
 
-  Widget actionButtons(BuildContext context) {
+  Widget actionButtons(BuildContext context, User user) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 28),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          shortButton(context, offWhite, true, Text('대화하기')),
-          shortButton(
-              context,
-              primary,
-              true,
-              Text(
-                '구매하기',
-                style: TextStyle(color: offWhite),
-              )),
+          getTalk(context, user),
+          shortButton(context),
         ],
+      ),
+    );
+  }
+
+  Widget getTalk(BuildContext context, User user) {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage(user: user,)));
+        },
+        child: Container(
+        width: MediaQuery.of(context).size.width * (163 / 375),
+        height: 44,
+        decoration:
+        BoxDecoration(border: Border.all(color: Colors.black), color: offWhite),
+        child: Center(
+          child: Text(
+            '대화하기',
+            style: cta(primary),
+          ),
+        ),
+      ),),
+    );
+  }
+
+  Widget shortButton(BuildContext context) {
+    return Material(
+      child: InkWell(
+        child: Container(
+          width: MediaQuery.of(context).size.width * (163 / 375),
+          height: 44,
+          color: primary,
+          child: Center(
+            child: Text('구매하기', style: cta(offWhite),),
+          ),
+        ),
       ),
     );
   }

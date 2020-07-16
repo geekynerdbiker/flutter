@@ -1,11 +1,14 @@
 import 'package:bak/models/classes/user.dart';
+import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NotificationSetting extends StatelessWidget {
-  final User user;
+  User user;
   NotificationSetting({this.user});
 
   bool getNotification = true;
@@ -55,7 +58,7 @@ class NotificationSetting extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -66,8 +69,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -102,11 +106,13 @@ class NotificationSetting extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("키워드 알림"),
+                  ImageIcon(AssetImage(forward_idle), size: 12,),
                 ],
               ),
             ),
           ),
         ),
+        borderLineGreyLite(context),
         Material(
           child: InkWell(
             child: Container(
@@ -115,6 +121,7 @@ class NotificationSetting extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("팔로잉 상점 알림"),
+                  ImageIcon(AssetImage(forward_idle), size: 12,),
                 ],
               ),
             ),
@@ -137,7 +144,7 @@ class NotificationSetting extends StatelessWidget {
               child: Text("서비스 알림"),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -148,8 +155,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -160,8 +168,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -172,8 +181,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -203,7 +213,7 @@ class NotificationSetting extends StatelessWidget {
               child: Text("상품 알림"),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -214,8 +224,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -226,8 +237,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -238,8 +250,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -269,7 +282,7 @@ class NotificationSetting extends StatelessWidget {
               child: Text("상점 알림"),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -280,8 +293,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -311,7 +325,7 @@ class NotificationSetting extends StatelessWidget {
               child: Text("메세지 알림"),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -341,7 +355,7 @@ class NotificationSetting extends StatelessWidget {
               child: Text("배송 알림"),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -352,8 +366,9 @@ class NotificationSetting extends StatelessWidget {
                 ],
               ),
             ),
+            borderLineGreyLite(context),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

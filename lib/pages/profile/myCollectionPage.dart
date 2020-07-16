@@ -8,8 +8,7 @@ import 'package:bak/pages/profile/follow.dart';
 import 'package:flutter/material.dart';
 
 class MyCollectionPage extends StatelessWidget {
-  final User user;
-
+  User user;
   MyCollectionPage({this.user});
 
   @override

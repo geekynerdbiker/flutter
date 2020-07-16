@@ -10,7 +10,7 @@ import 'package:bak/pages/message/chatRoom.dart';
 import 'package:flutter/material.dart';
 
 class MessagePage extends StatefulWidget {
-  final User user;
+User user;
   MessagePage({this.user});
 
   @override

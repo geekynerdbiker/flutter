@@ -9,9 +9,10 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/pages/collection/collectionDetailPage.dart';
 import 'package:bak/pages/product/productList.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FollowingCollectionsPage extends StatelessWidget {
-  final User user;
+  User user;
 
   FollowingCollectionsPage({this.user});
   @override

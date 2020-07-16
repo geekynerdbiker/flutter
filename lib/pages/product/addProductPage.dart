@@ -15,10 +15,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:intl/intl.dart';
 
 class AddProductPage extends StatefulWidget {
-  final User user;
-
+  User user;
   AddProductPage({this.user});
 
   @override
@@ -35,23 +35,29 @@ class _AddProductPageState extends State<AddProductPage> {
   int index = 0;
 
   String userID;
+
   String title;
-  String imageURI;
+  List<String> imageURI;
+
   String description;
   String updateDate;
   String soldDate;
+
   String status;
   String price;
   String deliveryFee;
+
   String state;
   String size;
   String material;
-  String color;
-  String category;
-  String tags;
-  String reviews;
-  String collection;
+  List<String> color = [];
+
   String rate;
+  String category;
+
+  List<String> tags = [];
+  List<String> reviews = [];
+  List<String> collections = [];
 
   String brand;
 
@@ -197,27 +203,6 @@ class _AddProductPageState extends State<AddProductPage> {
             ],
           ),
           textFieldBrand(context),
-          longButtonNav(
-              context,
-              offWhite,
-              true,
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('취향 선택 (선택)'),
-                      ),
-                      ImageIcon(
-                        AssetImage(forward_idle),
-                        size: 12,
-                        color: semiDark,
-                      )
-                    ],
-                  )),
-              favorite(context)),
           longTextField(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -233,10 +218,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget textFieldTitle(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -268,10 +250,7 @@ class _AddProductPageState extends State<AddProductPage> {
           });
         },
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * (335 / 375),
+          width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black), color: offWhite),
@@ -309,10 +288,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldSize(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (163 / 375),
+      width: MediaQuery.of(context).size.width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -331,10 +307,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldMaterial(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (163 / 375),
+      width: MediaQuery.of(context).size.width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -354,10 +327,7 @@ class _AddProductPageState extends State<AddProductPage> {
   Widget textFieldBrand(BuildContext context) {
     //tag
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -376,10 +346,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget longTextField(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 88,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -403,10 +370,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldPrice(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (163 / 375),
+      width: MediaQuery.of(context).size.width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -431,20 +395,13 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget smallTextFieldDeliveryFee(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (163 / 375),
+      width: MediaQuery.of(context).size.width * (163 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
       child: TextFormField(
         inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
         keyboardType: TextInputType.numberWithOptions(signed: true),
-        validator: (value) {
-          if (value.isEmpty) return '배송비를 입력하세요.';
-          return null;
-        },
         onSaved: (value) => deliveryFee = value,
         style: TextStyle(
           fontSize: 12,
@@ -688,12 +645,10 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget uploadButton(BuildContext context) {
-    bool confirm = false;
-
     return Material(
       child: InkWell(
-        onTap: () async {
-          confirm = await showDialog<bool>(
+        onTap: () {
+          showDialog<bool>(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -711,13 +666,9 @@ class _AddProductPageState extends State<AddProductPage> {
               );
             },
           );
-          if(confirm) add;
         },
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * (335 / 375),
+          width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
@@ -727,8 +678,7 @@ class _AddProductPageState extends State<AddProductPage> {
             ),
           ),
         ),
-      )
-      ,
+      ),
     );
   }
 
@@ -741,10 +691,11 @@ class _AddProductPageState extends State<AddProductPage> {
         child: Container(
           width: MediaQuery.of(context).size.width * (120 / 375),
           height: 36,
-          decoration: BoxDecoration(border: Border.all(color: primary), color: offWhite),
+          decoration: BoxDecoration(
+              border: Border.all(color: primary), color: offWhite),
           child: Center(
             child: Text(
-            '아니요',
+              '아니요',
               style: action1(primary),
             ),
           ),
@@ -757,7 +708,13 @@ class _AddProductPageState extends State<AddProductPage> {
     return Material(
       child: InkWell(
         onTap: () {
-          Navigator.pop(context, true);
+          userID = 'test';
+          if(_formKey.currentState.validate()) {
+            add();
+            Navigator.pop(context, true);
+          }
+          else
+            print('fail');
         },
         child: Container(
           width: MediaQuery.of(context).size.width * (120 / 375),
@@ -775,17 +732,16 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Future<void> add() async {
-    final FormState formState = _formKey.currentState;
     _autoValidate = true;
 
-    if (formState.validate()) {
-      formState.save();
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
       addProduct();
       try {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => BootPage()),
-                (route) => false);
+            MaterialPageRoute(builder: (context) => BootPage(user: widget.user,)),
+            (route) => false);
       } catch (e) {
         print(e.message);
       }
@@ -793,26 +749,39 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   void addProduct() {
-    Firestore.instance.collection('products').add({
-      "userID": userID ?? "_NULL",
-      "title": title ?? "_NULL",
-      "imageURI": imageURI ?? ["_NULL"],
-      "description": description ?? "_NULL",
-      "updateDate": DateTime.now().toString(),
-      "soldDate": soldDate ?? "_NULL",
-      "status": "onSale",
-      "price": price ?? "_NULL",
-      "deliveryFee": deliveryFee ?? "_NULL",
-      "state": state ?? "_NULL",
-      "size": size ?? "_NULL",
-      "material": material ?? "_NULL",
-      "color": color ?? ["_NULL"],
-      "category": categoryItem.title ?? "_NULL",
-      "tags": tags ?? ["_NULL"],
-      "reviews": reviews ?? ["_NULL"],
-      "collection": collection ?? ["_NULL"],
-      "rate": rate ?? "_NULL",
-    });
+    for(int i = 0; i < _tags.length; i++) {
+      tags.add(_tags[i].title);
+    }
+
+    Firestore.instance.collection('products').document(widget.user.username + '+' + title).setData({
+      "userID": widget.user.username ?? "",
+      "title": title ?? "",
+      "imageURI": imageURI ?? FieldValue.arrayUnion(['gs://newnew-test.appspot.com/IMG_0909.JPG']),
+      "description": description ?? "",
+      "updateDate": DateFormat("yyyy-MM-dd")
+          .format(DateTime.now())
+          .toString(),
+      "soldDate": soldDate ?? "",
+      "status": "on sale",
+      "price": price ?? "",
+      "deliveryFee": deliveryFee ?? "",
+      "state": state ?? "",
+      "size": size ?? "",
+      "material": material ?? "",
+      "color": color,
+      "category": categoryItem.title,
+      "tags": tags,
+      "reviews": reviews,
+      "collections": collections,
+      "rate": rate ?? "",
+    }).then((value) {
+      Firestore.instance.collection('users')
+          .document(widget.user.username)
+          .updateData({
+        "myProducts": FieldValue.arrayUnion([widget.user.username + '+' + title])
+      });
+    }
+    );
   }
 }
 

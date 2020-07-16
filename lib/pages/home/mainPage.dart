@@ -1,3 +1,4 @@
+import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/buttons.dart';
@@ -10,11 +11,12 @@ import 'package:bak/models/components/search.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
-  final User user;
-
+  User user;
   HomePage({this.user});
 
   @override
@@ -24,15 +26,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    User user;
+
     return Scaffold(
-      appBar: mainAppBar(context),
+      appBar: mainAppBar(context, user),
       backgroundColor: offWhite,
       body: ListView(
         children: <Widget>[
           carouselAndSearchBar(context),
           trendSearch(context),
           newNewPick(context),
-          popularSeller(context),
+          newNewPeople(context),
           recentView(context),
           hashTagCollection(context, new Collection('title', 'username', '/')),
           collectionBanner(context),
@@ -181,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                       context,
                       offWhite,
                       ProductListPage(
-                        collectionName: 'New New Pick',
                       )),
                 ),
               ],
@@ -191,7 +194,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  Widget popularSeller(BuildContext context) {
+  Widget newNewPeople(BuildContext context) {
     return Stack(
       children: [
         Container(
@@ -201,7 +204,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: EdgeInsets.only(top: 30, left: 20),
           child: Text(
-            '인기 셀러',
+            '뉴뉴 피플',
             style: subTitle1(primary),
           ),
         ),
@@ -324,7 +327,7 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardMedium(context, productItems[index], color),
+            child: productItemCardMedium(context, productItems[index], widget.user, color),
           );
         },
       ),
@@ -343,6 +346,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCollectionBody(
       BuildContext context, List<DocumentSnapshot> snapshot) {
+
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(
@@ -385,6 +389,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCollectionBody2(
       BuildContext context, List<DocumentSnapshot> snapshot) {
+
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(

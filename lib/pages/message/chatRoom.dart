@@ -6,13 +6,11 @@ import 'package:bak/models/designs/icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:intl/intl.dart';
 
 class ChatRoomPage extends StatefulWidget {
-  User _user;
-
-  ChatRoomPage(User _user) {
-    this._user = _user;
-  }
+  User user;
+  ChatRoomPage({this.user});
 
   @override
   _ChatRoomPage createState() => _ChatRoomPage();
@@ -24,7 +22,7 @@ class _ChatRoomPage extends State<ChatRoomPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: chat(context, widget._user),
+      appBar: chat(context, widget.user),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -46,7 +44,7 @@ class _ChatRoomPage extends State<ChatRoomPage> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       child: Center(
-        child: Text(DateTime.now().toString()),
+        child: Text(DateFormat("yyyy-MM-dd").format(DateTime.now()).toString()),
       ),
     );
   }

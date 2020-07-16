@@ -1,3 +1,4 @@
+import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/buttons.dart';
@@ -9,8 +10,7 @@ import 'package:bak/pages/profile/tradeList.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  final User user;
-
+  User user;
   ProfilePage({this.user});
 
   @override

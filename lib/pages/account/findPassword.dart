@@ -94,14 +94,21 @@ class FindPasswordPage extends StatelessWidget {
   }
 
   Widget basicButton(BuildContext context, String _textContext) {
-    return Container(
-      height: 44,
-      width: MediaQuery.of(context).size.width * ( 335 / 375 ),
-      color: Colors.black,
-      child: Center(
-        child: Text(
-          _textContext,
-          style: TextStyle(fontSize: 14, color: offWhite),
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordPage()));
+        },
+        child: Container(
+          height: 44,
+          width: MediaQuery.of(context).size.width * ( 335 / 375 ),
+          color: Colors.black,
+          child: Center(
+            child: Text(
+              _textContext,
+              style: TextStyle(fontSize: 14, color: offWhite),
+            ),
+          ),
         ),
       ),
     );

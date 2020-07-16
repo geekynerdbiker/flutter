@@ -11,9 +11,10 @@ import 'package:bak/pages/product/productList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecommendPage extends StatelessWidget {
-  final User user;
+  User user;
   RecommendPage({this.user});
 
   @override
@@ -191,7 +192,7 @@ class RecommendPage extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ProductDetailPage(
+                  builder: (context) => ProductDetailPage(user: user,
                         product: product,
                       )));
         },

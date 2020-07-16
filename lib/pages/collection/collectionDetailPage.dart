@@ -1,3 +1,4 @@
+import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
@@ -9,12 +10,13 @@ import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class CollectionDetailPage extends StatefulWidget {
-  final Collection collection;
-  final User user;
+  Collection collection;
+  User user;
 
   CollectionDetailPage({this.collection, this.user});
 
@@ -41,6 +43,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    User user;
+    getCurrentUserInfo().then((value) => user = value);
+
     return Scaffold(
       appBar: appBarDefaultDeep(context, 'Collection'),
       backgroundColor: offWhite,
@@ -54,7 +59,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         physics: ClampingScrollPhysics(),
         children: <Widget>[
           collectionInfo(context),
-          widget.user.username == widget.collection.userID
+          user.username == widget.collection.userID
               ? productItemList(context)
               : tabBar(context),
         ],
@@ -76,6 +81,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   }
 
   Widget collectionInfo(BuildContext context) {
+    User user;
+    getCurrentUserInfo().then((value) => user = value);
+
     return Column(
       children: <Widget>[
         Container(
@@ -118,7 +126,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                     ),
                   ],
                 ),
-                widget.user.username != widget.collection.userID
+                user.username != widget.collection.userID
                     ? Container(
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -175,12 +183,15 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   }
 
   Widget tabBar(BuildContext context) {
+    User user;
+    getCurrentUserInfo().then((value) => user = value);
+
     int myProducts = 0;
     int usersProducts = 0;
 
     for (int i = 0; i < widget.collection.products.length; i++)
-      for (int j = 0; j < widget.user.myProducts.length; j++)
-        widget.collection.products[i] == widget.user.myProducts[j]
+      for (int j = 0; j < user.myProducts.length; j++)
+        widget.collection.products[i] == user.myProducts[j]
             ? myProducts++
             : usersProducts++;
 
@@ -194,7 +205,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
           labelColor: primary,
           unselectedLabelColor: Colors.grey,
           indicatorColor: primary,
-
           tabs: [
             Tab(
               icon: Text('나의 컬렉션 (' + myProducts.toString() + ')'),
@@ -209,8 +219,22 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
           child: TabBarView(
             controller: _controller,
             children: <Widget>[
-              ListView(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), children: [Container(height: 100, width: 100, color: primary,)],),
-              ListView(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), children: [],),
+              ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: primary,
+                  )
+                ],
+              ),
+              ListView(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [],
+              ),
             ],
           ),
         )
@@ -258,7 +282,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
     return Container(
       child: Column(
         children: <Widget>[
-          productImageBox(context, product, _width, _height),
+          productImageBox(context, product, _width, _height, widget.user),
           hSpacer(_space1),
           Container(
             padding: EdgeInsets.only(left: 12),

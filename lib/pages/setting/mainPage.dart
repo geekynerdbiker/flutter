@@ -3,11 +3,13 @@ import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
+import 'package:bak/pages/setting/editPhoneNumber.dart';
 import 'package:bak/pages/setting/notificationSettiong.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingPage extends StatelessWidget {
-  final User user;
+  User user;
 
   SettingPage({this.user});
 
@@ -38,9 +40,16 @@ class SettingPage extends StatelessWidget {
           color: light,
           child: Text("계정 설정"),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Text("연락처 설정"),
+        Material(
+          child: InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EditPhoneNumber(user: user,)));
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Text("연락처 변경"),
+            ),
+          ),
         ),
         borderLineGreyLite(context),
         Container(
@@ -82,7 +91,7 @@ class SettingPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("알림 설정"),
-                  ImageIcon(AssetImage(forward_idle), size: 12,)
+                  ImageIcon(AssetImage(forward_idle), size: 12,),
                 ],
               ),
             ),

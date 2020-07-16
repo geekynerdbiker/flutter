@@ -1,3 +1,4 @@
+import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/designs/colors.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class SignUpPage extends StatefulWidget {
   _SignUpPage createState() => _SignUpPage();
@@ -17,12 +19,33 @@ class _SignUpPage extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
-  String phoneNumber;
   String verifyCode;
-  String eMail;
+  String confirmPassword;
+
   String username;
   String password;
-  String confirmPassword;
+  String contact;
+  String eMail;
+  String address;
+
+  String createDate;
+  String lastActivity;
+
+  String rate;
+
+  String imageURI;
+  String name;
+  String bio;
+  String webSite;
+
+  List<String> followers = [];
+  List<String> following = [];
+  List<String> selectedFavor = [];
+  List<String> reviews = [];
+
+  List<String> favorite = [];
+  List<String> myProducts = [];
+  List<String> myCollections = [];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +85,7 @@ class _SignUpPage extends State<SignUpPage> {
             false,
             Text(
               '인증요청',
-              style: label(offWhite),
+              style: cta(offWhite),
             )),
       ],
     );
@@ -70,7 +93,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldPhoneNumber(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (227 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (227 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -84,7 +110,7 @@ class _SignUpPage extends State<SignUpPage> {
           return null;
         },
         onSaved: (value) {
-          phoneNumber = value;
+          contact = value;
         },
         style: TextStyle(
           fontSize: 12,
@@ -97,11 +123,14 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Widget shortButtonRequestAuth(
-      BuildContext context, Color _color, bool _border, Widget _widget) {
+  Widget shortButtonRequestAuth(BuildContext context, Color _color,
+      bool _border, Widget _widget) {
     if (_border)
       return Container(
-        width: MediaQuery.of(context).size.width * (100 / 375),
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * (100 / 375),
         height: 44,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black), color: _color),
@@ -111,7 +140,10 @@ class _SignUpPage extends State<SignUpPage> {
       );
     else
       return Container(
-        width: MediaQuery.of(context).size.width * (100 / 375),
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * (100 / 375),
         height: 44,
         color: _color,
         child: Center(
@@ -122,7 +154,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldVerifyCode(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -151,7 +186,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldUsername(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -179,7 +217,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldEMail(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -208,7 +249,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldPassword(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -241,7 +285,10 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldConfirmPassword(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -269,6 +316,8 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget signUpButton(BuildContext context) {
     final FormState form = _formKey.currentState;
+    User user;
+
     return Material(
       child: InkWell(
         onTap: () {
@@ -276,19 +325,19 @@ class _SignUpPage extends State<SignUpPage> {
           if (validateAndSave()) {
             form.save();
             signUp();
-            print("OK!");
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SelectFavorPage(username: username,)));
           }
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * (335 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
             child: Text(
               '가입하기',
-              style: label(offWhite),
+              style: cta(offWhite),
             ),
           ),
         ),
@@ -305,27 +354,46 @@ class _SignUpPage extends State<SignUpPage> {
     return false;
   }
 
-  void signUp() {
-    Firestore.instance.collection('users').document(username).setData(
-        {
-          'username' : username,
-          'password' : password,
-          'contact' : phoneNumber,
-          'eMail' : eMail,
-          'address' : "",
-          'createDate' : DateTime.now().toString(),
-          'lastActivity' : DateTime.now().toString(),
-          'rate' : "",
-          'imageURI' : 'default',
-          'name' : "",
-          'bio' : "",
-          'followers' : ['default'],
-          'following': ['default'],
-          'selectedFavor' : ['default'],
-          'reviews':['default'],
-          'favorite':['default'],
-          'myProducts':['default'],
-          'myCollections':['default']
+  void signUp() async {
+    String uid;
+
+    FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: eMail, password: password).then((value) async {
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: eMail, password: password);
+    }).then((value) async{
+      uid = (await FirebaseAuth.instance.currentUser()).uid;
+
+      Firestore.instance.collection('users').document(username).setData(
+          {
+            'username': username,
+            'password': password,
+            'contact': contact,
+            'eMail': eMail,
+            'address': address ?? "",
+            'createDate': createDate ??
+                DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
+            'lastActivity': lastActivity ??
+                DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
+            'rate': rate ?? "",
+            'imageURI': imageURI ?? 'gs://newnew-test.appspot.com/1-1.JPG',
+            'name': name ?? "",
+            'bio': bio ?? "상점 소개를 입력하세요.",
+            'webSite': webSite ?? "",
+            'followers': followers ?? List.from(['']),
+            'following': following ?? List.from(['']),
+            'selectedFavor': selectedFavor ?? List.from(['']),
+            'reviews': reviews ?? List.from(['']),
+            'favorite': favorite ?? List.from(['']),
+            'myProducts': myProducts ?? List.from(['']),
+            'myCollections': myCollections ?? List.from(['']),
+          });
+
+      Firestore.instance.collection('users').document(username).get().then((e) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>
+                SelectFavorPage(user: User.getUserData(e),)));
+      });
     });
   }
 }

@@ -4,10 +4,10 @@ import 'package:bak/models/components/navigation.dart';
 import 'package:bak/pages/newnew/follwingCollections.dart';
 import 'package:bak/pages/newnew/follwingShops.dart';
 import 'package:bak/pages/newnew/recommend.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';import 'package:firebase_auth/firebase_auth.dart';
 
 class SearchResultPage extends StatefulWidget {
-  final User user;
+  User user;
   final String search;
   SearchResultPage({this.user, this.search});
 

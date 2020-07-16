@@ -7,7 +7,7 @@ import 'package:bak/pages/profile/review.dart';
 import 'package:flutter/material.dart';
 
 class MyShopPage extends StatelessWidget {
-  final User user;
+  User user;
 
   MyShopPage({this.user});
 
@@ -17,7 +17,6 @@ class MyShopPage extends StatelessWidget {
       body: ListView(
         shrinkWrap: true,
         physics: ClampingScrollPhysics(),
-        //shrinkWrap: true,
         children: [
           infoLine(context, user),
           GridView.count(
@@ -95,7 +94,8 @@ class MyShopPage extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => ReviewPage()));
                   },
-                  //child: Text('(' + user.reviews.length.toString() + ' Reviews' + ')'),
+                  child: Text(
+                      '(' + user.reviews.length.toString() + ' Reviews' + ')'),
                 ),
               )
             ],

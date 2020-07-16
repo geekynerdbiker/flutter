@@ -1,5 +1,6 @@
 import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/colors.dart';
@@ -7,8 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ProductListPage extends StatefulWidget {
-  final String collectionName;
-  ProductListPage({this.collectionName});
+  User user;
+  Collection collection;
+
+  ProductListPage({this.user, this.collection});
 
   @override
   _ProductListPage createState() => _ProductListPage();
@@ -18,7 +21,7 @@ class _ProductListPage extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarDefaultDeep(context, widget.collectionName + '('+')'),
+      appBar: appBarDefaultDeep(context, widget.collection.title),
       body: Container(child: productItemList(context),)
     );
   }
@@ -43,7 +46,7 @@ class _ProductListPage extends State<ProductListPage> {
         itemCount: productItems.length,
         itemBuilder: (context, index) {
           return Container(
-            child: productItemCardLarge(context, productItems[index]),
+            child: productItemCardLarge(context, productItems[index], widget.user),
           );
         },
     );

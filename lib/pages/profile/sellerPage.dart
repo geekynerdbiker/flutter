@@ -84,7 +84,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ChatRoomPage(widget._user)));
+                              builder: (context) => ChatRoomPage(user: widget._user)));
                     },
                     child: shortButton(context, offWhite, true, Text('메세지 보내기')),
                   ),

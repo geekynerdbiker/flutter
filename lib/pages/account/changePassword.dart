@@ -26,13 +26,12 @@ class ChangePasswordPage extends StatelessWidget {
                   .of(context)
                   .size
                   .width - 100,
-              child: Text(
-                '비밀번호를 재설정 해주세요.',
-                style: TextStyle(fontSize: 11, color: Colors.grey),
+              child: Center(
+                child: Text(
+                  '비밀번호를 다시 설정해주세요.',
+                  style: TextStyle(fontSize: 11, color: Colors.grey),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(40),
             ),
             Container(
                 height: 40,
@@ -50,11 +49,11 @@ class ChangePasswordPage extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: '신규 비밀번호 (8-20자 내외)'),
+                        hintText: '새로운 비밀번호'),
                   ),
                 )),
             Padding(
-              padding: EdgeInsets.all(40),
+              padding: EdgeInsets.all(5),
             ),
             Container(
                 height: 40,
@@ -71,7 +70,7 @@ class ChangePasswordPage extends StatelessWidget {
                       fontSize: 12,
                     ),
                     decoration: InputDecoration(
-                        border: InputBorder.none, hintText: '신규 비밀번호 확인'),
+                        border: InputBorder.none, hintText: '새로운 비밀번호 확인'),
                   ),
                 )),
             Padding(

@@ -2,6 +2,7 @@ import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/selection.dart';
+import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/account/signInPage.dart';
 import 'package:bak/pages/account/signUpPage.dart';
 import 'package:bak/pages/home/bootPage.dart';
@@ -18,13 +19,9 @@ class OnboardingScreen extends StatelessWidget {
             top: MediaQuery.of(context).size.width * 0.25,
             left: MediaQuery.of(context).size.width * 0.1,
             child: Text(
-              '취향있는 사람들의\n좋은 물건\nNEW NEW',
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue),
+              '즐거운 쓸모,\n수집의 기쁨',
+              style: title1(primary)),
             ),
-          ),
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.65),
             child: Column(
@@ -36,20 +33,13 @@ class OnboardingScreen extends StatelessWidget {
                     basicButton(context, '회원가입', SignUpPage()),
                   ],
                 ),
-                hSpacer(70),
-                Row(
+                hSpacer(10),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     foreignLogInButton(context, '네이버 로그인', Colors.green),
                     foreignLogInButton(context, '카카오 로그인', Colors.yellow),
-                  ],
-                ),
-                hSpacer(10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    foreignLogInButton(context, 'Facebook 로그인', Colors.blue),
-                    foreignLogInButton(context, 'Google 로그인', offWhite),
+                    foreignLogInButton(context, '애플 로그인', Colors.black),
                   ],
                 ),
               ],
@@ -61,8 +51,6 @@ class OnboardingScreen extends StatelessWidget {
   }
 
   Widget explore(BuildContext context) {
-    User guest = User('guest', 'no image');
-
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
@@ -71,7 +59,7 @@ class OnboardingScreen extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => BootPage(user: guest,)));
+                  context, MaterialPageRoute(builder: (context) => BootPage()));
             },
             child: Container(
               width: MediaQuery.of(context).size.width * 0.2,
@@ -106,7 +94,7 @@ class OnboardingScreen extends StatelessWidget {
           child: Center(
             child: Text(
               textContext,
-              style: TextStyle(color: primary),
+              style: cta(primary),
             ),
           ),
         ),
@@ -122,14 +110,15 @@ class OnboardingScreen extends StatelessWidget {
 //              context, MaterialPageRoute(builder: (context) => _route));
 //        },
         child: Container(
-          width: MediaQuery.of(context).size.width * (158 / 375),
+          margin: EdgeInsets.symmetric(vertical: 5),
+          width: MediaQuery.of(context).size.width * (335 / 375),
           height: 40,
           decoration: BoxDecoration(
               color: _color),
           child: Center(
             child: Text(
               textContext,
-              style: TextStyle(color: primary),
+              style: cta(offWhite),
             ),
           ),
         ),
