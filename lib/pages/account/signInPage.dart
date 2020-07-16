@@ -1,5 +1,6 @@
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
+import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/typos.dart';
@@ -7,6 +8,7 @@ import 'package:bak/pages/account/findPassword.dart';
 import 'package:bak/pages/account/signUpPage.dart';
 import 'package:bak/pages/home/bootPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -32,7 +34,10 @@ class _SignInPage extends State<SignInPage> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.symmetric(vertical: 60),
-              width: MediaQuery.of(context).size.width * (124 / 375),
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * (124 / 375),
               child: Image.asset(
                 'lib/assets/icons/drawable-xxxhdpi/new_new_logo_combined.png',
                 fit: BoxFit.cover,
@@ -83,7 +88,7 @@ class _SignInPage extends State<SignInPage> {
           child: Center(
             child: Text(
               _textContext,
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              style: caption2(semiDark),
             ),
           ),
         ),
@@ -93,7 +98,10 @@ class _SignInPage extends State<SignInPage> {
 
   Widget textFieldAccount(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -116,7 +124,10 @@ class _SignInPage extends State<SignInPage> {
 
   Widget textFieldPassword(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -141,15 +152,21 @@ class _SignInPage extends State<SignInPage> {
   Widget signInButton(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: signIn,
+        onTap: () {
+          _formKey.currentState.save();
+          signIn();
+        },
         child: Container(
-          width: MediaQuery.of(context).size.width * (335 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
             child: Text(
               '로그인',
-              style: label(offWhite),
+              style: cta(offWhite),
             ),
           ),
         ),
@@ -157,9 +174,50 @@ class _SignInPage extends State<SignInPage> {
     );
   }
 
-  void signIn() async{
-    Future<QuerySnapshot> snapshot = Firestore.instance.collection('users').getDocuments();
-    User user = User('guest', 'no image');
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => BootPage(user: user)), (route) => false);
+  void signIn() {
+    Firestore.instance.collection('users').document(account).get().then((e) {
+      if (account == e.data['username'] || account == e.data['eMail']) {
+        if (password == e.data['password']) {
+          FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: e.data['eMail'], password: e.data['password']);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      BootPage(
+                        user: User.getUserData(e),
+                      )),
+                  (route) => false);
+        } else
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: Text("비밀번호가 일치하지 않습니다."),
+                  actions: [
+                    FlatButton(
+                      onPressed: () => Navigator.pop(context),
+                      color: primary,
+                      child: Text('확인'),
+                    ),
+                  ],
+                );
+              });
+      } else
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('존재하지 않는 아이디입니다.'),
+                actions: [
+                  FlatButton(
+                    onPressed: () => Navigator.pop(context),
+                    color: primary,
+                    child: Text('확인'),
+                  ),
+                ],
+              );
+            });
+    });
   }
 }
