@@ -99,7 +99,7 @@ TextStyle inputText(Color _color) {
 
 // Tags
 TextStyle selectionTag(Color _color) {
-  return TextStyle(fontSize: 14, color: _color, fontFamily: 'SpoqaHanSans', fontWeight: FontWeight.w500);
+  return TextStyle(fontSize: 12, color: _color, fontFamily: 'SpoqaHanSans', fontWeight: FontWeight.w500);
 }
 
 // Messages
@@ -121,7 +121,7 @@ TextStyle titleText(Color _color) {
 }
 
 TextStyle popularSearchEngLarge(Color _color) {
-  return TextStyle(fontSize: 48, color: _color, fontFamily: 'SpoqaHanSans', fontWeight: FontWeight.w400);
+  return TextStyle(fontSize: 48, color: _color, fontFamily: 'Antonios', fontWeight: FontWeight.w400);
 }
 
 TextStyle popularSearchKRLarge(Color _color) {
@@ -133,7 +133,7 @@ TextStyle collectionTitle(Color _color) {
 }
 
 TextStyle popularSearchEngSmall(Color _color) {
-  return TextStyle(fontSize: 20, color: _color, fontFamily: 'SpoqaHanSans', fontWeight: FontWeight.w400);
+  return TextStyle(fontSize: 20, color: _color, fontFamily: 'Antonios', fontWeight: FontWeight.w400);
 }
 
 TextStyle popularSearchKRSmall(Color _color) {

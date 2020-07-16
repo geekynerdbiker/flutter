@@ -4,6 +4,7 @@ import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ import 'package:bak/models/classes/collection.dart';
 import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/collection/collectionDetailPage.dart';
 
-Widget productItemCardLarge(BuildContext context, Product product) {
+Widget productItemCardLarge(BuildContext context, Product product, User user) {
   const double _width = 185;
   const double _height = 250;
   const double _space1 = 14;
@@ -26,7 +27,7 @@ Widget productItemCardLarge(BuildContext context, Product product) {
     width: _width,
     child: Column(
       children: <Widget>[
-        productImageBox(context, product, _width, _height),
+        productImageBox(context, product, _width, _height, user),
         hSpacer(_space1),
         Container(
           padding: EdgeInsets.only(left: 10),
@@ -39,9 +40,16 @@ Widget productItemCardLarge(BuildContext context, Product product) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title.length < 10 ? product.title : product.title.substring(0, 10) + '..', style: body1(primary),),
+                      product.title.length < 10
+                          ? product.title
+                          : product.title.substring(0, 10) + '..',
+                      style: body1(primary),
+                    ),
                     hSpacer(_space2),
-                    Text(product.price.toString() + '원', style: body1(primary),),
+                    Text(
+                      product.price.toString() + '원',
+                      style: body1(primary),
+                    ),
                   ],
                 ),
                 Container(
@@ -61,7 +69,7 @@ Widget productItemCardLarge(BuildContext context, Product product) {
 }
 
 Widget productItemCardMedium(
-    BuildContext context, Product product, Color _color) {
+    BuildContext context, Product product, User user, Color _color) {
   const double _width = 160;
   const double _height = 200;
   const double _space1 = 14;
@@ -71,7 +79,7 @@ Widget productItemCardMedium(
   return Container(
     child: Column(
       children: <Widget>[
-        productImageBox(context, product, _width, _height),
+        productImageBox(context, product, _width, _height, user),
         hSpacer(_space1),
         Container(
           padding: EdgeInsets.only(left: 12),
@@ -84,7 +92,9 @@ Widget productItemCardMedium(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title.length < 9 ? product.title : product.title.substring(0, 8) + ' ..',
+                      product.title.length < 9
+                          ? product.title
+                          : product.title.substring(0, 8) + ' ..',
                       style: body1(_color),
                     ),
                     hSpacer(_space2),
@@ -113,7 +123,7 @@ Widget productItemCardMedium(
   );
 }
 
-Widget productItemCardSmall(BuildContext context, Product product) {
+Widget productItemCardSmall(BuildContext context, Product product, User user) {
   const double _width = 120;
   const double _height = 120;
   const double _space1 = 8;
@@ -124,7 +134,7 @@ Widget productItemCardSmall(BuildContext context, Product product) {
   return Container(
     child: Column(
       children: <Widget>[
-        productImageBox(context, product, _width, _height),
+        productImageBox(context, product, _width, _height, user),
         hSpacer(_space1),
         Container(
             padding: EdgeInsets.only(left: 12),
@@ -144,7 +154,8 @@ Widget productItemCardSmall(BuildContext context, Product product) {
   );
 }
 
-Widget collectionCoverCard(BuildContext context, Collection collection, User user) {
+Widget collectionCoverCard(
+    BuildContext context, Collection collection, User user) {
   const double _width = 375;
   const double _height = 280;
   const double _space1 = 16;
@@ -255,14 +266,14 @@ Widget collectionCardLarge(
 }
 
 Widget productImageBox(
-    BuildContext context, Product product, double _width, double _height) {
+    BuildContext context, Product product, double _width, double _height, User user) {
   return Material(
     child: InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ProductDetailPage(
+                builder: (context) => ProductDetailPage(user: user,
                       product: product,
                     )));
       },
@@ -273,7 +284,7 @@ Widget productImageBox(
         child: Image(
           image: FirebaseImage(product.imageURI[0],
               shouldCache: true,
-              maxSizeBytes: 3000 * 1000,
+              maxSizeBytes: 5000 * 1000,
               cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
         ),
@@ -290,23 +301,25 @@ Widget collectionImageBox(BuildContext context, Collection collection,
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CollectionDetailPage(collection: collection, user: user,)));
+                builder: (context) => CollectionDetailPage(
+                      collection: collection,
+                      user: user,
+                    )));
       },
       child: Container(
         width: _width,
         height: _height,
         color: Colors.grey,
         child: Image(
-          image: FirebaseImage(
-            collection.imageURI,
+          image: FirebaseImage(collection.imageURI,
               shouldCache: true,
               maxSizeBytes: 5000 * 1000,
               cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
-          ),
         ),
       ),
-    );
+    ),
+  );
 }
 
 Widget keywordNotificationListItem() {
@@ -343,7 +356,8 @@ Widget keywordNotificationListItem() {
   );
 }
 
-Widget collectionShowcase(BuildContext context, Collection collection, User user) {
+Widget collectionShowcase(
+    BuildContext context, Collection collection, User user) {
   const double _width = 240;
   const double _height = 160;
   const double _space1 = 8;
@@ -382,14 +396,14 @@ Widget collectionShowcase(BuildContext context, Collection collection, User user
   );
 }
 
-Widget productItem1(BuildContext context, Product product) {
+Widget productItem1(BuildContext context, Product product, User user) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          productImageBox(context, product, 48, 48),
+          productImageBox(context, product, 48, 48, user),
           wSpacer(12),
           Column(
             children: [

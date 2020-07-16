@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
-Widget mainAppBar(BuildContext context) {
+Widget mainAppBar(BuildContext context, User user) {
   return AppBar(
     elevation: 0.5,
     centerTitle: true,
@@ -38,12 +38,12 @@ Widget mainAppBar(BuildContext context) {
         child: ImageIcon(AssetImage(category_idle), color: primary),
       ),
     ),
-    actions: <Widget>[notification(context), favorite(context)],
+    actions: <Widget>[notification(context, user), favorite(context, user)],
   );
 }
 
-Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
-    TabController _controller) {
+Widget appBarWithSearch(BuildContext context, String _title, User user,
+    List<Tab> _tabs, TabController _controller) {
   return AppBar(
     elevation: 0,
     centerTitle: true,
@@ -66,7 +66,7 @@ Widget appBarWithSearch(BuildContext context, String _title, List<Tab> _tabs,
         child: ImageIcon(AssetImage(category_idle), color: primary),
       ),
     ),
-    actions: <Widget>[notification(context), favorite(context)],
+    actions: <Widget>[notification(context, user), favorite(context, user)],
     bottom: PreferredSize(
       preferredSize: Size(0, 40),
       child: Container(
@@ -204,7 +204,7 @@ Widget category(BuildContext context) {
   );
 }
 
-Widget notification(BuildContext context) {
+Widget notification(BuildContext context, User user) {
   return Material(
     color: offWhite,
     child: InkWell(
@@ -222,7 +222,7 @@ Widget notification(BuildContext context) {
   );
 }
 
-Widget favorite(BuildContext context) {
+Widget favorite(BuildContext context, User user) {
   return Material(
     color: offWhite,
     child: InkWell(
@@ -304,18 +304,21 @@ Widget myPage(BuildContext context, User user) {
     ),
     leading: Material(
       child: InkWell(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage(user: user)));
-        },
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SettingPage(user: user)));
+          },
           child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
-        child: ImageIcon(
-          AssetImage(setting_idle),
-          size: 8,
-          color: primary,
-        ),
-      )),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: ImageIcon(
+              AssetImage(setting_idle),
+              size: 8,
+              color: primary,
+            ),
+          )),
     ),
-    actions: <Widget>[notification(context), favorite(context)],
+    actions: <Widget>[notification(context, user), favorite(context, user)],
   );
 }

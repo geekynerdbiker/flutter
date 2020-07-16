@@ -29,30 +29,6 @@ class Product {
 
   DocumentReference reference;
 
-
-  Map<String, dynamic> toMap() {
-    return {
-      "userID": userID,
-      "title": title,
-      "imageURI": imageURI,
-      "description": description,
-      "updateDate": updateDate,
-      "soldDate": soldDate,
-      "status": status,
-      "price": price,
-      "deliveryFee": deliveryFee,
-      "state": state,
-      "size": size,
-      "material": material,
-      "color": color,
-      "category": category,
-      "tags": tags,
-      "reviews": reviews,
-      "collection": collections,
-      "rate": rate,
-    };
-  }
-
   Product.fromMap(Map <String, dynamic> map, {this.reference})
       : userID = map['userID'],
         title = map['title'],

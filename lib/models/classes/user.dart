@@ -1,5 +1,3 @@
-import 'package:bak/models/classes/product.dart';
-import 'package:bak/models/classes/collection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
@@ -17,6 +15,7 @@ class User {
   String imageURI;
   String name;
   String bio;
+  String webSite;
 
   List<String> followers = [];
   List<String> following = [];
@@ -33,7 +32,7 @@ class User {
       : username = map['username'],
         password = map['password'],
         contact = map['contact'],
-        eMail = map['email'],
+        eMail = map['eMail'],
         address = map['address'],
         createDate = map['createDate'],
         lastActivity = map['lastActivity'],
@@ -41,6 +40,7 @@ class User {
         imageURI = map['imageURI'],
         name = map['name'],
         bio = map['bio'],
+        webSite = map['webSite'],
         followers = List.from(
           map['followers'],
         ),
@@ -57,15 +57,55 @@ class User {
           map['favorite'],
         ),
         myProducts = List.from(
-          map['myProduct'],
+          map['myProducts'],
         ),
-        myCollections = List.from(map['myCollection']);
+        myCollections = List.from(map['myCollections']);
 
   User.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
-  User(this.username, this.imageURI);
+  User.getUserData(DocumentSnapshot snapshot)
+      : this.username = snapshot.data['username'],
+        this.password = snapshot.data['password'],
+        this.contact = snapshot.data['contact'],
+        this.eMail = snapshot.data['eMail'],
+        this.address = snapshot.data['address'],
+        this.createDate = snapshot.data['createDate'],
+        this.lastActivity = snapshot.data['lastActivity'],
+        this.rate = snapshot.data['rate'],
+        this.imageURI = snapshot.data['imageURI'],
+        this.name = snapshot.data['name'],
+        this.bio = snapshot.data['bio'],
+        this.webSite = snapshot.data['webSite'],
+        this.followers = List<String>.from(snapshot.data['followers']),
+        this.following = List<String>.from(snapshot.data['following']),
+        this.selectedFavor = List<String>.from(snapshot.data['selectedFavor']),
+        this.reviews = List<String>.from(snapshot.data['reviews']),
+        this.favorite = List<String>.from(snapshot.data['favorite']),
+        this.myProducts = List<String>.from(snapshot.data['myProducts']),
+        this.myCollections = List<String>.from(snapshot.data['myCollections']);
 
+  Map<String, dynamic> toUserData() => {
+    'username' : username,
+    'password' : password,
+    'contact' : contact,
+    'eMail' : eMail,
+    'address' : address,
+    'createDate' : createDate,
+    'lastActivity' : lastActivity,
+    'rate' : rate,
+    'imageURI' : imageURI,
+    'name' : name,
+    'bio' : bio,
+    'webSite' : webSite,
+    'followers' : followers,
+    'following' : following,
+    'selectedFavor' : selectedFavor,
+    'reviews' : reviews,
+    'favorite' : favorite,
+    'myProducts' : myProducts,
+    'myCollections' : myCollections,
+  };
 }
 
 class EditProfileForm {
@@ -75,5 +115,6 @@ class EditProfileForm {
   String webSite;
   String bio;
 
-  EditProfileForm(this.imageURI, this.username, this.name, this.webSite, this.bio);
+  EditProfileForm(
+      this.imageURI, this.username, this.name, this.webSite, this.bio);
 }

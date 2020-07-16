@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/designs/colors.dart';
+import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/message/chatRoom.dart';
 import 'package:bak/pages/profile/editProfile.dart';
 import 'package:firebase_image/firebase_image.dart';
@@ -147,7 +149,7 @@ Widget userMarquee2(BuildContext context, User _user) {
             children: [
               profileImage(_user, _r),
               wSpacer(_space1),
-              //Text(_user.username, style: caption2(primary),),
+              Text(_user.username, style: caption2(primary),),
             ],
           ),
           Row(
@@ -158,9 +160,9 @@ Widget userMarquee2(BuildContext context, User _user) {
                 size: 12,
               ),
               wSpacer(_space2),
-              //Text(_user..length, style: caption2(primary),),
+              _user.rate == 'null' ? Text('0.0', style: caption2(primary),) : Text(_user.rate, style: caption2(primary),),
               wSpacer(_space3),
-              //Text('(' + _user.reviews..length + ' Reviews' + ')', style: label(primary),),
+              Text('(' + _user.reviews.length.toString() + ' Reviews' + ')', style: label(primary),),
             ],
           )
         ],
@@ -178,7 +180,7 @@ Widget userMarqueeMessageListItem(BuildContext context, User _user) {
   return Material(
     child: InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage(_user)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage(user: _user)));
       },
       child: Column(
         children: [
