@@ -1,9 +1,9 @@
-import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/classes/collection.dart';
+import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/components/selection.dart';
@@ -11,9 +11,7 @@ import 'package:bak/models/components/search.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   User user;
@@ -195,20 +193,47 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget newNewPeople(BuildContext context) {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: MediaQuery.of(context).size.width * (211 / 375),
-          color: offWhite,
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 30, left: 20),
+          margin: EdgeInsets.only(top: 30, left: 20),
           child: Text(
             '뉴뉴 피플',
             style: subTitle1(primary),
           ),
         ),
+        getPeople(context),
       ],
+    );
+  }
+
+  Widget getPeople(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('users').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildUserMarquee(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildUserMarquee(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<User> userItems =
+    snapshot.map((e) => User.fromSnapshot(e)).toList();
+    return Container(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: userItems.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(top: 50, left: 20),
+            child: userMarqueePopularSeller(context, userItems[index]),
+          );
+        },
+      ),
     );
   }
 

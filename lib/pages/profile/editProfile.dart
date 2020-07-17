@@ -43,7 +43,7 @@ class _EditProfilePage extends State<EditProfilePage> {
             Center(
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 40),
-                child: profileImage(widget.user, 84),
+                child: profileImage(context, widget.user, 84),
               ),
             ),
             textFieldUsername(context),

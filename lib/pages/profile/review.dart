@@ -6,6 +6,9 @@ import 'package:bak/models/components/user.dart';
 import 'package:flutter/material.dart';
 
 class ReviewPage extends StatelessWidget {
+  User user;
+  ReviewPage({this.user});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

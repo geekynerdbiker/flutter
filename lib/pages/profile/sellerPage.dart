@@ -10,11 +10,9 @@ import 'package:bak/pages/profile/tradeList.dart';
 import 'package:flutter/material.dart';
 
 class SellerPage extends StatefulWidget {
-  User _user;
+  User user;
 
-  SellerPage(User _user) {
-    this._user = _user;
-  }
+  SellerPage({this.user});
 
   @override
   _SellerPageState createState() => _SellerPageState();
@@ -34,11 +32,11 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
 
   List<Widget> _pages = [
     MyShopPage(
-      //user: new User('username', '1', 'imageURI'),
-    ),
+        //user: new User('username', '1', 'imageURI'),
+        ),
     MyCollectionPage(
 //      user: new User('username', '1', 'imageURI'),
-    ),
+        ),
   ];
 
   @override
@@ -84,9 +82,11 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ChatRoomPage(user: widget._user)));
+                              builder: (context) =>
+                                  ChatRoomPage(user: widget.user)));
                     },
-                    child: shortButton(context, offWhite, true, Text('메세지 보내기')),
+                    child:
+                        shortButton(context, offWhite, true, Text('메세지 보내기')),
                   ),
                 ),
               ],

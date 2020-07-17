@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
   User user;
+
   ProfilePage({this.user});
 
   @override
@@ -20,20 +21,13 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
   TabController _controller;
-
-  List<Tab> _tabs = [
-    Tab(
-      icon: Text('나의 샵' + ' (' + '42' + ')'),
-    ),
-    Tab(
-      icon: Text('나의 컬렉션' + ' (' + '9' + ')'),
-    ),
-  ];
+  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: 2);
+    _controller =
+        TabController(initialIndex: selectedIndex, vsync: this, length: 2);
   }
 
   @override
@@ -44,6 +38,19 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    List<Tab> _tabs = [
+      Tab(
+        icon: Text(
+            '나의 샵' + ' (' + widget.user.myProducts.length.toString() + ')'),
+      ),
+      Tab(
+        icon: Text('나의 컬렉션' +
+            ' (' +
+            widget.user.myCollections.length.toString() +
+            ')'),
+      ),
+    ];
+
     List<Widget> _pages = [
       MyShopPage(
         user: widget.user,
@@ -56,34 +63,59 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       backgroundColor: offWhite,
       appBar: myPage(context, widget.user),
-      body: ListView(
-        physics: ClampingScrollPhysics(),
+      body: SingleChildScrollView(
+          child: Column(
         children: <Widget>[
           userMarqueeMyPage(context, widget.user),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Material(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TradeListPage()));
-                  },
-                  child: primaryCTAIdle(context, '구매/판매 내역'),
-                ),
-              )),
+          historyButton(context),
           TabBar(
-              controller: _controller,
-              labelColor: Colors.black,
-              indicatorColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              tabs: _tabs),
-          Container(
-            height: 500,
-            child: TabBarView(controller: _controller, children: _pages),
-          )
+            controller: _controller,
+            labelColor: Colors.black,
+            indicatorColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            tabs: _tabs,
+            onTap: (int index) {
+              setState(() {
+                selectedIndex = index;
+                _controller.animateTo(index);
+              });
+            },
+          ),
+//MyShopPage(user: widget.user)
+//TabBarView(controller: _controller, children: _pages),
+          IndexedStack(
+            children: <Widget>[
+              Visibility(
+                child: MyShopPage(
+                  user: widget.user,
+                ),
+                maintainState: true,
+                visible: selectedIndex == 0,
+              ),
+              Visibility(
+                child: MyCollectionPage(user: widget.user,),
+                maintainState: true,
+                visible: selectedIndex == 1,
+              ),
+            ],
+            index: selectedIndex,
+          ),
         ],
+      )),
+    );
+  }
+
+  Widget historyButton(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Material(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => TradeListPage()));
+          },
+          child: primaryCTAIdle(context, '구매/판매 내역'),
+        ),
       ),
     );
   }

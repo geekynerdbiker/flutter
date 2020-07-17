@@ -9,6 +9,7 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/collection/myCollectionItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_image/firebase_image.dart';
@@ -27,12 +28,13 @@ class CollectionDetailPage extends StatefulWidget {
 class _CollectionDetailPageState extends State<CollectionDetailPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  int selectedIndex = 0;
   bool isFollowing = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(vsync: this, length: 2);
+    _controller = TabController(initialIndex: selectedIndex, vsync: this, length: 2);
   }
 
   @override
@@ -43,9 +45,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    User user;
-    getCurrentUserInfo().then((value) => user = value);
-
     return Scaffold(
       appBar: appBarDefaultDeep(context, 'Collection'),
       backgroundColor: offWhite,
@@ -59,7 +58,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         physics: ClampingScrollPhysics(),
         children: <Widget>[
           collectionInfo(context),
-          user.username == widget.collection.userID
+          widget.user.username == widget.collection.userID
               ? productItemList(context)
               : tabBar(context),
         ],
@@ -81,9 +80,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   }
 
   Widget collectionInfo(BuildContext context) {
-    User user;
-    getCurrentUserInfo().then((value) => user = value);
-
     return Column(
       children: <Widget>[
         Container(
@@ -126,7 +122,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                     ),
                   ],
                 ),
-                user.username != widget.collection.userID
+                widget.user.username != widget.collection.userID
                     ? Container(
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -183,20 +179,16 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   }
 
   Widget tabBar(BuildContext context) {
-    User user;
-    getCurrentUserInfo().then((value) => user = value);
-
     int myProducts = 0;
     int usersProducts = 0;
 
     for (int i = 0; i < widget.collection.products.length; i++)
-      for (int j = 0; j < user.myProducts.length; j++)
-        widget.collection.products[i] == user.myProducts[j]
+      for (int j = 0; j < widget.user.myProducts.length; j++)
+        widget.collection.products[i] == widget.user.myProducts[j]
             ? myProducts++
             : usersProducts++;
 
-    return Expanded(
-        child: ListView(
+    return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: [
@@ -213,33 +205,30 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
               icon: Text('유저들의 컬렉션 (' + usersProducts.toString() + ')'),
             ),
           ],
+          onTap: (int index) {
+            setState(() {
+              selectedIndex = index;
+              _controller.animateTo(index);
+            });
+          },
         ),
-        Container(
-          height: 300,
-          child: TabBarView(
-            controller: _controller,
-            children: <Widget>[
-              ListView(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: primary,
-                  )
-                ],
-              ),
-              ListView(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [],
-              ),
-            ],
-          ),
-        )
+        IndexedStack(
+          children: <Widget>[
+            Visibility(
+              child: CollectionItem(user: widget.user, collection: widget.collection, isMine: true,),
+              maintainState: true,
+              visible: selectedIndex == 0,
+            ),
+            Visibility(
+              child: CollectionItem(user: widget.user, collection: widget.collection, isMine: false,),
+              maintainState: true,
+              visible: selectedIndex == 1,
+            ),
+          ],
+          index: selectedIndex,
+        ),
       ],
-    ));
+    );
   }
 
   Widget productItemList(BuildContext context) {
