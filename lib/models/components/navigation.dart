@@ -250,7 +250,7 @@ Widget chat(BuildContext context, User _user) {
       children: [
         Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
-          child: profileImage(_user, 20),
+          child: profileImage(context, _user, 20),
         ),
         Text(
           _user.username,
