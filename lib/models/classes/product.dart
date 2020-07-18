@@ -20,6 +20,7 @@ class Product {
   String material;
   List<String> color = [];
 
+  bool payCard;
   String rate;
   String category;
 
@@ -51,6 +52,7 @@ class Product {
         collections = List.from(
           map['collections'],
         ),
+        payCard = map['payCard'],
         rate = map['rate'];
 
   Product.fromSnapshot(DocumentSnapshot snapshot)
@@ -70,6 +72,7 @@ class Product {
         this.size = snapshot.data['size'],
         this.material = snapshot.data['material'],
         this.color = List<String>.from(snapshot.data['color']),
+        this.payCard = snapshot.data['payCard'],
         this.rate = snapshot.data['rate'],
         this.category = snapshot.data['catgory'],
         this.tags = List<String>.from(snapshot.data['tags']),

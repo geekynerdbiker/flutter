@@ -4,6 +4,7 @@ import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
@@ -270,12 +271,14 @@ Widget productImageBox(
   return Material(
     child: InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProductDetailPage(user: user,
-                      product: product,
-                    )));
+        Firestore.instance.collection('users').document(product.userID).get().then((e) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductDetailPage(user: user,
+                    product: product, owner: User.getUserData(e),
+                  )));
+        });
       },
       child: Container(
         width: _width,
@@ -284,7 +287,7 @@ Widget productImageBox(
         child: Image(
           image: FirebaseImage(product.imageURI[0],
               shouldCache: true,
-              maxSizeBytes: 5000 * 1000,
+              maxSizeBytes: 50 * 1024 * 1024,
               cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
         ),

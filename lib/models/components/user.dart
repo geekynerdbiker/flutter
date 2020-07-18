@@ -1,4 +1,4 @@
-import 'dart:ffi';
+import 'dart:io';
 
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/border.dart';
@@ -9,6 +9,7 @@ import 'package:bak/pages/message/chatRoom.dart';
 import 'package:bak/pages/profile/editProfile.dart';
 import 'package:bak/pages/profile/sellerPage.dart';
 import 'package:firebase_image/firebase_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/designs/icons.dart';
@@ -397,28 +398,36 @@ Widget userMarqueeFollow(BuildContext context, User _user) {
 }
 
 Widget profileImage(BuildContext context, User _user, double _r) {
+  String path = 'gs://newnew-test.appspot.com/user/' + _user.username +
+      '+' + 'profile.jpg';
+  var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 50 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
+
   return Material(
     child: InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => SellerPage(user: _user)));
       },
-      child: Container(
-        width: _r,
-        height: _r,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50), color: Colors.grey),
-        child: _user.username == 'guest'
-            ? null
-            : Image(
-                image: FirebaseImage(
-                  _user.imageURI,
-                  shouldCache: true,
-                  maxSizeBytes: 3 * 1000 * 1000,
-                  cacheRefreshStrategy: CacheRefreshStrategy.NEVER,
-                ),
-                fit: BoxFit.cover,
-              ),
-      ),
+      child: CircleAvatar (
+        backgroundImage: image,
+        backgroundColor: Colors.grey,
+      )
+//      child: Container(
+//        width: _r,
+//        height: _r,
+//        decoration: BoxDecoration(
+//            borderRadius: BorderRadius.circular(50), color: Colors.grey),
+//        child: _user.username == 'guest'
+//            ? null
+//            : Image(
+//                image: FirebaseImage(
+//                  _user.imageURI,
+//                  shouldCache: true,
+//                  maxSizeBytes: 3 * 1000 * 1000,
+//                  cacheRefreshStrategy: CacheRefreshStrategy.NEVER,
+//                ),
+//                fit: BoxFit.cover,
+//              ),
+//      ),
     ),
   );
 }
