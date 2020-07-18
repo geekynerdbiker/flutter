@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
@@ -11,6 +12,7 @@ import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/home/bootPage.dart';
 import 'package:bak/pages/category/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +21,7 @@ import 'package:intl/intl.dart';
 
 class AddProductPage extends StatefulWidget {
   User user;
+
   AddProductPage({this.user});
 
   @override
@@ -31,13 +34,44 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Category categoryItem;
   List<Asset> _images;
-  List<Tag> _tags;
+  List<Tag> _tags = List<Tag>();
   int index = 0;
+  double _value = 0;
+
+  List<Color> colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.lightGreen,
+    Colors.green,
+    Colors.lightBlueAccent,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.white,
+    Colors.grey,
+    Colors.black,
+  ];
+
+  List<bool> colorSelected = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
 
   String userID;
 
   String title;
-  List<String> imageURI;
+  List<String> imageURI = List<String>();
 
   String description;
   String updateDate;
@@ -50,14 +84,15 @@ class _AddProductPageState extends State<AddProductPage> {
   String state;
   String size;
   String material;
-  List<String> color = [];
+  List<String> color = List<String>();
 
+  bool payCard = false;
   String rate;
   String category;
 
-  List<String> tags = [];
-  List<String> reviews = [];
-  List<String> collections = [];
+  List<String> tags = List<String>();
+  List<String> reviews = List<String>();
+  List<String> collections = List<String>();
 
   String brand;
 
@@ -422,24 +457,24 @@ class _AddProductPageState extends State<AddProductPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ColorCircle(color: Colors.red),
-              ColorCircle(color: Colors.orange),
-              ColorCircle(color: Colors.yellow),
-              ColorCircle(color: Colors.lightGreen),
-              ColorCircle(color: Colors.green),
-              ColorCircle(color: Colors.lightBlueAccent),
+              colorCircle(context, 0),
+              colorCircle(context, 1),
+              colorCircle(context, 2),
+              colorCircle(context, 3),
+              colorCircle(context, 4),
+              colorCircle(context, 5),
             ],
           ),
           hSpacer(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ColorCircle(color: Colors.blue),
-              ColorCircle(color: Colors.purple),
-              ColorCircle(color: Colors.pink),
-              ColorCircle(color: Colors.white),
-              ColorCircle(color: Colors.grey),
-              ColorCircle(color: Colors.black),
+              colorCircle(context, 6),
+              colorCircle(context, 7),
+              colorCircle(context, 8),
+              colorCircle(context, 9),
+              colorCircle(context, 10),
+              colorCircle(context, 11),
             ],
           )
         ],
@@ -447,10 +482,98 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 
+//  Widget palette2(BuildContext context) {
+//    return Container(
+//      child: Wrap(
+//        alignment: WrapAlignment.center,
+//        direction: Axis.horizontal,
+//        children: colorItemBuilder(context),
+//      ),
+//    );
+//  }
+//
+//  List<Widget> colorItemBuilder(BuildContext context) {
+//    List<Widget> items = List<Widget>();
+//
+//    for (int i = 0; i < colors.length; i++) items.add(colorCircle(context, i));
+//
+//    return items;
+//  }
+
+  Widget colorCircle(BuildContext context, int index) {
+    const double _r = 32;
+
+    var checkIcon;
+    bool isWhite = colors[index] == Colors.white;
+    if (isWhite)
+      checkIcon = ImageIcon(
+        AssetImage(check_idle),
+        color: primary,
+      );
+    else
+      checkIcon = ImageIcon(
+        AssetImage(check_idle),
+        color: offWhite,
+      );
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      width: _r,
+      height: _r,
+      child: Material(
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              colorSelected[index] = !colorSelected[index];
+              checkIcon = colorSelected[index] ? checkIcon : null;
+            });
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: _r,
+                height: _r,
+                decoration: !isWhite
+                    ? BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: colors[index])
+                    : BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(100),
+                        color: colors[index]),
+              ),
+              Align(child: colorSelected[index] ? checkIcon : null),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget stateSlider(BuildContext context) {
     return Column(
       children: [
-        StateSlider(),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+              activeTrackColor: primary,
+              activeTickMarkColor: primary,
+              inactiveTrackColor: semiDark,
+              inactiveTickMarkColor: semiDark,
+              thumbColor: primary,
+              overlayColor: Colors.transparent),
+          child: Slider(
+              min: 0,
+              max: 10,
+              value: _value,
+              divisions: 10,
+              onChanged: (value) {
+                setState(() {
+                  _value = value;
+                  state = _value.toString();
+                });
+              }),
+        ),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
@@ -588,37 +711,34 @@ class _AddProductPageState extends State<AddProductPage> {
       child: InkWell(
         child: Container(
           margin: EdgeInsets.only(left: 10),
-          width: tag.title.length * 7 + 35.0,
+          width: tag.title.length * 10 + 30.0,
           height: 30,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
             color: offWhite,
           ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: Center(
-                      child: Text(tag.title),
-                    )),
-                Material(
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        _tags.remove(tag);
-                      });
-                    },
-                    child: ImageIcon(
-                      AssetImage(delete_tag_idle),
-                      size: 12,
-                    ),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Center(
+//                    margin: EdgeInsets.only(left: 10),
+                  child: Center(
+                child: Text(tag.title),
+              )),
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _tags.remove(tag);
+                    });
+                  },
+                  child: ImageIcon(
+                    AssetImage(delete_tag_idle),
+                    size: 12,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -635,7 +755,18 @@ class _AddProductPageState extends State<AddProductPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('카드 결제 허용하기'),
-              SelectionSwitch(),
+              Transform.scale(
+                scale: 0.8,
+                child: CupertinoSwitch(
+                  activeColor: primary,
+                  value: payCard,
+                  onChanged: (value) {
+                    setState(() {
+                      payCard = !payCard;
+                    });
+                  },
+                ),
+              ),
             ],
           ),
           Text('택배 어쩌구 저쩌구'),
@@ -708,12 +839,17 @@ class _AddProductPageState extends State<AddProductPage> {
     return Material(
       child: InkWell(
         onTap: () {
-          userID = 'test';
-          if(_formKey.currentState.validate()) {
+          if (_formKey.currentState.validate()) {
+            if (brand.length != 0) _tags.add(Tag(brand));
+            if (size.length != 0) _tags.add(Tag(size));
+            if (material.length != 0) _tags.add(Tag(material));
+
+            for (int i = 0; i < colorSelected.length; i++)
+              if (colorSelected[i]) color.add(colors[i].toString());
+
             add();
             Navigator.pop(context, true);
-          }
-          else
+          } else
             print('fail');
         },
         child: Container(
@@ -736,11 +872,30 @@ class _AddProductPageState extends State<AddProductPage> {
 
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+
+      setState(() {
+        imageURI = List<String>();
+      });
+
+      for (int i = 0; i < _images.length; i++) {
+        uploadImages(_images[i], i);
+        imageURI.add('gs://newnew-test.appspot.com/product' + widget.user.username +
+            '+' +
+            title +
+            '+' +
+            i.toString() +
+            '.jpg');
+        print(imageURI);
+      }
+
       addProduct();
       try {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => BootPage(user: widget.user,)),
+            MaterialPageRoute(
+                builder: (context) => BootPage(
+                      user: widget.user,
+                    )),
             (route) => false);
       } catch (e) {
         print(e.message);
@@ -748,19 +903,35 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
+  Future uploadImages(Asset asset, int index) async {
+    if (_images == null) return;
+
+    String path =
+        'product/' + widget.user.username + '+' + title + '+' + index.toString() + '.jpg';
+    ByteData byteData = await asset.requestOriginal();
+    List<int> imageData = byteData.buffer.asUint8List();
+    StorageReference ref =
+        FirebaseStorage.instance.ref().child(path);
+    StorageUploadTask uploadTask = ref.putData(imageData);
+
+    return await (await uploadTask.onComplete).ref.getDownloadURL();
+  }
+
   void addProduct() {
-    for(int i = 0; i < _tags.length; i++) {
+    for (int i = 0; i < _tags.length; i++) {
       tags.add(_tags[i].title);
     }
 
-    Firestore.instance.collection('products').document(widget.user.username + '+' + title).setData({
+    Firestore.instance
+        .collection('products')
+        .document(widget.user.username + '+' + title)
+        .setData({
       "userID": widget.user.username ?? "",
       "title": title ?? "",
-      "imageURI": imageURI ?? FieldValue.arrayUnion(['gs://newnew-test.appspot.com/IMG_0909.JPG']),
+      "imageURI": imageURI ??
+          FieldValue.arrayUnion(['gs://newnew-test.appspot.com/IMG_0909.JPG']),
       "description": description ?? "",
-      "updateDate": DateFormat("yyyy-MM-dd")
-          .format(DateTime.now())
-          .toString(),
+      "updateDate": DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
       "soldDate": soldDate ?? "",
       "status": "on sale",
       "price": price ?? "",
@@ -773,15 +944,17 @@ class _AddProductPageState extends State<AddProductPage> {
       "tags": tags,
       "reviews": reviews,
       "collections": collections,
+      "payCard": payCard,
       "rate": rate ?? "",
     }).then((value) {
-      Firestore.instance.collection('users')
+      Firestore.instance
+          .collection('users')
           .document(widget.user.username)
           .updateData({
-        "myProducts": FieldValue.arrayUnion([widget.user.username + '+' + title])
+        "myProducts":
+            FieldValue.arrayUnion([widget.user.username + '+' + title])
       });
-    }
-    );
+    });
   }
 }
 
@@ -814,6 +987,7 @@ class _ColorCircle extends State<ColorCircle> {
         AssetImage(check_idle),
         color: primary,
       );
+
       return Material(
         child: InkWell(
             onTap: () {
@@ -859,62 +1033,6 @@ class _ColorCircle extends State<ColorCircle> {
               Center(child: isSelected ? checkIcon : null),
             ],
           )),
-    );
-  }
-}
-
-class StateSlider extends StatefulWidget {
-  _StateSlider createState() => _StateSlider();
-}
-
-class _StateSlider extends State<StateSlider> {
-  double _value = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-          activeTrackColor: primary,
-          activeTickMarkColor: primary,
-          inactiveTrackColor: semiDark,
-          inactiveTickMarkColor: semiDark,
-          thumbColor: primary,
-          overlayColor: Colors.transparent),
-      child: Slider(
-          min: 0,
-          max: 10,
-          value: _value,
-          divisions: 10,
-          onChanged: (value) {
-            setState(() {
-              _value = value;
-            });
-          }),
-    );
-  }
-}
-
-class SelectionSwitch extends StatefulWidget {
-  @override
-  _SelectionSwitch createState() => _SelectionSwitch();
-}
-
-class _SelectionSwitch extends State<SelectionSwitch> {
-  bool isSwitched = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.scale(
-      scale: 0.8,
-      child: CupertinoSwitch(
-        activeColor: primary,
-        value: isSwitched,
-        onChanged: (value) {
-          setState(() {
-            isSwitched = value;
-          });
-        },
-      ),
     );
   }
 }

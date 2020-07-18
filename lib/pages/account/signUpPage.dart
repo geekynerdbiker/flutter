@@ -93,10 +93,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldPhoneNumber(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (227 / 375),
+      width: MediaQuery.of(context).size.width * (227 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -123,14 +120,11 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Widget shortButtonRequestAuth(BuildContext context, Color _color,
-      bool _border, Widget _widget) {
+  Widget shortButtonRequestAuth(
+      BuildContext context, Color _color, bool _border, Widget _widget) {
     if (_border)
       return Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * (100 / 375),
+        width: MediaQuery.of(context).size.width * (100 / 375),
         height: 44,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black), color: _color),
@@ -140,10 +134,7 @@ class _SignUpPage extends State<SignUpPage> {
       );
     else
       return Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * (100 / 375),
+        width: MediaQuery.of(context).size.width * (100 / 375),
         height: 44,
         color: _color,
         child: Center(
@@ -154,10 +145,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldVerifyCode(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -186,10 +174,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldUsername(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -217,10 +202,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldEMail(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -249,10 +231,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldPassword(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -285,10 +264,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget textFieldConfirmPassword(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -315,7 +291,6 @@ class _SignUpPage extends State<SignUpPage> {
   }
 
   Widget signUpButton(BuildContext context) {
-    final FormState form = _formKey.currentState;
     User user;
 
     return Material(
@@ -323,15 +298,12 @@ class _SignUpPage extends State<SignUpPage> {
         onTap: () {
           _autoValidate = true;
           if (validateAndSave()) {
-            form.save();
+            _formKey.currentState.save();
             signUp();
           }
         },
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * (335 / 375),
+          width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
@@ -346,9 +318,8 @@ class _SignUpPage extends State<SignUpPage> {
   }
 
   bool validateAndSave() {
-    final form = _formKey.currentState;
-    if (form.validate()) {
-      form.save();
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
       return true;
     }
     return false;
@@ -357,14 +328,18 @@ class _SignUpPage extends State<SignUpPage> {
   void signUp() async {
     String uid;
 
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: eMail, password: password).then((value) async {
-      FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: eMail, password: password);
-    }).then((value) async{
-      uid = (await FirebaseAuth.instance.currentUser()).uid;
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: eMail, password: password)
+        .then(
+      (value) async {
+        FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: eMail, password: password);
+      },
+    ).then(
+      (value) async {
+        uid = (await FirebaseAuth.instance.currentUser()).uid;
 
-      Firestore.instance.collection('users').document(username).setData(
+        Firestore.instance.collection('users').document(username).setData(
           {
             'username': username,
             'password': password,
@@ -387,13 +362,22 @@ class _SignUpPage extends State<SignUpPage> {
             'favorite': favorite ?? List.from(['']),
             'myProducts': myProducts ?? List.from(['']),
             'myCollections': myCollections ?? List.from(['']),
-          });
+          },
+        );
 
-      Firestore.instance.collection('users').document(username).get().then((e) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>
-                SelectFavorPage(user: User.getUserData(e),)));
-      });
-    });
+        Firestore.instance.collection('users').document(username).get().then(
+          (e) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SelectFavorPage(
+                  user: User.getUserData(e),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

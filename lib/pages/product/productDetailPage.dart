@@ -9,65 +9,85 @@ import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/message/chatRoom.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetailPage extends StatefulWidget {
   User user;
+  User owner;
   Product product;
 
-  ProductDetailPage({this.user, this.product});
+  ProductDetailPage({this.user, this.product, this.owner});
+
+  _ProductDetailPage createState() => _ProductDetailPage();
+}
+
+class _ProductDetailPage extends State<ProductDetailPage> {
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    print(user.username);
     return Scaffold(
       appBar: appBarDefaultDeep(context, '상품 상세'),
       body: ListView(
         physics: ClampingScrollPhysics(),
         children: [
-          //getUserInfo(context),
+          userMarquee2(context, widget.owner),
           carousel(context),
           productInfo(context),
           productInfo2(context),
           productScroll(context),
           productScroll(context),
           borderLineGreyLite(context),
-          actionButtons(context, user),
+          actionButtons(context, widget.user),
         ],
       ),
     );
   }
 
-  Widget getUserInfo(BuildContext context) {
-    Firestore.instance.collection('users').document(product.userID).get().then((e) {
-      User user = User.getUserData(e);
-      return userMarquee2(context, user);
-    });
-  }
-
   Widget carousel(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * (375 / 375),
-          height: MediaQuery.of(context).size.width * (360 / 375),
-          color: Colors.grey,
-          child: Image(
-            image: FirebaseImage(product.imageURI[0],
-                shouldCache: true,
-                maxSizeBytes: 3 * 1024 * 1024,
-                cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
-            fit: BoxFit.cover,
-          ),
+        CarouselSlider(
+          items: widget.product.imageURI
+              .map((item) => Container(
+                    child: Image(
+                      image: FirebaseImage(item,
+                          shouldCache: true,
+                          maxSizeBytes: 50 * 1024 * 1024,
+                          cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+                      fit: BoxFit.cover,
+                    ),
+                    color: Colors.green,
+                  ))
+              .toList(),
+          options: CarouselOptions(
+              height: MediaQuery.of(context).size.width * (360 / 375),
+              enableInfiniteScroll: false,
+              autoPlay: false,
+              enlargeCenterPage: false,
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              }),
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * (360 / 375) - 30),
+              top: MediaQuery.of(context).size.width * (360 / 375) - 45),
           child: Center(
-            child: imageCarouselIndicator(0, 5),
+            child: DotsIndicator(
+                dotsCount: widget.product.imageURI.length,
+                position: currentIndex.toDouble(),
+                decorator: DotsDecorator(
+                    shape: CircleBorder(
+                        side: BorderSide(color: Color.fromRGBO(255, 52, 0, 1))),
+                    color: Colors.transparent,
+                    activeColor: Color.fromRGBO(254, 59, 0, 1))),
           ),
         ),
       ],
@@ -80,13 +100,13 @@ class ProductDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(product.title),
+          Text(widget.product.title),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(product.price.toString()),
+              Text(widget.product.price.toString()),
               wSpacer(9),
-              Text(product.updateDate),
+              Text(widget.product.updateDate),
             ],
           ),
           hSpacer(18),
@@ -94,7 +114,7 @@ class ProductDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(product.deliveryFee.toString()),
+              Text(widget.product.deliveryFee.toString()),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -133,19 +153,24 @@ class ProductDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  product.size == '' ? Container() : Text('사이즈: ' + product.size),
-                  product.material == '' ? Container() : Text('소재: ' + product.material),
-                  product.color.length == 0 ? Container() : Text('색상: '),
-                  product.state == '' ? Container() : Text('상태: '),
+                  widget.product.size == ''
+                      ? Container()
+                      : Text('사이즈: ' + widget.product.size),
+                  widget.product.material == ''
+                      ? Container()
+                      : Text('소재: ' + widget.product.material),
+                  widget.product.color.length == 0 ? Container() : Text('색상: '),
+                  widget.product.state == '' ? Container() : Text('상태: '),
                   hSpacer(15)
                 ],
               ),
-              product.state == '' ? Container() : ShortStateSlider(double.parse(product.state)),
+              widget.product.state == ''
+                  ? Container()
+                  : ShortStateSlider(double.parse(widget.product.state)),
             ],
           ),
           hSpacer(20),
-          Text(
-              product.description),
+          Text(widget.product.description),
           tagList(context),
         ],
       ),
@@ -153,17 +178,16 @@ class ProductDetailPage extends StatelessWidget {
   }
 
   Widget tagList(BuildContext context) {
-    if(product.tags.length == 0)
-      return Text("등록된 태그가 없습니다.");
+    if (widget.product.tags.length == 0) return Text("등록된 태그가 없습니다.");
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 20,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: product.tags.length,
+        itemCount: widget.product.tags.length,
         itemBuilder: (context, index) {
-          return tagItem(context, product.tags[index]);
+          return tagItem(context, widget.product.tags[index]);
         },
       ),
     );
@@ -242,20 +266,26 @@ class ProductDetailPage extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage(user: user,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatRoomPage(
+                        user: user,
+                      )));
         },
         child: Container(
-        width: MediaQuery.of(context).size.width * (163 / 375),
-        height: 44,
-        decoration:
-        BoxDecoration(border: Border.all(color: Colors.black), color: offWhite),
-        child: Center(
-          child: Text(
-            '대화하기',
-            style: cta(primary),
+          width: MediaQuery.of(context).size.width * (163 / 375),
+          height: 44,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black), color: offWhite),
+          child: Center(
+            child: Text(
+              '대화하기',
+              style: cta(primary),
+            ),
           ),
         ),
-      ),),
+      ),
     );
   }
 
@@ -267,7 +297,10 @@ class ProductDetailPage extends StatelessWidget {
           height: 44,
           color: primary,
           child: Center(
-            child: Text('구매하기', style: cta(offWhite),),
+            child: Text(
+              '구매하기',
+              style: cta(offWhite),
+            ),
           ),
         ),
       ),

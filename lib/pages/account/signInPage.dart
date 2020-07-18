@@ -176,6 +176,7 @@ class _SignInPage extends State<SignInPage> {
 
   void signIn() {
     Firestore.instance.collection('users').document(account).get().then((e) {
+      //if (e == null ) wrongDialog('아이디가 존재하지 않습니다.');
       if (account == e.data['username'] || account == e.data['eMail']) {
         if (password == e.data['password']) {
           FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -189,35 +190,27 @@ class _SignInPage extends State<SignInPage> {
                       )),
                   (route) => false);
         } else
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  content: Text("비밀번호가 일치하지 않습니다."),
-                  actions: [
-                    FlatButton(
-                      onPressed: () => Navigator.pop(context),
-                      color: primary,
-                      child: Text('확인'),
-                    ),
-                  ],
-                );
-              });
-      } else
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('존재하지 않는 아이디입니다.'),
-                actions: [
-                  FlatButton(
-                    onPressed: () => Navigator.pop(context),
-                    color: primary,
-                    child: Text('확인'),
-                  ),
-                ],
-              );
-            });
-    });
+          wrongDialog('비밀번호가 일치하지 않습니다.');
+      }
+      else
+        wrongDialog('아이디가 존재하지 않습니다.');
+      });
+  }
+
+  void wrongDialog(String textContext) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(textContext),
+            actions: [
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                color: primary,
+                child: Text('확인'),
+              ),
+            ],
+          );
+        });
   }
 }

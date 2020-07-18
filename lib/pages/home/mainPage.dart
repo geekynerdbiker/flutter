@@ -10,11 +10,15 @@ import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/components/search.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productList.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   User user;
+
   HomePage({this.user});
 
   @override
@@ -22,6 +26,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> carousel = [
+    'gs://newnew-test.appspot.com/1-1.JPG',
+    'gs://newnew-test.appspot.com/1-2.JPG',
+    'gs://newnew-test.appspot.com/1-3.JPG',
+  ];
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     User user;
@@ -46,16 +57,42 @@ class _HomePageState extends State<HomePage> {
   Widget carouselAndSearchBar(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * (375 / 375),
-          height: MediaQuery.of(context).size.width * (460 / 375),
-          color: Colors.grey,
+        CarouselSlider(
+          items: carousel
+              .map((item) => Container(
+                    child: Image(
+                      image: FirebaseImage(item,
+                          shouldCache: true,
+                          maxSizeBytes: 5000 * 1000,
+                          cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+                      fit: BoxFit.cover,
+                    ),
+                    color: Colors.green,
+                  ))
+              .toList(),
+          options: CarouselOptions(
+              height: MediaQuery.of(context).size.width * (460 / 375),
+              autoPlay: true,
+              enlargeCenterPage: true,
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              }),
         ),
         Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.width * (460 / 375) - 45),
           child: Center(
-            child: imageCarouselIndicator(0, 5),
+            child: DotsIndicator(
+                dotsCount: carousel.length,
+                position: currentIndex.toDouble(),
+                decorator: DotsDecorator(
+                    shape: CircleBorder(
+                        side: BorderSide(color: Color.fromRGBO(255, 52, 0, 1))),
+                    color: Colors.transparent,
+                    activeColor: Color.fromRGBO(254, 59, 0, 1))),
           ),
         ),
         Padding(
@@ -179,11 +216,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 30, right: 20),
-                  child: seeMore(
-                      context,
-                      offWhite,
-                      ProductListPage(
-                      )),
+                  child: seeMore(context, offWhite, ProductListPage()),
                 ),
               ],
             ),
@@ -220,8 +253,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildUserMarquee(
       BuildContext context, List<DocumentSnapshot> snapshot) {
-    List<User> userItems =
-    snapshot.map((e) => User.fromSnapshot(e)).toList();
+    List<User> userItems = snapshot.map((e) => User.fromSnapshot(e)).toList();
     return Container(
       height: 200,
       child: ListView.builder(
@@ -352,7 +384,8 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardMedium(context, productItems[index], widget.user, color),
+            child: productItemCardMedium(
+                context, productItems[index], widget.user, color),
           );
         },
       ),
@@ -371,7 +404,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCollectionBody(
       BuildContext context, List<DocumentSnapshot> snapshot) {
-
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(
@@ -414,7 +446,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCollectionBody2(
       BuildContext context, List<DocumentSnapshot> snapshot) {
-
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return Expanded(
