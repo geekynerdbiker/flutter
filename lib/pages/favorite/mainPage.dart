@@ -47,8 +47,7 @@ class FavoritePage extends StatelessWidget {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Product> productItems =
     snapshot.map((e) => Product.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: productItems.length,
         itemBuilder: (context, index) {
@@ -57,7 +56,6 @@ class FavoritePage extends StatelessWidget {
             child: productItemCardLarge(context, productItems[index], user),
           );
         },
-      ),
     );
   }
 }

@@ -34,8 +34,7 @@ class CategoryPage2 extends StatelessWidget {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Category> categoryItems =
         snapshot.map((e) => Category.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         itemCount: categoryItems.length,
         itemBuilder: (context, index) {
           return Container(
@@ -43,7 +42,6 @@ class CategoryPage2 extends StatelessWidget {
           );
           return null;
         },
-      ),
     );
   }
 

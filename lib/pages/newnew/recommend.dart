@@ -1,7 +1,6 @@
 import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
-import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/components/user.dart';
@@ -11,7 +10,6 @@ import 'package:bak/pages/product/productList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class RecommendPage extends StatelessWidget {
   User user;
@@ -73,14 +71,12 @@ class RecommendPage extends StatelessWidget {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: collectionItems.length,
         itemBuilder: (context, index) {
           return collectionCardLarge(context, collectionItems[index], user, primary);
         },
-      ),
     );
   }
 
@@ -113,12 +109,10 @@ class RecommendPage extends StatelessWidget {
 
   Widget buildUserBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     List<User> userItems = snapshot.map((e) => User.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView(
+    return ListView(
         scrollDirection: Axis.horizontal,
         physics: ClampingScrollPhysics(),
         children: userItemBuilder(context, userItems),
-      ),
     );
   }
 
@@ -166,12 +160,10 @@ class RecommendPage extends StatelessWidget {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
-    return Expanded(
-      child: GridView.count(
+    return GridView.count(
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 3,
         children: productItemBuilder(context, productItems),
-      ),
     );
   }
 

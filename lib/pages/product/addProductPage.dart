@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
-import 'package:bak/models/components/buttons.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
@@ -590,6 +588,12 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget productTags(BuildContext context) {
+    List<Widget> tagList = [emptyTagBox(context)];
+
+    if (_tags?.isEmpty ?? true)
+      for (int i = 0; i < _tags.length; i++)
+        tagList.add(tagBox(context, _tags[i]));
+
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -598,28 +602,17 @@ class _AddProductPageState extends State<AddProductPage> {
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text('태그 추가'),
           ),
-          productTagList(context),
+          Container(
+            height: 45,
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              scrollDirection: Axis.horizontal,
+              children: tagList,
+            ),
+          ),
         ],
       ),
     );
-  }
-
-  Widget productTagList(BuildContext context) {
-    List<Widget> tagList = [emptyTagBox(context)];
-
-    if (_tags != null)
-      for (int i = 0; i < _tags.length; i++)
-        tagList.add(tagBox(context, _tags[i]));
-
-    return Container(
-        height: 45,
-        child: Expanded(
-          child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            scrollDirection: Axis.horizontal,
-            children: tagList,
-          ),
-        ));
   }
 
   Future<void> loadTags() async {
@@ -678,7 +671,7 @@ class _AddProductPageState extends State<AddProductPage> {
     }
 
     setState(() {
-      if (tag != null) _tags.add(Tag(tag));
+      _tags.add(Tag(tag));
       _error = _error;
     });
   }
@@ -722,7 +715,6 @@ class _AddProductPageState extends State<AddProductPage> {
             alignment: Alignment.topRight,
             children: [
               Center(
-//                    margin: EdgeInsets.only(left: 10),
                   child: Center(
                 child: Text(tag.title),
               )),
@@ -780,26 +772,50 @@ class _AddProductPageState extends State<AddProductPage> {
     return Material(
       child: InkWell(
         onTap: () {
-          showDialog<bool>(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('잠깐만!'),
-                content: Text('지금 등록하신 상품이 택배 발송이 가능한 상품이 확실한가요?'),
-                actions: [
-                  Row(
-                    children: [
-                      buttonNo(context),
-                      wSpacer(20),
-                      buttonYes(context),
-                    ],
-                  )
-                ],
-              );
-            },
-          );
+          setState(() {
+            _formKey.currentState.save();
+          });
+
+          if (_images?.isEmpty ?? true)
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  Future.delayed(Duration(seconds: 2), () {});
+                  return AlertDialog(
+                    content: Text('선택된 이미지가 없습니다!'),
+                  );
+                });
+          else if (categoryItem == null)
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  Future.delayed(Duration(seconds: 2), () {});
+                  return AlertDialog(
+                    content: Text('선택된 카테고리가 없습니다!'),
+                  );
+                });
+          else
+            showDialog<bool>(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('잠깐만!'),
+                  content: Text('지금 등록하신 상품이 택배 발송이 가능한 상품이 확실한가요?'),
+                  actions: [
+                    Row(
+                      children: [
+                        buttonNo(context),
+                        wSpacer(20),
+                        buttonYes(context),
+                      ],
+                    )
+                  ],
+                );
+              },
+            );
         },
         child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
           color: primary,
@@ -841,12 +857,13 @@ class _AddProductPageState extends State<AddProductPage> {
       child: InkWell(
         onTap: () {
           if (_formKey.currentState.validate()) {
-            if (brand != null) _tags.add(Tag(brand));
-            if (size != null ) _tags.add(Tag(size));
-            if (material != null) _tags.add(Tag(material));
+            if (brand != '') _tags.add(Tag(brand));
+            if (size != '') _tags.add(Tag(size));
+            if (material != '') _tags.add(Tag(material));
 
             for (int i = 0; i < colorSelected.length; i++) {
-              if (colorSelected[i]) color.add(colors[i].value.toRadixString(16));
+              if (colorSelected[i])
+                color.add(colors[i].value.toRadixString(16));
             }
 
             add();
@@ -875,19 +892,21 @@ class _AddProductPageState extends State<AddProductPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
+      String urlTitle = title.replaceAll(' ', '_');
+
       setState(() {
         imageURI = List<String>();
       });
 
       for (int i = 0; i < _images.length; i++) {
         uploadImages(_images[i], i);
-        imageURI.add('gs://newnew-test.appspot.com/product' + widget.user.username +
+        imageURI.add('gs://newnew-beta.appspot.com/product/' +
+            widget.user.username +
             '+' +
-            title +
+            urlTitle +
             '+' +
             i.toString() +
             '.jpg');
-        print(imageURI);
       }
 
       addProduct();
@@ -908,12 +927,18 @@ class _AddProductPageState extends State<AddProductPage> {
   Future uploadImages(Asset asset, int index) async {
     if (_images == null) return;
 
-    String path =
-        'product/' + widget.user.username + '+' + title + '+' + index.toString() + '.jpg';
+    String urlTitle = title.replaceAll(' ', '_');
+
+    String path = 'product/' +
+        widget.user.username +
+        '+' +
+        urlTitle +
+        '+' +
+        index.toString() +
+        '.jpg';
     ByteData byteData = await asset.requestOriginal();
     List<int> imageData = byteData.buffer.asUint8List();
-    StorageReference ref =
-        FirebaseStorage.instance.ref().child(path);
+    StorageReference ref = FirebaseStorage.instance.ref().child(path);
     StorageUploadTask uploadTask = ref.putData(imageData);
 
     return await (await uploadTask.onComplete).ref.getDownloadURL();
@@ -931,7 +956,7 @@ class _AddProductPageState extends State<AddProductPage> {
       "userID": widget.user.username ?? "",
       "title": title ?? "",
       "imageURI": imageURI ??
-          FieldValue.arrayUnion(['gs://newnew-test.appspot.com/IMG_0909.JPG']),
+          FieldValue.arrayUnion(['gs://newnew-beta.appspot.com/IMG_0909.JPG']),
       "description": description ?? "",
       "updateDate": DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
       "soldDate": soldDate ?? "",

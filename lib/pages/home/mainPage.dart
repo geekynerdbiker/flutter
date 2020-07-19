@@ -27,9 +27,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> carousel = [
-    'gs://newnew-test.appspot.com/1-1.JPG',
-    'gs://newnew-test.appspot.com/1-2.JPG',
-    'gs://newnew-test.appspot.com/1-3.JPG',
+    'gs://newnew-beta.appspot.com/mainbanner/1.jpg',
+    'gs://newnew-beta.appspot.com/mainbanner/2.jpg',
+    'gs://newnew-beta.appspot.com/mainbanner/3.jpg',
   ];
   int currentIndex = 0;
 
@@ -220,7 +220,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            productItemList(context, offWhite),
+            Container(height: 280, child: productItemList(context, offWhite)),
+
           ],
         ));
   }
@@ -255,13 +256,13 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<User> userItems = snapshot.map((e) => User.fromSnapshot(e)).toList();
     return Container(
-      height: 200,
+      height: 130,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: userItems.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: EdgeInsets.only(top: 50, left: 20),
+            margin: EdgeInsets.only(top: 30, left: 20),
             child: userMarqueePopularSeller(context, userItems[index]),
           );
         },
@@ -287,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            productItemList(context, primary),
+            Container(height: 280, child: productItemList(context, primary)),
           ],
         ));
   }
@@ -354,8 +355,8 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   )),
-              collectionItemList(context),
-              collectionItemList2(context),
+              Container(height: 310, child: collectionItemList(context),),
+              Container(height: 310, child: collectionItemList2(context),),
             ],
           ),
         ),
@@ -377,8 +378,7 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, List<DocumentSnapshot> snapshot, Color color) {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: productItems.length,
         itemBuilder: (context, index) {
@@ -388,7 +388,6 @@ class _HomePageState extends State<HomePage> {
                 context, productItems[index], widget.user, color),
           );
         },
-      ),
     );
   }
 
@@ -406,8 +405,7 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: collectionItems.length,
         itemBuilder: (context, index) {
@@ -430,7 +428,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-      ),
     );
   }
 
@@ -448,8 +445,7 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Collection> collectionItems =
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: collectionItems.length,
         itemBuilder: (context, index) {
@@ -472,7 +468,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-      ),
     );
   }
 }

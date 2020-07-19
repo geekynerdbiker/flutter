@@ -4,6 +4,7 @@ import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/collection/collectionDetailPage.dart';
 import 'package:bak/pages/home/bootPage.dart';
 import 'package:bak/pages/product/addProductPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,17 +15,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
-class AddCollectionPage extends StatefulWidget {
+class EditCollectionPage extends StatefulWidget {
   User user;
-  Product product;
+  Collection collection;
 
-  AddCollectionPage({this.user, this.product});
+  EditCollectionPage({this.user, this.collection});
 
   @override
-  _AddCollectionPage createState() => _AddCollectionPage();
+  _EditCollectionPage createState() => _EditCollectionPage();
 }
 
-class _AddCollectionPage extends State<AddCollectionPage> {
+class _EditCollectionPage extends State<EditCollectionPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
@@ -45,6 +46,18 @@ class _AddCollectionPage extends State<AddCollectionPage> {
 
   @override
   void initState() {
+    userID = widget.collection.userID;
+
+    title = widget.collection.title;
+    imageURI = widget.collection.imageURI;
+    description = widget.collection.description;
+
+    products = widget.collection.products;
+    followers = widget.collection.followers;
+    tags = widget.collection.tags;
+
+    canJoin = widget.collection.canJoin;
+    private = widget.collection.private;
     super.initState();
   }
 
@@ -76,17 +89,23 @@ class _AddCollectionPage extends State<AddCollectionPage> {
           loadAssets();
         },
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width * (280 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
+          height: MediaQuery
+              .of(context)
+              .size
+              .width * (280 / 375),
           color: Colors.grey,
-          child: (_images.isEmpty)
+          child: (_images?.isEmpty ?? true)
               ? null
               : AssetThumb(
-                  asset: _images[0],
-                  quality: 100,
-                  width: _images[0].originalWidth,
-                  height: _images[0].originalHeight,
-                ),
+            asset: _images[0],
+            quality: 100,
+            width: _images[0].originalWidth,
+            height: _images[0].originalHeight,
+          ),
         ),
       ),
     );
@@ -126,7 +145,10 @@ class _AddCollectionPage extends State<AddCollectionPage> {
 
   Widget textFieldTitle(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -149,7 +171,10 @@ class _AddCollectionPage extends State<AddCollectionPage> {
 
   Widget longTextField(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * (335 / 375),
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * (335 / 375),
       height: 176,
       margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -219,20 +244,21 @@ class _AddCollectionPage extends State<AddCollectionPage> {
     return Material(
       child: InkWell(
         onTap: () {
-          if (_images?.isEmpty ?? true)
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    content: Text('선택된 이미지가 없습니다!'),
-                  );
-                });
+          if( _images?.isEmpty ?? true )
+            showDialog(context: context, builder: (BuildContext context) {
+              return AlertDialog(
+                content: Text('선택된 이미지가 없습니다!'),
+              );
+            });
           else
-            add();
+           edit();
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          width: MediaQuery.of(context).size.width * (335 / 375),
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
@@ -246,86 +272,71 @@ class _AddCollectionPage extends State<AddCollectionPage> {
     );
   }
 
-  Future<void> add() async {
+  Future<void> edit() async {
     _autoValidate = true;
 
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      String urlTitle = title.replaceAll(' ', '_');
-
       uploadImages(_images[0]);
       imageURI = ('gs://newnew-beta.appspot.com/collection/' +
           widget.user.username +
           '+' +
-          urlTitle +
+          title +
           '.jpg');
-      products.add(widget.product.userID + '+' + widget.product.title);
     }
 
-    addCollection();
+    editCollection();
     try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            Future.delayed(Duration(seconds: 2), () {
-              Navigator.of(context).pop(true);
-            });
-            return AlertDialog(
-              content: Text('\'' + title + '\'' + '컬렉션에 추가되었습니다!'),
-            );
-          });
+      showDialog(context: context, builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pop(true);
+        });
+       return AlertDialog(
+          content: Text('\'' + title +'\'' + '컬렉션이 수정되었습니다!'),
+        );
+      });
 
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => BootPage(
+              builder: (context) =>
+                  CollectionDetailPage(
                     user: widget.user,
+                    collection: widget.collection,
                   )),
-          (route) => false);
+              (route) => false);
     } catch (e) {
       print(e.message);
     }
   }
 
-  void uploadImages(Asset asset) async {
-    if (_images?.isEmpty ?? true) return;
+  Future uploadImages(Asset asset) async {
+    if (_images == null) return;
 
-    String urlTitle = title.replaceAll(' ', '_');
-
-    String path =
-        'collection/' + widget.user.username + '+' + urlTitle + '.jpg';
+    String path = 'collection/' +
+        widget.user.username +
+        '+' +
+        title +
+        '.jpg';
     ByteData byteData = await asset.requestOriginal();
     List<int> imageData = byteData.buffer.asUint8List();
     StorageReference ref = FirebaseStorage.instance.ref().child(path);
     StorageUploadTask uploadTask = ref.putData(imageData);
 
-    print(await (await uploadTask.onComplete).ref.getDownloadURL().toString());
+    return await (await uploadTask.onComplete).ref.getDownloadURL();
   }
 
-  void addCollection() {
+  void editCollection() {
     Firestore.instance
         .collection('collections')
         .document(widget.user.username + '+' + title)
-        .setData({
-      "userID": widget.user.username ?? "",
-      "title": title ?? "",
-      "imageURI": imageURI ??
-          FieldValue.arrayUnion(['gs://newnew-beta.appspot.com/IMG_0909.JPG']),
-      "description": description ?? "",
-      "followers": followers,
-      "tags": tags,
-      "products": products,
+        .updateData({
+      "title": title,
+      "imageURI": imageURI,
+      "description": description,
       "canJoin": canJoin,
       "private": private,
-    }).then((value) {
-      Firestore.instance
-          .collection('users')
-          .document(widget.user.username)
-          .updateData({
-        "myCollections":
-            FieldValue.arrayUnion([widget.user.username + '+' + title])
-      });
     });
   }
 }

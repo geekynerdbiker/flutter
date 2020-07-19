@@ -11,6 +11,7 @@ import 'package:bak/pages/product/addProductPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class CollectionListPage extends StatefulWidget {
   User user;
@@ -73,13 +74,13 @@ class _CollectionListPage extends State<CollectionListPage> {
   }
 
   Widget myCollectionList(BuildContext context) {
-    return Expanded(
-        child: ListView(
+    return ListView(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       children: [
         addCollection(context),
       ],
-    ));
+    );
   }
 
   Widget addCollection(BuildContext context) {
@@ -143,6 +144,7 @@ class _CollectionListPage extends State<CollectionListPage> {
         snapshot.map((e) => Collection.fromSnapshot(e)).toList();
     return ListView.builder(
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: collections.length,
         itemBuilder: (context, index) {
           return collectionItem(context, collections[index]);

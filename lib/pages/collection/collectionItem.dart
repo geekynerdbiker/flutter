@@ -48,6 +48,7 @@ class _CollectionItem extends State<CollectionItem> {
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 10,
               crossAxisCount: 2, childAspectRatio: 0.5),
           scrollDirection: Axis.vertical,
           itemCount: productItems.length,
@@ -66,7 +67,7 @@ class _CollectionItem extends State<CollectionItem> {
           .collection('products')
           .where('collections',
           arrayContains:
-          widget.collection.products)
+          widget.collection.userID + '+' + widget.collection.title)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return CircularProgressIndicator();
@@ -85,10 +86,12 @@ class _CollectionItem extends State<CollectionItem> {
       child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 10,
               crossAxisCount: 2, childAspectRatio: 0.5),
           scrollDirection: Axis.vertical,
           itemCount: productItems.length,
           itemBuilder: (context, index) {
+            if(productItems[index].userID != widget.collection.userID)
             return productItemCardLarge(
                 context,
                 productItems[index], widget.user

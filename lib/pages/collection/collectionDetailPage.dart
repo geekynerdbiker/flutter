@@ -8,7 +8,8 @@ import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
-import 'package:bak/pages/collection/myCollectionItem.dart';
+import 'package:bak/pages/collection/collectionItem.dart';
+import 'package:bak/pages/collection/editCollection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
@@ -57,8 +58,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         physics: ClampingScrollPhysics(),
         children: <Widget>[
           collectionInfo(context),
-          widget.user.username != widget.collection.userID
-              ? productItemList(context)
+          widget.user.username == widget.collection.userID
+              ? CollectionItem(
+                  user: widget.user,
+                  collection: widget.collection,
+                  isMine: true,
+                )
               : tabBar(context),
         ],
       ),
@@ -140,8 +145,11 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
                         margin:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         child: Material(
-                          child:
-                              InkWell(child: ImageIcon(AssetImage(edit_idle))),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditCollectionPage(user: widget.user, collection: widget.collection,)));
+                              },
+                              child: ImageIcon(AssetImage(edit_idle))),
                         ),
                       )
               ],
@@ -182,10 +190,10 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
 
     for (int i = 0; i < widget.collection.products.length; i++)
       for (int j = 0; j < widget.user.myProducts.length; j++)
-        widget.collection.products[i] == widget.user.myProducts[j]
-            ? myProducts++
-            : usersProducts++;
+        if (widget.collection.products[i] == widget.user.myProducts[j])
+          myProducts++;
 
+    usersProducts = widget.collection.products.length - myProducts;
     return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -267,9 +275,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
           itemCount: productItems.length,
           itemBuilder: (context, index) {
             return productItemCardLarge(
-              context,
-              productItems[index], widget.user
-            );
+                context, productItems[index], widget.user);
           }),
     );
   }

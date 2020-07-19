@@ -308,8 +308,7 @@ class _ProductDetailPage extends State<ProductDetailPage> {
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
+    return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: productItems.length,
         itemBuilder: (context, index) {
@@ -319,7 +318,6 @@ class _ProductDetailPage extends State<ProductDetailPage> {
                 productItemCardSmall(context, productItems[index], widget.user),
           );
         },
-      ),
     );
   }
 
