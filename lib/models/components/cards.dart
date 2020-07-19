@@ -147,7 +147,7 @@ Widget productItemCardSmall(BuildContext context, Product product, User user) {
                 children: [
                   Text(product.title),
                   hSpacer(_space2),
-                  Text(product.price.toString()),
+                  Text(product.price.toString() + '원'),
                 ],
               ),
             ))

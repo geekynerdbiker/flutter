@@ -398,7 +398,7 @@ Widget userMarqueeFollow(BuildContext context, User _user) {
 }
 
 Widget profileImage(BuildContext context, User _user, double _r) {
-  String path = 'gs://newnew-test.appspot.com/user/' + _user.username +
+  String path = 'gs://newnew-beta.appspot.com/user/' + _user.username +
       '+' + 'profile.jpg';
   var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
 
