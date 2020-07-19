@@ -24,6 +24,7 @@ class Product {
   String rate;
   String category;
 
+  List<String> liked = [];
   List<String> tags = [];
   List<String> reviews = [];
   List<String> collections = [];
@@ -45,6 +46,7 @@ class Product {
         material = map['material'],
         color = List.from(map['color']),
         category = map['category'],
+        liked = List.from(map['liked']),
         tags = List.from(map['tags']),
         reviews = List.from(
           map['reviews'],
@@ -75,6 +77,7 @@ class Product {
         this.payCard = snapshot.data['payCard'],
         this.rate = snapshot.data['rate'],
         this.category = snapshot.data['catgory'],
+        this.liked = List<String>.from(snapshot.data['liked']),
         this.tags = List<String>.from(snapshot.data['tags']),
         this.reviews = List<String>.from(snapshot.data['reviews']),
         this.collections = List<String>.from(snapshot.data['collections']);

@@ -1,4 +1,5 @@
 // 12px
+const String add_idle = 'lib/assets/icons/drawable-xxxhdpi/12_px_add_idle.png';
 const String check_idle_12 = 'lib/assets/icons/drawable-xxxhdpi/12_px_check_idle.png';
 const String delete_tag_idle = 'lib/assets/icons/drawable-xxxhdpi/12_px_delete_tag_idle.png';
 const String quick_delivery = 'lib/assets/icons/drawable-xxxhdpi/12_px_quick_delivery.png';

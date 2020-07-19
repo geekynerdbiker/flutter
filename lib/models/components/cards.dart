@@ -133,6 +133,7 @@ Widget productItemCardSmall(BuildContext context, Product product, User user) {
   bool isMyProduct = false;
 
   return Container(
+    margin: EdgeInsets.only(left: 20),
     child: Column(
       children: <Widget>[
         productImageBox(context, product, _width, _height, user),
@@ -188,7 +189,7 @@ Widget collectionCoverCard(
                     wSpacer(_space4),
                     Text('팔로워'),
                     wSpacer(_space3),
-                    Text(collection.getFollowers().toString()),
+                    Text(collection.followers.length.toString()),
                   ],
                 ),
               ],
@@ -287,7 +288,7 @@ Widget productImageBox(
         child: Image(
           image: FirebaseImage(product.imageURI[0],
               shouldCache: true,
-              maxSizeBytes: 50 * 1024 * 1024,
+              maxSizeBytes: 20 * 1024 * 1024,
               cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
         ),
@@ -316,7 +317,7 @@ Widget collectionImageBox(BuildContext context, Collection collection,
         child: Image(
           image: FirebaseImage(collection.imageURI,
               shouldCache: true,
-              maxSizeBytes: 5000 * 1000,
+              maxSizeBytes: 20 * 1024 * 1024,
               cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
           fit: BoxFit.cover,
         ),
