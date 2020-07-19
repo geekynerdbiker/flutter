@@ -351,7 +351,7 @@ class _SignUpPage extends State<SignUpPage> {
             'lastActivity': lastActivity ??
                 DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
             'rate': rate ?? "",
-            'imageURI': imageURI ?? 'gs://newnew-test.appspot.com/1-1.JPG',
+            'imageURI': imageURI ?? 'gs://newnew-beta.appspot.com/1-1.JPG',
             'name': name ?? "",
             'bio': bio ?? "상점 소개를 입력하세요.",
             'webSite': webSite ?? "",

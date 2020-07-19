@@ -32,15 +32,13 @@ Widget buildCategoryBody(
     BuildContext context, List<DocumentSnapshot> snapshot) {
   List<Category> categoryItems =
       snapshot.map((e) => Category.fromSnapshot(e)).toList();
-  return Expanded(
-    child: ListView.builder(
+  return ListView.builder(
       itemCount: categoryItems.length,
       itemBuilder: (context, index) {
         return Container(
           child: categoryItemBuilder(context, categoryItems[index]),
         );
       },
-    ),
   );
 }
 
