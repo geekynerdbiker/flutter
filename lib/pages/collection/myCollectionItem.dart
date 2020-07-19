@@ -17,73 +17,31 @@ class CollectionItem extends StatefulWidget {
 }
 
 class _CollectionItem extends State<CollectionItem> {
-  List<Widget> myProducts = [];
-  List<Widget> usersProducts = [];
 
   @override
   Widget build(BuildContext context) {
-    itemList(context, widget.isMine);
-
-    print(280 *
-        (widget.isMine ? myProducts.length : usersProducts.length / 2 + 1)
-            .toDouble());
-
-    return Container(
-      height: 280 *
-          (widget.isMine ? myProducts.length : usersProducts.length / 2 + 1)
-              .toDouble(),
-      child: GridView.count(
-        crossAxisCount: 2,
-        children: widget.isMine ? myProducts : usersProducts,
-      ),
-    );
+    return widget.isMine ? myProductItemList(context) : userProductItemList(context);
   }
 
-  void itemList(BuildContext context, bool isMine) {
-    myProducts.clear();
-    usersProducts.clear();
-
-    for (int i = 0; i < widget.collection.products.length; i++) {
-      Firestore.instance
-          .collection('products')
-          .document(widget.collection.products[i])
-          .get()
-          .then((e) {
-        if (e.data['userID'] == widget.user.username) {
-          myProducts.add(
-            Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
-              child: productItemCardLarge(
-                  context, Product.getProductData(e), widget.user),
-            ),
-          );
-        } else {
-          usersProducts.add(
-            Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
-              child: productItemCardLarge(
-                  context, Product.getProductData(e), widget.user),
-            ),
-          );
-        }
-      });
-    }
-  }
-
-  Widget itemList2(BuildContext context, bool isMine) {
+  Widget myProductItemList(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('products').snapshots(),
+      stream: Firestore.instance
+          .collection('products')
+          .where('collections',
+          arrayContains:
+          widget.collection.userID + '+' + widget.collection.title)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return CircularProgressIndicator();
-        return buildProductList(context, snapshot.data.documents, isMine);
+        return buildMyProductBody(context, snapshot.data.documents);
       },
     );
   }
 
-  Widget buildProductList(
-      BuildContext context, List<DocumentSnapshot> snapshot, bool isMine) {
+  Widget buildMyProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Product> productItems =
-        snapshot.map((e) => Product.fromSnapshot(e)).toList();
+    snapshot.map((e) => Product.fromSnapshot(e)).toList();
 
     return Container(
       height: 280 * (productItems.length / 2 + 1),
@@ -94,13 +52,47 @@ class _CollectionItem extends State<CollectionItem> {
           scrollDirection: Axis.vertical,
           itemCount: productItems.length,
           itemBuilder: (context, index) {
-            for (int i = 0; i < widget.collection.products.length; i++) {
-              if (productItems[index].title == widget.collection.products[i]) {
-                return productItemCardLarge(
-                    context, productItems[index], widget.user);
-              }
-            }
-            return Container();
+            return productItemCardLarge(
+                context,
+                productItems[index], widget.user
+            );
+          }),
+    );
+  }
+
+  Widget userProductItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance
+          .collection('products')
+          .where('collections',
+          arrayContains:
+          widget.collection.products)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildUserProductBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildUserProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Product> productItems =
+    snapshot.map((e) => Product.fromSnapshot(e)).toList();
+
+    return Container(
+      height: 280 * (productItems.length / 2 + 1),
+      child: GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, childAspectRatio: 0.5),
+          scrollDirection: Axis.vertical,
+          itemCount: productItems.length,
+          itemBuilder: (context, index) {
+            return productItemCardLarge(
+                context,
+                productItems[index], widget.user
+            );
           }),
     );
   }

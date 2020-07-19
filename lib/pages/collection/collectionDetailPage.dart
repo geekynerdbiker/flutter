@@ -1,4 +1,3 @@
-import 'package:bak/database/functions.dart';
 import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
@@ -11,7 +10,6 @@ import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/collection/myCollectionItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +32,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(initialIndex: selectedIndex, vsync: this, length: 2);
+    _controller =
+        TabController(initialIndex: selectedIndex, vsync: this, length: 2);
   }
 
   @override
@@ -58,7 +57,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         physics: ClampingScrollPhysics(),
         children: <Widget>[
           collectionInfo(context),
-          widget.user.username == widget.collection.userID
+          widget.user.username != widget.collection.userID
               ? productItemList(context)
               : tabBar(context),
         ],
@@ -88,7 +87,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
           child: Image(
             image: FirebaseImage(widget.collection.imageURI,
                 shouldCache: true,
-                maxSizeBytes: 5000 * 1000,
+                maxSizeBytes: 20 * 1024 * 1024,
                 cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
             fit: BoxFit.cover,
           ),
@@ -171,7 +170,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           width: MediaQuery.of(context).size.width,
-          color: primary,
           child: Text(widget.collection.description),
         ),
       ],
@@ -215,12 +213,20 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
         IndexedStack(
           children: <Widget>[
             Visibility(
-              child: CollectionItem(user: widget.user, collection: widget.collection, isMine: true,),
+              child: CollectionItem(
+                user: widget.user,
+                collection: widget.collection,
+                isMine: true,
+              ),
               maintainState: true,
               visible: selectedIndex == 0,
             ),
             Visibility(
-              child: CollectionItem(user: widget.user, collection: widget.collection, isMine: false,),
+              child: CollectionItem(
+                user: widget.user,
+                collection: widget.collection,
+                isMine: false,
+              ),
               maintainState: true,
               visible: selectedIndex == 1,
             ),
@@ -233,7 +239,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
 
   Widget productItemList(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('products').snapshots(),
+      stream: Firestore.instance
+          .collection('products')
+          .where('collections',
+              arrayContains:
+                  widget.collection.userID + '+' + widget.collection.title)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return CircularProgressIndicator();
         return buildProductBody(context, snapshot.data.documents);
@@ -245,73 +256,21 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
       BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: productItems.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardMedium(context, productItems[index]),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget productItemCardMedium(BuildContext context, Product product) {
-    const double _width = 160;
-    const double _height = 200;
-    const double _space1 = 14;
-    const double _space2 = 4;
-    const double _icon = 44;
 
     return Container(
-      child: Column(
-        children: <Widget>[
-          productImageBox(context, product, _width, _height, widget.user),
-          hSpacer(_space1),
-          Container(
-            padding: EdgeInsets.only(left: 12),
-            child: SizedBox(
-              width: _width - 12,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title.length < 9
-                            ? product.title
-                            : product.title.substring(0, 8) + ' ..',
-                        style: body1(primary),
-                      ),
-                      hSpacer(_space2),
-                      Text(
-                        product.price.toString() + '원',
-                        style: body1(primary),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: _icon,
-                    height: _icon,
-                    child: Center(
-                      child: ImageIcon(
-                        AssetImage(favorite_idle_inverse),
-                        color: primary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
+      height: 280 * (productItems.length / 2 + 1),
+      child: GridView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, childAspectRatio: 0.5),
+          scrollDirection: Axis.vertical,
+          itemCount: productItems.length,
+          itemBuilder: (context, index) {
+            return productItemCardLarge(
+              context,
+              productItems[index], widget.user
+            );
+          }),
     );
   }
 }

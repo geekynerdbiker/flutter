@@ -2,14 +2,17 @@ import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/buttons.dart';
+import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/models/designs/typos.dart';
+import 'package:bak/pages/collection/collectionList.dart';
 import 'package:bak/pages/message/chatRoom.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,7 +60,7 @@ class _ProductDetailPage extends State<ProductDetailPage> {
                     child: Image(
                       image: FirebaseImage(item,
                           shouldCache: true,
-                          maxSizeBytes: 50 * 1024 * 1024,
+                          maxSizeBytes: 20 * 1024 * 1024,
                           cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
                       fit: BoxFit.cover,
                     ),
@@ -100,11 +103,14 @@ class _ProductDetailPage extends State<ProductDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.product.title),
+          Text(
+            widget.product.title,
+            style: body1(primary),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(widget.product.price.toString()),
+              Text(widget.product.price.toString() + '원'),
               wSpacer(9),
               Text(widget.product.updateDate),
             ],
@@ -114,19 +120,36 @@ class _ProductDetailPage extends State<ProductDetailPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.product.deliveryFee.toString()),
+              Text('배송료 ' + widget.product.deliveryFee.toString()),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     children: [
-                      ImageIcon(AssetImage(favorite_idle)),
-                      Text('111')
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            print('like!');
+                          },
+                          child: ImageIcon(AssetImage(favorite_idle)),
+                        ),
+                      ),
+                      Text(widget.product.liked.length.toString()),
                     ],
                   ),
                   wSpacer(20),
                   Column(
-                    children: [ImageIcon(AssetImage(save_idle)), Text('111')],
+                    children: [
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionListPage(user: widget.user, product: widget.product,)));
+                          },
+                          child: ImageIcon(AssetImage(save_idle)),
+                        ),
+                      ),
+                      Text(widget.product.collections.length.toString())
+                    ],
                   ),
                   wSpacer(20),
                   ImageIcon(AssetImage(share_idle)),
@@ -159,8 +182,17 @@ class _ProductDetailPage extends State<ProductDetailPage> {
                   widget.product.material == ''
                       ? Container()
                       : Text('소재: ' + widget.product.material),
-                  widget.product.color.length == 0 ? Container() : Text('색상: '),
-                  widget.product.state == '' ? Container() : Text('상태: '),
+                  widget.product.color.length == 0
+                      ? Container()
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                              Text('색상: '),
+                              getColors(context),
+                            ]),
+                  widget.product.state == ''
+                      ? Container()
+                      : Text('상태: ' + widget.product.state + '/10.0 점'),
                   hSpacer(15)
                 ],
               ),
@@ -173,6 +205,45 @@ class _ProductDetailPage extends State<ProductDetailPage> {
           Text(widget.product.description),
           tagList(context),
         ],
+      ),
+    );
+  }
+
+  Widget getColors(BuildContext context) {
+    return Wrap(
+      direction: Axis.horizontal,
+      children: colorList(context),
+    );
+  }
+
+  List<Widget> colorList(BuildContext context) {
+    List<Widget> colors = List<Widget>();
+    for (int i = 0; i < widget.product.color.length; i++)
+      colors.add(colorCircle(
+          context, Color(int.parse(widget.product.color[i], radix: 16))));
+
+    return colors;
+  }
+
+  Widget colorCircle(BuildContext context, Color _color) {
+    const double _r = 12;
+    bool isWhite = _color == Colors.white;
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 3),
+      width: _r,
+      height: _r,
+      child: Container(
+        width: _r,
+        height: _r,
+        decoration: !isWhite
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(100), color: _color)
+            : BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(100),
+                color: _color,
+              ),
       ),
     );
   }
@@ -215,36 +286,39 @@ class _ProductDetailPage extends State<ProductDetailPage> {
             ],
           ),
         ),
-        productList(context),
+        Container(
+          height: 200,
+          child: productItemList(context),
+        ),
       ],
     );
   }
 
-  Widget productList(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      height: 200,
-      child: ListView(
-        physics: ClampingScrollPhysics(),
+  Widget productItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('products').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildProductBody(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget buildProductBody(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Product> productItems =
+        snapshot.map((e) => Product.fromSnapshot(e)).toList();
+    return Expanded(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-          Container(
-            margin: EdgeInsets.only(right: 8),
-            //child: productItemCardSmall(context, new Product('title', 111, '/')),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 8),
-            //child: productItemCardSmall(context, new Product('title', 111, '/')),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 8),
-            //child: productItemCardSmall(context, new Product('title', 111, '/')),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 8),
-            //child: productItemCardSmall(context, new Product('title', 111, '/')),
-          ),
-        ],
+        itemCount: productItems.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.only(top: 10),
+            child:
+                productItemCardSmall(context, productItems[index], widget.user),
+          );
+        },
       ),
     );
   }

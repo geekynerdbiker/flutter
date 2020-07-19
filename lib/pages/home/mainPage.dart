@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     child: Image(
                       image: FirebaseImage(item,
                           shouldCache: true,
-                          maxSizeBytes: 5000 * 1000,
+                          maxSizeBytes: 20 * 1024 * 1024,
                           cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
                       fit: BoxFit.cover,
                     ),

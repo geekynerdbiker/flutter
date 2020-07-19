@@ -90,6 +90,7 @@ class _AddProductPageState extends State<AddProductPage> {
   String rate;
   String category;
 
+  List<String> liked = List<String>();
   List<String> tags = List<String>();
   List<String> reviews = List<String>();
   List<String> collections = List<String>();
@@ -840,12 +841,13 @@ class _AddProductPageState extends State<AddProductPage> {
       child: InkWell(
         onTap: () {
           if (_formKey.currentState.validate()) {
-            if (brand.length != 0) _tags.add(Tag(brand));
-            if (size.length != 0) _tags.add(Tag(size));
-            if (material.length != 0) _tags.add(Tag(material));
+            if (brand != null) _tags.add(Tag(brand));
+            if (size != null ) _tags.add(Tag(size));
+            if (material != null) _tags.add(Tag(material));
 
-            for (int i = 0; i < colorSelected.length; i++)
-              if (colorSelected[i]) color.add(colors[i].toString());
+            for (int i = 0; i < colorSelected.length; i++) {
+              if (colorSelected[i]) color.add(colors[i].value.toRadixString(16));
+            }
 
             add();
             Navigator.pop(context, true);
@@ -941,6 +943,7 @@ class _AddProductPageState extends State<AddProductPage> {
       "material": material ?? "",
       "color": color,
       "category": categoryItem.title,
+      "liked": liked,
       "tags": tags,
       "reviews": reviews,
       "collections": collections,
@@ -955,84 +958,5 @@ class _AddProductPageState extends State<AddProductPage> {
             FieldValue.arrayUnion([widget.user.username + '+' + title])
       });
     });
-  }
-}
-
-class ColorCircle extends StatefulWidget {
-  final Color color;
-
-  ColorCircle({this.color});
-
-  @override
-  _ColorCircle createState() => _ColorCircle();
-}
-
-class _ColorCircle extends State<ColorCircle> {
-  bool isSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return colorCircle(context, widget.color);
-  }
-
-  Widget colorCircle(BuildContext context, Color _color) {
-    const double _r = 32;
-    var checkIcon = ImageIcon(
-      AssetImage(check_idle),
-      color: offWhite,
-    );
-
-    if (_color == Colors.white) {
-      var checkIcon = ImageIcon(
-        AssetImage(check_idle),
-        color: primary,
-      );
-
-      return Material(
-        child: InkWell(
-            onTap: () {
-              setState(() {
-                isSelected = !isSelected;
-                checkIcon = isSelected ? checkIcon : null;
-              });
-            },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: _r,
-                  height: _r,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(100),
-                      color: _color),
-                ),
-                Align(child: isSelected ? checkIcon : null),
-              ],
-            )),
-      );
-    }
-
-    return Material(
-      child: InkWell(
-          onTap: () {
-            setState(() {
-              isSelected = !isSelected;
-              checkIcon = isSelected ? checkIcon : null;
-            });
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: _r,
-                height: _r,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100), color: _color),
-              ),
-              Center(child: isSelected ? checkIcon : null),
-            ],
-          )),
-    );
   }
 }

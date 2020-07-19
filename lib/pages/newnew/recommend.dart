@@ -201,7 +201,7 @@ class RecommendPage extends StatelessWidget {
           child: Image(
             image: FirebaseImage(product.imageURI[0],
                 shouldCache: true,
-                maxSizeBytes: 3000 * 1000,
+                maxSizeBytes: 20 * 1024 * 1024,
                 cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
             fit: BoxFit.cover,
           ),
