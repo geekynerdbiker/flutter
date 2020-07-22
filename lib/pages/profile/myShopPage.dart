@@ -18,7 +18,7 @@ class MyShopPage extends StatelessWidget {
     return Column(
       children: <Widget>[
         infoLine(context),
-        itemList(context),
+        productItemList(context),
       ],
     );
   }
@@ -80,7 +80,10 @@ class MyShopPage extends StatelessWidget {
               margin: EdgeInsets.only(top: 20, right: 20, bottom: 10),
               child: Row(
                 children: [
-                  ImageIcon(AssetImage(star_idle), size: 12,),
+                  ImageIcon(
+                    AssetImage(star_idle),
+                    size: 12,
+                  ),
                   wSpacer(_space2),
                   Material(
                     child: InkWell(
@@ -90,9 +93,7 @@ class MyShopPage extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => ReviewPage(user: user)));
                       },
-                      child: Text('(' +
-                          user.reviews.length.toString() +
-                          ')'),
+                      child: Text('(' + user.reviews.length.toString() + ')'),
                     ),
                   )
                 ],
@@ -102,7 +103,7 @@ class MyShopPage extends StatelessWidget {
     );
   }
 
-  Widget itemList(BuildContext context) {
+  Widget productItemList(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('products').snapshots(),
       builder: (context, snapshot) {
@@ -118,21 +119,28 @@ class MyShopPage extends StatelessWidget {
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
 
     return Container(
-      height: 280 * (productItems.length / 2 + 1),
-      child: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 0.5),
-        scrollDirection: Axis.vertical,
-        itemCount: productItems.length,
-        itemBuilder: (context, index) {
-          if (productItems[index].userID == user.username)
-            return Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
-              child: productItemCardLarge(context, productItems[index], user),
-            );
-        },
+      height: 450,
+      child: GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: 0.55,
+        crossAxisSpacing: 10,
+        physics: ClampingScrollPhysics(),
+        children: productItemBuilder(context, productItems),
       ),
     );
+  }
+
+  List<Widget> productItemBuilder(
+      BuildContext context, List<Product> products) {
+    List<Widget> items = List<Widget>();
+
+    for (int i = 0; i < products.length; i++)
+      if(products[i].userID == user.username)
+      items.add(ProductItemCardLarge(
+        product: products[i],
+        user: user,
+      ));
+
+    return items;
   }
 }

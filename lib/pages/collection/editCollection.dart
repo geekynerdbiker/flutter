@@ -282,7 +282,8 @@ class _EditCollectionPage extends State<EditCollectionPage> {
       imageURI = ('gs://newnew-beta.appspot.com/collection/' +
           widget.user.username +
           '+' +
-          title +
+          'collection' +
+          widget.user.myCollections.length.toString() +
           '.jpg');
     }
 
@@ -317,7 +318,8 @@ class _EditCollectionPage extends State<EditCollectionPage> {
     String path = 'collection/' +
         widget.user.username +
         '+' +
-        title +
+        'collection' +
+        widget.user.myCollections.length.toString() +
         '.jpg';
     ByteData byteData = await asset.requestOriginal();
     List<int> imageData = byteData.buffer.asUint8List();

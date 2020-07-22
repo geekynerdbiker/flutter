@@ -27,7 +27,6 @@ class _ProductListPage extends State<ProductListPage> {
   }
 
   Widget productItemList(BuildContext context) {
-    print(Firestore.instance.collection('products'));
 
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('products').snapshots(),
@@ -46,7 +45,7 @@ class _ProductListPage extends State<ProductListPage> {
         itemCount: productItems.length,
         itemBuilder: (context, index) {
           return Container(
-            child: productItemCardLarge(context, productItems[index], widget.user),
+            child: ProductItemCardLarge(product: productItems[index], user: widget.user),
           );
         },
     );

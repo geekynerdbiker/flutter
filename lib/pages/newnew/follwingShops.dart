@@ -73,11 +73,11 @@ class FollowingShopsPage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: productItems.length,
         itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardMedium(
-                context, productItems[index], user, primary),
-          );
+//          return Container(
+//            margin: EdgeInsets.only(top: 10, right: 10),
+//            child: productItemCardMedium(
+//                context, productItems[index], user, primary),
+//          );
         },
     );
   }

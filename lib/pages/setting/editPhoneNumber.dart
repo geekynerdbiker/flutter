@@ -156,7 +156,6 @@ class _EditPhoneNumber extends State<EditPhoneNumber> {
               if (validateAndSave()) {
                 form.save();
                 change();
-                print("OK!");
               }
             },
             child: Container(

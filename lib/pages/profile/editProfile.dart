@@ -200,7 +200,6 @@ class _EditProfilePage extends State<EditProfilePage> {
           'myProducts': widget.user.myProducts,
           'myCollections': widget.user.myCollections,
         });
-    print(username);
     Firestore.instance.collection('users')
         .document(widget.user.username)
         .delete();

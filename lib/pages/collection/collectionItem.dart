@@ -53,9 +53,8 @@ class _CollectionItem extends State<CollectionItem> {
           scrollDirection: Axis.vertical,
           itemCount: productItems.length,
           itemBuilder: (context, index) {
-            return productItemCardLarge(
-                context,
-                productItems[index], widget.user
+            return ProductItemCardLarge(
+                product: productItems[index], user: widget.user
             );
           }),
     );
@@ -92,9 +91,8 @@ class _CollectionItem extends State<CollectionItem> {
           itemCount: productItems.length,
           itemBuilder: (context, index) {
             if(productItems[index].userID != widget.collection.userID)
-            return productItemCardLarge(
-                context,
-                productItems[index], widget.user
+            return ProductItemCardLarge(
+                product: productItems[index], user: widget.user
             );
           }),
     );

@@ -868,8 +868,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
             add();
             Navigator.pop(context, true);
-          } else
-            print('fail');
+          }
         },
         child: Container(
           width: MediaQuery.of(context).size.width * (120 / 375),
@@ -892,8 +891,6 @@ class _AddProductPageState extends State<AddProductPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      String urlTitle = title.replaceAll(' ', '_');
-
       setState(() {
         imageURI = List<String>();
       });
@@ -903,7 +900,8 @@ class _AddProductPageState extends State<AddProductPage> {
         imageURI.add('gs://newnew-beta.appspot.com/product/' +
             widget.user.username +
             '+' +
-            urlTitle +
+            'product' +
+widget.user.myProducts.length.toString() +
             '+' +
             i.toString() +
             '.jpg');
@@ -927,12 +925,11 @@ class _AddProductPageState extends State<AddProductPage> {
   Future uploadImages(Asset asset, int index) async {
     if (_images == null) return;
 
-    String urlTitle = title.replaceAll(' ', '_');
-
     String path = 'product/' +
         widget.user.username +
         '+' +
-        urlTitle +
+        'product' +
+        widget.user.myProducts.length.toString() +
         '+' +
         index.toString() +
         '.jpg';

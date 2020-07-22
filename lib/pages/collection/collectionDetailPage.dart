@@ -274,8 +274,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage>
           scrollDirection: Axis.vertical,
           itemCount: productItems.length,
           itemBuilder: (context, index) {
-            return productItemCardLarge(
-                context, productItems[index], widget.user);
+            return ProductItemCardLarge(
+                product: productItems[index], user: widget.user);
           }),
     );
   }

@@ -64,6 +64,7 @@ class _ProfilePageState extends State<ProfilePage>
       backgroundColor: offWhite,
       appBar: myPage(context, widget.user),
       body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
           child: Column(
         children: <Widget>[
           userMarqueeMyPage(context, widget.user),
@@ -81,8 +82,6 @@ class _ProfilePageState extends State<ProfilePage>
               });
             },
           ),
-//MyShopPage(user: widget.user)
-//TabBarView(controller: _controller, children: _pages),
           IndexedStack(
             children: <Widget>[
               Visibility(
@@ -93,7 +92,9 @@ class _ProfilePageState extends State<ProfilePage>
                 visible: selectedIndex == 0,
               ),
               Visibility(
-                child: MyCollectionPage(user: widget.user,),
+                child: MyCollectionPage(
+                  user: widget.user,
+                ),
                 maintainState: true,
                 visible: selectedIndex == 1,
               ),

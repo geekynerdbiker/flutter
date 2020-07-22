@@ -53,7 +53,7 @@ class FavoritePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardLarge(context, productItems[index], user),
+            child: ProductItemCardLarge(product: productItems[index], user: user),
           );
         },
     );

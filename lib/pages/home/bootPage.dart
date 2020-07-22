@@ -19,7 +19,6 @@ class BootPage extends StatefulWidget {
 class _BootPageState extends State<BootPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.user.username);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(

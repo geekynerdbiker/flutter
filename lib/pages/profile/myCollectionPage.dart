@@ -1,12 +1,15 @@
+import 'package:bak/models/classes/product.dart';
 import 'package:bak/models/components/cards.dart';
 import 'package:bak/models/classes/collection.dart';
-import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
+import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/designs/icons.dart';
 import 'package:bak/pages/collection/collectionDetailPage.dart';
 import 'package:bak/pages/profile/follow.dart';
 import 'package:bak/pages/profile/review.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MyCollectionPage extends StatelessWidget {
@@ -18,6 +21,7 @@ class MyCollectionPage extends StatelessWidget {
     return Column(
         children: [
           infoLine(context),
+          collectionItemList(context),
         ],
     );
   }
@@ -83,86 +87,90 @@ class MyCollectionPage extends StatelessWidget {
     );
   }
 
-  Widget collectionItem(BuildContext context, Collection collection) {
-    return Container(
-        height: MediaQuery.of(context).size.width * (500 / 375),
-      child: Column(
-        children: [
-          collectionBannerItem(context, collection),
-          Expanded(child: collectionProductItemList(context, collection)),
-        ],
-      ),
+  Widget collectionItemList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('collections').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildCollectionList(context, snapshot.data.documents);
+      },
     );
   }
 
-  Widget collectionInfoLine(BuildContext context, Collection collection) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(collection.title + '(Item #)'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('@' + collection.userID),
-            Material(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CollectionDetailPage(collection: collection)));
-                },
-                child: Text(
-                  '+ 더보기',
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget collectionBannerItem(BuildContext context, Collection collection) {
-    final double _width = MediaQuery.of(context).size.width;
-    final double _height = MediaQuery.of(context).size.width * (260 / 375);
+  Widget buildCollectionList(
+      BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Collection> collectionItems =
+    snapshot.map((e) => Collection.fromSnapshot(e)).toList();
 
     return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: collectionInfoLine(context, collection),
-          ),
-          collectionImageBox(context, collection, _width, _height, user),
-        ],
-      ),
-    );
-  }
-
-  Widget collectionProductItemList(
-      BuildContext context, Collection collection) {
-      return ListView(
+      height: 450,
+      child: ListView(
         physics: ClampingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
+        children: collectionItemBuilder(context, collectionItems),
+      ),
+    );
+  }
+
+  List<Widget> collectionItemBuilder(
+      BuildContext context, List<Collection> collections) {
+    List<Widget> items = List<Widget>();
+
+    for (int i = 0; i < collections.length; i++)
+      if(collections[i].userID == user.username)
+        items.add(collectionItemFrame(
+          context, collections[i]
+        ));
+
+    return items;
+  }
+
+  Widget collectionItemFrame(BuildContext context, Collection collection) {
+    return Container(
+      child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 8, right: 8),
-//            child:
-//            productItemCardSmall(context, new Product('title', 100000, '/')),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 8, right: 8),
-//            child:
-//            productItemCardSmall(context, new Product('title', 100000, '/')),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 8, right: 8),
-//            child:
-//            productItemCardSmall(context, new Product('title', 100000, '/')),
-          ),
+          collectionForMyPage(context, collection, user),
+          productOfCollectionItemList(context, collection)
         ],
-      );
-    }
+      ),
+    );
+  }
+
+  Widget productOfCollectionItemList(BuildContext context, Collection collection) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('products').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return CircularProgressIndicator();
+        return buildProductOfCollectionList(context, snapshot.data.documents, collection);
+      },
+    );
+  }
+
+  Widget buildProductOfCollectionList(
+      BuildContext context, List<DocumentSnapshot> snapshot, Collection collection) {
+    List<Product> productOfCollectionItems =
+    snapshot.map((e) => Product.fromSnapshot(e)).toList();
+
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 15),
+      height: 170,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        physics: ClampingScrollPhysics(),
+        children: productOfCollectionItemBuilder(context, productOfCollectionItems, collection),
+      ),
+    );
+  }
+
+  List<Widget> productOfCollectionItemBuilder(
+      BuildContext context, List<Product> products, Collection collection) {
+    List<Widget> items = List<Widget>();
+
+    for (int i = 0; i < products.length; i++)
+      products[i].collections.forEach((e) {
+        if(e == collection.userID+'+'+collection.title)
+          items.add(productItemCardSmall(context, products[i], user));
+      });
+
+    return items;
+  }
 }

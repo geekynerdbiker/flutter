@@ -378,14 +378,14 @@ class _HomePageState extends State<HomePage> {
       BuildContext context, List<DocumentSnapshot> snapshot, Color color) {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
+
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: productItems.length,
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.only(top: 10, right: 10),
-            child: productItemCardMedium(
-                context, productItems[index], widget.user, color),
+            child: ProductItemCardMedium(product: productItems[index], user: widget.user, color: color),
           );
         },
     );

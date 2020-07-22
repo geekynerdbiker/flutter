@@ -30,9 +30,15 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPage extends State<ProductDetailPage> {
   int currentIndex = 0;
+  bool isLiked = false;
 
   @override
   Widget build(BuildContext context) {
+
+    for (int i = 0; i < widget.user.favorite.length; i++)
+      if (widget.user.favorite[i] ==
+          widget.product.userID + '+' + widget.product.title) isLiked = true;
+
     return Scaffold(
       appBar: appBarDefaultDeep(context, '상품 상세'),
       body: ListView(
@@ -127,11 +133,72 @@ class _ProductDetailPage extends State<ProductDetailPage> {
                   Column(
                     children: [
                       Material(
+                        color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            print('like!');
+                            !isLiked
+                                ? Firestore.instance
+                                    .collection('users')
+                                    .document(widget.user.username)
+                                    .updateData({
+                                    "favorite": FieldValue.arrayUnion([
+                                      widget.product.userID +
+                                          '+' +
+                                          widget.product.title
+                                    ])
+                                  }).then((value) {
+                                    Firestore.instance
+                                        .collection('products')
+                                        .document(widget.product.userID +
+                                            '+' +
+                                            widget.product.title)
+                                        .updateData({
+                                      "liked": FieldValue.arrayUnion(
+                                          [widget.user.username])
+                                    });
+                                    setState(() {
+                                      isLiked = !isLiked;
+                                    });
+                                  })
+                                : Firestore.instance
+                                    .collection('users')
+                                    .document(widget.user.username)
+                                    .updateData({
+                                    "favorite": FieldValue.arrayRemove([
+                                      widget.product.userID +
+                                          '+' +
+                                          widget.product.title
+                                    ])
+                                  }).then((value) {
+                                    Firestore.instance
+                                        .collection('products')
+                                        .document(widget.product.userID +
+                                            '+' +
+                                            widget.product.title)
+                                        .updateData({
+                                      "liked": FieldValue.arrayRemove(
+                                          [widget.user.username])
+                                    });
+                                    setState(() {
+                                      isLiked = !isLiked;
+                                    });
+                                  });
+
                           },
-                          child: ImageIcon(AssetImage(favorite_idle)),
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            child: Center(
+                                child: !isLiked
+                                    ? ImageIcon(
+                                        AssetImage(favorite_idle_inverse),
+                                        color: primary,
+                                      )
+                                    : ImageIcon(
+                                        AssetImage(favorite_active_inverse),
+                                        color: primary,
+                                      )),
+                          ),
                         ),
                       ),
                       Text(widget.product.liked.length.toString()),
@@ -143,7 +210,13 @@ class _ProductDetailPage extends State<ProductDetailPage> {
                       Material(
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionListPage(user: widget.user, product: widget.product,)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CollectionListPage(
+                                          user: widget.user,
+                                          product: widget.product,
+                                        )));
                           },
                           child: ImageIcon(AssetImage(save_idle)),
                         ),
@@ -198,7 +271,9 @@ class _ProductDetailPage extends State<ProductDetailPage> {
               ),
               widget.product.state == ''
                   ? Container()
-                  : ShortStateSlider(double.parse(widget.product.state)),
+                  : Container(
+                child: ShortStateSlider(double.parse(widget.product.state)),
+              )
             ],
           ),
           hSpacer(20),
@@ -309,15 +384,15 @@ class _ProductDetailPage extends State<ProductDetailPage> {
     List<Product> productItems =
         snapshot.map((e) => Product.fromSnapshot(e)).toList();
     return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: productItems.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.only(top: 10),
-            child:
-                productItemCardSmall(context, productItems[index], widget.user),
-          );
-        },
+      scrollDirection: Axis.horizontal,
+      itemCount: productItems.length,
+      itemBuilder: (context, index) {
+        return Container(
+          margin: EdgeInsets.only(top: 10),
+          child:
+              productItemCardSmall(context, productItems[index], widget.user),
+        );
+      },
     );
   }
 

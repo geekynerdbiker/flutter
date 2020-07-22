@@ -252,14 +252,14 @@ class _AddCollectionPage extends State<AddCollectionPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      String urlTitle = title.replaceAll(' ', '_');
-
       uploadImages(_images[0]);
       imageURI = ('gs://newnew-beta.appspot.com/collection/' +
           widget.user.username +
           '+' +
-          urlTitle +
+          'collection' +
+          widget.user.myCollections.length.toString() +
           '.jpg');
+
       products.add(widget.product.userID + '+' + widget.product.title);
     }
 
@@ -291,10 +291,12 @@ class _AddCollectionPage extends State<AddCollectionPage> {
   void uploadImages(Asset asset) async {
     if (_images?.isEmpty ?? true) return;
 
-    String urlTitle = title.replaceAll(' ', '_');
-
-    String path =
-        'collection/' + widget.user.username + '+' + urlTitle + '.jpg';
+    String path = 'collection/' +
+        widget.user.username +
+        '+' +
+        'collection' +
+        widget.user.myCollections.length.toString() +
+        '.jpg';
     ByteData byteData = await asset.requestOriginal();
     List<int> imageData = byteData.buffer.asUint8List();
     StorageReference ref = FirebaseStorage.instance.ref().child(path);
@@ -320,11 +322,18 @@ class _AddCollectionPage extends State<AddCollectionPage> {
       "private": private,
     }).then((value) {
       Firestore.instance
-          .collection('users')
-          .document(widget.user.username)
+          .collection('products')
+          .document(widget.product.userID + '+' + widget.product.title)
           .updateData({
-        "myCollections":
-            FieldValue.arrayUnion([widget.user.username + '+' + title])
+        "collections": FieldValue.arrayUnion(
+            [widget.user.username + '+' + title]),}).then((value) {
+        Firestore.instance
+            .collection('users')
+            .document(widget.user.username)
+            .updateData({
+          "myCollections":
+          FieldValue.arrayUnion([widget.user.username + '+' + title])
+        });
       });
     });
   }
