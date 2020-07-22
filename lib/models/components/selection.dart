@@ -61,19 +61,15 @@ class ShortStateSlider extends StatelessWidget {
           inactiveTrackColor: semiDark,
           inactiveTickMarkColor: semiDark,
           thumbColor: accent1,
-
           overlayColor: Colors.transparent),
       child: Transform.scale(
-        scale: 0.5,
-        child: Positioned(
-          child: Slider(
+        scale: 0.4,
+        child: Slider(
             min: 0,
             max: 10,
             value: _value,
             divisions: 10,
-            onChanged: (value) {
-
-            }),)
+            onChanged: (value) {}),
       ),
     );
   }

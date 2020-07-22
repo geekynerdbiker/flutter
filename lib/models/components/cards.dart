@@ -15,113 +15,266 @@ import 'package:bak/models/classes/collection.dart';
 import 'package:bak/pages/product/productDetailPage.dart';
 import 'package:bak/pages/collection/collectionDetailPage.dart';
 
-Widget productItemCardLarge(BuildContext context, Product product, User user) {
-  const double _width = 185;
-  const double _height = 250;
-  const double _space1 = 14;
-  const double _space2 = 4;
-  const double _icon = 44;
+class ProductItemCardLarge extends StatefulWidget {
+  Product product;
+  User user;
+  Color color;
 
-  bool isMyProduct = false;
+  ProductItemCardLarge({this.product, this.user, this.color});
 
-  return Container(
-    width: _width,
-    child: Column(
-      children: <Widget>[
-        productImageBox(context, product, _width, _height, user),
-        hSpacer(_space1),
-        Container(
-          padding: EdgeInsets.only(left: 10),
-          child: SizedBox(
-            width: _width - 12,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.title.length < 10
-                          ? product.title
-                          : product.title.substring(0, 10) + '..',
-                      style: body1(primary),
-                    ),
-                    hSpacer(_space2),
-                    Text(
-                      product.price.toString() + '원',
-                      style: body1(primary),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: _icon,
-                  height: _icon,
-                  child: Center(
-                    child: Icon(Icons.favorite),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-      ],
-    ),
-  );
+  @override
+  _ProductItemCardLarge createState() => _ProductItemCardLarge();
 }
 
-Widget productItemCardMedium(
-    BuildContext context, Product product, User user, Color _color) {
-  const double _width = 160;
-  const double _height = 200;
-  const double _space1 = 14;
-  const double _space2 = 4;
-  const double _icon = 44;
+class _ProductItemCardLarge extends State<ProductItemCardLarge> {
+  bool isLiked = false;
 
-  return Container(
-    child: Column(
-      children: <Widget>[
-        productImageBox(context, product, _width, _height, user),
-        hSpacer(_space1),
-        Container(
-          padding: EdgeInsets.only(left: 12),
-          child: SizedBox(
-            width: _width - 12,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.title.length < 9
-                          ? product.title
-                          : product.title.substring(0, 8) + ' ..',
-                      style: body1(_color),
-                    ),
-                    hSpacer(_space2),
-                    Text(
-                      product.price.toString() + '원',
-                      style: body1(_color),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: _icon,
-                  height: _icon,
-                  child: Center(
-                    child: ImageIcon(
-                      AssetImage(favorite_idle_inverse),
-                      color: _color,
+  Widget build(BuildContext context) {
+    const double _width = 185;
+    const double _height = 250;
+    const double _space1 = 14;
+    const double _space2 = 4;
+    const double _icon = 44;
+
+    for (int i = 0; i < widget.user.favorite.length; i++)
+      if (widget.user.favorite[i] == widget.product.userID + '+' + widget.product.title)
+        isLiked = true;
+
+    return Container(
+      width: _width,
+      child: Column(
+        children: <Widget>[
+          productImageBox(context, widget.product, _width, _height, widget.user),
+          hSpacer(_space1),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: SizedBox(
+              width: _width - 12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.product.title.length < 10
+                            ? widget.product.title
+                            : widget.product.title.substring(0, 10) + '..',
+                        style: body1(primary),
+                      ),
+                      hSpacer(_space2),
+                      Text(
+                        widget.product.price.toString() + '원',
+                        style: body1(primary),
+                      ),
+                    ],
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        !isLiked
+                            ? Firestore.instance
+                            .collection('users')
+                            .document(widget.user.username)
+                            .updateData({
+                          "favorite": FieldValue.arrayUnion([
+                            widget.product.userID +
+                                '+' +
+                                widget.product.title
+                          ])
+                        }).then((value) {
+                          Firestore.instance
+                              .collection('products')
+                              .document(widget.product.userID +
+                              '+' +
+                              widget.product.title)
+                              .updateData({
+                            "liked": FieldValue.arrayUnion(
+                                [widget.user.username])
+                          });
+                          setState(() {
+                            isLiked = !isLiked;
+                          });
+                        })
+                            : Firestore.instance
+                            .collection('users')
+                            .document(widget.user.username)
+                            .updateData({
+                          "favorite": FieldValue.arrayRemove([
+                            widget.product.userID +
+                                '+' +
+                                widget.product.title
+                          ])
+                        }).then((value) {
+                          Firestore.instance
+                              .collection('products')
+                              .document(widget.product.userID +
+                              '+' +
+                              widget.product.title)
+                              .updateData({
+                            "liked": FieldValue.arrayRemove(
+                                [widget.user.username])
+                          });
+                          setState(() {
+                            isLiked = !isLiked;
+                          });
+                        });
+                      },
+                      child: Container(
+                        width: _icon,
+                        height: _icon,
+                        child: Center(
+                            child: !isLiked ? ImageIcon(
+                              AssetImage(favorite_idle_inverse),
+                              color: primary,
+                            ) : ImageIcon(
+                              AssetImage(favorite_active_inverse),
+                              color: primary,
+                            )
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        )
-      ],
-    ),
-  );
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ProductItemCardMedium extends StatefulWidget {
+  Product product;
+  User user;
+  Color color;
+
+  ProductItemCardMedium({this.product, this.user, this.color});
+
+  @override
+  _ProductItemCardMedium createState() => _ProductItemCardMedium();
+}
+
+class _ProductItemCardMedium extends State<ProductItemCardMedium> {
+  bool isLiked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    const double _width = 160;
+    const double _height = 200;
+    const double _space1 = 14;
+    const double _space2 = 4;
+    const double _icon = 44;
+
+    for (int i = 0; i < widget.user.favorite.length; i++)
+      if (widget.user.favorite[i] == widget.product.userID + '+' + widget.product.title)
+        isLiked = true;
+
+    return Container(
+      child: Column(
+        children: <Widget>[
+          productImageBox(context, widget.product, _width, _height, widget.user),
+          hSpacer(_space1),
+          Container(
+            padding: EdgeInsets.only(left: 12),
+            child: SizedBox(
+              width: _width - 12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.product.title.length < 9
+                            ? widget.product.title
+                            : widget.product.title.substring(0, 8) + ' ..',
+                        style: body1(widget.color),
+                      ),
+                      hSpacer(_space2),
+                      Text(
+                        widget.product.price.toString() + '원',
+                        style: body1(widget.color),
+                      ),
+                    ],
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        !isLiked
+                            ? Firestore.instance
+                            .collection('users')
+                            .document(widget.user.username)
+                            .updateData({
+                          "favorite": FieldValue.arrayUnion([
+                            widget.product.userID +
+                                '+' +
+                                widget.product.title
+                          ])
+                        }).then((value) {
+                          Firestore.instance
+                              .collection('products')
+                              .document(widget.product.userID +
+                              '+' +
+                              widget.product.title)
+                              .updateData({
+                            "liked": FieldValue.arrayUnion(
+                                [widget.user.username])
+                          });
+                          setState(() {
+                            isLiked = !isLiked;
+                          });
+                        })
+                            : Firestore.instance
+                            .collection('users')
+                            .document(widget.user.username)
+                            .updateData({
+                          "favorite": FieldValue.arrayRemove([
+                            widget.product.userID +
+                                '+' +
+                                widget.product.title
+                          ])
+                        }).then((value) {
+                          Firestore.instance
+                              .collection('products')
+                              .document(widget.product.userID +
+                              '+' +
+                              widget.product.title)
+                              .updateData({
+                            "liked": FieldValue.arrayRemove(
+                                [widget.user.username])
+                          });
+                          setState(() {
+                            isLiked = !isLiked;
+                          });
+                        });
+                      },
+                      child: Container(
+                        width: _icon,
+                        height: _icon,
+                        child: Center(
+                            child: !isLiked ? ImageIcon(
+                              AssetImage(favorite_idle_inverse),
+                              color: offWhite,
+                            ) : ImageIcon(
+                              AssetImage(favorite_active_inverse),
+                              color: offWhite,
+                            )
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Widget productItemCardSmall(BuildContext context, Product product, User user) {
@@ -133,7 +286,7 @@ Widget productItemCardSmall(BuildContext context, Product product, User user) {
   bool isMyProduct = false;
 
   return Container(
-    margin: EdgeInsets.only(left: 20),
+    margin: EdgeInsets.only(right: 15),
     child: Column(
       children: <Widget>[
         productImageBox(context, product, _width, _height, user),
@@ -267,18 +420,63 @@ Widget collectionCardLarge(
   );
 }
 
-Widget productImageBox(
-    BuildContext context, Product product, double _width, double _height, User user) {
+Widget collectionForMyPage(
+    BuildContext context, Collection collection, User user) {
+  double _width = MediaQuery.of(context).size.width;
+  double _height = MediaQuery.of(context).size.width * ( 260 / 375);
+  const double _space1 = 12;
+  const double _space2 = 6;
+
+  bool isMyCollection = false;
+
+  return Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                collection.title +
+                    ' (#' +
+                    collection.products.length.toString() +
+                    ')',
+                style: body1(primary),
+              ),
+              hSpacer(_space2),
+              Text(
+                '@' + collection.userID,
+                style: body1(primary),
+              ),
+            ],
+          ),
+        ),
+        collectionImageBox(context, collection, _width, _height, user),
+      ],
+    ),
+  );
+}
+
+Widget productImageBox(BuildContext context, Product product, double _width,
+    double _height, User user) {
   return Material(
     child: InkWell(
       onTap: () {
-        Firestore.instance.collection('users').document(product.userID).get().then((e) {
+        Firestore.instance
+            .collection('users')
+            .document(product.userID)
+            .get()
+            .then((e) {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ProductDetailPage(user: user,
-                    product: product, owner: User.getUserData(e),
-                  )));
+                  builder: (context) => ProductDetailPage(
+                        user: user,
+                        product: product,
+                        owner: User.getUserData(e),
+                      )));
         });
       },
       child: Container(
@@ -399,6 +597,8 @@ Widget collectionShowcase(
     ),
   );
 }
+
+
 
 Widget productItem1(BuildContext context, Product product, User user) {
   return Column(
