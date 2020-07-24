@@ -34,10 +34,7 @@ class _SignInPage extends State<SignInPage> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.symmetric(vertical: 60),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * (124 / 375),
+              width: MediaQuery.of(context).size.width * (124 / 375),
               child: Image.asset(
                 'lib/assets/icons/drawable-xxxhdpi/new_new_logo_combined.png',
                 fit: BoxFit.cover,
@@ -98,10 +95,7 @@ class _SignInPage extends State<SignInPage> {
 
   Widget textFieldAccount(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -124,10 +118,7 @@ class _SignInPage extends State<SignInPage> {
 
   Widget textFieldPassword(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * (335 / 375),
+      width: MediaQuery.of(context).size.width * (335 / 375),
       height: 44,
       margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -157,10 +148,7 @@ class _SignInPage extends State<SignInPage> {
           signIn();
         },
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * (335 / 375),
+          width: MediaQuery.of(context).size.width * (335 / 375),
           height: 44,
           color: primary,
           child: Center(
@@ -175,26 +163,47 @@ class _SignInPage extends State<SignInPage> {
   }
 
   void signIn() {
+    Pattern pattern =
+        r'^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$';
+    RegExp regex = new RegExp(pattern);
+    if (regex.hasMatch(account)) {
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: account, password: password)
+          .then((e) {
+        var users = Firestore.instance
+            .collection('users')
+            .where('eMail', isEqualTo: account)
+            .snapshots()
+            .forEach((element) {
+          element.documents.asMap().forEach((key, e) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BootPage(
+                        user: User.getUserData(e),
+                      )),
+              (route) => false);
+          });
+        });
+      });
+    }
     Firestore.instance.collection('users').document(account).get().then((e) {
-      //if (e == null ) wrongDialog('아이디가 존재하지 않습니다.');
-      if (account == e.data['username'] || account == e.data['eMail']) {
+      if (account == e.data['username']) {
         if (password == e.data['password']) {
           FirebaseAuth.instance.signInWithEmailAndPassword(
               email: e.data['eMail'], password: e.data['password']);
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      BootPage(
+                  builder: (context) => BootPage(
                         user: User.getUserData(e),
                       )),
-                  (route) => false);
+              (route) => false);
         } else
           wrongDialog('비밀번호가 일치하지 않습니다.');
-      }
-      else
+      } else
         wrongDialog('아이디가 존재하지 않습니다.');
-      });
+    });
   }
 
   void wrongDialog(String textContext) {

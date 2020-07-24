@@ -27,6 +27,7 @@ class _BootPageState extends State<BootPage> {
         child: Scaffold(
           backgroundColor: offWhite,
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               HomePage(user: widget.user,),
               NewnewPage(user: widget.user,),
