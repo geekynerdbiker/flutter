@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 
 class Product {
   String userID;
@@ -125,6 +124,7 @@ class Category {
   String level;
   String parent;
   String title;
+  int itemCount;
 
   DocumentReference reference;
 
@@ -133,7 +133,8 @@ class Category {
   Category.fromMap(Map<String, dynamic> map, {this.reference})
       : level = map['level'],
         parent = map['parent'],
-        title = map['title'];
+        title = map['title'],
+        itemCount = map['itemCount'];
 
   Category.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);

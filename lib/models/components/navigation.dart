@@ -24,7 +24,7 @@ Widget mainAppBar(BuildContext context, User user) {
         onTap: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CategoryMainPage()));
+                MaterialPageRoute(builder: (context) => CategoryMainPage(user: user,)));
         },
         child: ImageIcon(AssetImage(category_idle), color: primary),
       ),
