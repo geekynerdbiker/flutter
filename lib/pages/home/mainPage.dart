@@ -6,7 +6,6 @@ import 'package:bak/models/classes/collection.dart';
 import 'package:bak/models/components/user.dart';
 import 'package:bak/models/designs/colors.dart';
 import 'package:bak/models/components/navigation.dart';
-import 'package:bak/models/components/selection.dart';
 import 'package:bak/models/components/search.dart';
 import 'package:bak/models/designs/typos.dart';
 import 'package:bak/pages/product/productList.dart';
@@ -35,10 +34,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    User user;
-
     return Scaffold(
-      appBar: mainAppBar(context, user),
+      appBar: mainAppBar(context, widget.user),
       backgroundColor: offWhite,
       body: ListView(
         children: <Widget>[

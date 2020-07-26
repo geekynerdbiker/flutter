@@ -1,10 +1,15 @@
 import 'package:bak/models/classes/product.dart';
+import 'package:bak/models/classes/user.dart';
 import 'package:bak/models/components/border.dart';
 import 'package:bak/models/components/navigation.dart';
 import 'package:bak/pages/category/categoryPage2.dart';
 import 'package:flutter/material.dart';
 
 class FavorPage extends StatelessWidget {
+  User user;
+
+  FavorPage({this.user});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

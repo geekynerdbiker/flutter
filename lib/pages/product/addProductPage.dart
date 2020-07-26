@@ -588,7 +588,7 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   Widget productTags(BuildContext context) {
-    List<Widget> tagList = [emptyTagBox(context)];
+    List<Widget> tagList = [ emptyTagBox(context)];
 
     if (_tags?.isEmpty ?? true)
       for (int i = 0; i < _tags.length; i++)
@@ -978,6 +978,10 @@ widget.user.myProducts.length.toString() +
           .updateData({
         "myProducts":
             FieldValue.arrayUnion([widget.user.username + '+' + title])
+      }).then((value) {
+        Firestore.instance.collection('categories').document(category).updateData({
+          "itemCount": categoryItem.itemCount+1
+        });
       });
     });
   }
