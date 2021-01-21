@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:artpia/pages/home/init.dart';
+
 class OnboardingScreen extends StatefulWidget {
   @override
   _OnboardingScreen createState() => _OnboardingScreen();
@@ -132,8 +134,9 @@ class Page3 extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: (context) => BootPage()));
+             Navigator.push(
+                 context, MaterialPageRoute(builder: (context) => InitPage()));
+             print("go to init");
           },
           child: Container(
             width: 60,

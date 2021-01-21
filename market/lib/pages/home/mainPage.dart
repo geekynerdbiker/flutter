@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: <Widget>[
           carouselAndSearchBar(context),
-          trendSearch(context),
           newNewPick(context),
           newNewPeople(context),
           recentView(context),

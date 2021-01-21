@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:artpia/pages/start/onboarding.dart';
 import 'package:flutter/material.dart';
+
+import 'package:artpia/pages/start/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

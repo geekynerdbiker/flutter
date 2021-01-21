@@ -105,19 +105,4 @@ class _ProfilePageState extends State<ProfilePage>
       )),
     );
   }
-
-  Widget historyButton(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Material(
-        child: InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TradeListPage()));
-          },
-          child: primaryCTAIdle(context, '구매/판매 내역'),
-        ),
-      ),
-    );
-  }
 }
