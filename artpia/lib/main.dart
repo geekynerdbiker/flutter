@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:artpia/pages/start/splash.dart';
+import 'package:artpia/pages/boot/splash.dart';
 
 void main() => runApp(Artpia());
 
