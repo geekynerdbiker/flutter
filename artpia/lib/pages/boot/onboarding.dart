@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/pages/general/init.dart';
+import 'package:artpia/pages/general/interface.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
