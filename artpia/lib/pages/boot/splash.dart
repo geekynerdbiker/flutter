@@ -35,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width,
           child: Image.asset(
-            // Need Effect
             'lib/assets/logo_path',
             scale: 0.5,
           ),
