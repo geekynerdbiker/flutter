@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 //////////////////////////// User ////////////////////////////
 class User {
+  String uid;
   String username;
   String password;
-  String contact;
   String eMail;
 
   String imageURI;
@@ -13,49 +13,40 @@ class User {
   List<String> followers = [];
   List<String> following = [];
 
-  List<String> favorite = [];
-  List<String> myProducts = [];
-
   // DocumentReference reference;
   //
   // User.fromMap(Map<String, dynamic> map, {this.reference})
-  //     : username = map['username'],
+  //     : uid = map['uid'],
+  //       username = map['username'],
   //       password = map['password'],
-  //       contact = map['contact'],
   //       eMail = map['eMail'],
   //       imageURI = map['imageURI'],
   //       bio = map['bio'],
   //       followers = List.from(map['followers']),
   //       following = List.from(map['following']),
-  //       favorite = List.from(map['favorite']),
-  //       myProducts = List.from(map['myProducts']);
   //
   // User.fromSnapshot(DocumentSnapshot snapshot)
   //     : this.fromMap(snapshot.data, reference: snapshot.reference);
   //
   // User.getUserData(DocumentSnapshot snapshot)
-  //     : this.username = snapshot.data['username'],
+  //     : this.uid = snapshot.data['uid'],
+  //       this.username = snapshot.data['username'],
   //       this.password = snapshot.data['password'],
-  //       this.contact = snapshot.data['contact'],
   //       this.eMail = snapshot.data['eMail'],
   //       this.imageURI = snapshot.data['imageURI'],
   //       this.bio = snapshot.data['bio'],
   //       this.followers = List<String>.from(snapshot.data['followers']),
   //       this.following = List<String>.from(snapshot.data['following']),
-  //       this.favorite = List<String>.from(snapshot.data['favorite']),
-  //       this.myProducts = List<String>.from(snapshot.data['myProducts']);
 
   Map<String, dynamic> toUserData() => {
+        'uid': uid,
         'username': username,
         'password': password,
-        'contact': contact,
         'eMail': eMail,
         'imageURI': imageURI,
         'bio': bio,
         'followers': followers,
         'following': following,
-        'favorite': favorite,
-        'myProducts': myProducts,
       };
 }
 
@@ -176,4 +167,55 @@ class Category {
         'category': category,
         'itemCount': itemCount,
       };
+}
+
+class ErrorAlertDialog extends StatelessWidget
+{
+  final String message;
+  const ErrorAlertDialog({Key key, this.message}) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return AlertDialog(
+      key: key,
+      content: Text(message),
+      actions: <Widget>[
+        RaisedButton(onPressed: ()
+        {
+          Navigator.pop(context);
+        },
+          color: Colors.red,
+          child: Center(
+            child: Text("OK"),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class LoadingAlertDialog extends StatelessWidget
+{
+  final String message;
+  const LoadingAlertDialog({Key key, this.message}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return AlertDialog(
+      key: key,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          //circularProgress(),
+          SizedBox(
+            height: 10,
+          ),
+          Text('Authenticating, Please wait.....'),
+        ],
+      ),
+    );
+  }
 }
