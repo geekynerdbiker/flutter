@@ -1,11 +1,25 @@
-import 'package:artpia/pages/auth/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:artpia/pages/home/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:artpia/assets/config.dart';
+import 'package:artpia/assets/modules.dart';
+import 'package:artpia/pages/auth/signup.dart';
+import 'package:artpia/pages/auth/modules.dart';
 
 class AuthenticPage extends StatefulWidget {
   _AuthenticPageState createState() => _AuthenticPageState();
 }
 
 class _AuthenticPageState extends State<AuthenticPage> {
+  final TextEditingController _emailTextEditController =
+      TextEditingController();
+  final TextEditingController _passwordTextEditController =
+      TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +48,23 @@ class _AuthenticPageState extends State<AuthenticPage> {
   }
 
   Widget inputSector(BuildContext context) {
-    return Container();
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomTextField(
+            controller: _emailTextEditController,
+            hintText: 'Name',
+            isObsecure: false,
+          ),
+          CustomTextField(
+            controller: _passwordTextEditController,
+            hintText: 'E-Mail',
+            isObsecure: false,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget authSector(BuildContext context) {
@@ -60,8 +90,13 @@ class _AuthenticPageState extends State<AuthenticPage> {
     return InkWell(
       onTap: () {
         if (title == 'Sign Up')
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SignUpPage()));
+          signUp();
+        else if (title == 'Sign In')
+          signIn();
+        else if (title == 'Apple')
+          apple();
+        else
+          google();
       },
       child: Container(
         decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -80,4 +115,79 @@ class _AuthenticPageState extends State<AuthenticPage> {
       ),
     );
   }
+
+  void signUp() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SignUpPage()));
+  }
+
+  void signIn() {
+    _emailTextEditController.text.isNotEmpty &&
+            _passwordTextEditController.text.isNotEmpty
+        ? signInUser()
+        : showDialog(
+            context: context,
+            builder: (c) {
+              return ErrorAlertDialog(
+                  message: 'Please write email and password.');
+            });
+  }
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void signInUser() async {
+    showDialog(
+        context: context,
+        builder: (c) {
+          return LoadingAlertDialog(message: 'Authenticating, Please wait.');
+        });
+    FirebaseUser firebaseUser;
+    await _auth
+        .signInWithEmailAndPassword(
+            email: _emailTextEditController.text.trim(),
+            password: _passwordTextEditController.text.trim())
+        .then((authUser) {
+      firebaseUser = authUser.user;
+    }).catchError((error) {
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (c) {
+            return ErrorAlertDialog(message: error.message.toString());
+          });
+    });
+    if (firebaseUser != null) {
+      readData(firebaseUser).then((s) {
+        Navigator.pop(context);
+        Route route = MaterialPageRoute(builder: (context) => HomePage());
+        Navigator.pushReplacement(context, route);
+      });
+    }
+  }
+
+  Future readData(FirebaseUser firebaseUser) async {
+    Firestore.instance
+        .collection('users')
+        .document(firebaseUser.uid)
+        .get()
+        .then((dataSnapshot) async {
+      await ArtpiaConfig.sharedPreferences
+          .setString('uid', dataSnapshot.data[ArtpiaConfig.userUID]);
+      await ArtpiaConfig.sharedPreferences.setString(
+          ArtpiaConfig.userEmail, dataSnapshot.data[ArtpiaConfig.userEmail]);
+      await ArtpiaConfig.sharedPreferences.setString(
+          ArtpiaConfig.userName, dataSnapshot.data[ArtpiaConfig.userName]);
+      await ArtpiaConfig.sharedPreferences.setString(
+          ArtpiaConfig.userProfileImageUrl,
+          dataSnapshot.data[ArtpiaConfig.userProfileImageUrl]);
+      List<String> cartList =
+          dataSnapshot.data[ArtpiaConfig.userCartList].cast<String>();
+      await ArtpiaConfig.sharedPreferences
+          .setStringList(ArtpiaConfig.userCartList, cartList);
+    });
+  }
+
+  void apple() {}
+
+  void google() {}
 }

@@ -50,28 +50,11 @@ class User {
       };
 }
 
-Widget profileImage(BuildContext context, User user) {
-  String path = 'gs://artpia.appspot.com/user/' +
-      user.username +
-      '+' +
-      'profile.jpg';
-  // var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
-
-  return Container(
-    child: CircleAvatar(
-      // backgroundImage: image,
-      backgroundColor: Colors.grey,
-    ),
-  );
-}
-
 //////////////////////////// Product ////////////////////////////
 class Product {
-  String userID;
+  String pid;
   String title;
   String description;
-
-  // String uploadDate;
 
   int price;
   int likes;
@@ -83,7 +66,7 @@ class Product {
   // DocumentReference reference;
   //
   //  Product.fromMap(Map<String, dynamic> map, {this.reference})
-  //      : userID = map['userID'],
+  //      : pid = map['pid'],
   //        title = map['title'],
   //        description = map['description'],
   //        price = map['price'],
@@ -96,7 +79,7 @@ class Product {
   //      : this.fromMap(snapshot.data, reference: snapshot.reference);
   //
   //  Product.getProductData(DocumentSnapshot snapshot)
-  //      : this.userID = snapshot.data['userID'],
+  //      : this.pid = snapshot.data['pid'],
   //        this.title = snapshot.data['title'],
   //        this.description = snapshot.data['description'],
   //        this.price = snapshot.data['price'],
@@ -106,7 +89,7 @@ class Product {
   //        this.tags = List<String>.from(snapshot.data['tags']);
 
   Map<String, dynamic> toProductData() => {
-        'userID': userID,
+        'pid': pid,
         'title': title,
         'description': description,
         'price': price,
@@ -142,15 +125,13 @@ class Category {
   String level;
   String parent;
   String category;
-  int itemCount;
 
   // DocumentReference reference;
   //
   // Category.fromMap(Map<String, dynamic> map, {this.reference})
   //     : level = map['level'],
   //       parent = map['parent'],
-  //       category = map['category'],
-  //       itemCount = map['itemCount'];
+  //       category = map['category'];
   //
   // Category.fromSnapshot(DocumentSnapshot snapshot)
   //     : this.fromMap(snapshot.data, reference: snapshot.reference);
@@ -158,14 +139,12 @@ class Category {
   // Category.getCategoryData(DocumentSnapshot snapshot)
   //     : this.level = snapshot.data['level'],
   //       this.parent = snapshot.data['parent'],
-  //       this.category = snapshot.data['category'],
-  //       this.itemCount = snapshot.data['itemCount'];
+  //       this.category = snapshot.data['category'];
 
   Map<String, dynamic> toCategoryData() => {
         'level': level,
         'parent': parent,
         'category': category,
-        'itemCount': itemCount,
       };
 }
 
@@ -218,4 +197,19 @@ class LoadingAlertDialog extends StatelessWidget
       ),
     );
   }
+}
+
+Widget profileImage(BuildContext context, User user) {
+  String path = 'gs://artpia.appspot.com/user/' +
+      user.username +
+      '+' +
+      'profile.jpg';
+  // var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
+
+  return Container(
+    child: CircleAvatar(
+      // backgroundImage: image,
+      backgroundColor: Colors.grey,
+    ),
+  );
 }

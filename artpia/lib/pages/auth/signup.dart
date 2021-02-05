@@ -57,6 +57,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget userImg(BuildContext context) {
     return InkWell(
+      onTap: () {_selectAndPickImg();},
       child: CircleAvatar(
         radius: MediaQuery.of(context).size.width * 0.15,
         backgroundColor: Colors.grey,
@@ -104,6 +105,9 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget button(BuildContext context, String title) {
     return InkWell(
+      onTap: () {
+        uploadAndSaveImg();
+      },
       child: Container(
         decoration: BoxDecoration(border: Border.all(color: Colors.black)),
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -122,8 +126,11 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Future<void> _selecteAndPickImg() async {
-    _imgFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+  Future<void> _selectAndPickImg() async {
+    File _img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _imgFile = _img;
+    });
   }
 
   Future<void> uploadAndSaveImg() async {
@@ -161,7 +168,7 @@ class _SignUpPage extends State<SignUpPage> {
     showDialog(
       context: context,
       builder: (c) {
-        return LoadingAlertDialog();
+        return LoadingAlertDialog(message: 'Registering, Please wait.');
       },
     );
 
@@ -197,7 +204,7 @@ class _SignUpPage extends State<SignUpPage> {
           });
     });
 
-    if(firebaseUser != null) {
+    if (firebaseUser != null) {
       saveUserInfoToFireStore(firebaseUser).then((value) {
         Navigator.pop(context);
         Route route = MaterialPageRoute(builder: (context) => HomePage());
@@ -208,20 +215,25 @@ class _SignUpPage extends State<SignUpPage> {
 
   Future saveUserInfoToFireStore(FirebaseUser firebaseUser) async {
     Firestore.instance.collection("users").document(firebaseUser.uid).setData({
-    'uid': firebaseUser.uid,
-    'username': _nameTextEditController.text.trim(),
-    'password': _passwordTextEditController.text.trim(),
-    'eMail': firebaseUser.email,
-    'imageURI': userImgUrl,
-    'bio': '',
-    'followers': List<String>(),
-    'following': List<String>(),
+      'uid': firebaseUser.uid,
+      'username': _nameTextEditController.text.trim(),
+      'password': _passwordTextEditController.text.trim(),
+      'eMail': firebaseUser.email,
+      'imageURI': userImgUrl,
+      'bio': '',
+      'followers': List<String>(),
+      'following': List<String>(),
+      ArtpiaConfig.userCartList: ['init'],
     });
 
     await ArtpiaConfig.sharedPreferences.setString('uid', firebaseUser.uid);
-    await ArtpiaConfig.sharedPreferences.setString(ArtpiaConfig.userEmail, firebaseUser.email);
-    await ArtpiaConfig.sharedPreferences.setString(ArtpiaConfig.userName, _nameTextEditController.text);
-    await ArtpiaConfig.sharedPreferences.setString(ArtpiaConfig.userProfileImageUrl, userImgUrl);
-    await ArtpiaConfig.sharedPreferences.setStringList(ArtpiaConfig.userCartList, ['init']);
+    await ArtpiaConfig.sharedPreferences
+        .setString(ArtpiaConfig.userEmail, firebaseUser.email);
+    await ArtpiaConfig.sharedPreferences
+        .setString(ArtpiaConfig.userName, _nameTextEditController.text);
+    await ArtpiaConfig.sharedPreferences
+        .setString(ArtpiaConfig.userProfileImageUrl, userImgUrl);
+    await ArtpiaConfig.sharedPreferences
+        .setStringList(ArtpiaConfig.userCartList, ['init']);
   }
 }
