@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +13,7 @@ class AddProductPage extends StatefulWidget {
 
 class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAliveClientMixin<AddProductPage> {
   bool get wantKeepAlive => true;
-  
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   List<Asset> _images;
@@ -44,7 +43,6 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
       backgroundColor: Colors.white,
       body: Form(
         key: _formKey,
-        autovalidate: _autoValidate,
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: <Widget>[
