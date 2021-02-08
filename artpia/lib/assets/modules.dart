@@ -199,6 +199,21 @@ class LoadingAlertDialog extends StatelessWidget
   }
 }
 
+circularProgress() {
+  return Container(
+    alignment: Alignment.center,
+    child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.black),),
+  );
+}
+
+linearProgress() {
+  return Container(
+    alignment: Alignment.center,
+    child: LinearProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.black),),
+  );
+}
+
+
 Widget profileImage(BuildContext context, User user) {
   String path = 'gs://artpia.appspot.com/user/' +
       user.username +
