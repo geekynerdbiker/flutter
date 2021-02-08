@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'package:artpia/assets/config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,16 +15,15 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAliveClientMixin<AddProductPage> {
   bool get wantKeepAlive => true;
 
+  final TextEditingController _titleTextEditController = TextEditingController();
+  final TextEditingController _descriptionTextEditController = TextEditingController();
+  final TextEditingController _priceTextEditController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   List<Asset> _images;
 
   int index = 0;
-  double _value = 0;
-
-  String pid;
-  String title;
-  String description;
 
   int price;
   int likes;
@@ -107,7 +107,7 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 10,
+        maxImages: 5,
         enableCamera: true,
         selectedAssets: _images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
@@ -333,7 +333,7 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
         },
         child: InkWell(
           onTap: () {
-            add();
+            addProduct(ArtpiaConfig.sharedPreferences.getString('uid'));
           },
           child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -352,70 +352,16 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
     );
   }
 
-  Future<void> add() async {
-    _autoValidate = true;
-
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-
-      setState(() {
-        imageURI = List<String>();
-      });
-
-      for (int i = 0; i < _images.length; i++) {
-        uploadImages(_images[i], i);
-        imageURI.add('gs://newnew-beta.appspot.com/product/' +
-            widget.user.username +
-            '+' +
-            'product' +
-            widget.user.myProducts.length.toString() +
-            '+' +
-            i.toString() +
-            '.jpg');
-      }
-
-      addProduct();
-      try {
-        Navigator.pop(context);
-      } catch (e) {
-        print(e.message);
-      }
-    }
-  }
-
-  Future uploadImages(Asset asset, int index) async {
-    if (_images == null) return;
-
-    String path = 'product/' +
-        widget.user.username +
-        '+' +
-        'product' +
-        widget.user.myProducts.length.toString() +
-        '+' +
-        index.toString() +
-        '.jpg';
-    ByteData byteData = await asset.requestOriginal();
-    List<int> imageData = byteData.buffer.asUint8List();
-    StorageReference ref = FirebaseStorage.instance.ref().child(path);
-    StorageUploadTask uploadTask = ref.putData(imageData);
-
-    return await (await uploadTask.onComplete).ref.getDownloadURL();
-  }
-
-  Future addProduct() async {
-    for (int i = 0; i < _tags.length; i++) {
-      tags.add(_tags[i].title);
-    }
-
-    Firestore.instance.collection("product").document(firebaseUser.uid).setData({
-      'uid': firebaseUser.uid,
-      'username': _nameTextEditController.text.trim(),
-      'password': _passwordTextEditController.text.trim(),
-      'eMail': firebaseUser.email,
+  Future addProduct(String uid) async {
+    Firestore.instance.collection("product").document(uid).setData({
+      'uid': uid,
+      'pid': uid + DateTime.now().microsecondsSinceEpoch.toString(),
+      'title': _titleTextEditController.text.trim(),
+      'description': _descriptionTextEditController.text.trim(),
+      'price': _priceTextEditController.text.trim(),
+      'likes': '0',
       'imageURI': userImgUrl,
-      'bio': '',
-      'followers': List<String>(),
-      'following': List<String>(),
+      'tags': List<String>(),
       ArtpiaConfig.userCartList: ['init'],
     });
   }
