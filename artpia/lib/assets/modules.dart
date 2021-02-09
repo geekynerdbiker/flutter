@@ -7,7 +7,7 @@ class User {
   String password;
   String eMail;
 
-  String imageURI;
+  String imageURL;
   String bio;
 
   List<String> followers = [];
@@ -20,7 +20,7 @@ class User {
   //       username = map['username'],
   //       password = map['password'],
   //       eMail = map['eMail'],
-  //       imageURI = map['imageURI'],
+  //       imageURL = map['imageURL'],
   //       bio = map['bio'],
   //       followers = List.from(map['followers']),
   //       following = List.from(map['following']),
@@ -33,7 +33,7 @@ class User {
   //       this.username = snapshot.data['username'],
   //       this.password = snapshot.data['password'],
   //       this.eMail = snapshot.data['eMail'],
-  //       this.imageURI = snapshot.data['imageURI'],
+  //       this.imageURL = snapshot.data['imageURL'],
   //       this.bio = snapshot.data['bio'],
   //       this.followers = List<String>.from(snapshot.data['followers']),
   //       this.following = List<String>.from(snapshot.data['following']),
@@ -43,7 +43,7 @@ class User {
         'username': username,
         'password': password,
         'eMail': eMail,
-        'imageURI': imageURI,
+        'imageURL': imageURL,
         'bio': bio,
         'followers': followers,
         'following': following,
@@ -60,7 +60,7 @@ class Product {
   int likes;
   String category;
 
-  List<String> imageURI = [];
+  List<String> imageURL = [];
   List<String> tags = [];
 
   // DocumentReference reference;
@@ -72,7 +72,7 @@ class Product {
   //        price = map['price'],
   //        likes = map['likes'],
   //        category = map['category'],
-  //        imageURI = List.from(map['imageURI']),
+  //        imageURL = List.from(map['imageURL']),
   //        tags = List.from(map['tags']);
   //
   //  Product.fromSnapshot(DocumentSnapshot snapshot)
@@ -85,7 +85,7 @@ class Product {
   //        this.price = snapshot.data['price'],
   //        this.likes = snapshot.data['likes'],
   //        this.category = snapshot.data['catgory'],
-  //        this.imageURI = List<String>.from(snapshot.data['imageURI']),
+  //        this.imageURL = List<String>.from(snapshot.data['imageURL']),
   //        this.tags = List<String>.from(snapshot.data['tags']);
 
   Map<String, dynamic> toProductData() => {
@@ -95,7 +95,7 @@ class Product {
         'price': price,
         'likes': likes,
         'category': category,
-        'imageURI': imageURI,
+        'imageURL': imageURL,
         'tags': tags,
       };
 }
