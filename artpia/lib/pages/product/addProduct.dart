@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:html';
 import 'package:artpia/assets/config.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:artpia/assets/modules.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,12 +14,16 @@ class AddProductPage extends StatefulWidget {
   _AddProductPageState createState() => _AddProductPageState();
 }
 
-class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAliveClientMixin<AddProductPage> {
+class _AddProductPageState extends State<AddProductPage>
+    with AutomaticKeepAliveClientMixin<AddProductPage> {
   bool get wantKeepAlive => true;
 
-  final TextEditingController _titleTextEditController = TextEditingController();
-  final TextEditingController _descriptionTextEditController = TextEditingController();
-  final TextEditingController _priceTextEditController = TextEditingController();
+  final TextEditingController _titleTextEditController =
+      TextEditingController();
+  final TextEditingController _descriptionTextEditController =
+      TextEditingController();
+  final TextEditingController _priceTextEditController =
+      TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -29,7 +35,7 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
   int likes;
   String category;
 
-  List<String> imageURI = [];
+  List<String> imageURL = [];
   List<String> tags = [];
 
   @override
@@ -313,14 +319,33 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
   //     ),
   //   );
   // }
+  Future uploadImages(Asset asset, int index) async {
+    showDialog(
+      context: context,
+      builder: (c) {
+        return LoadingAlertDialog(message: 'Adding images, Please wait.');
+      },
+    );
+
+    String imgFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    StorageReference storageReference =
+        FirebaseStorage.instance.ref().child(imgFileName);
+    // ByteData byteData = await asset.requestOriginal();
+    // List<int> imageData = byteData.buffer.asUint8List();
+    // StorageReference ref = FirebaseStorage.instance.ref().child(path);
+    StorageUploadTask storageUploadTask = storageReference.putFile(_imgFile);
+    StorageTaskSnapshot storageTaskSnapshot =
+    await storageUploadTask.onComplete;
+    await storageTaskSnapshot.ref.getDownloadURL().then((imgUrl) {
+      imageURL[index] = imgUrl;
+    });
+  }
 
   Widget uploadButton(BuildContext context) {
     return Material(
       child: InkWell(
         onTap: () {
-          setState(() {
-            _formKey.currentState.save();
-          });
+          setState(() {});
 
           showDialog(
               context: context,
@@ -333,20 +358,20 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
         },
         child: InkWell(
           onTap: () {
-            addProduct(ArtpiaConfig.sharedPreferences.getString('uid'));
+            addProduct(Artpia.sharedPreferences.getString('uid'));
           },
           child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          width: MediaQuery.of(context).size.width * (335 / 375),
-          height: 44,
-          color: Colors.black,
-          child: Center(
-            child: Text(
-              '등록하기',
-              style: TextStyle(color: Colors.white),
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            width: MediaQuery.of(context).size.width * (335 / 375),
+            height: 44,
+            color: Colors.black,
+            child: Center(
+              child: Text(
+                '등록하기',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
-        ),
         ),
       ),
     );
@@ -360,9 +385,9 @@ class _AddProductPageState extends State<AddProductPage> with AutomaticKeepAlive
       'description': _descriptionTextEditController.text.trim(),
       'price': _priceTextEditController.text.trim(),
       'likes': '0',
-      'imageURI': userImgUrl,
+      // 'imageURL': userImgUrl,
       'tags': List<String>(),
-      ArtpiaConfig.userCartList: ['init'],
+      Artpia.userCartList: ['init'],
     });
   }
 }

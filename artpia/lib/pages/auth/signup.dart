@@ -219,21 +219,21 @@ class _SignUpPage extends State<SignUpPage> {
       'username': _nameTextEditController.text.trim(),
       'password': _passwordTextEditController.text.trim(),
       'eMail': firebaseUser.email,
-      'imageURI': userImgUrl,
+      'imageURL': userImgUrl,
       'bio': '',
       'followers': List<String>(),
       'following': List<String>(),
-      ArtpiaConfig.userCartList: ['init'],
+      Artpia.userCartList: ['init'],
     });
 
-    await ArtpiaConfig.sharedPreferences.setString('uid', firebaseUser.uid);
-    await ArtpiaConfig.sharedPreferences
-        .setString(ArtpiaConfig.userEmail, firebaseUser.email);
-    await ArtpiaConfig.sharedPreferences
-        .setString(ArtpiaConfig.userName, _nameTextEditController.text);
-    await ArtpiaConfig.sharedPreferences
-        .setString(ArtpiaConfig.userProfileImageUrl, userImgUrl);
-    await ArtpiaConfig.sharedPreferences
-        .setStringList(ArtpiaConfig.userCartList, ['init']);
+    await Artpia.sharedPreferences.setString('uid', firebaseUser.uid);
+    await Artpia.sharedPreferences
+        .setString(Artpia.userEmail, firebaseUser.email);
+    await Artpia.sharedPreferences
+        .setString(Artpia.userName, _nameTextEditController.text);
+    await Artpia.sharedPreferences
+        .setString(Artpia.userProfileImageUrl, userImgUrl);
+    await Artpia.sharedPreferences
+        .setStringList(Artpia.userCartList, ['init']);
   }
 }

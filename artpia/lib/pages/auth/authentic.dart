@@ -171,19 +171,19 @@ class _AuthenticPageState extends State<AuthenticPage> {
         .document(firebaseUser.uid)
         .get()
         .then((dataSnapshot) async {
-      await ArtpiaConfig.sharedPreferences
-          .setString('uid', dataSnapshot.data[ArtpiaConfig.userUID]);
-      await ArtpiaConfig.sharedPreferences.setString(
-          ArtpiaConfig.userEmail, dataSnapshot.data[ArtpiaConfig.userEmail]);
-      await ArtpiaConfig.sharedPreferences.setString(
-          ArtpiaConfig.userName, dataSnapshot.data[ArtpiaConfig.userName]);
-      await ArtpiaConfig.sharedPreferences.setString(
-          ArtpiaConfig.userProfileImageUrl,
-          dataSnapshot.data[ArtpiaConfig.userProfileImageUrl]);
+      await Artpia.sharedPreferences
+          .setString('uid', dataSnapshot.data[Artpia.userUID]);
+      await Artpia.sharedPreferences.setString(
+          Artpia.userEmail, dataSnapshot.data[Artpia.userEmail]);
+      await Artpia.sharedPreferences.setString(
+          Artpia.userName, dataSnapshot.data[Artpia.userName]);
+      await Artpia.sharedPreferences.setString(
+          Artpia.userProfileImageUrl,
+          dataSnapshot.data[Artpia.userProfileImageUrl]);
       List<String> cartList =
-          dataSnapshot.data[ArtpiaConfig.userCartList].cast<String>();
-      await ArtpiaConfig.sharedPreferences
-          .setStringList(ArtpiaConfig.userCartList, cartList);
+          dataSnapshot.data[Artpia.userCartList].cast<String>();
+      await Artpia.sharedPreferences
+          .setStringList(Artpia.userCartList, cartList);
     });
   }
 
