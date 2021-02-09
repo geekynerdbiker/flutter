@@ -11,13 +11,13 @@ import 'package:artpia/pages/auth/authentic.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  ArtpiaConfig.auth = FirebaseAuth.instance;
-  ArtpiaConfig.sharedPreferences = await SharedPreferences.getInstance();
-  ArtpiaConfig.firestore = Firestore.instance;
-  runApp(Artpia());
+  Artpia.auth = FirebaseAuth.instance;
+  Artpia.sharedPreferences = await SharedPreferences.getInstance();
+  Artpia.firestore = Firestore.instance;
+  runApp(ArtpiaApp());
 }
 
-class Artpia extends StatelessWidget {
+class ArtpiaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   displaySplash() {
     Timer(new Duration(seconds: 3), () async {
-      if (await ArtpiaConfig.auth.currentUser() != null) {
+      if (await Artpia.auth.currentUser() != null) {
         Route route = MaterialPageRoute(builder: (context) => InterfacePage());
         Navigator.pushReplacement(context, route);
       } else {
