@@ -1,7 +1,7 @@
 import 'package:artpia/pages/product/modules.dart';
 import 'package:flutter/material.dart';
 
-import 'package:artpia/pages/messege/modules.dart';
+import 'package:artpia/pages/message/modules.dart';
 
 class ProductInfoPage extends StatefulWidget {
   @override

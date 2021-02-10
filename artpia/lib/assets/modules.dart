@@ -228,3 +228,7 @@ Widget profileImage(BuildContext context, User user) {
     ),
   );
 }
+
+Widget addProductFAT(BuildContext context) {
+  return FloatingActionButton(onPressed: null);
+}

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/home/home.dart';
 import 'package:artpia/pages/browse/browse.dart';
-import 'package:artpia/pages/messege/messege.dart';
+import 'package:artpia/pages/message/message.dart';
 import 'package:artpia/pages/profile/profile.dart';
 
 class InterfacePage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _InterfacePageState extends State<InterfacePage> {
             children: <Widget>[
               HomePage(),
               BrowsePage(),
-              MessegePage(),
+              MessagePage(),
               ProfilePage(),
             ],
           ),
