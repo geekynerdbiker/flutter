@@ -1,6 +1,6 @@
+import 'package:artpia/pages/product/addProduct.dart';
 import 'package:flutter/material.dart';
 
-//////////////////////////// User ////////////////////////////
 class User {
   String uid;
   String username;
@@ -38,7 +38,8 @@ class User {
   //       this.followers = List<String>.from(snapshot.data['followers']),
   //       this.following = List<String>.from(snapshot.data['following']),
 
-  Map<String, dynamic> toUserData() => {
+  Map<String, dynamic> toUserData() =>
+      {
         'uid': uid,
         'username': username,
         'password': password,
@@ -50,7 +51,6 @@ class User {
       };
 }
 
-//////////////////////////// Product ////////////////////////////
 class Product {
   String pid;
   String title;
@@ -88,7 +88,8 @@ class Product {
   //        this.imageURL = List<String>.from(snapshot.data['imageURL']),
   //        this.tags = List<String>.from(snapshot.data['tags']);
 
-  Map<String, dynamic> toProductData() => {
+  Map<String, dynamic> toProductData() =>
+      {
         'pid': pid,
         'title': title,
         'description': description,
@@ -100,7 +101,6 @@ class Product {
       };
 }
 
-//////////////////////////// Tag ////////////////////////////
 class Tag {
   String tag;
 
@@ -115,12 +115,12 @@ class Tag {
   // Tag.getTagData(DocumentSnapshot snapshot)
   //     : this.tag = snapshot.data['tag'];
 
-  Map<String, dynamic> toTagData() => {
+  Map<String, dynamic> toTagData() =>
+      {
         'tag': tag,
       };
 }
 
-//////////////////////////// Category ////////////////////////////
 class Category {
   String level;
   String parent;
@@ -141,28 +141,27 @@ class Category {
   //       this.parent = snapshot.data['parent'],
   //       this.category = snapshot.data['category'];
 
-  Map<String, dynamic> toCategoryData() => {
+  Map<String, dynamic> toCategoryData() =>
+      {
         'level': level,
         'parent': parent,
         'category': category,
       };
 }
 
-class ErrorAlertDialog extends StatelessWidget
-{
+class ErrorAlertDialog extends StatelessWidget {
   final String message;
+
   const ErrorAlertDialog({Key key, this.message}) : super(key: key);
 
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return AlertDialog(
       key: key,
       content: Text(message),
       actions: <Widget>[
-        RaisedButton(onPressed: ()
-        {
+        RaisedButton(onPressed: () {
           Navigator.pop(context);
         },
           color: Colors.red,
@@ -175,14 +174,13 @@ class ErrorAlertDialog extends StatelessWidget
   }
 }
 
-class LoadingAlertDialog extends StatelessWidget
-{
+class LoadingAlertDialog extends StatelessWidget {
   final String message;
+
   const LoadingAlertDialog({Key key, this.message}) : super(key: key);
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return AlertDialog(
       key: key,
       content: Column(
@@ -202,14 +200,16 @@ class LoadingAlertDialog extends StatelessWidget
 circularProgress() {
   return Container(
     alignment: Alignment.center,
-    child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.black),),
+    child: CircularProgressIndicator(
+      valueColor: AlwaysStoppedAnimation(Colors.black),),
   );
 }
 
 linearProgress() {
   return Container(
     alignment: Alignment.center,
-    child: LinearProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.black),),
+    child: LinearProgressIndicator(
+      valueColor: AlwaysStoppedAnimation(Colors.black),),
   );
 }
 
@@ -230,5 +230,8 @@ Widget profileImage(BuildContext context, User user) {
 }
 
 Widget addProductFAT(BuildContext context) {
-  return FloatingActionButton(onPressed: null);
+  Route route = MaterialPageRoute(builder: (context) => AddProductPage());
+  return FloatingActionButton(onPressed: () {
+    Navigator.push(context, route);
+  });
 }
