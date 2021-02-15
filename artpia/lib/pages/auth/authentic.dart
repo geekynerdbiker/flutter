@@ -1,3 +1,4 @@
+import 'package:artpia/pages/interface.dart';
 import 'package:flutter/material.dart';
 import 'package:artpia/pages/home/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -187,7 +188,10 @@ class _AuthenticPageState extends State<AuthenticPage> {
     });
   }
 
-  void apple() {}
+  void apple() {
+    Route route = MaterialPageRoute(builder: (context) => InterfacePage());
+    Navigator.push(context, route);
+  }
 
   void google() {}
 }

@@ -5,6 +5,7 @@ import 'package:artpia/pages/profile/profile.dart';
 
 Widget browseAppBar(BuildContext context) {
   return AppBar(
+    toolbarHeight: 40,
     elevation: 0.5,
     centerTitle: true,
     backgroundColor: Colors.white,

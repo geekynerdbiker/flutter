@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       appBar: homeAppBar(context),
       backgroundColor: Colors.white,
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: <Widget>[

@@ -231,7 +231,8 @@ Widget profileImage(BuildContext context, User user) {
 
 Widget addProductFAT(BuildContext context) {
   Route route = MaterialPageRoute(builder: (context) => AddProductPage());
-  return FloatingActionButton(onPressed: () {
+  return FloatingActionButton(
+      onPressed: () {
     Navigator.push(context, route);
   });
 }

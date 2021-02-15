@@ -4,6 +4,7 @@ import 'package:artpia/assets/modules.dart';
 
 Widget profileAppBar(BuildContext context) {
   return AppBar(
+    toolbarHeight: 40,
     elevation: 0.5,
     centerTitle: true,
     backgroundColor: Colors.white,

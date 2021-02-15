@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/assets/modules.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -27,11 +25,6 @@ class _AddProductPageState extends State<AddProductPage>
       TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  List<Asset> _images;
-
-  int index = 0;
-
   int price;
   int likes;
   String category;
@@ -65,10 +58,6 @@ class _AddProductPageState extends State<AddProductPage>
   Widget productImages(BuildContext context) {
     List<Widget> imageList = [emptyImageBox(context)];
 
-    if (_images != null)
-      for (int i = 0; i < _images.length; i++)
-        imageList.add(imageBox(context, _images[i]));
-
     return Container(
       height: 118,
       child: ListView(
@@ -85,7 +74,6 @@ class _AddProductPageState extends State<AddProductPage>
     return Material(
       child: InkWell(
         onTap: () {
-          loadAssets();
         },
         child: Container(
           margin: EdgeInsets.only(right: 15),
@@ -103,40 +91,7 @@ class _AddProductPageState extends State<AddProductPage>
     );
   }
 
-  Future<void> loadAssets() async {
-    setState(() {
-      _formKey.currentState.save();
-      if (_images == null) _images = List<Asset>();
-    });
-
-    List<Asset> resultList;
-    String _error;
-
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 5,
-        enableCamera: true,
-        selectedAssets: _images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          useDetailsView: false,
-          selectCircleStrokeColor: "#FFFFFF",
-        ),
-      );
-    } on Exception catch (e) {
-      _error = e.toString();
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      for (int i = index; i < resultList.length + index; i++)
-        _images = resultList;
-      _error = _error;
-    });
-  }
-
-  Widget imageBox(BuildContext context, Asset image) {
+  Widget imageBox(BuildContext context) {
     const double _length = 92;
 
     return Material(
@@ -148,12 +103,6 @@ class _AddProductPageState extends State<AddProductPage>
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
             color: Colors.white,
-          ),
-          child: AssetThumb(
-            asset: image,
-            quality: 100,
-            width: image.originalWidth,
-            height: image.originalHeight,
           ),
         ),
       ),
@@ -206,7 +155,6 @@ class _AddProductPageState extends State<AddProductPage>
   }
 
   Future addProduct(String uid) async {
-    for (int i = 0; i < _images.length; i++) uploadImages(_images[i], i);
     Firestore.instance.collection("product").document(uid).setData({
       'uid': uid,
       'pid': uid + DateTime.now().microsecondsSinceEpoch.toString(),
@@ -220,7 +168,7 @@ class _AddProductPageState extends State<AddProductPage>
     });
   }
 
-  Future uploadImages(Asset asset, int index) async {
+  Future uploadImages(int index) async {
     showDialog(
       context: context,
       builder: (c) {
@@ -228,17 +176,17 @@ class _AddProductPageState extends State<AddProductPage>
       },
     );
 
-    String imgFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference storageReference =
-        FirebaseStorage.instance.ref().child(imgFileName);
-    ByteData byteData = await asset.getByteData(quality: 100);
-    List<int> imgData = byteData.buffer.asUint8List();
-    StorageUploadTask storageUploadTask = storageReference.putData(imgData);
-    StorageTaskSnapshot storageTaskSnapshot =
-        await storageUploadTask.onComplete;
-    await storageTaskSnapshot.ref.getDownloadURL().then((imgUrl) {
-      imageURL[index] = imgUrl;
-    });
+    // String imgFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    // StorageReference storageReference =
+    //     FirebaseStorage.instance.ref().child(imgFileName);
+    // ByteData byteData = await asset.getByteData(quality: 100);
+    // List<int> imgData = byteData.buffer.asUint8List();
+    // StorageUploadTask storageUploadTask = storageReference.putData(imgData);
+    // StorageTaskSnapshot storageTaskSnapshot =
+    //     await storageUploadTask.onComplete;
+    // await storageTaskSnapshot.ref.getDownloadURL().then((imgUrl) {
+    //   imageURL[index] = imgUrl;
+    // });
   }
 
 //

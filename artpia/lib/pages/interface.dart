@@ -1,3 +1,4 @@
+import 'package:artpia/assets/modules.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,11 @@ class InterfacePage extends StatefulWidget {
 class _InterfacePageState extends State<InterfacePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DefaultTabController(
+    return DefaultTabController(
         length: 4,
         initialIndex: 0,
         child: Scaffold(
+          floatingActionButton: addProductFAT(context),
           backgroundColor: Colors.white,
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -66,7 +67,6 @@ class _InterfacePageState extends State<InterfacePage> {
             ),
           ),
         ),
-      ),
     );
   }
 }
