@@ -60,7 +60,7 @@ Widget item(BuildContext context) {
         width: MediaQuery.of(context).size.width / 2 - 30,
         height: 30,
         child: Text(
-          '[' + 'title' + ']',
+          '[' + 'product title' + ']',
           style: TextStyle(fontWeight: FontWeight.w700),
           textAlign: TextAlign.start,
         ),
