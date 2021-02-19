@@ -223,7 +223,7 @@ class _SignUpPage extends State<SignUpPage> {
       'bio': '',
       'followers': List<String>(),
       'following': List<String>(),
-      Artpia.userCartList: ['init'],
+      Artpia.userFavoriteList: ['init'],
     });
 
     await Artpia.sharedPreferences.setString('uid', firebaseUser.uid);
@@ -234,6 +234,6 @@ class _SignUpPage extends State<SignUpPage> {
     await Artpia.sharedPreferences
         .setString(Artpia.userProfileImageUrl, userImgUrl);
     await Artpia.sharedPreferences
-        .setStringList(Artpia.userCartList, ['init']);
+        .setStringList(Artpia.userFavoriteList, ['init']);
   }
 }

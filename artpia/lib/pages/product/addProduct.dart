@@ -164,7 +164,7 @@ class _AddProductPageState extends State<AddProductPage>
       'likes': '0',
       // 'imageURL': userImgUrl,
       'tags': List<String>(),
-      Artpia.userCartList: ['init'],
+      Artpia.userFavoriteList: ['init'],
     });
   }
 

@@ -181,10 +181,10 @@ class _AuthenticPageState extends State<AuthenticPage> {
       await Artpia.sharedPreferences.setString(
           Artpia.userProfileImageUrl,
           dataSnapshot.data[Artpia.userProfileImageUrl]);
-      List<String> cartList =
-          dataSnapshot.data[Artpia.userCartList].cast<String>();
+      List<String> favoriteList =
+          dataSnapshot.data[Artpia.userFavoriteList].cast<String>();
       await Artpia.sharedPreferences
-          .setStringList(Artpia.userCartList, cartList);
+          .setStringList(Artpia.userFavoriteList, favoriteList);
     });
   }
 

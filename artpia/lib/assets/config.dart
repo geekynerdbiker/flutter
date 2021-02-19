@@ -13,7 +13,7 @@ class Artpia
 
   static String collectionUser = "users";
   static String collectionOrders = "orders";
-  static String userCartList = 'userCart';
+  static String userFavoriteList = 'userFavorite';
   static String subCollectionAddress = 'userAddress';
 
   static final String userUID = 'uid';

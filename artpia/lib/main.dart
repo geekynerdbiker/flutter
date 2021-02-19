@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:artpia/assets/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:artpia/assets/config.dart';
@@ -20,9 +22,16 @@ Future<void> main() async {
 class ArtpiaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoriteItemCounter()),
+        ChangeNotifierProvider(create: (context) => TotalAmount()),
+        ChangeNotifierProvider(create: (context) => AddressChanger()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
     );
   }
 }
