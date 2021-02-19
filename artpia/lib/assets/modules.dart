@@ -1,3 +1,5 @@
+import 'package:artpia/assets/config.dart';
+import 'package:artpia/main.dart';
 import 'package:artpia/pages/product/addProduct.dart';
 import 'package:flutter/material.dart';
 
@@ -38,8 +40,7 @@ class User {
   //       this.followers = List<String>.from(snapshot.data['followers']),
   //       this.following = List<String>.from(snapshot.data['following']),
 
-  Map<String, dynamic> toUserData() =>
-      {
+  Map<String, dynamic> toUserData() => {
         'uid': uid,
         'username': username,
         'password': password,
@@ -88,8 +89,7 @@ class Product {
   //        this.imageURL = List<String>.from(snapshot.data['imageURL']),
   //        this.tags = List<String>.from(snapshot.data['tags']);
 
-  Map<String, dynamic> toProductData() =>
-      {
+  Map<String, dynamic> toProductData() => {
         'pid': pid,
         'title': title,
         'description': description,
@@ -115,8 +115,7 @@ class Tag {
   // Tag.getTagData(DocumentSnapshot snapshot)
   //     : this.tag = snapshot.data['tag'];
 
-  Map<String, dynamic> toTagData() =>
-      {
+  Map<String, dynamic> toTagData() => {
         'tag': tag,
       };
 }
@@ -141,8 +140,7 @@ class Category {
   //       this.parent = snapshot.data['parent'],
   //       this.category = snapshot.data['category'];
 
-  Map<String, dynamic> toCategoryData() =>
-      {
+  Map<String, dynamic> toCategoryData() => {
         'level': level,
         'parent': parent,
         'category': category,
@@ -154,16 +152,16 @@ class ErrorAlertDialog extends StatelessWidget {
 
   const ErrorAlertDialog({Key key, this.message}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       key: key,
       content: Text(message),
       actions: <Widget>[
-        RaisedButton(onPressed: () {
-          Navigator.pop(context);
-        },
+        RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
           color: Colors.red,
           child: Center(
             child: Text("OK"),
@@ -201,7 +199,8 @@ circularProgress() {
   return Container(
     alignment: Alignment.center,
     child: CircularProgressIndicator(
-      valueColor: AlwaysStoppedAnimation(Colors.black),),
+      valueColor: AlwaysStoppedAnimation(Colors.black),
+    ),
   );
 }
 
@@ -209,16 +208,14 @@ linearProgress() {
   return Container(
     alignment: Alignment.center,
     child: LinearProgressIndicator(
-      valueColor: AlwaysStoppedAnimation(Colors.black),),
+      valueColor: AlwaysStoppedAnimation(Colors.black),
+    ),
   );
 }
 
-
 Widget profileImage(BuildContext context, User user) {
-  String path = 'gs://artpia.appspot.com/user/' +
-      user.username +
-      '+' +
-      'profile.jpg';
+  String path =
+      'gs://artpia.appspot.com/user/' + user.username + '+' + 'profile.jpg';
   // var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
 
   return Container(
@@ -231,8 +228,49 @@ Widget profileImage(BuildContext context, User user) {
 
 Widget addProductFAT(BuildContext context) {
   Route route = MaterialPageRoute(builder: (context) => AddProductPage());
-  return FloatingActionButton(
-      onPressed: () {
+  return FloatingActionButton(onPressed: () {
     Navigator.push(context, route);
   });
+}
+
+class FavoriteItemCounter extends ChangeNotifier {
+  int _counter =
+      Artpia.sharedPreferences.getStringList(Artpia.userFavoriteList).length -
+          1;
+
+  int get count => _counter;
+
+  Future<void> displayResult() async {
+    int _counter =
+        Artpia.sharedPreferences.getStringList(Artpia.userFavoriteList).length -
+            1;
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
+  }
+}
+
+class AddressChanger extends ChangeNotifier {
+  int _counter = 0;
+
+  int get count => _counter;
+
+  displayResult(int v) {
+    _counter = v;
+    notifyListeners();
+  }
+}
+
+class TotalAmount extends ChangeNotifier {
+  double _totalAmount = 0;
+
+  double get totalAmount => _totalAmount;
+
+  displayResult(double a) async {
+    _totalAmount = a;
+
+    await Future.delayed(const Duration(milliseconds: 100), () {
+      notifyListeners();
+    });
+  }
 }
