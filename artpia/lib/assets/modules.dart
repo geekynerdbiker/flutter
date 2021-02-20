@@ -1,6 +1,7 @@
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/main.dart';
 import 'package:artpia/pages/product/addProduct.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class User {
@@ -14,31 +15,6 @@ class User {
 
   List<String> followers = [];
   List<String> following = [];
-
-  // DocumentReference reference;
-  //
-  // User.fromMap(Map<String, dynamic> map, {this.reference})
-  //     : uid = map['uid'],
-  //       username = map['username'],
-  //       password = map['password'],
-  //       eMail = map['eMail'],
-  //       imageURL = map['imageURL'],
-  //       bio = map['bio'],
-  //       followers = List.from(map['followers']),
-  //       following = List.from(map['following']),
-  //
-  // User.fromSnapshot(DocumentSnapshot snapshot)
-  //     : this.fromMap(snapshot.data, reference: snapshot.reference);
-  //
-  // User.getUserData(DocumentSnapshot snapshot)
-  //     : this.uid = snapshot.data['uid'],
-  //       this.username = snapshot.data['username'],
-  //       this.password = snapshot.data['password'],
-  //       this.eMail = snapshot.data['eMail'],
-  //       this.imageURL = snapshot.data['imageURL'],
-  //       this.bio = snapshot.data['bio'],
-  //       this.followers = List<String>.from(snapshot.data['followers']),
-  //       this.following = List<String>.from(snapshot.data['following']),
 
   Map<String, dynamic> toUserData() => {
         'uid': uid,
@@ -56,7 +32,7 @@ class Product {
   String pid;
   String title;
   String description;
-
+  Timestamp publishedDate;
   int price;
   int likes;
   String category;
@@ -64,56 +40,32 @@ class Product {
   List<String> imageURL = [];
   List<String> tags = [];
 
-  // DocumentReference reference;
-  //
-  //  Product.fromMap(Map<String, dynamic> map, {this.reference})
-  //      : pid = map['pid'],
-  //        title = map['title'],
-  //        description = map['description'],
-  //        price = map['price'],
-  //        likes = map['likes'],
-  //        category = map['category'],
-  //        imageURL = List.from(map['imageURL']),
-  //        tags = List.from(map['tags']);
-  //
-  //  Product.fromSnapshot(DocumentSnapshot snapshot)
-  //      : this.fromMap(snapshot.data, reference: snapshot.reference);
-  //
-  //  Product.getProductData(DocumentSnapshot snapshot)
-  //      : this.pid = snapshot.data['pid'],
-  //        this.title = snapshot.data['title'],
-  //        this.description = snapshot.data['description'],
-  //        this.price = snapshot.data['price'],
-  //        this.likes = snapshot.data['likes'],
-  //        this.category = snapshot.data['catgory'],
-  //        this.imageURL = List<String>.from(snapshot.data['imageURL']),
-  //        this.tags = List<String>.from(snapshot.data['tags']);
+  Product(
+      {this.pid,
+      this.title,
+      this.description,
+      this.publishedDate,
+      this.price,
+      this.likes,
+      this.category,
+      this.imageURL,
+      this.tags});
 
-  Map<String, dynamic> toProductData() => {
-        'pid': pid,
-        'title': title,
-        'description': description,
-        'price': price,
-        'likes': likes,
-        'category': category,
-        'imageURL': imageURL,
-        'tags': tags,
-      };
+  Product.fromJson(Map<String, dynamic> json) {
+    pid = json['pid'];
+    title = json['title'];
+    description = json['description'];
+    publishedDate= json['publishedDate'];
+    price= json['price'];
+    likes= json['likes'];
+    category= json['category'];
+    imageURL= json['imageURL'];
+    tags= json['tags'];
+  }
 }
 
 class Tag {
   String tag;
-
-  // DocumentReference reference;
-  //
-  // Tag.fromMap(Map<String, dynamic> map, {this.reference})
-  //     : tag = map['tag'];
-  //
-  // Tag.fromSnapshot(DocumentSnapshot snapshot)
-  //     : this.fromMap(snapshot.data, reference: snapshot.reference);
-  //
-  // Tag.getTagData(DocumentSnapshot snapshot)
-  //     : this.tag = snapshot.data['tag'];
 
   Map<String, dynamic> toTagData() => {
         'tag': tag,
@@ -124,21 +76,6 @@ class Category {
   String level;
   String parent;
   String category;
-
-  // DocumentReference reference;
-  //
-  // Category.fromMap(Map<String, dynamic> map, {this.reference})
-  //     : level = map['level'],
-  //       parent = map['parent'],
-  //       category = map['category'];
-  //
-  // Category.fromSnapshot(DocumentSnapshot snapshot)
-  //     : this.fromMap(snapshot.data, reference: snapshot.reference);
-  //
-  // Category.getCategoryData(DocumentSnapshot snapshot)
-  //     : this.level = snapshot.data['level'],
-  //       this.parent = snapshot.data['parent'],
-  //       this.category = snapshot.data['category'];
 
   Map<String, dynamic> toCategoryData() => {
         'level': level,
