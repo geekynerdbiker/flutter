@@ -31,16 +31,16 @@ Widget hotArtists(BuildContext context) {
 
 // Widget getArtists(BuildContext context) {
 //   return StreamBuilder<QuerySnapshot>(
-//     stream: Firestore.instance.collection('user').snapshots(),
+//     stream: FirebaseFirestore.instance.collection('user').snapshots(),
 //     builder: (context, snapshot) {
 //       if (!snapshot.hasData) return CircularProgressIndicator();
-//       return portraits(context, snapshot.data.documents);
+//       return portraits(context, snapshot.data.docs);
 //     },
 //   );
 // }
 //
 // Widget portraits(BuildContext context, List<DocumentSnapshot> snapshot) {
-//   List<User> userItems = snapshot.map((e) => User.fromSnapshot(e)).toList();
+//   List<UserClass> userItems = snapshot.map((e) => UserClass.fromSnapshot(e)).toList();
 //
 //   return Container(
 //     height: 130,
@@ -57,7 +57,7 @@ Widget hotArtists(BuildContext context) {
 //   );
 // }
 
-Widget artistInfo(BuildContext context, User user) {
+Widget artistInfo(BuildContext context, UserClass user) {
   return Container(
     margin: EdgeInsets.only(right: 8),
     child: Column(

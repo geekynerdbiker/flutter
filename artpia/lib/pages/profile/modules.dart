@@ -15,7 +15,7 @@ Widget profileAppBar(BuildContext context) {
   );
 }
 
-Widget userProfile(BuildContext context, User user) {
+Widget userProfile(BuildContext context, UserClass user) {
   return Column(
     children: [
       Row(
@@ -28,7 +28,7 @@ Widget userProfile(BuildContext context, User user) {
   );
 }
 
-Widget productList(BuildContext context, User user) {
+Widget productList(BuildContext context, UserClass user) {
   return GridView.builder(
     gridDelegate: null,
     itemBuilder: null,

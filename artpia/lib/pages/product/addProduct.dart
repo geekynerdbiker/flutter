@@ -155,7 +155,7 @@ class _AddProductPageState extends State<AddProductPage>
   }
 
   Future addProduct(String uid) async {
-    Firestore.instance.collection("product").document(uid).setData({
+    FirebaseFirestore.instance.collection("product").doc(uid).set({
       'uid': uid,
       'pid': uid + DateTime.now().microsecondsSinceEpoch.toString(),
       'title': _titleTextEditController.text.trim(),

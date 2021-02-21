@@ -4,7 +4,7 @@ import 'package:artpia/assets/modules.dart';
 import 'package:artpia/pages/profile/modules.dart';
 
 class ProfilePage extends StatefulWidget {
-  User user;
+  UserClass user;
 
   ProfilePage({this.user});
 

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         child: CustomScrollView(
           slivers: [
             StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance
+              stream: FirebaseFirestore.instance
                   .collection('products')
                   .limit(20)
                   .orderBy('publishedDate', descending: true)
@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
                         staggeredTileBuilder: (context) => StaggeredTile.fit(1),
                         itemBuilder: (context, index) {
                           Product product = Product.fromJson(
-                              dataSnapshot.data.documents[index].data);
+                              dataSnapshot.data.docs[index].data());
                           return item(context, product);
                         },
-                        itemCount: dataSnapshot.data.documents.length,
+                        itemCount: dataSnapshot.data.docs.length,
                       );
               },
             )

@@ -173,12 +173,12 @@ class _SignUpPage extends State<SignUpPage> {
     );
 
     String imgFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference storageReference =
+    Reference reference =
         FirebaseStorage.instance.ref().child(imgFileName);
-    StorageUploadTask storageUploadTask = storageReference.putFile(_imgFile);
-    StorageTaskSnapshot storageTaskSnapshot =
-        await storageUploadTask.onComplete;
-    await storageTaskSnapshot.ref.getDownloadURL().then((imgUrl) {
+    UploadTask uploadTask = reference.putFile(_imgFile);
+    TaskSnapshot taskSnapshot =
+        await uploadTask;
+    await taskSnapshot.ref.getDownloadURL().then((imgUrl) {
       userImgUrl = imgUrl;
       _registerUser();
     });
@@ -187,7 +187,7 @@ class _SignUpPage extends State<SignUpPage> {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _registerUser() async {
-    FirebaseUser firebaseUser;
+    User firebaseUser;
 
     await _auth
         .createUserWithEmailAndPassword(
@@ -213,16 +213,16 @@ class _SignUpPage extends State<SignUpPage> {
     }
   }
 
-  Future saveUserInfoToFireStore(FirebaseUser firebaseUser) async {
-    Firestore.instance.collection("users").document(firebaseUser.uid).setData({
+  Future saveUserInfoToFireStore(User firebaseUser) async {
+    FirebaseFirestore.instance.collection("users").doc(firebaseUser.uid).set({
       'uid': firebaseUser.uid,
       'username': _nameTextEditController.text.trim(),
       'password': _passwordTextEditController.text.trim(),
       'eMail': firebaseUser.email,
       'imageURL': userImgUrl,
       'bio': '',
-      'followers': List<String>(),
-      'following': List<String>(),
+      'followers': [],
+      'following': [],
       Artpia.userFavoriteList: ['init'],
     });
 

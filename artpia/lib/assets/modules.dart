@@ -4,7 +4,7 @@ import 'package:artpia/pages/product/addProduct.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class User {
+class UserClass {
   String uid;
   String username;
   String password;
@@ -150,7 +150,7 @@ linearProgress() {
   );
 }
 
-Widget profileImage(BuildContext context, User user) {
+Widget profileImage(BuildContext context, UserClass user) {
   String path =
       'gs://artpia.appspot.com/user/' + user.username + '+' + 'profile.jpg';
   // var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);

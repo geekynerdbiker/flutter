@@ -142,7 +142,7 @@ class _AuthenticPageState extends State<AuthenticPage> {
         builder: (c) {
           return LoadingAlertDialog(message: 'Authenticating, Please wait.');
         });
-    FirebaseUser firebaseUser;
+    User firebaseUser;
     await _auth
         .signInWithEmailAndPassword(
             email: _emailTextEditController.text.trim(),
@@ -166,23 +166,23 @@ class _AuthenticPageState extends State<AuthenticPage> {
     }
   }
 
-  Future readData(FirebaseUser firebaseUser) async {
-    Firestore.instance
+  Future readData(User firebaseUser) async {
+    FirebaseFirestore.instance
         .collection('users')
-        .document(firebaseUser.uid)
+        .doc(firebaseUser.uid)
         .get()
         .then((dataSnapshot) async {
       await Artpia.sharedPreferences
-          .setString('uid', dataSnapshot.data[Artpia.userUID]);
+          .setString('uid', dataSnapshot.data()[Artpia.userUID]);
       await Artpia.sharedPreferences.setString(
-          Artpia.userEmail, dataSnapshot.data[Artpia.userEmail]);
+          Artpia.userEmail, dataSnapshot.data()[Artpia.userEmail]);
       await Artpia.sharedPreferences.setString(
-          Artpia.userName, dataSnapshot.data[Artpia.userName]);
+          Artpia.userName, dataSnapshot.data()[Artpia.userName]);
       await Artpia.sharedPreferences.setString(
           Artpia.userProfileImageUrl,
-          dataSnapshot.data[Artpia.userProfileImageUrl]);
+          dataSnapshot.data()[Artpia.userProfileImageUrl]);
       List<String> favoriteList =
-          dataSnapshot.data[Artpia.userFavoriteList].cast<String>();
+          dataSnapshot.data()[Artpia.userFavoriteList].cast<String>();
       await Artpia.sharedPreferences
           .setStringList(Artpia.userFavoriteList, favoriteList);
     });
