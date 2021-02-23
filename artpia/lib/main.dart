@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:artpia/assets/modules.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:artpia/assets/config.dart';
@@ -12,25 +12,55 @@ import 'package:artpia/pages/auth/authentic.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  Artpia.auth = FirebaseAuth.instance;
-  Artpia.sharedPreferences = await SharedPreferences.getInstance();
-  Artpia.firestore = FirebaseFirestore.instance;
   runApp(ArtpiaApp());
 }
 
-class ArtpiaApp extends StatelessWidget {
+class ArtpiaApp extends StatefulWidget {
+  _ArtpiaAppState createState() => _ArtpiaAppState();
+}
+
+class _ArtpiaAppState extends State<ArtpiaApp> {
+  bool _initialized = false;
+  bool _error = false;
+
+  void initialize() async {
+    try {
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initialize();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => FavoriteItemCounter()),
-        ChangeNotifierProvider(create: (context) => TotalAmount()),
-        ChangeNotifierProvider(create: (context) => AddressChanger()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+    if (_error) return SomethingWentWrong();
+    if (!_initialized) return Loading();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SomethingWentWrong extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text('Something Went Wrong!'),
+        ),
       ),
     );
   }
@@ -45,7 +75,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    getUserInfo();
     displaySplash();
+  }
+
+  getUserInfo() async {
+    Artpia.auth = FirebaseAuth.instance;
+    Artpia.sharedPreferences = await SharedPreferences.getInstance();
+    Artpia.firestore = FirebaseFirestore.instance;
   }
 
   displaySplash() {
@@ -62,15 +99,33 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
-          child: Image.asset(
-            'lib/assets/logo_path',
-            scale: 0.5,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            child: Image.asset(
+              'lib/assets/logo_path',
+              scale: 0.5,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Center(
+            child: Text('Loading...'),
           ),
         ),
       ),
