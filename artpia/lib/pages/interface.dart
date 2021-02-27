@@ -15,6 +15,8 @@ class InterfacePage extends StatefulWidget {
 class _InterfacePageState extends State<InterfacePage> {
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+
     return DefaultTabController(
         length: 4,
         initialIndex: 0,
@@ -31,7 +33,7 @@ class _InterfacePageState extends State<InterfacePage> {
             ],
           ),
           bottomNavigationBar: Container(
-            height: 80,
+            height: _height * 0.1,
             child: new TabBar(
               labelColor: Colors.black,
               indicatorColor: Colors.transparent,

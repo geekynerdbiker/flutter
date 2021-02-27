@@ -19,11 +19,10 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.white,
       appBar: profileAppBar(context),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: <Widget>[
             userProfile(context),
-            // productList(context),
+            productList(context),
           ],
         ),
       ),
@@ -133,6 +132,53 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget productList(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
+    return Container(
+      // margin: EdgeInsets.symmetric(horizontal: 20),
+      height: _height * 0.59,
+      child: GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1,
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        children: [
+          testItem(),
+          testItem2(),
+          testItem3(),
+          testItem2(),
+          testItem(),
+          testItem2(),
+          testItem3(),
+          testItem2(),
+          testItem(),
+          testItem2(),
+          testItem3(),
+          testItem2(),
+          testItem(),
+        ],
+      ),
+    );
+  }
+
+  Widget testItem() {
+    return Container(
+      color: Colors.orange,
+    );
+  }
+  Widget testItem2() {
+    return Container(
+      color: Colors.blueGrey,
+    );
+  }
+  Widget testItem3() {
+    return Container(
+      color: Colors.cyan,
     );
   }
 }
