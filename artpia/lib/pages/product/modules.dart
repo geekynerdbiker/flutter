@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget productAppBar(BuildContext context) {
   return AppBar(
+    toolbarHeight: MediaQuery.of(context).size.height * 0.05,
     elevation: 0.5,
     centerTitle: true,
     backgroundColor: Colors.white,
