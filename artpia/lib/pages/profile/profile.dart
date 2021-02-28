@@ -34,12 +34,13 @@ class _ProfilePageState extends State<ProfilePage> {
     double _width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: _height * 0.2,
+      height: _height * 0.3,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(right: 20),
+            margin: EdgeInsets.only(top:30, right: 20),
+            alignment: Alignment.topCenter,
             child: CircleAvatar(
               radius: _width * 0.1,
             ),
@@ -141,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Container(
       // margin: EdgeInsets.symmetric(horizontal: 20),
-      height: _height * 0.59,
+      height: _height * 0.49,
       child: GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 1,

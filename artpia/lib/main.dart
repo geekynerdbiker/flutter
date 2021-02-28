@@ -9,6 +9,12 @@ import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/interface.dart';
 import 'package:artpia/pages/auth/authentic.dart';
 
+/*
+* Appbar : height * 0.05
+* BottomNavigationBar : height * 0.1
+* Page : height * 0.79
+* */
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ArtpiaApp());
