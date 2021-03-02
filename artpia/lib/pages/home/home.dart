@@ -1,4 +1,5 @@
 import 'package:artpia/assets/modules.dart';
+import 'package:artpia/pages/product/productInfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,11 @@ Widget item(BuildContext context, Product product) {
   return Column(
     children: [
       InkWell(
-        onTap: () {},
+        onTap: () {
+          Route route =
+              MaterialPageRoute(builder: (context) => ProductInfoPage(product));
+          Navigator.push(context, route);
+        },
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
