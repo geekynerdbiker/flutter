@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/product/addProduct.dart';
@@ -28,6 +30,7 @@ class UserClass {
 }
 
 class Product {
+  String uid;
   String pid;
   String title;
   String description;
@@ -40,7 +43,8 @@ class Product {
   List<String> tags = [];
 
   Product(
-      {this.pid,
+      {this.uid,
+      this.pid,
       this.title,
       this.description,
       this.publishedDate,
@@ -51,15 +55,16 @@ class Product {
       this.tags});
 
   Product.fromJson(Map<String, dynamic> json) {
+    uid = json['uid'];
     pid = json['pid'];
     title = json['title'];
     description = json['description'];
-    publishedDate= json['publishedDate'];
-    price= json['price'];
-    likes= json['likes'];
-    category= json['category'];
-    imageURL= json['imageURL'];
-    tags= json['tags'];
+    publishedDate = json['publishedDate'];
+    price = json['price'];
+    likes = json['likes'];
+    category = json['category'];
+    imageURL = json['imageURL'];
+    tags = json['tags'];
   }
 }
 
