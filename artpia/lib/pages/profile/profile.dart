@@ -5,7 +5,6 @@ import 'package:artpia/pages/profile/modules.dart';
 
 class ProfilePage extends StatefulWidget {
   // UserClass user;
-
   // ProfilePage({this.user});
 
   @override
@@ -76,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 10,
                         ),
                         Text(
-                          '0',
+                          '1000',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -94,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 10,
                         ),
                         Text(
-                          '0',
+                          '1000',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -141,7 +140,6 @@ class _ProfilePageState extends State<ProfilePage> {
     double _width = MediaQuery.of(context).size.width;
 
     return Container(
-      // margin: EdgeInsets.symmetric(horizontal: 20),
       height: _height * 0.49,
       child: GridView.count(
         crossAxisCount: 3,
