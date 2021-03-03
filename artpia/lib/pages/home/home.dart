@@ -25,14 +25,14 @@ class _HomePageState extends State<HomePage> {
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('products')
-                  .limit(20)
-                  .orderBy('publishedDate', descending: true)
+                  // .limit(20)
+                  // .orderBy('publishedDate', descending: true)
                   .snapshots(),
               builder: (context, dataSnapshot) {
                 return !dataSnapshot.hasData
                     ? SliverToBoxAdapter(
                         child: Center(
-                          child: circularProgress(),
+                          child: Text('No Data'),
                         ),
                       )
                     : SliverStaggeredGrid.countBuilder(
