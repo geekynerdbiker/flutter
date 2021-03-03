@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/assets/modules.dart';
 import 'package:artpia/pages/profile/modules.dart';
 
 class ProfilePage extends StatefulWidget {
-  // UserClass user;
-  // ProfilePage({this.user});
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -38,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(top:30, right: 20),
+            margin: EdgeInsets.only(top: 30, right: 20),
             alignment: Alignment.topCenter,
             child: CircleAvatar(
               radius: _width * 0.1,
@@ -170,11 +166,13 @@ class _ProfilePageState extends State<ProfilePage> {
       color: Colors.orange,
     );
   }
+
   Widget testItem2() {
     return Container(
       color: Colors.blueGrey,
     );
   }
+
   Widget testItem3() {
     return Container(
       color: Colors.cyan,

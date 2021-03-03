@@ -1,14 +1,15 @@
-import 'package:artpia/pages/product/modules.dart';
 import 'package:flutter/material.dart';
 
+import 'package:artpia/assets/modules.dart';
 import 'package:artpia/pages/message/modules.dart';
+import 'package:artpia/pages/product/modules.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProductInfoPage extends StatefulWidget {
-  @override
-  _ProductInfoPageState createState() => _ProductInfoPageState();
-}
+class ProductInfoPage extends StatelessWidget {
+  final Product product;
 
-class _ProductInfoPageState extends State<ProductInfoPage> {
+  ProductInfoPage(this.product);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,17 +17,62 @@ class _ProductInfoPageState extends State<ProductInfoPage> {
       backgroundColor: Colors.white,
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
-        child: ListView(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(15),
-              width: MediaQuery.of(context).size.width - 20,
-              height: MediaQuery.of(context).size.width - 20,
-              color: Colors.blue,
-            ),
+        child: Column(
+          children: [
+            // sellerInfo(),
+            // images(),
+            // description(),
+            // options(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget sellerInfo(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(this.product.uid).get(),
+      builder: (BuildContext c, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) return ErrorAlertDialog();
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          return Container(
+            height: 150,
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 120,
+                ),
+                Center(
+                  child: Text(data['username']),
+                ),
+              ],
+            ),
+          );
+        }
+        return LoadingAlertDialog();
+      },
+    );
+  }
+
+  Widget images(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width;
+
+    return Container(
+      margin: EdgeInsets.all(15),
+      width: _width,
+      height: _width * 9 / 16,
+      color: Colors.blue,
+    );
+  }
+
+  Widget description(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+
+    return Container(
+      
     );
   }
 }
