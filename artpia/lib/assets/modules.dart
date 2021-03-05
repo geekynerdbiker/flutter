@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/product/addProduct.dart';
@@ -34,10 +32,9 @@ class Product {
   String pid;
   String title;
   String description;
-  Timestamp publishedDate;
+  String publishedDate;
   int price;
   int likes;
-  String category;
 
   List<String> imageURL = [];
   List<String> tags = [];
@@ -50,7 +47,6 @@ class Product {
       this.publishedDate,
       this.price,
       this.likes,
-      this.category,
       this.imageURL,
       this.tags});
 
@@ -62,7 +58,6 @@ class Product {
     publishedDate = json['publishedDate'];
     price = json['price'];
     likes = json['likes'];
-    category = json['category'];
     imageURL = json['imageURL'];
     tags = json['tags'];
   }

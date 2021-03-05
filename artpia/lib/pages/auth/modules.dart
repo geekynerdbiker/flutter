@@ -12,8 +12,9 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width - 40,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),),
+          border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(50)),
       padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: TextFormField(
