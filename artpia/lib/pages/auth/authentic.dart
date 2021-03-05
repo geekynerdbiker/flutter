@@ -29,60 +29,56 @@ class _AuthenticPageState extends State<AuthenticPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            banner(context),
             inputSector(context),
-            authSector(context),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Text('OR'),
+            ),
+            socialOptions(context),
           ],
         ),
       ),
-    );
-  }
-
-  Widget banner(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-      width: MediaQuery.of(context).size.width - 20,
-      height: (MediaQuery.of(context).size.width - 20) / 1.4,
-      color: Colors.black,
     );
   }
 
   Widget inputSector(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          CustomTextField(
-            controller: _emailTextEditController,
-            hintText: 'Name',
-            isObsecure: false,
-          ),
-          CustomTextField(
-            controller: _passwordTextEditController,
-            hintText: 'E-Mail',
-            isObsecure: false,
-          ),
-        ],
+    return Container(
+      height: 160,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            CustomTextField(
+              controller: _emailTextEditController,
+              hintText: 'e-mail',
+              isObsecure: false,
+            ),
+            CustomTextField(
+              controller: _passwordTextEditController,
+              hintText: 'password',
+              isObsecure: false,
+            ),
+            SizedBox(height: 5,),
+            InkWell(
+              onTap: () {
+                print('Sign In');
+              },
+              child: Text('Sign In', style: TextStyle(fontSize: 25),),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget authSector(BuildContext context) {
+  Widget socialOptions(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            button(context, 'Sign In'),
-            button(context, 'Sign Up'),
-          ],
-        ),
-        Row(
-          children: [
-            button(context, 'Apple'),
-            button(context, 'Google'),
-          ],
-        )
+        button(context, 'Google'),
+        button(context, 'Apple'),
+        button(context, 'Facebook'),
       ],
     );
   }
@@ -90,20 +86,31 @@ class _AuthenticPageState extends State<AuthenticPage> {
   Widget button(BuildContext context, String title) {
     return InkWell(
       onTap: () {
-        if (title == 'Sign Up')
-          signUp();
-        else if (title == 'Sign In')
-          signIn();
-        else if (title == 'Apple')
-          apple();
-        else
-          google();
+        switch (title) {
+          case 'Sign In':
+            signIn();
+            return;
+          case 'Sign Up':
+            signUp();
+            return;
+          case 'Google':
+            google();
+            return;
+          case 'Apple':
+            apple();
+            return;
+          case 'Facebook':
+            facebook();
+            return;
+        }
       },
       child: Container(
-        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        width: (MediaQuery.of(context).size.width - 40) / 2,
-        height: 40,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(50)),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        width: (MediaQuery.of(context).size.width - 100),
+        height: 30,
         child: Center(
           child: Text(
             title,
@@ -174,12 +181,11 @@ class _AuthenticPageState extends State<AuthenticPage> {
         .then((dataSnapshot) async {
       await Artpia.sharedPreferences
           .setString('uid', dataSnapshot.data()[Artpia.userUID]);
-      await Artpia.sharedPreferences.setString(
-          Artpia.userEmail, dataSnapshot.data()[Artpia.userEmail]);
-      await Artpia.sharedPreferences.setString(
-          Artpia.userName, dataSnapshot.data()[Artpia.userName]);
-      await Artpia.sharedPreferences.setString(
-          Artpia.userProfileImageUrl,
+      await Artpia.sharedPreferences
+          .setString(Artpia.userEmail, dataSnapshot.data()[Artpia.userEmail]);
+      await Artpia.sharedPreferences
+          .setString(Artpia.userName, dataSnapshot.data()[Artpia.userName]);
+      await Artpia.sharedPreferences.setString(Artpia.userProfileImageUrl,
           dataSnapshot.data()[Artpia.userProfileImageUrl]);
       List<String> favoriteList =
           dataSnapshot.data()[Artpia.userFavoriteList].cast<String>();
@@ -188,10 +194,16 @@ class _AuthenticPageState extends State<AuthenticPage> {
     });
   }
 
-  void apple() {
+  void google() {
     Route route = MaterialPageRoute(builder: (context) => InterfacePage());
     Navigator.push(context, route);
   }
 
-  void google() {}
+  void apple() {
+    print('Apple Sign In');
+  }
+
+  void facebook() {
+    print('Facebook Sign In');
+  }
 }

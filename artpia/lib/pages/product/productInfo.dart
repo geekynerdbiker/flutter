@@ -72,7 +72,67 @@ class ProductInfoPage extends StatelessWidget {
     double _height = MediaQuery.of(context).size.height;
 
     return Container(
-      
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(product.description),
+    );
+  }
+
+  Widget otherWork(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      height: 400,
+      child: Column(
+        children: [
+          Text('Artist\'s Other works'),
+          ListView(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            children: [
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+              item(context, Product()),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget item(BuildContext context, Product product) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Route route = MaterialPageRoute(
+                builder: (context) => ProductInfoPage(product));
+            Navigator.push(context, route);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                border: Border.all(color: Colors.blue)),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            width: MediaQuery.of(context).size.width / 2 - 30,
+            height: MediaQuery.of(context).size.width / 2 - 30,
+            child: Image.network(product.imageURL[0]),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          width: MediaQuery.of(context).size.width / 2 - 30,
+          height: 30,
+          child: Text(
+            '[' + 'product title' + ']',
+            style: TextStyle(fontWeight: FontWeight.w700),
+            textAlign: TextAlign.start,
+          ),
+        )
+      ],
     );
   }
 }

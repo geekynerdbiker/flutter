@@ -155,13 +155,15 @@ class _AddProductPageState extends State<AddProductPage>
   }
 
   Future addProduct(String uid) async {
-    FirebaseFirestore.instance.collection("product").doc(uid).set({
+    String pid = uid + DateTime.now().microsecondsSinceEpoch.toString();
+    FirebaseFirestore.instance.collection("product").doc(pid).set({
       'uid': uid,
-      'pid': uid + DateTime.now().microsecondsSinceEpoch.toString(),
+      'pid': pid,
       'title': _titleTextEditController.text.trim(),
       'description': _descriptionTextEditController.text.trim(),
+      'publishedDate': DateTime.now().millisecondsSinceEpoch.toString(),
       'price': _priceTextEditController.text.trim(),
-      'likes': '0',
+      'likes': 0,
       // 'imageURL': userImgUrl,
       'tags': List<String>(),
       Artpia.userFavoriteList: ['init'],
