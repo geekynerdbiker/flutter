@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/assets/modules.dart';
-import 'package:artpia/pages/message/modules.dart';
-import 'package:artpia/pages/product/modules.dart';
+import 'package:artpia/assets/module.dart';
+import 'package:artpia/pages/message/module.dart';
+import 'package:artpia/pages/product/module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductInfoPage extends StatelessWidget {

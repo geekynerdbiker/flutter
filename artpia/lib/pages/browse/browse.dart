@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/pages/browse/modules.dart';
+import 'package:artpia/pages/browse/module.dart';
 
 class BrowsePage extends StatefulWidget {
   @override

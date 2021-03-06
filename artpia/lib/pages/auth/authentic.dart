@@ -5,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:artpia/assets/config.dart';
-import 'package:artpia/assets/modules.dart';
+import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/auth/signup.dart';
-import 'package:artpia/pages/auth/modules.dart';
+import 'package:artpia/pages/auth/module.dart';
 
 class AuthenticPage extends StatefulWidget {
   _AuthenticPageState createState() => _AuthenticPageState();

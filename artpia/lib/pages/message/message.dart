@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/pages/message/modules.dart';
+import 'package:artpia/pages/message/module.dart';
 
 class MessagePage extends StatefulWidget {
   @override

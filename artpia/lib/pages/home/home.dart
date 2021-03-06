@@ -1,11 +1,11 @@
-import 'package:artpia/assets/modules.dart';
-import 'package:artpia/pages/product/productInfo.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:artpia/pages/home/modules.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import 'package:artpia/assets/module.dart';
+import 'package:artpia/pages/home/module.dart';
+import 'package:artpia/pages/product/productInfo.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: homeAppBar(context),
       backgroundColor: Colors.white,
+      floatingActionButton: addProductFAT(context),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: CustomScrollView(

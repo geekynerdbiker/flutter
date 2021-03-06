@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/pages/profile/modules.dart';
+import 'package:artpia/pages/profile/module.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -14,7 +14,8 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.white,
       appBar: profileAppBar(context),
       body: Container(
-        child: Column(
+        child: ListView(
+          physics: ClampingScrollPhysics(),
           children: <Widget>[
             userProfile(context),
             productList(context),
@@ -118,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         BoxDecoration(border: Border.all(color: Colors.black)),
                     child: Center(
                       child: Text(
-                        'Messege',
+                        'Message',
                       ),
                     ),
                   ),
@@ -133,14 +134,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget productList(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
 
-    return Container(
-      height: _height * 0.49,
+    return Expanded(
       child: GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 1,
-        physics: ScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
           testItem(),

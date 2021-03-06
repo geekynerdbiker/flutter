@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:artpia/assets/config.dart';
-import 'package:artpia/assets/modules.dart';
+import 'package:artpia/assets/module.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
