@@ -165,7 +165,7 @@ Widget profileImage(BuildContext context, UserClass user) {
 Widget addProductFAT(BuildContext context) {
   Route route = MaterialPageRoute(builder: (context) => AddProductPage());
   return FloatingActionButton(onPressed: () {
-    Navigator.push(context, route);
+    Navigator.push(context, _createRoute());
   });
 }
 
@@ -209,4 +209,21 @@ class TotalAmount extends ChangeNotifier {
       notifyListeners();
     });
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => AddProductPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(0.0, 1.0);
+      var end = Offset.zero;
+      var curve = Curves.ease;
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
