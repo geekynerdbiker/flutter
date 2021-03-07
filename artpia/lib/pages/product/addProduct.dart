@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'package:artpia/assets/config.dart';
-import 'package:artpia/assets/module.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:artpia/pages/product/module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:artpia/assets/config.dart';
+import 'package:artpia/assets/module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -29,8 +27,8 @@ class _AddProductPageState extends State<AddProductPage>
   int likes;
   String category;
 
-  List<String> imageURL = [];
   List<String> tags = [];
+  List<String> imageURL = [];
 
   @override
   void initState() {
@@ -40,6 +38,7 @@ class _AddProductPageState extends State<AddProductPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: addProductAppBar(context),
       backgroundColor: Colors.white,
       body: Form(
         key: _formKey,
@@ -123,7 +122,6 @@ class _AddProductPageState extends State<AddProductPage>
       child: InkWell(
         onTap: () {
           setState(() {});
-
           showDialog(
               context: context,
               builder: (BuildContext context) {

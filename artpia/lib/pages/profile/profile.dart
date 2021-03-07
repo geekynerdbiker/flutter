@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double _width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: _height * 0.3,
+      height: _height * 0.2,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
