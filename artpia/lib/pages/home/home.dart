@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/home/module.dart';
@@ -20,49 +19,41 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       floatingActionButton: addProductFAT(context),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: CustomScrollView(
-          slivers: [
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('products')
-                  // .limit(20)
-                  // .orderBy('publishedDate', descending: true)
-                  .snapshots(),
-              builder: (context, dataSnapshot) {
-                return !dataSnapshot.hasData
-                    ? SliverToBoxAdapter(
-                        child: Center(
-                          child: Text('No Data'),
-                        ),
-                      )
-                    : SliverStaggeredGrid.countBuilder(
-                        crossAxisCount: 2,
-                        staggeredTileBuilder: (context) => StaggeredTile.fit(1),
-                        itemBuilder: (context, index) {
-                          Product product = Product.fromJson(
-                              dataSnapshot.data.docs[index].data());
-                          return item(context, product);
-                        },
-                        itemCount: dataSnapshot.data.docs.length,
-                      );
-              },
-            )
-          ],
-        ),
-      ),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: GridView.count(
+            childAspectRatio: 0.8,
+            crossAxisCount: 2,
+            children: [
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+
+            ],
+          )),
     );
   }
 }
 
-Widget item(BuildContext context, Product product) {
+Widget item(BuildContext context) {
   return Column(
     children: [
       InkWell(
         onTap: () {
-          Route route =
-              MaterialPageRoute(builder: (context) => ProductInfoPage(product));
-          Navigator.push(context, route);
+          // Route route =
+          //     MaterialPageRoute(builder: (context) => ProductInfoPage(product));
+          // Navigator.push(context, route);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -71,17 +62,26 @@ Widget item(BuildContext context, Product product) {
           margin: EdgeInsets.symmetric(horizontal: 10),
           width: MediaQuery.of(context).size.width / 2 - 30,
           height: MediaQuery.of(context).size.width / 2 - 30,
-          child: Image.network(product.imageURL[0]),
+          // child: Image.network(product.imageURL[0]),
         ),
       ),
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         width: MediaQuery.of(context).size.width / 2 - 30,
-        height: 30,
-        child: Text(
-          '[' + 'product title' + ']',
-          style: TextStyle(fontWeight: FontWeight.w700),
-          textAlign: TextAlign.start,
+        height: 35,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'product title',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+              textAlign: TextAlign.start,
+            ),
+            Text('artist',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+              textAlign: TextAlign.start,
+            ),
+          ],
         ),
       )
     ],
