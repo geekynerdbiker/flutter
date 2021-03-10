@@ -9,9 +9,25 @@ import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/interface.dart';
 import 'package:artpia/pages/auth/authentic.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(ArtpiaApp());
+  runApp(App());
+}
+
+class App extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done)
+          return ArtpiaApp();
+        return Container();
+      },
+    );
+  }
 }
 
 class ArtpiaApp extends StatefulWidget {
@@ -19,48 +35,16 @@ class ArtpiaApp extends StatefulWidget {
 }
 
 class _ArtpiaAppState extends State<ArtpiaApp> {
-  bool _initialized = false;
-  bool _error = false;
-
-  void initialize() async {
-    try {
-      await Firebase.initializeApp();
-      setState(() {
-        _initialized = true;
-      });
-    } catch (e) {
-      setState(() {
-        _error = true;
-      });
-    }
-  }
-
   @override
   void initState() {
-    initialize();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_error) return SomethingWentWrong();
-    if (!_initialized) return Loading();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-    );
-  }
-}
-
-class SomethingWentWrong extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text('Something Went Wrong!'),
-        ),
-      ),
     );
   }
 }
@@ -98,35 +82,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Container(
-            width: 100,
-            height: 100,
-            child: Image.asset(
-              'lib/assets/logo_path',
-              scale: 0.5,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Loading extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          child: Center(
-            child: Text('Loading...'),
-          ),
-        ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Text('LOGO', style: TextStyle(fontSize: 24),),
       ),
     );
   }

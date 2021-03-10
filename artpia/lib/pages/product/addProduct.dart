@@ -138,8 +138,8 @@ class _AddProductPageState extends State<AddProductPage>
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             width: MediaQuery.of(context).size.width * (335 / 375),
+            decoration: BoxDecoration(border: Border.all(width: 10)),
             height: 44,
-            color: Colors.black,
             child: Center(
               child: Text(
                 '등록하기',

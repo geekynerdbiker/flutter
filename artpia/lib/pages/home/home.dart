@@ -19,8 +19,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       floatingActionButton: addProductFAT(context),
       body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: EdgeInsets.symmetric(horizontal: 10),
           child: GridView.count(
+            physics: ClampingScrollPhysics(),
             childAspectRatio: 0.8,
             crossAxisCount: 2,
             children: [
