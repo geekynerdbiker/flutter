@@ -31,56 +31,42 @@ class Product {
   String uid;
   String pid;
   String title;
+  String category;
   String description;
   String publishedDate;
   int price;
   int likes;
 
   List<String> imageURL = [];
-  List<String> tags = [];
 
   Product(
       {this.uid,
       this.pid,
       this.title,
+      this.category,
       this.description,
       this.publishedDate,
       this.price,
       this.likes,
-      this.imageURL,
-      this.tags});
+      this.imageURL});
 
   Product.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     pid = json['pid'];
     title = json['title'];
+    category = json['category'];
     description = json['description'];
     publishedDate = json['publishedDate'];
     price = json['price'];
     likes = json['likes'];
     imageURL = json['imageURL'];
-    tags = json['tags'];
   }
 }
 
-class Tag {
-  String tag;
-
-  Map<String, dynamic> toTagData() => {
-        'tag': tag,
-      };
-}
-
 class Category {
-  String level;
-  String parent;
   String category;
 
-  Map<String, dynamic> toCategoryData() => {
-        'level': level,
-        'parent': parent,
-        'category': category,
-      };
+  Category({this.category});
 }
 
 class ErrorAlertDialog extends StatelessWidget {
