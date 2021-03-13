@@ -17,33 +17,27 @@ class _BrowsePageState extends State<BrowsePage> {
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(15),
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              color: Colors.yellow,
-            ),
-            Container(
-              margin: EdgeInsets.all(15),
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              color: Colors.green,
-            ),
-            Container(
-              margin: EdgeInsets.all(15),
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              color: Colors.pink,
-            ),
-            Container(
-              margin: EdgeInsets.all(15),
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              color: Colors.blue,
-            ),
+            categoryPanel(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget categoryPanel(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Text('Category', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          width: MediaQuery.of(context).size.width,
+          height: 300,
+          color: Colors.blue,
+        ),
+      ],
     );
   }
 }

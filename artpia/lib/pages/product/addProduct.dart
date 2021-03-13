@@ -158,6 +158,7 @@ class _AddProductPageState extends State<AddProductPage>
       'uid': uid,
       'pid': pid,
       'title': _titleTextEditController.text.trim(),
+      'category': 'test',
       'description': _descriptionTextEditController.text.trim(),
       'publishedDate': DateTime.now().millisecondsSinceEpoch.toString(),
       'price': _priceTextEditController.text.trim(),
