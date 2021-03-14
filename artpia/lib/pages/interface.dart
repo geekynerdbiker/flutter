@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/home/home.dart';
 import 'package:artpia/pages/browse/browse.dart';
-import 'package:artpia/pages/message/message.dart';
+import 'package:artpia/pages/notification/notification.dart';
 import 'package:artpia/pages/profile/profile.dart';
 
 class InterfacePage extends StatefulWidget {
@@ -12,24 +12,15 @@ class InterfacePage extends StatefulWidget {
   _InterfacePageState createState() => _InterfacePageState();
 }
 
-class _InterfacePageState extends State<InterfacePage>
-    with SingleTickerProviderStateMixin {
-  TabController _controller;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class _InterfacePageState extends State<InterfacePage> {
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    final double height = MediaQuery.of(context).size.height;
 
     return DefaultTabController(
       length: 4,
@@ -38,17 +29,16 @@ class _InterfacePageState extends State<InterfacePage>
         // floatingActionButton: addProductFAT(context),
         backgroundColor: Colors.white,
         body: TabBarView(
-          controller: _controller,
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
             BrowsePage(),
-            MessagePage(),
+            NotificationPage(),
             ProfilePage(),
           ],
         ),
         bottomNavigationBar: Container(
-          height: _height * 0.1,
+          height: height * 0.1,
           child: new TabBar(
             labelColor: Colors.black,
             indicatorColor: Colors.transparent,

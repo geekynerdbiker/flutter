@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+import 'package:artpia/pages/notification/module.dart';
+
+class NotificationPage extends StatefulWidget {
+  @override
+  _NotificationPageState createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: notificationAppBar(context),
+      backgroundColor: Colors.white,
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: ListView(
+          children: <Widget>[
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context),
+            notificationField(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget notificationField(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(),
+              SizedBox(width: 10),
+              Text('UserID ', style: TextStyle(fontWeight: FontWeight.bold),),
+              Text('did somthing few minutes ago!'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

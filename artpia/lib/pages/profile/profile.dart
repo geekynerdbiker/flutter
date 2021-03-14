@@ -26,11 +26,11 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget userProfile(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: _height * 0.2,
+      height: height * 0.2,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
             margin: EdgeInsets.only(top: 30, right: 20),
             alignment: Alignment.topCenter,
             child: CircleAvatar(
-              radius: _width * 0.1,
+              radius: width * 0.1,
             ),
           ),
           Column(
@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
-                    width: _width * 0.16,
+                    width: width * 0.16,
                     child: Column(
                       children: [
                         Text('items'),
@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    width: _width * 0.16,
+                    width: width * 0.16,
                     child: Column(
                       children: [
                         Text('followers'),
@@ -80,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
-                    width: _width * 0.16,
+                    width: width * 0.16,
                     child: Column(
                       children: [
                         Text(
@@ -102,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 5),
-                    width: _width * 0.25,
+                    width: width * 0.25,
                     height: 30,
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.black)),
@@ -113,13 +113,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Container(
-                    width: _width * 0.25,
+                    width: width * 0.25,
                     height: 30,
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.black)),
                     child: Center(
                       child: Text(
-                        'Message',
+                        'Notification',
                       ),
                     ),
                   ),
@@ -133,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget productList(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    final double height = MediaQuery.of(context).size.height;
 
     return Expanded(
       child: GridView.count(

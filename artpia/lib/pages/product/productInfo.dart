@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:artpia/assets/module.dart';
-import 'package:artpia/pages/message/module.dart';
 import 'package:artpia/pages/product/module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -58,18 +57,18 @@ class ProductInfoPage extends StatelessWidget {
   }
 
   Widget images(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
+    final double width = MediaQuery.of(context).size.width;
 
     return Container(
       margin: EdgeInsets.all(15),
-      width: _width,
-      height: _width * 9 / 16,
+      width: width,
+      height: width * 9 / 16,
       color: Colors.blue,
     );
   }
 
   Widget description(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
+    final double height = MediaQuery.of(context).size.height;
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

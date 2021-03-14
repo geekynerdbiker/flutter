@@ -25,19 +25,22 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   Widget categoryPanel(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('Category', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          width: MediaQuery.of(context).size.width,
-          height: 300,
-          color: Colors.blue,
-        ),
-      ],
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [testItem(), testItem(), testItem()],
+      ),
+    );
+  }
+
+  Widget testItem() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: Colors.blue)),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      width: 80,
+      height: 80,
     );
   }
 }
