@@ -11,8 +11,7 @@ Widget browseAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     leading: Container(),
     title: Container(
-      width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Text('Search Bar Here'),
+      child: Text('Search Bar Here', style: TextStyle(color: Colors.black),),
     ),
   );
 }

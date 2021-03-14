@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget messageAppBar(BuildContext context) {
+Widget notificationAppBar(BuildContext context) {
   return AppBar(
     toolbarHeight: MediaQuery.of(context).size.height * 0.07,
     elevation: 0,
