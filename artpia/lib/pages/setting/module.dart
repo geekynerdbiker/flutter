@@ -9,7 +9,7 @@ Widget settingAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Image.asset('logo-image-path'),
+      child: Text('Setting', style: TextStyle(color: Colors.black),),
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),

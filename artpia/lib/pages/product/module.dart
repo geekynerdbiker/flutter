@@ -7,10 +7,13 @@ Widget productAppBar(BuildContext context) {
     elevation: 0,
     centerTitle: true,
     backgroundColor: Colors.white,
-    leading: Container(),
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Image.asset('logo-image-path'),
+      child: Text('Home', style: TextStyle(color: Colors.black),),
+    ),
+    leading: FlatButton(
+      onPressed: () => Navigator.pop(context),
+      child: Icon(CupertinoIcons.clear),
     ),
   );
 }
@@ -23,7 +26,7 @@ Widget addProductAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Image.asset('logo-image-path'),
+      child:Text('Home', style: TextStyle(color: Colors.black),),
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),
@@ -31,4 +34,3 @@ Widget addProductAppBar(BuildContext context) {
     ),
   );
 }
-

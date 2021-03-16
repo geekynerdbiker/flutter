@@ -149,9 +149,8 @@ Widget profileImage(BuildContext context, UserClass user) {
 }
 
 Widget addProductFAT(BuildContext context) {
-  Route route = MaterialPageRoute(builder: (context) => AddProductPage());
   return FloatingActionButton(onPressed: () {
-    Navigator.push(context, _createRoute());
+    Navigator.push(context, createRoute(AddProductPage()));
   });
 }
 
@@ -197,9 +196,9 @@ class TotalAmount extends ChangeNotifier {
   }
 }
 
-Route _createRoute() {
+Route createRoute(Widget page) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => AddProductPage(),
+    pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       var begin = Offset(0.0, 1.0);
       var end = Offset.zero;

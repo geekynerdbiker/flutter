@@ -19,7 +19,7 @@ Widget profileAppBar(BuildContext context) {
           .of(context)
           .size
           .width * 2 / 5,
-      child: Image.asset('logo-image-path'),
+      child: Text('Home', style: TextStyle(color: Colors.black),),
     ),
     actions: [
       FlatButton(

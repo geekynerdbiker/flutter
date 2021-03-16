@@ -9,7 +9,7 @@ Widget notificationAppBar(BuildContext context) {
     leading: Container(),
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Image.asset('logo-image-path'),
+      child: Text('Notification', style: TextStyle(color: Colors.black),),
     ),
   );
 }
