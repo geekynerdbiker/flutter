@@ -35,10 +35,9 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Widget notificationField(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       height: 50,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
@@ -46,7 +45,7 @@ class _NotificationPageState extends State<NotificationPage> {
               CircleAvatar(),
               SizedBox(width: 10),
               Text('UserID ', style: TextStyle(fontWeight: FontWeight.bold),),
-              Text('did somthing few minutes ago!'),
+              Text('did something a minute ago!'),
             ],
           ),
         ],

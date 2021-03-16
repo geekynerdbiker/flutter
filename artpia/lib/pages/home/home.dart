@@ -52,9 +52,8 @@ Widget item(BuildContext context) {
     children: [
       InkWell(
         onTap: () {
-          // Route route =
-          //     MaterialPageRoute(builder: (context) => ProductInfoPage(product));
-          // Navigator.push(context, route);
+          Route route = createRoute(ProductInfoPage());
+          Navigator.push(context, route);
         },
         child: Container(
           decoration: BoxDecoration(
