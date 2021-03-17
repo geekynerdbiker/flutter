@@ -7,13 +7,13 @@ Widget settingAppBar(BuildContext context) {
     elevation: 0,
     centerTitle: true,
     backgroundColor: Colors.white,
-    title: Container(
-      width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Text('Setting', style: TextStyle(color: Colors.black),),
+    title: Text(
+      'Setting',
+      style: TextStyle(color: Colors.black),
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),
-      child: Icon(CupertinoIcons.clear),
+      child: Icon(CupertinoIcons.clear, size: 18, color: Colors.grey,),
     ),
   );
 }

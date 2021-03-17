@@ -10,10 +10,9 @@ Widget homeAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     leading: Container(),
-    title: Container(
-      width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Text('Home', style: TextStyle(color: Colors.black),),
+    title: Text(
+      'Home',
+      style: TextStyle(color: Colors.black),
     ),
   );
 }
-

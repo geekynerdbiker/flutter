@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget productList(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
 
-    return Expanded(
+    return Container(
       child: GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 1,
