@@ -54,7 +54,7 @@ class SettingPage extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               option,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              // style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           Icon(CupertinoIcons.right_chevron)
