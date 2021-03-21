@@ -20,7 +20,9 @@ class SettingPage extends StatelessWidget {
 
   Widget list(BuildContext context, String s) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, ),
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
       child: Column(
         children: [
           listItemTitle(context, 'Title'),
@@ -42,7 +44,6 @@ class SettingPage extends StatelessWidget {
       ),
     );
   }
-
 
   Widget listItem(BuildContext context, String option) {
     return InkWell(
