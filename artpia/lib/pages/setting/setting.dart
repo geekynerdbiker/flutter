@@ -43,6 +43,7 @@ class SettingPage extends StatelessWidget {
     );
   }
 
+
   Widget listItem(BuildContext context, String option) {
     return InkWell(
       onTap: () => print('selected ' + option),

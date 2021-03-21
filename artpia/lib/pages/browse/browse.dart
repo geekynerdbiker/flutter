@@ -16,9 +16,7 @@ class _BrowsePageState extends State<BrowsePage> {
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
-          children: <Widget>[
-            categoryPanel(context),
-          ],
+          children: <Widget>[categoryPanel(context), recentSearch(context)],
         ),
       ),
     );
@@ -26,9 +24,51 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget categoryPanel(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [testItem(), testItem(), testItem()],
+        child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          width: MediaQuery.of(context).size.width,
+          child: Text('category'),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [testItem(), testItem(), testItem()],
+        ),
+      ],
+    ));
+  }
+
+  Widget recentSearch(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Recent Search'),
+              InkWell(
+                onTap: () {
+                  print("See All");
+                },
+                child: Text('See All'),
+              )
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            height: 300,
+            child: ListView(
+              children: [
+                Text('search1'),
+                Text('search2'),
+                Text('search3'),
+                Text('search4'),
+                Text('search5'),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
