@@ -47,7 +47,7 @@ class SettingPage extends StatelessWidget {
 
   Widget listItem(BuildContext context, String option) {
     return InkWell(
-      onTap: () => print('selected ' + option),
+      // onTap: () => print('selected ' + option),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
