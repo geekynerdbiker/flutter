@@ -9,7 +9,19 @@ class _OrderListPageState extends State<OrderListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        child: ListView(
+          children: [
+            testItem(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget testItem(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     );
   }
 }
