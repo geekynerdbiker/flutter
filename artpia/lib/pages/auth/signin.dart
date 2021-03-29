@@ -9,11 +9,11 @@ import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/auth/signup.dart';
 import 'package:artpia/pages/auth/module.dart';
 
-class AuthenticPage extends StatefulWidget {
-  _AuthenticPageState createState() => _AuthenticPageState();
+class SignInPage extends StatefulWidget {
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _AuthenticPageState extends State<AuthenticPage> {
+class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailTextEditController =
       TextEditingController();
   final TextEditingController _passwordTextEditController =
