@@ -63,8 +63,6 @@ class _BrowsePageState extends State<BrowsePage> {
                 Text('search1'),
                 Text('search2'),
                 Text('search3'),
-                Text('search4'),
-                Text('search5'),
               ],
             ),
           ),
