@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/home/module.dart';
-import 'package:artpia/pages/product/productInfo.dart';
+import 'package:artpia/pages/artwork/artworkInfo.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: homeAppBar(context),
       backgroundColor: Colors.white,
-      floatingActionButton: addProductFAT(context),
+      floatingActionButton: addArtworkFAT(context),
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: GridView.count(
@@ -52,7 +52,7 @@ Widget item(BuildContext context) {
     children: [
       InkWell(
         onTap: () {
-          Route route = createRoute(ProductInfoPage());
+          Route route = createRoute(ArtworkInfoPage());
           Navigator.push(context, route);
         },
         child: Container(
@@ -62,7 +62,7 @@ Widget item(BuildContext context) {
           margin: EdgeInsets.symmetric(horizontal: 10),
           width: MediaQuery.of(context).size.width / 2 - 30,
           height: MediaQuery.of(context).size.width / 2 - 30,
-          // child: Image.network(product.imageURL[0]),
+          // child: Image.netartwork(artwork.imageURL[0]),
         ),
       ),
       Container(
@@ -73,7 +73,7 @@ Widget item(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'product title',
+              'artwork title',
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               textAlign: TextAlign.start,
             ),

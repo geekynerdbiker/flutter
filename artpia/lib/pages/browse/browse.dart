@@ -24,19 +24,20 @@ class _BrowsePageState extends State<BrowsePage> {
 
   Widget categoryPanel(BuildContext context) {
     return Container(
-        child: Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          width: MediaQuery.of(context).size.width,
-          child: Text('category'),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [testItem(), testItem(), testItem()],
-        ),
-      ],
-    ));
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            width: MediaQuery.of(context).size.width,
+            child: Text('category'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [testItem(), testItem(), testItem()],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget recentSearch(BuildContext context) {

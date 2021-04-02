@@ -26,7 +26,7 @@ class _InterfacePageState extends State<InterfacePage> {
       length: 4,
       initialIndex: 0,
       child: Scaffold(
-        // floatingActionButton: addProductFAT(context),
+        // floatingActionButton: addArtworkFAT(context),
         backgroundColor: Colors.white,
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),

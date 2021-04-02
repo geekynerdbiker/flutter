@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:artpia/assets/config.dart';
-import 'package:artpia/pages/product/addProduct.dart';
+import 'package:artpia/pages/artwork/addArtwork.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserClass {
@@ -27,7 +27,7 @@ class UserClass {
       };
 }
 
-class Product {
+class Artwork {
   String uid;
   String pid;
   String title;
@@ -39,7 +39,7 @@ class Product {
 
   List<String> imageURL = [];
 
-  Product(
+  Artwork(
       {this.uid,
       this.pid,
       this.title,
@@ -50,7 +50,7 @@ class Product {
       this.likes,
       this.imageURL});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  Artwork.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     pid = json['pid'];
     title = json['title'];
@@ -110,7 +110,7 @@ class LoadingAlertDialog extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text('Authenticating, Please wait.....'),
+          Text('Authenticating, Please wait...'),
         ],
       ),
     );
@@ -148,9 +148,9 @@ Widget profileImage(BuildContext context, UserClass user) {
   );
 }
 
-Widget addProductFAT(BuildContext context) {
+Widget addArtworkFAT(BuildContext context) {
   return FloatingActionButton(onPressed: () {
-    Navigator.push(context, createRoute(AddProductPage()));
+    Navigator.push(context, createRoute(AddArtworkPage()));
   });
 }
 
