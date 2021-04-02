@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
           physics: ClampingScrollPhysics(),
           children: <Widget>[
             userProfile(context),
-            productList(context),
+            artworkList(context),
           ],
         ),
       ),
@@ -132,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget productList(BuildContext context) {
+  Widget artworkList(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
 
     return Container(

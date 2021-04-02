@@ -40,7 +40,7 @@ Widget userProfile(BuildContext context, UserClass user) {
   );
 }
 
-Widget productList(BuildContext context, UserClass user) {
+Widget artworkList(BuildContext context, UserClass user) {
   return GridView.builder(
     gridDelegate: null,
     itemBuilder: null,
