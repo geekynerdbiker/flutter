@@ -76,7 +76,7 @@ class _BrowsePageState extends State<BrowsePage> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          border: Border.all(color: Colors.blue)),
+          border: Border.all(color: Colors.black)),
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: 80,
       height: 80,

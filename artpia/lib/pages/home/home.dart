@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/home/module.dart';
-import 'package:artpia/pages/artwork/artworkInfo.dart';
+import 'package:artpia/pages/artwork/artworkDetail.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: homeAppBar(context),
       backgroundColor: Colors.white,
-      floatingActionButton: addArtworkFAT(context),
+      floatingActionButton: addArtworkFAB(context),
       body: Container(
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: GridView.count(
@@ -58,7 +58,7 @@ Widget item(BuildContext context) {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
-              border: Border.all(color: Colors.blue)),
+              border: Border.all(color: Colors.black)),
           margin: EdgeInsets.symmetric(horizontal: 10),
           width: MediaQuery.of(context).size.width / 2 - 30,
           height: MediaQuery.of(context).size.width / 2 - 30,
