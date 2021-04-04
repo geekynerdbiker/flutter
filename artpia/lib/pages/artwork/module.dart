@@ -9,7 +9,10 @@ Widget artworkAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child: Text('Home', style: TextStyle(color: Colors.black),),
+      child: Text(
+        'Home',
+        style: TextStyle(color: Colors.black),
+      ),
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),
@@ -26,7 +29,10 @@ Widget addArtworkAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     title: Container(
       width: MediaQuery.of(context).size.width * 2 / 5,
-      child:Text('Home', style: TextStyle(color: Colors.black),),
+      child: Text(
+        'Home',
+        style: TextStyle(color: Colors.black),
+      ),
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),

@@ -148,10 +148,20 @@ Widget profileImage(BuildContext context, UserClass user) {
   );
 }
 
-Widget addArtworkFAT(BuildContext context) {
-  return FloatingActionButton(onPressed: () {
-    Navigator.push(context, createRoute(AddArtworkPage()));
-  });
+Widget addArtworkFAB(BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(context, createRoute(AddArtworkPage()));
+    },
+    child: Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.black),
+      child: Center(
+        child: Icon(Icons.add, color: Colors.white, size: 30,),
+      ),
+    ),
+  );
 }
 
 class FavoriteItemCounter extends ChangeNotifier {
