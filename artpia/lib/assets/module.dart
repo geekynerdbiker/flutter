@@ -136,8 +136,8 @@ linearProgress() {
 }
 
 Widget profileImage(BuildContext context, UserClass user) {
-  String path =
-      'gs://artpia.appspot.com/user/' + user.username + '+' + 'profile.jpg';
+  // String path =
+  //     'gs://artpia.appspot.com/user/' + user.username + '+' + 'profile.jpg';
   // var image = FirebaseImage(path, shouldCache: true, maxSizeBytes: 20 * 1024 * 1024, cacheRefreshStrategy: CacheRefreshStrategy.BY_METADATA_DATE);
 
   return Container(
@@ -156,9 +156,14 @@ Widget addArtworkFAB(BuildContext context) {
     child: Container(
       width: 50,
       height: 50,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.black),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100), color: Colors.black),
       child: Center(
-        child: Icon(Icons.add, color: Colors.white, size: 30,),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
       ),
     ),
   );
