@@ -50,14 +50,14 @@ Widget hotArtists(BuildContext context) {
 //       itemBuilder: (context, index) {
 //         return Container(
 //           margin: EdgeInsets.only(top: 30, left: 20),
-//           child: artistInfo(context, userItems[index]),
+//           child: artistDetail(context, userItems[index]),
 //         );
 //       },
 //     ),
 //   );
 // }
 
-Widget artistInfo(BuildContext context, UserClass user) {
+Widget artistDetail(BuildContext context, UserClass user) {
   return Container(
     margin: EdgeInsets.only(right: 8),
     child: Column(

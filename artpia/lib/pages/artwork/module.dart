@@ -8,9 +8,8 @@ Widget artworkAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     title: Container(
-      width: MediaQuery.of(context).size.width * 2 / 5,
       child: Text(
-        'Home',
+        'ADD ARTWORK',
         style: TextStyle(color: Colors.black),
       ),
     ),
