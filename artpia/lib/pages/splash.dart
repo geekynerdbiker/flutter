@@ -17,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    getUserInfo();
+    getUserDetail();
     displaySplash();
   }
 
-  getUserInfo() async {
+  getUserDetail() async {
     Artpia.auth = FirebaseAuth.instance;
     Artpia.sharedPreferences = await SharedPreferences.getInstance();
     Artpia.firestore = FirebaseFirestore.instance;

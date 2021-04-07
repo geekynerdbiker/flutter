@@ -1,3 +1,4 @@
+import 'package:artpia/pages/order/orderList.dart';
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/profile/module.dart';
@@ -112,14 +113,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: width * 0.25,
-                    height: 30,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: Center(
-                      child: Text(
-                        'Notification',
+                  InkWell(
+                    onTap: () {
+                      Route route = MaterialPageRoute(builder: (context) => OrderListPage());
+                      Navigator.push(context, route);
+                    },
+                    child: Container(
+                      width: width * 0.25,
+                      height: 30,
+                      decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                      child: Center(
+                        child: Text(
+                          'ORDER LIST',
+                        ),
                       ),
                     ),
                   ),

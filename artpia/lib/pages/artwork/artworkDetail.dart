@@ -1,13 +1,13 @@
-import 'package:artpia/pages/order/orderWork.dart';
+import 'package:artpia/pages/order/orderArtwork.dart';
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ArtworkInfoPage extends StatelessWidget {
+class ArtworkDetailPage extends StatelessWidget {
   // final Artwork artwork;
 
-  // ArtworkInfoPage(this.artwork);
+  // ArtworkDetailPage(this.artwork);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +21,11 @@ class ArtworkInfoPage extends StatelessWidget {
             images(context),
             description(context),
             otherArtwork(context),
-            buyArtwork(context)
           ],
         ),
       ),
+      floatingActionButton: buyArtwork(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -165,7 +166,7 @@ class ArtworkInfoPage extends StatelessWidget {
   Widget buyArtwork(BuildContext context) {
     return Container(
       color: Colors.black,
-      width: 150,
+      width: MediaQuery.of(context).size.width,
       height: 50,
       child: InkWell(
           onTap: () {

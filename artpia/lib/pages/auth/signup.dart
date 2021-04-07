@@ -205,7 +205,7 @@ class _SignUpPage extends State<SignUpPage> {
     });
 
     if (firebaseUser != null) {
-      saveUserInfoToFireStore(firebaseUser).then((value) {
+      saveUserDetailToFireStore(firebaseUser).then((value) {
         Navigator.pop(context);
         Route route = MaterialPageRoute(builder: (context) => HomePage());
         Navigator.pushReplacement(context, route);
@@ -213,7 +213,7 @@ class _SignUpPage extends State<SignUpPage> {
     }
   }
 
-  Future saveUserInfoToFireStore(User firebaseUser) async {
+  Future saveUserDetailToFireStore(User firebaseUser) async {
     FirebaseFirestore.instance.collection("users").doc(firebaseUser.uid).set({
       'uid': firebaseUser.uid,
       'username': _nameTextEditController.text.trim(),

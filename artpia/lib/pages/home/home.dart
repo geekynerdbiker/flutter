@@ -52,7 +52,7 @@ Widget item(BuildContext context) {
     children: [
       InkWell(
         onTap: () {
-          Route route = createRoute(ArtworkInfoPage());
+          Route route = createRoute(ArtworkDetailPage());
           Navigator.push(context, route);
         },
         child: Container(
