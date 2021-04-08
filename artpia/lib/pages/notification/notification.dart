@@ -42,7 +42,7 @@ class _NotificationPageState extends State<NotificationPage> {
         children: [
           Row(
             children: [
-              CircleAvatar(),
+              CircleAvatar(backgroundColor: Colors.black,),
               SizedBox(width: 10),
               Text('UserID ', style: TextStyle(fontWeight: FontWeight.bold),),
               Text('did something a minute ago!'),

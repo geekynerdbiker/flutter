@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/assets/module.dart';
-import 'package:artpia/pages/auth/signup.dart';
 import 'package:artpia/pages/auth/module.dart';
 
 class SignInPage extends StatefulWidget {
@@ -31,42 +30,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            inputSector(context),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: Text('OR'),
-            ),
             socialOptions(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget inputSector(BuildContext context) {
-    return Container(
-      height: 160,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            CustomTextField(
-              controller: _emailTextEditController,
-              hintText: 'e-mail',
-              isObsecure: false,
-            ),
-            CustomTextField(
-              controller: _passwordTextEditController,
-              hintText: 'password',
-              isObsecure: false,
-            ),
-            SizedBox(height: 5,),
-            InkWell(
-              onTap: () {
-                print('Sign In');
-              },
-              child: Text('Sign In', style: TextStyle(fontSize: 25),),
-            ),
           ],
         ),
       ),
@@ -89,9 +53,6 @@ class _SignInPageState extends State<SignInPage> {
         switch (title) {
           case 'Sign In':
             signIn();
-            return;
-          case 'Sign Up':
-            signUp();
             return;
           case 'Google':
             google();
@@ -122,11 +83,6 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
-  }
-
-  void signUp() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SignUpPage()));
   }
 
   void signIn() {
