@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 Widget orderAppBar(BuildContext context) {
   return AppBar(
-    toolbarHeight: MediaQuery.of(context).size.height * 0.07,
+    toolbarHeight: MediaQuery
+        .of(context)
+        .size
+        .height * 0.07,
     elevation: 0,
     centerTitle: true,
     backgroundColor: Colors.white,
@@ -13,9 +16,11 @@ Widget orderAppBar(BuildContext context) {
         style: TextStyle(color: Colors.black),
       ),
     ),
-    leading: FlatButton(
-      onPressed: () => Navigator.pop(context),
-      child: Icon(CupertinoIcons.back),
+    leading: InkWell(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Icon(CupertinoIcons.back, color: Colors.black,),
     ),
   );
 }
