@@ -19,6 +19,9 @@ class _ProfilePageState extends State<ProfilePage> {
           physics: ClampingScrollPhysics(),
           children: <Widget>[
             userProfile(context),
+            SizedBox(
+              height: 20,
+            ),
             artworkList(context),
           ],
         ),
@@ -31,157 +34,58 @@ class _ProfilePageState extends State<ProfilePage> {
     final double width = MediaQuery.of(context).size.width;
 
     return Container(
-      height: height * 0.2,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
+      child:  Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 30, right: 20),
-            alignment: Alignment.topCenter,
-            child: CircleAvatar(
-              radius: width * 0.1,
-            ),
+          CircleAvatar(
+            backgroundColor: Colors.black,
+            radius: 60,
           ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 20),
-                    width: width * 0.16,
-                    child: Column(
-                      children: [
-                        Text('items'),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '0',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    width: width * 0.16,
-                    child: Column(
-                      children: [
-                        Text('followers'),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '1000',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 20),
-                    width: width * 0.16,
-                    child: Column(
-                      children: [
-                        Text(
-                          'following',
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '1000',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
-                    width: width * 0.25,
-                    height: 30,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: Center(
-                      child: Text(
-                        'Follow',
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Route route = MaterialPageRoute(builder: (context) => OrderListPage());
-                      Navigator.push(context, route);
-                    },
-                    child: Container(
-                      width: width * 0.25,
-                      height: 30,
-                      decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                      child: Center(
-                        child: Text(
-                          'ORDER LIST',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          SizedBox(
+            height: 10,
           ),
+          Text('Name', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+          Text(' City, Country', style: TextStyle(fontSize: 18,),),
         ],
       ),
     );
   }
 
   Widget artworkList(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-
     return Container(
-      child: GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: 1,
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          testItem(),
-          testItem2(),
-          testItem3(),
-          testItem2(),
-          testItem(),
-          testItem2(),
-          testItem3(),
-          testItem2(),
-          testItem(),
-          testItem2(),
-          testItem3(),
-          testItem2(),
-          testItem(),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            width: MediaQuery.of(context).size.width,
+            child: Text('Artworks', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
+          ),
+          GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 1,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              testItem(),
+              testItem(),
+              testItem(),
+              testItem(),testItem(),
+              testItem(),
+              testItem(),
+              testItem(),
+            ],
+          ),
         ],
-      ),
+      )
     );
   }
 
   Widget testItem() {
     return Container(
-      color: Colors.orange,
-    );
-  }
-
-  Widget testItem2() {
-    return Container(
-      color: Colors.blueGrey,
-    );
-  }
-
-  Widget testItem3() {
-    return Container(
-      color: Colors.cyan,
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: Colors.black, borderRadius: BorderRadius.circular(20)),
     );
   }
 }
