@@ -1,9 +1,9 @@
-import 'package:artpia/assets/module.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:artpia/assets/module.dart';
 
 import 'package:artpia/pages/home/home.dart';
-import 'package:artpia/pages/browse/browse.dart';
+import 'package:artpia/pages/search/search.dart';
 import 'package:artpia/pages/notification/notification.dart';
 import 'package:artpia/pages/profile/profile.dart';
 
@@ -32,7 +32,7 @@ class _InterfacePageState extends State<InterfacePage> {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
-            BrowsePage(),
+            SearchPage(),
             NotificationPage(),
             ProfilePage(),
           ],
