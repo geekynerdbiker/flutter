@@ -1,24 +1,12 @@
-import 'package:artpia/pages/interface.dart';
 import 'package:flutter/material.dart';
-import 'package:artpia/pages/home/home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:artpia/assets/config.dart';
-import 'package:artpia/assets/module.dart';
-import 'package:artpia/pages/auth/module.dart';
+import 'package:artpia/pages/interface.dart';
 
 class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final TextEditingController _emailTextEditController =
-      TextEditingController();
-  final TextEditingController _passwordTextEditController =
-      TextEditingController();
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +39,6 @@ class _SignInPageState extends State<SignInPage> {
     return InkWell(
       onTap: () {
         switch (title) {
-          case 'Sign In':
-            signIn();
-            return;
           case 'Google':
             google();
             return;
@@ -83,71 +68,6 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
-  }
-
-  void signIn() {
-    _emailTextEditController.text.isNotEmpty &&
-            _passwordTextEditController.text.isNotEmpty
-        ? signInUser()
-        : showDialog(
-            context: context,
-            builder: (c) {
-              return ErrorAlertDialog(
-                  message: 'Please write email and password.');
-            });
-  }
-
-  FirebaseAuth _auth = FirebaseAuth.instance;
-
-  void signInUser() async {
-    showDialog(
-        context: context,
-        builder: (c) {
-          return LoadingAlertDialog(message: 'Authenticating, Please wait.');
-        });
-    User firebaseUser;
-    await _auth
-        .signInWithEmailAndPassword(
-            email: _emailTextEditController.text.trim(),
-            password: _passwordTextEditController.text.trim())
-        .then((authUser) {
-      firebaseUser = authUser.user;
-    }).catchError((error) {
-      Navigator.pop(context);
-      showDialog(
-          context: context,
-          builder: (c) {
-            return ErrorAlertDialog(message: error.message.toString());
-          });
-    });
-    if (firebaseUser != null) {
-      readData(firebaseUser).then((s) {
-        Navigator.pop(context);
-        Route route = MaterialPageRoute(builder: (context) => HomePage());
-        Navigator.pushReplacement(context, route);
-      });
-    }
-  }
-
-  Future readData(User firebaseUser) async {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(firebaseUser.uid)
-        .get()
-        .then((dataSnapshot) async {
-      await Artpia.sharedPreferences
-          .setString('uid', dataSnapshot.data()[Artpia.userUID]);
-      await Artpia.sharedPreferences
-          .setString(Artpia.userEmail, dataSnapshot.data()[Artpia.userEmail]);
-      await Artpia.sharedPreferences
-          .setString(Artpia.userName, dataSnapshot.data()[Artpia.userName]);
-      await Artpia.sharedPreferences.setString(Artpia.userProfileImageUrl,
-          dataSnapshot.data()[Artpia.userProfileImageUrl]);
-      List<String> favoriteList =
-          dataSnapshot.data()[Artpia.userFavoriteList].cast<String>();
-      await Artpia.sharedPreferences
-          .setStringList(Artpia.userFavoriteList, favoriteList);
-    });
   }
 
   void google() {
