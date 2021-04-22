@@ -7,7 +7,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,8 +70,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void google() {
-    Route route = MaterialPageRoute(builder: (context) => InterfacePage());
-    Navigator.push(context, route);
+    print('Google Sign In');
   }
 
   void apple() {
@@ -81,5 +79,10 @@ class _SignInPageState extends State<SignInPage> {
 
   void facebook() {
     print('Facebook Sign In');
+  }
+
+  void navigateToHome() {
+    Route route = MaterialPageRoute(builder: (context) => InterfacePage());
+    Navigator.push(context, route);
   }
 }
