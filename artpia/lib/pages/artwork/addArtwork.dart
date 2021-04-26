@@ -1,10 +1,16 @@
-import 'package:artpia/pages/order/orderArtwork.dart';
 import 'package:flutter/material.dart';
+import 'package:artpia/pages/order/orderArtwork.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AddArtworkPage extends StatelessWidget {
+class AddArtworkPage extends StatefulWidget {
+  @override
+  _AddArtworkPageState createState() => _AddArtworkPageState();
+}
+
+class _AddArtworkPageState extends State<AddArtworkPage> {
+  String _error = 'No Error Detected.';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +20,7 @@ class AddArtworkPage extends StatelessWidget {
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: [
-            // sellerDetail(),
-            images(context),
+            addImages(context),
             description(context),
           ],
         ),
@@ -25,13 +30,17 @@ class AddArtworkPage extends StatelessWidget {
     );
   }
 
-  Widget images(BuildContext context) {
+  Widget addImages(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
 
-    return Container(
-      width: width,
-      height: width * 3 / 4,
-      color: Colors.black,
+    return InkWell(
+      onTap: () {
+      },
+      child: Container(
+        width: width,
+        height: width * 3 / 4,
+        color: Colors.black,
+      ),
     );
   }
 
@@ -51,21 +60,22 @@ class AddArtworkPage extends StatelessWidget {
               children: [
                 Container(
                   decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
+                      BoxDecoration(border: Border.all(color: Colors.black)),
                   width: MediaQuery.of(context).size.width,
                   height: 40,
                   child: Text('Title of Artwork'),
                 ),
               ],
             ),
-          ),Container(
+          ),
+          Container(
             margin: EdgeInsets.symmetric(vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
+                      BoxDecoration(border: Border.all(color: Colors.black)),
                   width: MediaQuery.of(context).size.width,
                   height: 40,
                   child: Text('Price of Artwork'),
