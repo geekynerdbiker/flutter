@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:artpia/pages/order/orderArtwork.dart';
+import 'package:images_picker/images_picker.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
+import 'package:artpia/pages/order/orderArtwork.dart';
 
 class AddArtworkPage extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class AddArtworkPage extends StatefulWidget {
 }
 
 class _AddArtworkPageState extends State<AddArtworkPage> {
-  String _error = 'No Error Detected.';
+  String path;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,23 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
     final double width = MediaQuery.of(context).size.width;
 
     return InkWell(
-      onTap: () {
+      onTap: () async {
+          List<Media> res = await ImagesPicker.pick(
+            count: 3,
+            pickType: PickType.all,
+            language: Language.System,
+            cropOpt: CropOption(
+              // aspectRatio: CropAspectRatio.wh16x9
+            ),
+          );
+          if (res != null) {
+            print(res.map((e) => e.path).toList());
+            setState(() {
+              path = res[0].thumbPath;
+            });
+            // bool status = await ImagesPicker.saveImageToAlbum(File(res[0]?.path));
+            // print(status);
+          }
       },
       child: Container(
         width: width,
