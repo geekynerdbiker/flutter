@@ -12,7 +12,7 @@ Widget orderAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     title: Container(
       child: Text(
-        'ORDER ARTWORK',
+        'Order Artwork',
         style: TextStyle(color: Colors.black),
       ),
     ),

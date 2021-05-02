@@ -11,7 +11,7 @@ Widget homeAppBar(BuildContext context) {
     backgroundColor: Colors.white,
     leading: Container(),
     title: Text(
-      'HOME',
+      'Home',
       style: TextStyle(color: Colors.black),
     ),
   );

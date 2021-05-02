@@ -6,23 +6,26 @@ import 'package:artpia/assets/module.dart';
 
 Widget profileAppBar(BuildContext context) {
   return AppBar(
-    toolbarHeight: MediaQuery
-        .of(context)
-        .size
-        .height * 0.07,
+    toolbarHeight: MediaQuery.of(context).size.height * 0.07,
     elevation: 0,
     centerTitle: true,
     backgroundColor: Colors.white,
     leading: Container(),
-    title: Text('Profile', style: TextStyle(color: Colors.black),),
+    title: Container(
+      child: Text(
+        'Profile',
+        style: TextStyle(color: Colors.black),
+      ),
+    ),
     actions: [
-      FlatButton(
+      TextButton(
           onPressed: () {
             Navigator.push(context, _createRoute());
           },
-          color: Colors.transparent,
-          child: Icon(CupertinoIcons.settings, size: 24,)
-      ),
+          child: Icon(
+            CupertinoIcons.settings,
+            size: 24,
+          )),
     ],
   );
 }

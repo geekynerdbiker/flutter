@@ -11,16 +11,17 @@ Widget searchAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     title: Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.black),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Icon(CupertinoIcons.search),
-          ),
-          SizedBox(width: 10,),
-          Text('Search here!'),
-        ],
+      height: 25,
+      width: MediaQuery.of(context).size.width,
+      child: Text(
+        'Search here!',
+        style: TextStyle(color: Colors.black),
+      ),
+    ),
+    leading: Center(
+      child: Icon(
+        CupertinoIcons.search,
+        color: Colors.black,
       ),
     ),
   );

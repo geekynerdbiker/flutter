@@ -7,7 +7,11 @@ Widget notificationAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     leading: Container(),
-    title: Text('Notification', style: TextStyle(color: Colors.black),
+    title: Container(
+      child: Text(
+        'Notification',
+        style: TextStyle(color: Colors.black),
+      ),
     ),
   );
 }
