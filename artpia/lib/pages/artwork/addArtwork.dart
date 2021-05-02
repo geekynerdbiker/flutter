@@ -14,50 +14,88 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: artworkAppBar(context),
+      appBar: addArtworkAppBar(context),
       backgroundColor: Colors.white,
       body: Container(
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: [
-            addImages(context),
+            imageBox(context),
             description(context),
+            addArtwork(context),
           ],
         ),
       ),
-      floatingActionButton: addArtwork(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  Widget addImages(BuildContext context) {
+  Widget imageBox(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
 
-    return InkWell(
-      onTap: () async {
-          List<Media> res = await ImagesPicker.pick(
-            count: 5,
-            pickType: PickType.all,
-            language: Language.System,
-            cropOpt: CropOption(
-              // aspectRatio: CropAspectRatio.wh16x9
+    return Column(
+      children: [
+        InkWell(
+          onTap: () async {
+            addImages();
+          },
+          child: Container(
+            width: width,
+            height: width * 3 / 4,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              width: width / 5 - 25,
+              height: width / 5 - 25,
+              color: Colors.black,
             ),
-          );
-          if (res != null) {
-            print(res.map((e) => e.path).toList());
-            setState(() {
-              path = res[0].thumbPath;
-            });
-            // bool status = await ImagesPicker.saveImageToAlbum(File(res[0]?.path));
-            // print(status);
-          }
-      },
-      child: Container(
-        width: width,
-        height: width * 3 / 4,
-        color: Colors.black,
-      ),
+            Container(
+              width: width / 5 - 25,
+              height: width / 5 - 25,
+              color: Colors.black,
+            ),
+            Container(
+              width: width / 5 - 25,
+              height: width / 5 - 25,
+              color: Colors.black,
+            ),
+            Container(
+              width: width / 5 - 25,
+              height: width / 5 - 25,
+              color: Colors.black,
+            ),
+            Container(
+              width: width / 5 - 25,
+              height: width / 5 - 25,
+              color: Colors.black,
+            ),
+          ],
+        )
+      ],
     );
+  }
+
+  void addImages() async {
+    List<Media> res = await ImagesPicker.pick(
+      count: 5,
+      pickType: PickType.all,
+      language: Language.System,
+      cropOpt: CropOption(
+          // aspectRatio: CropAspectRatio.wh16x9
+          ),
+    );
+    if (res != null) {
+      print(res.map((e) => e.path).toList());
+      setState(() {
+        path = res[0].thumbPath;
+      });
+      // bool status = await ImagesPicker.saveImageToAlbum(File(res[0]?.path));
+      // print(status);
+    }
   }
 
   Widget description(BuildContext context) {
