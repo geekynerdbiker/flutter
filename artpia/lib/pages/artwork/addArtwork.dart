@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:images_picker/images_picker.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
-import 'package:artpia/pages/order/orderArtwork.dart';
 
 class AddArtworkPage extends StatefulWidget {
   @override
@@ -37,7 +36,7 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
     return InkWell(
       onTap: () async {
           List<Media> res = await ImagesPicker.pick(
-            count: 3,
+            count: 5,
             pickType: PickType.all,
             language: Language.System,
             cropOpt: CropOption(
