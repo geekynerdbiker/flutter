@@ -42,6 +42,7 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
             width: width,
             height: width * 3 / 4,
             color: Colors.black,
+            child: Image.asset(path),
           ),
         ),
         SizedBox(height: 10,),

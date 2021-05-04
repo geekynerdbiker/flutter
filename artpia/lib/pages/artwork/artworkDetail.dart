@@ -5,9 +5,6 @@ import 'package:artpia/pages/artwork/module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ArtworkDetailPage extends StatelessWidget {
-  // final Artwork artwork;
-
-  // ArtworkDetailPage(this.artwork);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,34 +25,6 @@ class ArtworkDetailPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
-
-  // Widget sellerDetail(BuildContext context) {
-  //   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  //
-  //   return FutureBuilder<DocumentSnapshot>(
-  //     future: users.doc(this.artwork.uid).get(),
-  //     builder: (BuildContext c, AsyncSnapshot<DocumentSnapshot> snapshot) {
-  //       if (snapshot.hasError) return ErrorAlertDialog();
-  //       if (snapshot.connectionState == ConnectionState.done) {
-  //         Map<String, dynamic> data = snapshot.data.data();
-  //         return Container(
-  //           height: 150,
-  //           child: Row(
-  //             children: [
-  //               CircleAvatar(
-  //                 radius: 120,
-  //               ),
-  //               Center(
-  //                 child: Text(data['username']),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //       return LoadingAlertDialog();
-  //     },
-  //   );
-  // }
 
   Widget images(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
