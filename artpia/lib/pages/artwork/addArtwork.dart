@@ -46,36 +46,6 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
           ),
         ),
         SizedBox(height: 10,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: width / 5 - 25,
-              height: width / 5 - 25,
-              color: Colors.black,
-            ),
-            Container(
-              width: width / 5 - 25,
-              height: width / 5 - 25,
-              color: Colors.black,
-            ),
-            Container(
-              width: width / 5 - 25,
-              height: width / 5 - 25,
-              color: Colors.black,
-            ),
-            Container(
-              width: width / 5 - 25,
-              height: width / 5 - 25,
-              color: Colors.black,
-            ),
-            Container(
-              width: width / 5 - 25,
-              height: width / 5 - 25,
-              color: Colors.black,
-            ),
-          ],
-        )
       ],
     );
   }
@@ -86,7 +56,6 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
       pickType: PickType.all,
       language: Language.System,
       cropOpt: CropOption(
-          // aspectRatio: CropAspectRatio.wh16x9
           ),
     );
     if (res != null) {
@@ -94,8 +63,6 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
       setState(() {
         path = res[0].thumbPath;
       });
-      // bool status = await ImagesPicker.saveImageToAlbum(File(res[0]?.path));
-      // print(status);
     }
   }
 
