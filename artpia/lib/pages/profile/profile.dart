@@ -1,7 +1,7 @@
-import 'package:artpia/pages/order/orderList.dart';
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/profile/module.dart';
+import 'package:images_picker/images_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -9,6 +9,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String path;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +51,22 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  void addImages() async {
+    List<Media> res = await ImagesPicker.pick(
+      count: 1,
+      pickType: PickType.all,
+      language: Language.System,
+      cropOpt: CropOption(
+      ),
+    );
+    if (res != null) {
+      print(res.map((e) => e.path).toList());
+      setState(() {
+        path = res[0].thumbPath;
+      });
+    }
   }
 
   Widget artworkList(BuildContext context) {
