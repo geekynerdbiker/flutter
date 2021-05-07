@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
               item(context),
               item(context),
               item(context),
-
             ],
           )),
     );

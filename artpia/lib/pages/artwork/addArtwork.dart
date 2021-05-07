@@ -9,7 +9,7 @@ class AddArtworkPage extends StatefulWidget {
 }
 
 class _AddArtworkPageState extends State<AddArtworkPage> {
-  String path;
+  String path = '/';
 
   @override
   Widget build(BuildContext context) {
