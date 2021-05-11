@@ -1,8 +1,8 @@
-import 'package:artpia/pages/setting/setting.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:artpia/assets/module.dart';
+import 'package:artpia/pages/setting/setting.dart';
 
 Widget profileAppBar(BuildContext context) {
   return AppBar(

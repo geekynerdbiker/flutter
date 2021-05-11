@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/artwork/addArtwork.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserClass {
   String uid;

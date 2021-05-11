@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:artpia/assets/module.dart';
-import 'package:artpia/pages/profile/profile.dart';
-
 Widget homeAppBar(BuildContext context) {
   return AppBar(
     toolbarHeight: MediaQuery.of(context).size.height * 0.07,

@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:artpia/assets/module.dart';
-import 'package:artpia/pages/profile/profile.dart';
 
 Widget searchAppBar(BuildContext context) {
   return AppBar(
