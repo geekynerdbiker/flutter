@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:artpia/assets/module.dart';
 import 'package:artpia/pages/home/module.dart';

@@ -1,8 +1,7 @@
-import 'package:artpia/pages/order/orderArtwork.dart';
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:artpia/pages/order/orderArtwork.dart';
 
 class ArtworkDetailPage extends StatelessWidget {
   @override

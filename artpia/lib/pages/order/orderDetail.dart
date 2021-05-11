@@ -1,5 +1,6 @@
-import 'package:artpia/pages/order/module.dart';
 import 'package:flutter/material.dart';
+
+import 'package:artpia/pages/order/module.dart';
 
 class OrderDetailPage extends StatefulWidget {
   @override

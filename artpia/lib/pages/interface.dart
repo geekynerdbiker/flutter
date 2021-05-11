@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:artpia/assets/module.dart';
 
 import 'package:artpia/pages/home/home.dart';
 import 'package:artpia/pages/search/search.dart';
-import 'package:artpia/pages/notification/notification.dart';
 import 'package:artpia/pages/profile/profile.dart';
+import 'package:artpia/pages/notification/notification.dart';
 
 class InterfacePage extends StatefulWidget {
   @override
