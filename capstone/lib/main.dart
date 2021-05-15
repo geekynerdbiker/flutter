@@ -40,13 +40,14 @@ class _MyHomePageState extends State<MyHomePage> {
           InkWell(
             onTap: () {
               print('Import Video from Gallery');
-              addImagesFromGallery();
+              addVideoFromGallery();
             },
             child: button(context, 'Import Video from Gallery'),
           ),
           InkWell(
             onTap: () {
               print('Import Video from Camera');
+              addVideoFromCamera();
             },
             child: button(context, 'Import Video from Camera'),
           ),
@@ -66,16 +67,34 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void addImagesFromGallery() async {
+  void addVideoFromGallery() async {
     List<Media> res = await ImagesPicker.pick(
-      count: 5,
       pickType: PickType.all,
       language: Language.System,
-      cropOpt: CropOption(
-      ),
+      // cropOpt: CropOption(
+      //   aspectRatio: CropAspectRatio.wh16x9,
+      // ),
+      // maxTime: 60,
     );
     if (res != null) {
       print(res.map((e) => e.path).toList());
+      setState(() {
+        path = res[0].thumbPath;
+      });
+    }
+  }
+
+  void addVideoFromCamera() async {
+    List<Media> res = await ImagesPicker.openCamera(
+      pickType: PickType.image,
+      quality: 0.5,
+      // cropOpt: CropOption(
+      //   aspectRatio: CropAspectRatio.wh16x9,
+      // ),
+      // maxTime: 60,
+    );
+    if (res != null) {
+      print(res[0].path);
       setState(() {
         path = res[0].thumbPath;
       });
