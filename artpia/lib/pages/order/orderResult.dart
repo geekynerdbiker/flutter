@@ -32,7 +32,7 @@ class OrderResultPage extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Route route =
-              MaterialPageRoute(builder: (context) => InterfacePage());
+              MaterialPageRoute(builder: (context) => InterfacePage(true));
           Navigator.push(context, route);
         },
         child: Center(

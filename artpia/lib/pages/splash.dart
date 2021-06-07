@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   displaySplash() {
     Timer(new Duration(seconds: 3), () async {
       if (await Artpia.auth.currentUser != null) {
-        Route route = MaterialPageRoute(builder: (context) => InterfacePage());
+        Route route = MaterialPageRoute(builder: (context) => InterfacePage(true));
         Navigator.pushReplacement(context, route);
       } else {
         Route route = MaterialPageRoute(builder: (context) => SignInPage());

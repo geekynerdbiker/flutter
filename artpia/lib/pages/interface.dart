@@ -4,11 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:artpia/pages/home/home.dart';
 import 'package:artpia/pages/search/search.dart';
 import 'package:artpia/pages/profile/profile.dart';
+import 'package:artpia/pages/profile/artistInfo.dart';
 import 'package:artpia/pages/notification/notification.dart';
 
 class InterfacePage extends StatefulWidget {
   @override
   _InterfacePageState createState() => _InterfacePageState();
+
+  bool info = true;
+  InterfacePage(bool info);
 }
 
 class _InterfacePageState extends State<InterfacePage> {
@@ -23,7 +27,7 @@ class _InterfacePageState extends State<InterfacePage> {
 
     return DefaultTabController(
       length: 4,
-      initialIndex: 0,
+      initialIndex: widget.info ? 0 : 3,
       child: Scaffold(
         // floatingActionButton: addArtworkFAT(context),
         backgroundColor: Colors.white,
@@ -33,7 +37,7 @@ class _InterfacePageState extends State<InterfacePage> {
             HomePage(),
             SearchPage(),
             NotificationPage(),
-            ProfilePage(),
+            widget.info ? ProfilePage() : ArtistPage(),
           ],
         ),
         bottomNavigationBar: Container(

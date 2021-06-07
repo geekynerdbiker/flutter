@@ -50,7 +50,8 @@ Widget item(BuildContext context) {
     children: [
       InkWell(
         onTap: () {
-          Route route = createRoute(ArtworkDetailPage());
+          // Route route = createRoute(ArtworkDetailPage());
+          Route route = MaterialPageRoute(builder: (context) => ArtworkDetailPage());
           Navigator.push(context, route);
         },
         child: Container(

@@ -1,7 +1,9 @@
+import 'package:artpia/pages/interface.dart';
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/artwork/module.dart';
 import 'package:artpia/pages/order/orderArtwork.dart';
+import 'package:artpia/pages/profile/artistInfo.dart';
 
 class ArtworkDetailPage extends StatelessWidget {
   @override
@@ -48,6 +50,18 @@ class ArtworkDetailPage extends StatelessWidget {
             child: Text(
               'artwork.title',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Route route = MaterialPageRoute(builder: (context) => InterfacePage(false));
+              Navigator.push(context, route);
+            },
+            child: Container(
+              child: Text(
+                'artwork.artist',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
             ),
           ),
           Container(
