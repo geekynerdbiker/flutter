@@ -17,16 +17,25 @@ Widget profileAppBar(BuildContext context) {
         style: TextStyle(color: Colors.black),
       ),
     ),
-    actions: [
-      TextButton(
-          onPressed: () {
-            Navigator.push(context, _createRoute());
-          },
-          child: Icon(
-            CupertinoIcons.settings,
-            size: 24,
-          )),
-    ],
+  );
+}
+
+Widget artistAppBar(BuildContext context) {
+  return AppBar(
+    toolbarHeight: MediaQuery.of(context).size.height * 0.07,
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: Colors.white,
+    leading: FlatButton(
+      onPressed: () => Navigator.pop(context),
+      child: Icon(CupertinoIcons.back),
+    ),
+    title: Container(
+      child: Text(
+        'Artist',
+        style: TextStyle(color: Colors.black),
+      ),
+    ),
   );
 }
 

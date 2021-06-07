@@ -15,7 +15,7 @@ Widget artworkAppBar(BuildContext context) {
     ),
     leading: FlatButton(
       onPressed: () => Navigator.pop(context),
-      child: Icon(CupertinoIcons.clear),
+      child: Icon(CupertinoIcons.back),
     ),
   );
 }
