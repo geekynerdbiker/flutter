@@ -11,8 +11,8 @@ class InterfacePage extends StatefulWidget {
   @override
   _InterfacePageState createState() => _InterfacePageState();
 
-  bool info = true;
-  InterfacePage(bool info);
+  bool info;
+  InterfacePage(this.info);
 }
 
 class _InterfacePageState extends State<InterfacePage> {
@@ -25,6 +25,7 @@ class _InterfacePageState extends State<InterfacePage> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
 
+    print(widget.info);
     return DefaultTabController(
       length: 4,
       initialIndex: widget.info ? 0 : 3,

@@ -26,6 +26,8 @@ class _AddArtworkPageState extends State<AddArtworkPage> {
           ],
         ),
       ),
+      floatingActionButton: addArtwork(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

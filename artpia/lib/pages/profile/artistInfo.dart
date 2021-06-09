@@ -15,7 +15,7 @@ class _ArtistPageState extends State<ArtistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: profileAppBar(context),
+      appBar: artistAppBar(context),
       body: Container(
         child: ListView(
           physics: ClampingScrollPhysics(),
