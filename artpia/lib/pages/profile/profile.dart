@@ -1,3 +1,4 @@
+import 'package:artpia/pages/artwork/artworkDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:images_picker/images_picker.dart';
 
@@ -37,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child:  Column(
+      child: Column(
         children: [
           CircleAvatar(
             backgroundColor: Colors.black,
@@ -46,8 +47,16 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(
             height: 10,
           ),
-          Text('Name', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-          Text(' City, Country', style: TextStyle(fontSize: 18,),),
+          Text(
+            'Name',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            ' City, Country',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
         ],
       ),
     );
@@ -58,8 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
       count: 1,
       pickType: PickType.all,
       language: Language.System,
-      cropOpt: CropOption(
-      ),
+      cropOpt: CropOption(),
     );
     if (res != null) {
       print(res.map((e) => e.path).toList());
@@ -71,39 +79,58 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget artworkList(BuildContext context) {
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            width: MediaQuery.of(context).size.width,
-            child: Text('Artworks', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              'Artworks',
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            ),
           ),
-          GridView.count(
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: GridView.count(
             crossAxisCount: 2,
             childAspectRatio: 1,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
-              testItem(),
-              testItem(),
-              testItem(),
-              testItem(),testItem(),
-              testItem(),
-              testItem(),
-              testItem(),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
+              item(context),
             ],
           ),
-        ],
-      )
-    );
+        ),
+      ],
+    ));
   }
 
-  Widget testItem() {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+  Widget item(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Route route =
+            MaterialPageRoute(builder: (context) => ArtworkDetailPage());
+        Navigator.push(context, route);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            border: Border.all(color: Colors.black)),
+        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        width: MediaQuery.of(context).size.width / 2 - 30,
+        height: MediaQuery.of(context).size.width / 2 - 30,
+        // child: Image.netartwork(artwork.imageURL[0]),
+      ),
     );
   }
 }

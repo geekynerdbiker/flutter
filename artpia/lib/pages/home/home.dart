@@ -18,11 +18,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       floatingActionButton: addArtworkFAB(context),
       body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
+          margin: EdgeInsets.symmetric(horizontal: 5),
           child: GridView.count(
             physics: ClampingScrollPhysics(),
             childAspectRatio: 0.8,
             crossAxisCount: 2,
+            shrinkWrap: true,
             children: [
               item(context),
               item(context),
