@@ -32,24 +32,25 @@ class _NotificationPageState extends State<NotificationPage> {
       ),
     );
   }
+}
 
-  Widget notificationField(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-      height: 50,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(backgroundColor: Colors.black,),
-              SizedBox(width: 10),
-              Text('UserID ', style: TextStyle(fontWeight: FontWeight.bold),),
-              Text('did something a minute ago!'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+Widget notificationField(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+    height: 20,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            Text(
+              'UserID ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text('did something a minute ago!'),
+          ],
+        ),
+      ],
+    ),
+  );
 }
