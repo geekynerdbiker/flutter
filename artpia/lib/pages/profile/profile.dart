@@ -23,41 +23,11 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             userProfile(context),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             artworkList(context),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget userProfile(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-    final double width = MediaQuery.of(context).size.width;
-
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: 60,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Name',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            ' City, Country',
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -76,61 +46,88 @@ class _ProfilePageState extends State<ProfilePage> {
       });
     }
   }
+}
 
-  Widget artworkList(BuildContext context) {
-    return Container(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+Widget userProfile(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child: Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              'Artworks',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
-          ),
+        CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 60,
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          child: GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: 1,
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            children: [
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-            ],
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'Artist Name',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'City, Genre',
+          style: TextStyle(
+            fontSize: 16,
           ),
         ),
       ],
-    ));
-  }
+    ),
+  );
+}
 
-  Widget item(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Route route =
-            MaterialPageRoute(builder: (context) => ArtworkDetailPage());
-        Navigator.push(context, route);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            border: Border.all(color: Colors.black)),
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        width: MediaQuery.of(context).size.width / 2 - 30,
-        height: MediaQuery.of(context).size.width / 2 - 30,
-        // child: Image.netartwork(artwork.imageURL[0]),
+Widget artworkList(BuildContext context) {
+  return Container(
+      child: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Container(
+        width: MediaQuery.of(context).size.width,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            'Artworks',
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
-    );
-  }
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: [
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+          ],
+        ),
+      ),
+    ],
+  ));
+}
+
+Widget item(BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Route route =
+          MaterialPageRoute(builder: (context) => ArtworkDetailPage());
+      Navigator.push(context, route);
+    },
+    child: Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: Colors.black)),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      width: MediaQuery.of(context).size.width / 2 - 30,
+      height: MediaQuery.of(context).size.width / 2 - 30,
+      // child: Image.netartwork(artwork.imageURL[0]),
+    ),
+  );
 }

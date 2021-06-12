@@ -18,30 +18,31 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       floatingActionButton: addArtworkFAB(context),
       body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          child: GridView.count(
-            physics: ClampingScrollPhysics(),
-            childAspectRatio: 0.8,
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            children: [
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-              item(context),
-            ],
-          )),
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: GridView.count(
+          physics: ClampingScrollPhysics(),
+          childAspectRatio: 0.75,
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          children: [
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+            item(context),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -52,23 +53,23 @@ Widget item(BuildContext context) {
       InkWell(
         onTap: () {
           // Route route = createRoute(ArtworkDetailPage());
-          Route route = MaterialPageRoute(builder: (context) => ArtworkDetailPage());
+          Route route =
+              MaterialPageRoute(builder: (context) => ArtworkDetailPage());
           Navigator.push(context, route);
         },
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
               border: Border.all(color: Colors.black)),
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          width: MediaQuery.of(context).size.width / 2 - 30,
-          height: MediaQuery.of(context).size.width / 2 - 30,
+          width: MediaQuery.of(context).size.width / 2 - 20,
+          height: MediaQuery.of(context).size.width / 2 - 20,
           // child: Image.netartwork(artwork.imageURL[0]),
         ),
       ),
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        width: MediaQuery.of(context).size.width / 2 - 30,
-        height: 35,
+        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        width: MediaQuery.of(context).size.width / 2 - 20,
+        height: 40,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,8 +78,9 @@ Widget item(BuildContext context) {
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
               textAlign: TextAlign.start,
             ),
-            Text('artist',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+            Text(
+              'artist',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
               textAlign: TextAlign.start,
             ),
           ],
