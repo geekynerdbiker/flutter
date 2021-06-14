@@ -1,8 +1,8 @@
-import 'package:artpia/pages/artwork/artworkDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:images_picker/images_picker.dart';
 
 import 'package:artpia/pages/profile/module.dart';
+import 'package:artpia/pages/artwork/artworkDetail.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
