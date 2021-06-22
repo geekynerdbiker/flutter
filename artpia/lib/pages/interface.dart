@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:artpia/pages/home/home.dart';
+
 import 'package:artpia/pages/search/search.dart';
 import 'package:artpia/pages/profile/profile.dart';
 import 'package:artpia/pages/profile/artistInfo.dart';
+import 'package:artpia/pages/search/searchResult.dart';
 import 'package:artpia/pages/notification/notification.dart';
 
 class InterfacePage extends StatefulWidget {
   @override
   _InterfacePageState createState() => _InterfacePageState();
 
-  bool info;
-  InterfacePage(this.info);
+  bool artistInfo;
+  bool searchResult;
+  InterfacePage({Key key, this.artistInfo = false, this.searchResult = false}) : super(key: key);
 }
 
 class _InterfacePageState extends State<InterfacePage> {
@@ -25,10 +27,15 @@ class _InterfacePageState extends State<InterfacePage> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
 
-    print(widget.info);
+    int initialIndex;
+
+    if(widget.artistInfo) initialIndex = 3;
+    else if(widget.searchResult) initialIndex = 1;
+    else initialIndex = 0;
+
     return DefaultTabController(
       length: 4,
-      initialIndex: widget.info ? 0 : 3,
+      initialIndex: initialIndex,
       child: Scaffold(
         // floatingActionButton: addArtworkFAT(context),
         backgroundColor: Colors.white,
@@ -36,9 +43,9 @@ class _InterfacePageState extends State<InterfacePage> {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
-            SearchPage(),
+            widget.searchResult ? SearchResultPage() : SearchPage(),
             NotificationPage(),
-            widget.info ? ProfilePage() : ArtistPage(),
+            widget.artistInfo ? ArtistPage() : ProfilePage(),
           ],
         ),
         bottomNavigationBar: Container(

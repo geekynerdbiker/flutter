@@ -86,7 +86,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void navigateToHome() {
-    Route route = MaterialPageRoute(builder: (context) => InterfacePage(true));
-    Navigator.push(context, route);
+    Route route = MaterialPageRoute(builder: (context) => InterfacePage());
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 }

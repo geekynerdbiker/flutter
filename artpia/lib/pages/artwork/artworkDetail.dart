@@ -54,7 +54,7 @@ class ArtworkDetailPage extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Route route = MaterialPageRoute(builder: (context) => InterfacePage(false));
+              Route route = MaterialPageRoute(builder: (context) => InterfacePage(artistInfo: true,));
               Navigator.push(context, route);
             },
             child: Container(
