@@ -1,3 +1,5 @@
+import 'package:artpia/pages/interface.dart';
+import 'package:artpia/pages/search/searchResult.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,13 +12,18 @@ Widget searchAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     title: Container(
-      height: 25,
-      width: MediaQuery.of(context).size.width,
-      child: Text(
-        'Search here!',
-        style: TextStyle(color: Colors.black),
-      ),
-    ),
+        height: 25,
+        width: MediaQuery.of(context).size.width,
+        child: InkWell(
+          onTap: () {
+            Route route = MaterialPageRoute(builder: (context) => InterfacePage(searchResult: true,));
+            Navigator.push(context, route);
+          },
+          child: Text(
+            'Search here!',
+            style: TextStyle(color: Colors.black),
+          ),
+        )),
     leading: Center(
       child: Icon(
         CupertinoIcons.search,
@@ -26,16 +33,19 @@ Widget searchAppBar(BuildContext context) {
   );
 }
 
-Widget hotArtists(BuildContext context) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        margin: EdgeInsets.only(top: 30, left: 20),
-        child: Text('Hot Artists'),
+Widget searchResultAppBar(BuildContext context) {
+  return AppBar(
+    toolbarHeight: MediaQuery.of(context).size.height * 0.07,
+    elevation: 0,
+    centerTitle: true,
+    backgroundColor: Colors.white,
+    title: Container(
+      child: Text(
+        'Result',
+        style: TextStyle(color: Colors.black),
       ),
-      // getArtists(context),
-    ],
+    ),
+    leading: Container(),
   );
 }
 
@@ -66,15 +76,3 @@ Widget hotArtists(BuildContext context) {
 //     ),
 //   );
 // }
-
-Widget artistDetail(BuildContext context, UserClass user) {
-  return Container(
-    margin: EdgeInsets.only(right: 8),
-    child: Column(
-      children: <Widget>[
-        profileImage(context, user),
-        Text('@' + user.username),
-      ],
-    ),
-  );
-}
