@@ -14,7 +14,8 @@ class InterfacePage extends StatefulWidget {
 
   bool artistInfo;
   bool searchResult;
-  InterfacePage({Key key, this.artistInfo = false, this.searchResult = false}) : super(key: key);
+  String searchKeyword;
+  InterfacePage({Key key, this.artistInfo = false, this.searchResult = false, this.searchKeyword}) : super(key: key);
 }
 
 class _InterfacePageState extends State<InterfacePage> {

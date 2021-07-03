@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:artpia/pages/interface.dart';
 import 'package:artpia/pages/search/module.dart';
 
 class SearchPage extends StatefulWidget {
@@ -16,29 +17,32 @@ class _SearchPageState extends State<SearchPage> {
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
-          children: <Widget>[categoryPanel(context), recentSearch(context)],
+          children: <Widget>[
+            // categoryPanel(context),
+            recentSearch(context),
+          ],
         ),
       ),
     );
   }
 
-  Widget categoryPanel(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            child: Text('category'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [testItem(), testItem(), testItem()],
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget categoryPanel(BuildContext context) {
+  //   return Container(
+  //     child: Column(
+  //       children: [
+  //         Container(
+  //           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+  //           width: MediaQuery.of(context).size.width,
+  //           child: Text('category'),
+  //         ),
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [testItem(), testItem(), testItem()],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget recentSearch(BuildContext context) {
     return Container(
@@ -48,12 +52,12 @@ class _SearchPageState extends State<SearchPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Recent Search'),
-              InkWell(
-                onTap: () {
-                  print("See All");
-                },
-                child: Text('See All'),
-              )
+              // InkWell(
+              //   onTap: () {
+              //     print("See All");
+              //   },
+              //   child: Text('See All'),
+              // )
             ],
           ),
           Container(
@@ -61,14 +65,29 @@ class _SearchPageState extends State<SearchPage> {
             height: 300,
             child: ListView(
               children: [
-                Text('search1'),
-                Text('search2'),
-                Text('search3'),
+                recentSearchItem(context, 'search1'),
+                recentSearchItem(context, 'search2'),
+                recentSearchItem(context, 'search3'),
+                recentSearchItem(context, 'search4'),
+                recentSearchItem(context, 'search5'),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget recentSearchItem(BuildContext context, String keyword) {
+    return InkWell(
+      onTap: () {
+        Route route = new MaterialPageRoute(
+            builder: (context) => InterfacePage(
+                  searchResult: true, searchKeyword: keyword,
+                ));
+        Navigator.push(context, route);
+      },
+      child: Text(keyword),
     );
   }
 
