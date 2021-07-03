@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:artpia/assets/module.dart';
 
 Widget searchAppBar(BuildContext context) {
+  String keyword;
+
   return AppBar(
     toolbarHeight: MediaQuery.of(context).size.height * 0.07,
     elevation: 0,
@@ -16,7 +18,10 @@ Widget searchAppBar(BuildContext context) {
         width: MediaQuery.of(context).size.width,
         child: InkWell(
           onTap: () {
-            Route route = MaterialPageRoute(builder: (context) => InterfacePage(searchResult: true,));
+            Route route = MaterialPageRoute(
+                builder: (context) => InterfacePage(
+                      searchResult: true, searchKeyword: keyword,
+                    ));
             Navigator.push(context, route);
           },
           child: Text(
@@ -45,7 +50,10 @@ Widget searchResultAppBar(BuildContext context) {
         style: TextStyle(color: Colors.black),
       ),
     ),
-    leading: Container(),
+    leading: FlatButton(
+      onPressed: () => Navigator.pop(context),
+      child: Icon(CupertinoIcons.back),
+    ),
   );
 }
 
