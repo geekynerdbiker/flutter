@@ -52,12 +52,12 @@ class _SearchPageState extends State<SearchPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Recent Search'),
-              // InkWell(
-              //   onTap: () {
-              //     print("See All");
-              //   },
-              //   child: Text('See All'),
-              // )
+              InkWell(
+                onTap: () {
+                  print("See All");
+                },
+                child: Text('See All'),
+              )
             ],
           ),
           Container(
