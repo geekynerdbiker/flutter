@@ -51,13 +51,13 @@ class _SearchPageState extends State<SearchPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Recent Search'),
-              InkWell(
-                onTap: () {
-                  print("See All");
-                },
-                child: Text('See All'),
-              )
+              Text('Recent Search', style: TextStyle(fontSize: 20),),
+              // InkWell(
+              //   onTap: () {
+              //     print("See All");
+              //   },
+              //   child: Text('See All'),
+              // )
             ],
           ),
           Container(
@@ -87,7 +87,9 @@ class _SearchPageState extends State<SearchPage> {
                 ));
         Navigator.push(context, route);
       },
-      child: Text(keyword),
+      child: Container(
+        child: Text(keyword, style: TextStyle(fontSize: 15),),
+      ),
     );
   }
 
