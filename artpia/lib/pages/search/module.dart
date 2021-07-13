@@ -1,9 +1,6 @@
 import 'package:artpia/pages/interface.dart';
-import 'package:artpia/pages/search/searchResult.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'package:artpia/assets/module.dart';
 
 Widget searchAppBar(BuildContext context) {
   String keyword;
