@@ -1,5 +1,3 @@
-// Renewal design of screen
-
 import 'package:flutter/material.dart';
 import 'package:images_picker/images_picker.dart';
 

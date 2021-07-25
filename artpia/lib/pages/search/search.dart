@@ -1,5 +1,3 @@
-// Need renewal
-
 import 'package:flutter/material.dart';
 
 import 'package:artpia/pages/interface.dart';

@@ -1,5 +1,3 @@
-// Connect with FireBase and Renewal Design
-
 import 'package:flutter/material.dart';
 import 'package:images_picker/images_picker.dart';
 
