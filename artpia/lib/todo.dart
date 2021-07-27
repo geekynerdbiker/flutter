@@ -84,10 +84,10 @@ Add artwork
 - Upload details to Firebase
 
 Artwork detail
--
+- Navigate to Order
 
 Order list
--
+- Refresh in realtime
 
 [ Level 3 ]
 Order artwork
@@ -95,10 +95,10 @@ Order artwork
 - Notify order info to Administrator
 
 Order detail
--
+- Can be controlled by admin
 
 Order result
--
+- Successful or not
 
 General Setting
 -
