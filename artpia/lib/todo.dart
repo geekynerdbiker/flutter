@@ -107,3 +107,40 @@ Profile Setting
 -
 
 */
+
+/*
+Data Structure
+
+[User]
+- user id
+- nickname
+- profile image
+- bio
+- artwork list
+- order list
+- name
+- address
+
+[Artwork]
+- user id
+- artwork id
+- image list
+- title
+- description
+- price
+
+[Order]
+- user id
+- artwork id
+- order id
+- order state
+
+[Notification]
+- user id
+- notification type
+- message
+
+[Shared Preference]
+
+
+*/
