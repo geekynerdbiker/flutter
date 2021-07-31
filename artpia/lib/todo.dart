@@ -141,6 +141,8 @@ Data Structure
 - message
 
 [Shared Preference]
-
+- login info
+- cart
+- order list
 
 */
