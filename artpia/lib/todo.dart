@@ -137,6 +137,7 @@ Data Structure
 
 [Notification]
 - user id
+- notification state
 - notification type
 - message
 
