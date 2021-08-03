@@ -3,96 +3,128 @@ import 'package:artpia/assets/config.dart';
 import 'package:artpia/pages/artwork/addArtwork.dart';
 
 class UserClass {
-  // Social Login based. Add simple bio at first.
-
   String uid;
-
-  // String eMail;
-  // String password;
-
   String username;
-  String bio;
   String imageURL;
+  String bio;
+  List<String> artworkList = [];
+  List<String> orderList = [];
+  String name;
+  String address;
 
-  // List<String> followers = [];
-  // List<String> following = [];
+  UserClass(
+      {this.uid,
+      this.username,
+      this.imageURL,
+      this.bio,
+      this.artworkList,
+      this.orderList,
+      this.name,
+      this.address});
 
   Map<String, dynamic> toUserData() => {
         'uid': uid,
-        // 'password': password,
-        // 'eMail': eMail,
         'username': username,
-        'bio': bio,
         'imageURL': imageURL,
-        // 'followers': followers,
-        // 'following': following,
+        'bio': bio,
+        'artworkList': artworkList,
+        'orderList': orderList,
+        'name': name,
+        'address': address,
       };
 
   UserClass.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
-    // password = json['password'];
-    // eMail = json['eMail'];
     username = json['username'];
-    bio = json['bio'];
     imageURL = json['imageURL'];
-    // followers = json['followers'];
-    // following = json['following'];
+    bio = json['bio'];
+    artworkList = json['artworkList'];
+    orderList = json['orderList'];
+    name = json['name'];
+    address = json['address'];
   }
 }
 
-class Artwork {
+class ArtworkClass {
   String uid;
   String pid;
   String title;
-  // String category;
   String description;
-  String publishedDate;
   int price;
-  // int likes;
-
   List<String> imageURL = [];
 
-  Artwork(
+  ArtworkClass(
       {this.uid,
       this.pid,
       this.title,
-      // this.category,
       this.description,
-      this.publishedDate,
       this.price,
-      // this.likes,
       this.imageURL});
 
   Map<String, dynamic> toArtworkData() => {
-    'uid': uid,
-    'pid': pid,
-    'title': title,
-    // 'category': category,
-    'description': description,
-    'publishedDate': publishedDate,
-    'price': price,
-    // 'likes': likes,
-    'imageURL': imageURL,
-  };
+        'uid': uid,
+        'pid': pid,
+        'title': title,
+        'description': description,
+        'price': price,
+        'imageURL': imageURL,
+      };
 
-  Artwork.fromJson(Map<String, dynamic> json) {
+  ArtworkClass.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     pid = json['pid'];
     title = json['title'];
-    // category = json['category'];
     description = json['description'];
-    publishedDate = json['publishedDate'];
     price = json['price'];
-    // likes = json['likes'];
     imageURL = json['imageURL'];
   }
 }
 
-// class Category {
-//   String category;
-//
-//   Category({this.category});
-// }
+class OrderClass {
+  String uid;
+  String pid;
+  String oid;
+  String state;
+
+  OrderClass({this.uid, this.pid, this.oid, this.state});
+
+  Map<String, dynamic> toOrderData() => {
+        'uid': uid,
+        'pid': pid,
+        'oid': oid,
+        'state': state,
+      };
+
+  OrderClass.fromJson(Map<String, dynamic> json) {
+    uid = json['uid'];
+    pid = json['pid'];
+    oid = json['oid'];
+    state = json['state'];
+  }
+}
+
+class NotificationClass {
+  String uid;
+  String state;
+  String type;
+  String message;
+
+  NotificationClass({this.uid, this.state, this.type, this.message});
+
+  Map<String, dynamic> toNotificationData() => {
+        'uid': uid,
+        'state': state,
+        'type': type,
+        'message': message,
+      };
+
+  NotificationClass.fromJson(Map<String, dynamic> json) {
+    uid = json['uid'];
+    state = json['state'];
+    type = json['type'];
+    message = json['message'];
+  }
+}
 
 class ErrorAlertDialog extends StatelessWidget {
   final String message;
