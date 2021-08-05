@@ -22,14 +22,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   getUserDetail() async {
-    Artpia.auth = FirebaseAuth.instance;
-    Artpia.sharedPreferences = await SharedPreferences.getInstance();
-    Artpia.firestore = FirebaseFirestore.instance;
+    ArtpiaProject.auth = FirebaseAuth.instance;
+    ArtpiaProject.sharedPreferences = await SharedPreferences.getInstance();
+    ArtpiaProject.firestore = FirebaseFirestore.instance;
   }
 
   displaySplash() {
     Timer(new Duration(seconds: 3), () async {
-      if (await Artpia.auth.currentUser != null) {
+      if (await ArtpiaProject.auth.currentUser != null) {
         Route route = MaterialPageRoute(builder: (context) => InterfacePage());
         Navigator.pushReplacement(context, route);
       } else {
