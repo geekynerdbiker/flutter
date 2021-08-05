@@ -13,15 +13,13 @@ class ArtpiaProject
 
   static String collectionUser = "users";
   static String collectionOrders = "orders";
-  static String userFavoriteList = 'userFavorite';
-  static String subCollectionAddress = 'userAddress';
 
   static final String userUID = 'uid';
   static final String addressID = 'addressID';
 
   static final String totalAmount = 'totalAmount';
-  static final String artworkID = 'artworkIDs';
-  static final String paymentDetails ='paymentDetails';
-  static final String orderTime ='orderTime';
-  static final String isSuccess ='isSuccess';
+  // static final String artworkID = 'artworkIDs';
+  // static final String paymentDetails ='paymentDetails';
+  // static final String orderTime ='orderTime';
+  // static final String isSuccess ='isSuccess';
 }
