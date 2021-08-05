@@ -228,14 +228,14 @@ Widget addArtworkFAB(BuildContext context) {
 
 class FavoriteItemCounter extends ChangeNotifier {
   int _counter =
-      Artpia.sharedPreferences.getStringList(Artpia.userFavoriteList).length -
+      ArtpiaProject.sharedPreferences.getStringList(ArtpiaProject.userFavoriteList).length -
           1;
 
   int get count => _counter;
 
   Future<void> displayResult() async {
     int _counter =
-        Artpia.sharedPreferences.getStringList(Artpia.userFavoriteList).length -
+        ArtpiaProject.sharedPreferences.getStringList(ArtpiaProject.userFavoriteList).length -
             1;
     await Future.delayed(const Duration(milliseconds: 100), () {
       notifyListeners();
