@@ -1,9 +1,7 @@
-// 25 July (SUN), 2021 Updated
+// 6 Aug (FRI), 2021 Updated
 
+// Front-End
 /*
-
-Front-End
-
 App Title
 Logo design
 Branding
@@ -39,10 +37,8 @@ _ Profile Setting
 
 */
 
+// Back-End
 /*
-
-Back-End
-
 [ Hidden Level ]
 Admin
 - Send notification of order state
@@ -108,38 +104,37 @@ Profile Setting
 
 */
 
+// Data Structure
 /*
-Data Structure
+[User]
+- user id
+- nickname
+- profile image
+- bio
+- artwork list
+- order list
+- name
+- address
 
-// [User]
-// - user id
-// - nickname
-// - profile image
-// - bio
-// - artwork list
-// - order list
-// - name
-// - address
-//
-// [Artwork]
-// - user id
-// - artwork id
-// - image list
-// - title
-// - description
-// - price
-//
-// [Order]
-// - user id
-// - artwork id
-// - order id
-// - order state
-//
-// [Notification]
-// - user id
-// - notification state
-// - notification type
-// - message
+[Artwork]
+- user id
+- artwork id
+- image list
+- title
+- description
+- price
+
+[Order]
+- user id
+- artwork id
+- order id
+- order state
+
+[Notification]
+- user id
+- notification state
+- notification type
+- message
 
 [Shared Preference]
 - login info
