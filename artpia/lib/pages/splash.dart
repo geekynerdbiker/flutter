@@ -44,7 +44,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text('LOGO', style: TextStyle(fontSize: 24),),
+        child: Text(
+          'LOGO',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }

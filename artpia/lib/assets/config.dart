@@ -2,8 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ArtpiaProject
-{
+class ArtpiaProject {
   static const String appName = 'e-Shop';
 
   static SharedPreferences sharedPreferences;
@@ -18,8 +17,8 @@ class ArtpiaProject
   static final String addressID = 'addressID';
 
   static final String totalAmount = 'totalAmount';
-  // static final String artworkID = 'artworkIDs';
-  // static final String paymentDetails ='paymentDetails';
-  // static final String orderTime ='orderTime';
-  // static final String isSuccess ='isSuccess';
+// static final String artworkID = 'artworkIDs';
+// static final String paymentDetails ='paymentDetails';
+// static final String orderTime ='orderTime';
+// static final String isSuccess ='isSuccess';
 }
