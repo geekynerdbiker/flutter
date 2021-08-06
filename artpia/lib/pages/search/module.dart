@@ -17,7 +17,8 @@ Widget searchAppBar(BuildContext context) {
           onTap: () {
             Route route = MaterialPageRoute(
                 builder: (context) => InterfacePage(
-                      searchResult: true, searchKeyword: keyword,
+                      searchResult: true,
+                      searchKeyword: keyword,
                     ));
             Navigator.push(context, route);
           },
