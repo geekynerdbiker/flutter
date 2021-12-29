@@ -4,13 +4,6 @@ import 'package:mzone/page/user/club/club.dart';
 import 'package:mzone/page/user/home/home.dart';
 import 'package:mzone/page/user/mypage/user.dart';
 import 'package:mzone/page/user/place/place.dart';
-// import 'package:artpia/pages/home/home.dart';
-//
-// import 'package:artpia/pages/search/search.dart';
-// import 'package:artpia/pages/profile/profile.dart';
-// import 'package:artpia/pages/profile/artistInfo.dart';
-// import 'package:artpia/pages/search/searchResult.dart';
-// import 'package:artpia/pages/notification/notification.dart';
 
 class InterfacePage extends StatefulWidget {
   @override

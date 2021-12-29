@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  bool get isiOS => foundation.defaultTargetPlatform == foundation.TargetPlatform.iOS;
+
   @override
   void initState() {
     super.initState();
@@ -30,13 +33,13 @@ class _HomePageState extends State<HomePage> {
 
   PreferredSize homeAppBar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(220.0),
+      preferredSize: Size.fromHeight(200.0), // noch -> 220
       child: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0,
         flexibleSpace: Container(
-          margin: EdgeInsets.only(top: 80),
+          margin: EdgeInsets.only(top: 40), // noch -> 80
           child: Column(
             children: [
               Container(
