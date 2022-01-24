@@ -23,23 +23,22 @@ class _InterfacePageState extends State<InterfacePage> {
     int initialIndex = 0;
 
     return DefaultTabController(
-      length: 4,
+      length: 3,
       initialIndex: initialIndex,
       child: Scaffold(
-// floatingActionButton: addArtworkFAT(context),
         backgroundColor: Colors.white,
         body: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
             ClubPage(),
-            PlacePage(),
+            // PlacePage(),
             UserPage(),
           ],
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: height * 0.1,
-          child: new TabBar(
+          child: const TabBar(
             labelColor: Colors.black,
             indicatorColor: Colors.transparent,
             unselectedLabelColor: Colors.grey,
@@ -50,9 +49,9 @@ class _InterfacePageState extends State<InterfacePage> {
               Tab(
                 icon: Icon(CupertinoIcons.group),
               ),
-              Tab(
-                icon: Icon(CupertinoIcons.placemark),
-              ),
+              // Tab(
+              //   icon: Icon(CupertinoIcons.placemark),
+              // ),
               Tab(
                 icon: Icon(CupertinoIcons.person),
               ),
