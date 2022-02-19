@@ -6,6 +6,8 @@ import 'package:mzone/page/user/mypage/user.dart';
 import 'package:mzone/page/user/place/place.dart';
 
 class InterfacePage extends StatefulWidget {
+  const InterfacePage({Key? key}) : super(key: key);
+
   @override
   _InterfacePageState createState() => _InterfacePageState();
 }
