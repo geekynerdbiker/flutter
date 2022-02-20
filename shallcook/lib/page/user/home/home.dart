@@ -50,7 +50,10 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
-          carouselList(),
+          Container(
+            margin: EdgeInsets.only(top: 20, bottom: 30),
+            child: carouselList(),
+          ),
           salonList(),
           showMySalon(),
         ],
@@ -73,46 +76,47 @@ class _HomePageState extends State<HomePage> {
 
   Widget carouselList() {
     return Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 60,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                viewportFraction: 1.0,
-                enlargeCenterPage: false,
-                scrollDirection: Axis.horizontal,
-                autoPlay: true,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                },
-              ),
-              items: imageSliders,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 60,
+          child: CarouselSlider(
+            options: CarouselOptions(
+              viewportFraction: 1.0,
+              enlargeCenterPage: false,
+              scrollDirection: Axis.horizontal,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _current = index;
+                });
+              },
             ),
+            items: imageSliders,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _controller.animateToPage(entry.key),
-                child: Container(
-                  width: 10.0,
-                  height: 15.0,
-                  margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
-      );
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: imgList.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _controller.animateToPage(entry.key),
+              child: Container(
+                width: 10.0,
+                height: 15.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black)
+                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Widget salonList() {
@@ -128,10 +132,10 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                listItem2(),
-                listItem2(),
-                listItem2(),
-                listItem2(),
+                listItem(),
+                listItem(),
+                listItem(),
+                listItem(),
               ],
             ),
           )
@@ -153,14 +157,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget listItem2() {
+  Widget listItem() {
     return Container(
       width: 218,
       height: 282,
       margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.blue),
+          boxShadow: [
+            BoxShadow(color: Colors.grey, spreadRadius: 3, blurRadius: 5,offset: Offset(0,0)),
+          ],
+          color: Colors.white),
     );
   }
 }
