@@ -1,5 +1,5 @@
-name: mzone
-description: Social Food Salon.
+name: shallcook
+description: Social Cooking Salon.
 
 publish_to: 'none'
 
@@ -12,9 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0
+  firebase_core: ^1.12.0
+  firebase_auth: ^3.3.7
+  cloud_firestore: ^3.1.8
 
 dev_dependencies:
   flutter_test:

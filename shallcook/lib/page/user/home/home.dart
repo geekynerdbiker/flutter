@@ -28,13 +28,11 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
-            child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                )),
-          ))
+          margin: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(13.0)),
+            child: Image.network(item, fit: BoxFit.cover, width: 1000.0),
+          )))
       .toList();
 
   @override
@@ -51,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         physics: const ClampingScrollPhysics(),
         children: [
           Container(
-            margin: EdgeInsets.only(top: 20, bottom: 30),
+            margin: const EdgeInsets.only(top: 20, bottom: 30),
             child: carouselList(),
           ),
           salonList(),
@@ -163,7 +161,7 @@ class _HomePageState extends State<HomePage> {
       height: 282,
       margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
           boxShadow: [
             BoxShadow(color: Colors.grey, spreadRadius: 3, blurRadius: 5,offset: Offset(0,0)),
           ],

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mzone/page/user/club/club.dart';
-import 'package:mzone/page/user/home/home.dart';
-import 'package:mzone/page/user/mypage/user.dart';
-import 'package:mzone/page/user/place/place.dart';
+import 'package:shallcook/page/user/salon/salon.dart';
+import 'package:shallcook/page/user/home/home.dart';
+import 'package:shallcook/page/user/mypage/user.dart';
 
 class InterfacePage extends StatefulWidget {
   const InterfacePage({Key? key}) : super(key: key);
@@ -20,8 +19,6 @@ class _InterfacePageState extends State<InterfacePage> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-
     int initialIndex = 0;
 
     return DefaultTabController(
@@ -33,13 +30,14 @@ class _InterfacePageState extends State<InterfacePage> {
           physics: const NeverScrollableScrollPhysics(),
           children: <Widget>[
             HomePage(),
-            ClubPage(),
-            // PlacePage(),
+            SalonPage(),
             UserPage(),
           ],
         ),
-        bottomNavigationBar: SizedBox(
-          height: height * 0.1,
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+              border: Border(top: BorderSide(color: Colors.black))),
+          height: 65,
           child: const TabBar(
             labelColor: Colors.black,
             indicatorColor: Colors.transparent,
@@ -51,9 +49,6 @@ class _InterfacePageState extends State<InterfacePage> {
               Tab(
                 icon: Icon(CupertinoIcons.group),
               ),
-              // Tab(
-              //   icon: Icon(CupertinoIcons.placemark),
-              // ),
               Tab(
                 icon: Icon(CupertinoIcons.person),
               ),
